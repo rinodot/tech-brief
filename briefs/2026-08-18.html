@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月18日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-17.html">← 8/17（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年8月18日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>AIが壊し、AIが見逃し、別のAIが突いた — Snowflake実証事例</h2>
+      <p class="why">— AI生成PRのレビュー方針に、そのまま使える教訓が詰まった事件。</p>
+      <p class="b">セキュリティ企業Wizが8/17に公開した検証だ。Snowflake公式の.NETコネクタのリポジトリで、GitHub Copilotの自動修正機能「Autofix」が6月に作ったPRが、GitHub Actions（GitHubのCI/CD基盤）の安全な書き方（環境変数とjq経由）を、Issueタイトルをシェルへ直接埋め込む書き方に"修正"していた。タイトルに引用符を1つ入れるだけで任意コマンドが動くインジェクション（入力に紛れ込ませた命令を実行させる攻撃）で、GitHubのAIセキュリティレビューもこのPRを通過させていた。そこへWizの自律攻撃エージェント「Red Agent」。穴を自力で発見し、初回の攻撃失敗を自己診断して書き直し、SnowflakeのJira認証トークンの持ち出しまで成功した（承認済み演習で実害なし、当日修正済み）。</p>
+      <figure>
+        <svg viewBox="0 0 400 262" role="img" aria-label="AI同士の攻防のループ図">
+          <defs>
+            <marker id="aht" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <rect x="60" y="10" width="280" height="46" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="29" text-anchor="middle" font-size="12.5" fill="#2E2C27">① Copilot Autofixの“修正”PR</text>
+            <text x="200" y="47" text-anchor="middle" font-size="11.5" fill="#6B6A63">安全な書き方を注入可能な形に置換</text>
+            <line x1="200" y1="56" x2="200" y2="70" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#aht)"/>
+            <rect x="60" y="72" width="280" height="46" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="91" text-anchor="middle" font-size="12.5" fill="#2E2C27">② AIセキュリティレビューが承認</text>
+            <text x="200" y="109" text-anchor="middle" font-size="11.5" fill="#6B6A63">人間の目は通らずマージ</text>
+            <line x1="200" y1="118" x2="200" y2="132" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#aht)"/>
+            <rect x="60" y="134" width="280" height="46" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="153" text-anchor="middle" font-size="12.5" fill="#2E2C27">③ 誰でも発火できる穴が公開状態に</text>
+            <text x="200" y="171" text-anchor="middle" font-size="11.5" fill="#6B6A63">Issueタイトル経由・認証不要</text>
+            <line x1="200" y1="180" x2="200" y2="194" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#aht)"/>
+            <rect x="60" y="196" width="280" height="46" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="200" y="215" text-anchor="middle" font-size="12.5" fill="#2E2C27">④ 別のAI（Red Agent）が発見・攻撃成功</text>
+            <text x="200" y="233" text-anchor="middle" font-size="11.5" fill="#6B6A63">失敗を自己診断→書き直して認証情報を奪取</text>
+            <text x="200" y="256" text-anchor="middle" font-size="11.5" fill="#6B6A63">導入から発見まで、人間のレビューはゼロだった</text>
+          </g>
+        </svg>
+        <figcaption>壊すAI・見逃すAI・突くAI — ループから人間が消えた初の著名事例</figcaption>
+      </figure>
+      <p class="b">含意: AI生成PRこそ、.github/workflows配下の差分を人間が読む。Issueタイトル等の外部入力をrun:へ直接展開する書き方を禁止し、環境変数経由に固定する。auto mode時代の受託運用ルールとして、そのまま流用できる。</p>
+      <p class="src">出典: <a href="https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug">Wiz Research</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Qwen3.8-27Bに初の独立計測 — 「考えすぎ」が数字で裏付く</h2>
+      <p class="why">— 昨日の「独立ベンチ待ち」が届いた。試す前の設定指針が確定。</p>
+      <p class="b">Qwen3.8-27Bに第三者計測が出た。Artificial AnalysisのIntelligence Index（総合指数）は52。評価中の出力は1.6億トークンと同級中央値の4倍で、「考えすぎ」が数字で裏付いた。Willisonの実機レビューも同結論で、既定の推論設定xhighでは描画課題に21分（推論オフなら137秒）。ローカルは15〜30tok/s、llama.cppのMTP（複数トークン同時予測の高速化）で約72%改善。含意: 推論レベルを下げMTPを有効化してから評価するのが前提。</p>
+      <p class="src">出典: <a href="https://simonwillison.net/2026/Aug/16/qwen-38-27b/">Simon Willison</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>月曜はAnthropicとGitHubが相次ぎ停止 — 二重依存が露呈した日</h2>
+      <p class="why">— 朝はClaudeにログイン不能、夜はpushが通らない。昨日の体感の答え合わせ。</p>
+      <p class="b">朝6:58からAnthropicの認証障害でClaude系サービスが約40分ログイン不能に。夜22:40からはGitHubの大規模障害で、Web/APIの約20%がエラー、Actions／PR／Issues／Copilotが停止（8月だけで13件目）。GitHubはAI由来の負荷急増を挙げ、2月比30倍の容量増強が要ると説明。含意: エージェント運用はモデル提供元とGitHubの二重依存。ローカルgitは生きるため、障害時に回す作業（ローカルテストや設計作業）を決めておくと止まらない。</p>
+      <p class="src">出典: <a href="https://www.githubstatus.com/incidents/zkxwbgr0cnmx">GitHub Status</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
