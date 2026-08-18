@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月13日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><span class="dis">←</span><a href="../index.html">一覧</a><a href="2026-08-16.html">8/16（日）→</a></div></nav><!--BNAV END-->
+
+
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年8月13日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code、あすから「逐次の許可確認なし」が既定に</h2>
+      <p class="why">— 毎日使うツールの安全設計があす切り替わる。ガードレールを今日決めておく話。</p>
+      <p class="b">8月14日から、Pro/Max/Teamプランの新規セッションで「auto mode」——不可逆・有害・権限外と判定した操作以外を、逐次の承認なしで実行するモード——が既定になる。根拠は実測データだ。有償テスター1,053人の検証で、人間が止められた危険コマンドは13.6%、auto modeの分類器は89%。ユーザーは許可プロンプトの97%を機械的に承認していた。第三者によるプロンプトインジェクション（外部データに仕込んだ指示でAIを乗っ取る攻撃）の試験でも、攻撃成功率は0%（フルアクセス設定では19%）。</p>
+      <figure>
+        <svg viewBox="0 0 400 278" role="img" aria-label="auto modeの二層ガードの流れ図">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+            <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#C6613F"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <rect x="100" y="8" width="200" height="40" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="33" text-anchor="middle" font-size="13" fill="#2E2C27">Claudeが提案するアクション</text>
+            <line x1="200" y1="48" x2="200" y2="63" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah)"/>
+            <rect x="76" y="66" width="248" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="86" text-anchor="middle" font-size="13" fill="#2E2C27">① サーバー側プローブ</text>
+            <text x="200" y="104" text-anchor="middle" font-size="11.5" fill="#6B6A63">ツール出力に紛れた指示を検査</text>
+            <line x1="200" y1="114" x2="200" y2="129" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah)"/>
+            <rect x="76" y="132" width="248" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="152" text-anchor="middle" font-size="13" fill="#2E2C27">② 分類器が審査</text>
+            <text x="200" y="170" text-anchor="middle" font-size="11.5" fill="#6B6A63">不可逆・有害・権限外か</text>
+            <line x1="160" y1="180" x2="107" y2="213" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah)"/>
+            <line x1="240" y1="180" x2="293" y2="213" stroke="#C6613F" stroke-width="1.4" marker-end="url(#ahc)"/>
+            <rect x="16" y="216" width="178" height="52" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="105" y="238" text-anchor="middle" font-size="13" fill="#2E2C27">問題なし → 即実行</text>
+            <text x="105" y="256" text-anchor="middle" font-size="11" fill="#B4B3A8">（大多数）</text>
+            <rect x="206" y="216" width="178" height="52" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="295" y="238" text-anchor="middle" font-size="13" fill="#2E2C27">疑わしい → 従来の</text>
+            <text x="295" y="256" text-anchor="middle" font-size="13" fill="#2E2C27">確認プロンプトへ</text>
+          </g>
+        </svg>
+        <figcaption>auto modeの二層ガード — 逐次承認は「疑わしい時だけ」に切り替わる</figcaption>
+      </figure>
+      <p class="b">仕組みは図の二層ガードで、疑わしい時だけ従来の確認に戻る設計。ただし、エージェントが「やりすぎた」実事例52件のうち17%は分類器が見逃しており、リスクはゼロではない。含意: あす以降、新規セッションの挙動が黙って変わる。従来の手動権限も残るので、本番の認証情報やクライアントrepoを触る環境では、hard-denyルール（必ずブロックする強制規則）を今日のうちに整備しておくと切り替えを安心して受けられる。</p>
+      <p class="src">出典: <a href="https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default/">TechCrunch</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Compose 1.12安定版 — Android 17前提の移行が始まった</h2>
+      <p class="why">— Flutter側にもcompileSdk引き上げの波が来る予告編。</p>
+      <p class="b">Googleが8月12日、Jetpack Compose 1.12（Android純正の宣言的UI）を安定版にした。ビルド要件がcompileSdk 37（Android 17のAPIレベル）に上がり、弱点の初期表示速度も「従来View同等」に。8月20日にはAndroid 17搭載Pixel 11も発売。</p>
+      <figure>
+        <svg viewBox="0 0 400 208" role="img" aria-label="Android 17移行のタイムライン">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <line x1="64" y1="22" x2="64" y2="138" stroke="#2E2C27" stroke-width="1.5"/>
+            <line x1="64" y1="138" x2="64" y2="184" stroke="#B4B3A8" stroke-width="1.5" stroke-dasharray="5 5"/>
+            <circle cx="64" cy="36" r="6" fill="#2E2C27"/>
+            <text x="84" y="33" font-size="13" fill="#2E2C27"><tspan font-weight="700">8/12</tspan><tspan dx="9">Compose 1.12が安定版に</tspan></text>
+            <text x="84" y="52" font-size="11.5" fill="#6B6A63">compileSdk 37（Android 17）が必須に</text>
+            <circle cx="64" cy="104" r="6" fill="#C6613F"/>
+            <text x="84" y="101" font-size="13" fill="#2E2C27"><tspan font-weight="700" fill="#C6613F">8/20</tspan><tspan dx="9">Pixel 11発売</tspan></text>
+            <text x="84" y="120" font-size="11.5" fill="#6B6A63">Android 17実機が市場に流通</text>
+            <circle cx="64" cy="172" r="6" fill="#FCFCFB" stroke="#B4B3A8" stroke-width="1.5"/>
+            <text x="84" y="169" font-size="13" font-weight="700" fill="#B4B3A8">2027年頃（推定）</text>
+            <text x="84" y="188" font-size="11.5" fill="#6B6A63">PlayのtargetSdk要件が例年なら追随</text>
+          </g>
+        </svg>
+        <figcaption>Android 17移行のタイムライン — 今日はまだ「予告編」の段階</figcaption>
+      </figure>
+      <p class="b">含意: Flutter本体に直接の影響はなくても、プラグインやadd-to-appのネイティブ層からcompileSdk 37対応が順に要求される。依存プラグインの対応状況を早めに棚卸ししておくと移行が軽い。</p>
+      <p class="src">出典: <a href="https://android-developers.googleblog.com/2026/08/jetpack-compose-august-2026-release.html">Android Developers Blog</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>NVIDIAの「実行係」3Bモデル、エージェント分業を標準形に</h2>
+      <p class="why">— サブエージェントの作業をローカルの安いモデルへ逃がす構成が現実味を帯びた。</p>
+      <p class="b">NVIDIAが8月11日に公開したNemotron 3.5 Lightningは、総30B・アクティブ3B（動くのは3BだけのMoE方式）のオープンモデル。「計画はフロンティアモデル、実行・検証は軽量モデル」という分業の実行係に特化し、振り分けOSSのSwitchyardも同時公開。llama.cpp/Ollamaも初日対応。</p>
+      <figure>
+        <svg viewBox="0 0 400 200" role="img" aria-label="計画層と実行層の分業構成図">
+          <defs>
+            <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+            <marker id="ah3g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#B4B3A8"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <rect x="52" y="10" width="296" height="50" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="31" text-anchor="middle" font-size="13" fill="#2E2C27">計画層 — フロンティアモデル</text>
+            <text x="200" y="49" text-anchor="middle" font-size="11.5" fill="#6B6A63">Claude等 · 方針決定・難所の実装</text>
+            <line x1="200" y1="60" x2="200" y2="77" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah3)"/>
+            <rect x="100" y="80" width="200" height="34" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="102" text-anchor="middle" font-size="12.5" fill="#2E2C27">NeMo Switchyard（振り分け）</text>
+            <line x1="200" y1="114" x2="200" y2="131" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah3)"/>
+            <rect x="40" y="134" width="320" height="54" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="200" y="156" text-anchor="middle" font-size="13" fill="#2E2C27">実行層 — Lightning アクティブ3B</text>
+            <text x="200" y="175" text-anchor="middle" font-size="11.5" fill="#6B6A63">ローカルGPU · ツール呼び出し・検証・反復</text>
+            <path d="M360,161 C392,161 392,35 352,35" fill="none" stroke="#B4B3A8" stroke-width="1.3" marker-end="url(#ah3g)"/>
+            <text x="380" y="103" text-anchor="middle" font-size="11" fill="#B4B3A8">結果</text>
+          </g>
+        </svg>
+        <figcaption>「計画／実行」分業の標準形 — Switchyardはその参照実装</figcaption>
+      </figure>
+      <p class="b">含意: 機械的な作業までフロンティア級に投げるとコストが重い。ローカルGPUのLightningに実行層を逃がす分業は、Claude Codeのサブエージェントでそのまま試せる。</p>
+      <p class="src">出典: <a href="https://developer.nvidia.com/blog/nvidia-nemotron-3-5-lightning-delivers-fast-accurate-specialized-task-execution-for-long-running-agents/">NVIDIA Developer Blog</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
