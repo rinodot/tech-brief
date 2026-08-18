@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月19日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-18.html">← 8/18（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年8月19日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code、9/1から週次上限が実質3分の2に — 8/31でプロモ終了</h2>
+      <p class="why">— 毎朝のブリーフ自動生成も含め、あなたの週次消費の前提が変わる。</p>
+      <p class="b">Claude Codeの週次利用上限を50%引き上げていた「5〜8月プロモーション」が、サポート文書の記載どおりなら8/31で終わる。9/1からは標準の上限に戻り、いまの感覚では実質3分の2への縮小になる（5時間ローリング上限は変更なし。Pro/Max/Team対象、料金は不変）。8/18にはHacker Newsでこの期限が話題になり、重い利用者の乗り換え検討や、延長が繰り返されてきたことによる不確実性への不満が並んだ。過去に期限延長された経緯があるため再延長の可能性は残るが、現時点で発表はない。</p>
+      <figure>
+        <svg viewBox="0 0 400 150" role="img" aria-label="週次上限の変化">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="200" y="18" text-anchor="middle" font-size="11.5" fill="#6B6A63">週次上限のイメージ（5時間上限は不変）</text>
+            <text x="20" y="53" font-size="12.5" fill="#2E2C27">いま</text>
+            <rect x="90" y="36" width="270" height="26" fill="#F9F9F7" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="352" y="53" text-anchor="end" font-size="12" fill="#2E2C27">150%</text>
+            <text x="20" y="105" font-size="12.5" fill="#2E2C27">9/1〜</text>
+            <rect x="90" y="88" width="180" height="26" fill="#F9F9F7" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="262" y="105" text-anchor="end" font-size="12" fill="#2E2C27">100%</text>
+            <line x1="270" y1="82" x2="270" y2="120" stroke="#B4B3A8" stroke-width="1" stroke-dasharray="4 4"/>
+            <text x="278" y="136" font-size="11.5" fill="#6B6A63">← ここまで戻る（体感で約-33%）</text>
+          </g>
+        </svg>
+        <figcaption>50%上乗せが終わると、使える量は「いまの3分の2」に戻る</figcaption>
+      </figure>
+      <p class="b">同日公開のv2.1.235には、権限プロンプトのコメント欄でShift+Tabを押すと、編集の承認に加えてセッション全体の編集許可まで付与されてしまうバグの修正が入った。auto mode時代の権限バグなので更新推奨。含意: 9月に向けて`/usage`で自分の週次消費を把握しておく。サブエージェントの多用や毎朝の自動ブリーフも同じ枠を消費するため、上限復帰後の配分を考える材料になる。</p>
+      <p class="src">出典: <a href="https://support.claude.com/en/articles/15910845-claude-code-may-august-2026-weekly-limits-promotion">Claude サポート文書</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Flutter「Wasm週間」開催中 — 今週だけ公式が移行の詰まりを即対応</h2>
+      <p class="why">— Web版を持つ・提案する案件があるなら、試すのは今週が最も得。</p>
+      <p class="b">Flutterチームが8/17〜21を「WebAssembly週間」とし、期間中はDart/Flutterのエンジニアが移行の障害報告を即対応している。Flutter 3.47で`flutter build web --wasm`を実行するだけ。公称はフレーム時間最大2倍・構築2.5倍高速、バンドル増は圧縮後約5%、既存アプリの58%超は無変更でコンパイル可という。既定はJS互換の都合で当面JSのまま。含意: Web版があるなら今週ビルドを試し、詰まったら公式フォームへ。既定切替の前哨戦でもある。</p>
+      <p class="src">出典: <a href="https://flutter.dev/blog/try-flutter-web-with-webassembly-week">Flutter Blog</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>「AIが壊した」に異議 — 昨日のSnowflake事例でGitHubが反論</h2>
+      <p class="why">— 昨日の1件目の続報。事実関係が係争入りしたので更新しておく。</p>
+      <p class="b">昨日伝えたWizの検証にGitHubが反論した。社内調査として「脆弱な変更は人間が書いたもので、Copilot Autofixは作成にもレビューにも関与していない」と主張（現時点で報道1社の単一ソース）。Wizは「Copilotはco-authorで、マージ後のチェックでも見逃した」と主張を維持し、帰属は係争入り。含意: 「AIが書いた」という昨日の断定は保留に格下げする。ただし教訓は帰属に依存しない——外部入力をrun:へ直接展開しない、AIレビューを最終防衛線にしない、は変わらず有効だ。</p>
+      <p class="src">出典: <a href="https://thenextweb.com/news/snowflake-copilot-autofix-wiz-red-agent-github-dispute">TNW</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
