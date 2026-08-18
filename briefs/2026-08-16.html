@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月16日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  section.special{padding:30px 0 26px; border-top:1px solid var(--hair);}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-13.html">← 8/13（木）</a><a href="../index.html">一覧</a><a href="2026-08-17.html">8/17（月）→</a></div></nav><!--BNAV END-->
+
+
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年8月16日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約5分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Qwen3.8-27B公開 — 16GB級ローカルの本命がまた交代</h2>
+      <p class="why">— Muse Glimmer、Nemotronに続く1週間で3本目。ローカルLLM選定の前提が変わった。</p>
+      <p class="b">Alibabaが金曜夜にQwen3.8-27Bを公開し、週末のうちにOllama/MLX/GGUF対応が揃った。Apache 2.0・画像/動画入力対応・26万トークン文脈。公表値ではSWE-bench Pro 61.7などでMuse Glimmer 30Bを上回る（独立検証は未出）。量子化すれだ16GB級VRAMで動く。</p>
+      <figure>
+        <svg viewBox="0 0 400 208" role="img" aria-label="30B級オープンモデルの1週間">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <line x1="64" y1="22" x2="64" y2="186" stroke="#2E2C27" stroke-width="1.5"/>
+            <circle cx="64" cy="36" r="6" fill="#2E2C27"/>
+            <text x="84" y="33" font-size="13" fill="#2E2C27"><tspan font-weight="700">8/10</tspan><tspan dx="9">Muse Glimmer 30B（Meta）</tspan></text>
+            <text x="84" y="52" font-size="11.5" fill="#6B6A63">Apache 2.0・エージェント特化</text>
+            <circle cx="64" cy="104" r="6" fill="#2E2C27"/>
+            <text x="84" y="101" font-size="13" fill="#2E2C27"><tspan font-weight="700">8/11</tspan><tspan dx="9">Nemotron 3.5 Lightning（NVIDIA）</tspan></text>
+            <text x="84" y="120" font-size="11.5" fill="#6B6A63">MoE 30B/アクティブ3B・実行係特化</text>
+            <circle cx="64" cy="172" r="6" fill="#C6613F"/>
+            <text x="84" y="169" font-size="13" fill="#2E2C27"><tspan font-weight="700" fill="#C6613F">8/14</tspan><tspan dx="9">Qwen3.8-27B（Alibaba）</tspan></text>
+            <text x="84" y="188" font-size="11.5" fill="#6B6A63">26万トークン文脈・16GB級で動作</text>
+          </g>
+        </svg>
+        <figcaption>30B級オープンモデルが1週間で3本 — ローカルの選択肢が一新された</figcaption>
+      </figure>
+      <p class="b">含意: 1週間でMeta/NVIDIA/Alibabaの30B級が出揃った。RAG（外部文書を検索して回答に使う構成）や常駐サブエージェントの候補は、まず本機から試すのが早い。</p>
+      <p class="src">出典: <a href="https://huggingface.co/Qwen/Qwen3.8-27B">Hugging Face</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Debian、AI生成コードの扱いを全開発者投票へ</h2>
+      <p class="why">— Claude Codeで書いたコードをOSSに出せるか、その先例になる投票。</p>
+      <p class="b">Debianが8/15、LLM（大規模言語モデル）による貢献の扱いを決める全体投票を開始した（〜8/28）。選択肢は8案＋棄権。全面禁止（3:1の特別多数が必要）から、説明責任や開示を条件とする容認案、生成物の直接投稿は不可の「Humans create Debian」案まで幅がある。背景にはAI生成パッチを巡る論争があり、Gentoo/NetBSDは禁止済み、Fedoraは条件付き容認。含意: エージェントで書いたコードをOSSへ出す際の規範がここで一段決まる。受託先がOSS系なら確認が実務になる。</p>
+      <p class="src">出典: <a href="https://www.debian.org/vote/2026/vote_002">Debian（投票ページ）</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: auto modeはなぜ「自分で自分を承認」できるのか</h3>
+      <p class="b">今週最大の変化は、Claude Codeの新規セッションでauto mode——逐次の人間承認を分類器（判定専用の別モデル）に置き換えるモード——が既定になったこと（8/14、Pro/Max/Team）。「自分で自分を承認して大丈夫か」という不安を、原理から解剖する。</p>
+      <p class="b">出発点は「人間承認は既に機能していない」という実測だ。有償テスター1,053人の検証で、危険コマンドを止められた人間は13.6%。承認プロンプトの97%は機械的に承認され、50プロンプトを超えると検知率は約5%まで落ちる。</p>
+      <p class="b">設計原理は3つ。①判定者の隔離: 分類器（既定はSonnet 5）が見るのはユーザーの発言・ツール呼び出し・CLAUDE.mdだけ。エージェント自身の弁明や、ファイル/Webから読み込んだ外部コンテンツは意図的に遮断される。プロンプトインジェクション（外部データに仕込んだ指示でAIを乗っ取る攻撃）が「裁判官」に届かない構造で、ここが単純な自己承認と違う。入力側でも別プローブがツール出力を検査する。</p>
+      <figure>
+        <svg viewBox="0 0 400 258" role="img" aria-label="分類器が見るものと見ないもの">
+          <defs>
+            <marker id="ahs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="105" y="18" text-anchor="middle" font-size="11.5" fill="#6B6A63">分類器が見るもの</text>
+            <rect x="20" y="26" width="170" height="32" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="105" y="46" text-anchor="middle" font-size="12.5" fill="#2E2C27">ユーザーの指示</text>
+            <rect x="20" y="66" width="170" height="32" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="105" y="86" text-anchor="middle" font-size="12.5" fill="#2E2C27">CLAUDE.md</text>
+            <rect x="20" y="106" width="170" height="32" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="105" y="126" text-anchor="middle" font-size="12.5" fill="#2E2C27">実行予定のツール呼び出し</text>
+            <text x="295" y="18" text-anchor="middle" font-size="11.5" fill="#B4B3A8">意図的に見せないもの</text>
+            <rect x="210" y="26" width="170" height="32" fill="#F9F9F7" stroke="#B4B3A8" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <text x="295" y="46" text-anchor="middle" font-size="12.5" fill="#6B6A63">エージェントの弁明</text>
+            <rect x="210" y="66" width="170" height="32" fill="#F9F9F7" stroke="#B4B3A8" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <text x="295" y="86" text-anchor="middle" font-size="12.5" fill="#6B6A63">ツール結果（外部データ）</text>
+            <line x1="105" y1="138" x2="185" y2="176" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ahs)"/>
+            <line x1="295" y1="98" x2="240" y2="160" stroke="#B4B3A8" stroke-width="1.3" stroke-dasharray="5 4"/>
+            <text x="252" y="152" text-anchor="middle" font-size="14" font-weight="700" fill="#B4B3A8">×</text>
+            <rect x="115" y="178" width="170" height="44" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="200" y="196" text-anchor="middle" font-size="12.5" fill="#2E2C27">分類器（Sonnet 5）</text>
+            <text x="200" y="214" text-anchor="middle" font-size="11.5" fill="#6B6A63">不可逆・破壊的・環境外か?</text>
+            <line x1="200" y1="222" x2="200" y2="236" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ahs)"/>
+            <text x="200" y="252" text-anchor="middle" font-size="11.5" fill="#6B6A63">承認 ／ ブロック（3連続か累計20回で手動承認へ）</text>
+          </g>
+        </svg>
+        <figcaption>「裁判官の隔離」— 攻撃や弁明が判定者に届かないことが自己承認との違い</figcaption>
+      </figure>
+      <p class="b">②不可逆性で線を引く: 読み取りや作業ディレクトリ内の編集は素通しし、「不可逆・破壊的・環境外向き」だけを審査。データ持ち出し系はhard-deny（ユーザーが頼んでも解除されない強制ブロック）。③誤りの非対称設計: 誤ブロックは実トラフィック1万件で0.4%まで削る一方、実際の暴走事例52件では17%を見逃しており、公式も「正直な数字」と認める。</p>
+      <p class="b">含意: 「疲れた人間より統計的にマシ、ただし保証ではない」が正確な理解。クライアントrepoではsettings.jsonのdefaultMode指定で手動維持もでき、askルール（例: git push系は必ず確認）を足せばauto mode内に人間チェックポイントを作れる。`claude auto-mode defaults`で現行ブロック規則を一読しておくのが最初の一手。</p>
+      <p class="src">出典: <a href="https://www.anthropic.com/engineering/claude-code-auto-mode">Anthropic Engineering</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください（特集への質問も可）。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
