@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月20日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-19.html">← 8/19（水）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年8月20日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Android 17、アプリ毎のメモリ上限を全RAM帯へ拡大 — 落とされる前に監視を</h2>
+      <p class="why">— きょうPixel 11発売でAndroid 17実機が増える。画像多めのFlutterアプリはまさに対象。</p>
+      <p class="b">Googleが8/19、Android 17の「アプリ単位メモリ上限」を4GB〜16GB超の全RAM帯へ広げると開発者ブログで告知した。仕組みは段階制で、上限を超えたアプリはまずメモリページがzRAM（RAM上の圧縮領域）へ退避されて動作が重くなり、それでも増え続けるとシステムに強制終了される。終了理由はApplicationExitInfo.getDescription()が返す「MemoryLimiter:AnonSwap」で判別できる。監視はAndroid Vitalsの「Memory Usage」「Bitmap Memory Usage」指標と、OOM追跡を強化したCrashlytics 20.1.0以降が推奨とされた。</p>
+      <figure>
+        <svg viewBox="0 0 400 250" role="img" aria-label="Android 17メモリ上限の段階制フロー">
+          <defs>
+            <marker id="ahx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <rect x="70" y="8" width="260" height="40" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="33" text-anchor="middle" font-size="13" fill="#2E2C27">メモリ使用が上限を超える</text>
+            <line x1="200" y1="48" x2="200" y2="62" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ahx)"/>
+            <rect x="50" y="64" width="300" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="84" text-anchor="middle" font-size="13" fill="#2E2C27">zRAM（圧縮領域）へ退避</text>
+            <text x="200" y="102" text-anchor="middle" font-size="11.5" fill="#6B6A63">動作が重くなる — これが警告段階</text>
+            <line x1="200" y1="112" x2="200" y2="126" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ahx)"/>
+            <rect x="50" y="128" width="300" height="48" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="200" y="148" text-anchor="middle" font-size="13" fill="#2E2C27">それでも増え続けると強制終了</text>
+            <text x="200" y="166" text-anchor="middle" font-size="11.5" fill="#6B6A63">ユーザーには「勝手に落ちた」に見える</text>
+            <line x1="200" y1="176" x2="200" y2="190" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ahx)"/>
+            <rect x="50" y="192" width="300" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="212" text-anchor="middle" font-size="13" fill="#2E2C27">終了理由がログに残る</text>
+            <text x="200" y="230" text-anchor="middle" font-size="11.5" fill="#6B6A63">ApplicationExitInfo: MemoryLimiter:AnonSwap</text>
+          </g>
+        </svg>
+        <figcaption>段階制の仕組み — 「重くなる」が最初のサインで、終了理由はログで判別できる</figcaption>
+      </figure>
+      <p class="b">6月の導入時は「極端なリークを狙う控えめな運用」とされていたが、今回は適用拡大の予告で、きょう8/20にはAndroid 17搭載Pixel 11の店頭販売も始まる。含意: 画像を多く扱うFlutterアプリはBitmap指標の監視対象そのもの。Crashlyticsのバージョン確認と終了理由のログ取得を今のうちに仕込んでおくと、「勝手に落ちる」報告を切り分けられる。</p>
+      <p class="src">出典: <a href="https://android-developers.googleblog.com/2026/08/app-broader-memory-limits.html">Android Developers Blog</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>週次上限、8/19終了→8/31へ再延長 — 「恒久化したい」とAnthropic</h2>
+      <p class="why">— 昨日の「8/31で終了」の続報。実は締切はきのうで、土壇場で延びていた。</p>
+      <p class="b">昨日「8/31で終了」と伝えたClaude Codeの週次上限50%増プロモは、正確には期限は8/19で、直前に8/31へ再延長されていた（昨日参照した文書は延長反映後。経緯を補正する）。公式は「恒久化したいが需要が強く容量が逼迫しうる」と表明、文書は依然「期間限定」のまま。延長は2度目。同日のv2.1.236はauto modeを強化し、Monitorルール経由の審査迂回と.env改名によるサンドボックス回避を塞いだ。含意: 次の判断日は8/31。`/usage`での消費把握の推奨は変わらない。</p>
+      <p class="src">出典: <a href="https://support.claude.com/en/articles/15910845-claude-code-may-august-2026-weekly-limits-promotion">Claude サポート文書</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>GitHub障害の全容判明 — 障害を10倍に増幅したのはVS Codeだった</h2>
+      <p class="why">— 月曜の7時間47分停止の続報。リトライ設計の教材として一級品。</p>
+      <p class="b">原因分析が公開された。発端はIstio（通信仲介のサイドカー）の同時接続上限。自動スケールの監視対象から漏れていて増設されず、ロードバランサが枯渇した。さらに応答遅延でVS Codeの潜在リトライバグが発火し、Copilot認証への通信を約10倍に増幅、復旧を遅らせた。火曜のWiz対GitHub係争も、Wiz CTOが「co-author表記では帰属を判断できない」と認め、人間の記述で決着した。含意: 上限と指数バックオフの無いリトライは障害の増幅器。自作アプリのAPI呼び出し設計に直結する教訓だ。</p>
+      <p class="src">出典: <a href="https://www.githubstatus.com/incidents/zkxwbgr0cnmx">GitHub Status（RCA）</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
