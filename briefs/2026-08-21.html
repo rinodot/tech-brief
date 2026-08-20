@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月21日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-20.html">← 8/20（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年8月21日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Qwen3.8-27B、16GB機に本命が降りてきた — 量子化の作り直しで</h2>
+      <p class="why">— 月曜に「16GBでは溢れる」と書いた件。前提が変わったので更新する。</p>
+      <p class="b">量子化ファイル（モデルを圧縮して小さなGPUで動かす加工）の配布元Unslothが8/20、Qwen3.8-27Bを「Dynamic 3.0」方式で作り直した。月曜のブリーフで伝えた「RTX 5070 Ti（16GB）ではQ4_K_M約19GBが収まらずCPUオフロードになる」という状況が、ここで動く。新しい4bit帯はUD-IQ4_XSが14.3GB、Q4_K_Mが16.5GB。16GBのVRAMに文脈用の余白まで含めて載るのはUD-IQ4_XSのほうだ。下は1bitのUD-IQ1_Sが6.19GB、2bit帯が7.3〜9.8GB、3bit帯が10.9〜13.1GBと細かく刻まれ、無圧縮のBF16は54.7GB。llama.cpp／Ollama／LM Studioでそのまま読める。</p>
+      <figure>
+        <svg viewBox="0 0 400 200" role="img" aria-label="量子化タイプ別のファイルサイズ">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <line x1="118" y1="14" x2="118" y2="150" stroke="#E4E3DC" stroke-width="1"/>
+            <line x1="326" y1="10" x2="326" y2="158" stroke="#C6613F" stroke-width="1" stroke-dasharray="4 4"/>
+            <text x="322" y="172" text-anchor="end" font-size="10.5" fill="#C6613F">16GBの壁</text>
+            <text x="112" y="32" text-anchor="end" font-size="11" fill="#2E2C27">UD-IQ1_S（1bit）</text>
+            <rect x="118" y="23" width="80" height="12" fill="#B4B3A8"/>
+            <text x="204" y="33" font-size="10.5" fill="#6B6A63">6.2GB</text>
+            <text x="112" y="60" text-anchor="end" font-size="11" fill="#2E2C27">UD-Q2_K_XL（2bit）</text>
+            <rect x="118" y="51" width="128" height="12" fill="#B4B3A8"/>
+            <text x="252" y="61" font-size="10.5" fill="#6B6A63">9.8GB</text>
+            <text x="112" y="88" text-anchor="end" font-size="11" fill="#2E2C27">UD-Q3_K_XL（3bit）</text>
+            <rect x="118" y="79" width="170" height="12" fill="#B4B3A8"/>
+            <text x="294" y="89" font-size="10.5" fill="#6B6A63">13.1GB</text>
+            <text x="112" y="116" text-anchor="end" font-size="11" fill="#2E2C27">UD-IQ4_XS（4bit）</text>
+            <rect x="118" y="107" width="186" height="12" fill="#C6613F"/>
+            <text x="310" y="117" font-size="10.5" fill="#2E2C27">14.3GB</text>
+            <text x="112" y="144" text-anchor="end" font-size="11" fill="#2E2C27">Q4_K_M（4bit）</text>
+            <rect x="118" y="135" width="215" height="12" fill="#B4B3A8"/>
+            <text x="339" y="145" font-size="10.5" fill="#6B6A63">16.5GB</text>
+            <text x="200" y="192" text-anchor="middle" font-size="10.5" fill="#6B6A63">16GB級で文脈の余白まで残るのはUD-IQ4_XS</text>
+          </g>
+        </svg>
+        <figcaption>作り直された量子化の刻み — 4bit帯が16GBの内側に入った</figcaption>
+      </figure>
+      <p class="b">ただし「同サイズ比で上位1%の精度が10%以上改善」という主張は自社独自の測定方法によるもので、第三者の再現はまだない。含意: 16GB級で27Bを常用する道が現実に開いた。まずUD-IQ4_XSから試し、精度の主張は自分の用途で確かめるのが早い。</p>
+      <p class="src">出典: <a href="https://huggingface.co/unsloth/Qwen3.8-27B-GGUF">Hugging Face（Unsloth）</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Codeに「Concise」出力スタイル — 前置きを削る公式設定</h2>
+      <p class="why">— 昨日話したトークン消費に、設定ひとつで効く追加。</p>
+      <p class="b">8/20公開のv2.1.237に、組み込みの出力スタイル「Concise」が入った。結果から先に述べ、前置きや実況を省くが、作業の徹底度は変えないという位置づけで、`/config`のOutput styleから選べる。同版ではLLMゲートウェイ経由のセッションでプロンプトキャッシュ（前回の文脈を再利用して課金を抑える仕組み）が効かない不具合も直った。含意: 出力トークンは重みが最も大きいので、前置きを削るだけで消費に効く。今日から切り替えて損はない。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>StripeがOpenRouterを約7,500億円で買収 — モデル中継層が決済会社の傘下へ</h2>
+      <p class="why">— 「モデルを乗り換えられる中立層」の持ち主が変わる。受託の技術選定に効く話。</p>
+      <p class="b">決済のStripeが8/19、OpenRouterを75億ドルで買収すると発表した。1つのAPIでOpenAI・Anthropic・Googleやオープンモデルを呼び分けられる中継サービスで、報道では1日10兆トークン超・利用者1,000万人。Databricksとの競り合いを制した形で、OpenRouterは「製品・方針・既存の約束は変えない」と表明。含意: モデル乗り換えの自由度を担保してきた層が、AI利用の金の流れを見たい会社の傘下に入る。中立性は継続観察の対象になる。</p>
+      <p class="src">出典: <a href="https://techcrunch.com/2026/08/19/stripe-didnt-really-buy-openrouter-because-of-the-singularity/">TechCrunch</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
