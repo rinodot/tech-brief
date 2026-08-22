@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月23日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+    h3.sp{font-size:16px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-22.html">← 8/22（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年8月23日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約5分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>MCP公式ロードマップ公開 — ポーリング前提をやめ、サーバーから通知する設計へ</h2>
+      <p class="why">— 自作MCPサーバーの前提が半年〜1年で変わる。今の書き方の寿命が読める話。</p>
+      <p class="b">8/22、MCP（Model Context Protocol、AIエージェントに外部ツールをつなぐ共通規格）のコアメンテナ2人が今後の優先5分野を公式ブログで公開した。核はエージェント間メッセージングの刷新で、クライアントが定期的に問い合わせるポーリング前提をやめ、サーバー側から発火するイベント（webhookやチャネル）へ寄せる。長時間タスクを扱うTasks拡張（SEP-2663）も正式仕様への格上げを目指す。伝送路は7/28版仕様を土台に、ローカルの「Streamable HTTP over stdio」とリモートHTTPを一本化。認可はDPoP（トークンに鍵の所持証明を添える方式。盗まれたトークン単体では使えなくなる）の採用が確定し、サブエージェントへの権限委任シナリオまで想定に入った。</p>
+      <figure>
+        <svg viewBox="0 0 400 196" role="img" aria-label="MCPロードマップの5分野">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="16" font-size="11" fill="#B4B3A8">分野</text>
+            <text x="140" y="16" font-size="11" fill="#B4B3A8">何を変えるか</text>
+            <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">① メッセージング</text>
+            <text x="140" y="44" font-size="12" fill="#2E2C27">ポーリング→サーバー起点イベント</text>
+            <line x1="6" y1="54" x2="394" y2="54" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="76" font-size="12.5" fill="#2E2C27">② 伝送路</text>
+            <text x="140" y="76" font-size="12" fill="#2E2C27">ローカルとリモートをHTTPで一本化</text>
+            <line x1="6" y1="86" x2="394" y2="86" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="108" font-size="12.5" fill="#2E2C27">③ ID・認可</text>
+            <text x="140" y="108" font-size="12" fill="#2E2C27">DPoP採用、委任シナリオまで</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#C6613F" font-weight="700">④ プリミティブ</text>
+            <text x="140" y="140" font-size="12" fill="#2E2C27">ツール一覧を必要時まで見せない</text>
+            <line x1="6" y1="150" x2="394" y2="150" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="172" font-size="12.5" fill="#2E2C27">⑤ SDK</text>
+            <text x="140" y="172" font-size="12" fill="#2E2C27">開発者体験の改善</text>
+            <line x1="6" y1="182" x2="394" y2="182" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>公式が挙げた5分野 — 赤字が自作サーバーに最も効く2つ</figcaption>
+      </figure>
+      <p class="b">含意: 効くのは①と④だ。ポーリングで書いた箇所は通知型に寄せる余地があり、④はツールを増やすほど一覧そのものが文脈コストになるという指摘。今日の特集で扱うSkillsの3段階ロードと同じ発想で、「必要になるまで読ませない」が界隈全体の設計方針になりつつある。</p>
+      <p class="src">出典: <a href="https://blog.modelcontextprotocol.io/posts/mcp-roadmap/">MCP公式ブログ</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>753BのMoEをGPU 1枚で動かす論文 — 帯域に合わせて実行を組み替える</h2>
+      <p class="why">— 「16GBで27B」という今の天井を、量子化とは別の角度から押し上げる手法。</p>
+      <p class="b">MoE（専門家を切り替えて一部だけ動かす方式）推論の論文「FreeToken」が8/22にHNで浮上した（arXiv提出は8/17の拾い上げ。著者にUC BerkeleyのIon Stoica）。エキスパートの配置・CPU/GPU分担・状態の再利用を帯域に合わせて動的に組み替える手法で、実装はGitHubで公開済み。著者のX投稿ではGLM-5.2 753BをRTX PRO 6000で15 tok/sとあるが未検証。含意: MoEは帯域律速。量子化で削らずとも置き場所の設計で実効速度が変わる。</p>
+      <p class="src">出典: <a href="https://arxiv.org/abs/2608.16157">arXiv</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: Skillsを自作して動かす — 3段階ロードの原理と最短手順</h3>
+      <p class="b">Skills（Claudeに手順書を渡す仕組み）が節約になる理由は、全部を一度に読まないからだ。起動時にシステムプロンプトへ常駐するのは、全スキルのnameとdescriptionだけ。発話がdescriptionに合致して初めて、ClaudeがBashでSKILL.md本体をcatして読む。参照先の追加ファイルは、必要と判断したときだけ開く。この3段構えのおかげで、スキルに書ける分量は実質的に上限がない。目次→章→付録の順に読む本と同じ構造だ。</p>
+      <figure>
+        <svg viewBox="0 0 400 222" role="img" aria-label="Skillsの3段階ロード">
+          <defs>
+            <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#2E2C27"/>
+            </marker>
+          </defs>
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <rect x="50" y="8" width="300" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="28" text-anchor="middle" font-size="13" fill="#2E2C27">起動時: name と description だけ常駐</text>
+            <text x="200" y="46" text-anchor="middle" font-size="11.5" fill="#6B6A63">ここで「どれを使うか」を判断する</text>
+            <line x1="200" y1="56" x2="200" y2="70" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah3)"/>
+            <rect x="50" y="72" width="300" height="48" fill="#FFFFFF" stroke="#C6613F" stroke-width="1.5"/>
+            <text x="200" y="92" text-anchor="middle" font-size="13" fill="#2E2C27">合致したとき: SKILL.md 本体を読む</text>
+            <text x="200" y="110" text-anchor="middle" font-size="11.5" fill="#6B6A63">Bashで cat して文脈に入れる</text>
+            <line x1="200" y1="120" x2="200" y2="134" stroke="#2E2C27" stroke-width="1.4" marker-end="url(#ah3)"/>
+            <rect x="50" y="136" width="300" height="48" fill="#FFFFFF" stroke="#2E2C27" stroke-width="1.4"/>
+            <text x="200" y="156" text-anchor="middle" font-size="13" fill="#2E2C27">必要になったとき: 参照ファイル</text>
+            <text x="200" y="174" text-anchor="middle" font-size="11.5" fill="#6B6A63">reference.md などを個別に開く</text>
+            <text x="200" y="206" text-anchor="middle" font-size="11.5" fill="#6B6A63">読まれない限り文脈を1文字も消費しない</text>
+          </g>
+        </svg>
+        <figcaption>3段構え — descriptionだけが常に載る「入口」なので、ここが最重要</figcaption>
+      </figure>
+      <p class="b">手順は短い。<code>~/.claude/skills/&lt;名前&gt;/SKILL.md</code>を作り、フロントマターにnameとdescriptionを書く。nameは小文字とハイフンのみ64字以内、<code>processing-pdfs</code>のような動名詞形が推奨。descriptionは三人称で「何をするか」と「いつ使うか」の両方を書き、具体的なキーワードを入れる。「Helps with documents」のような曖昧な記述はトリガーしない。本体は500行未満に収め、超えるなら別ファイルへ逃がす。置き場所は<code>~/.claude/skills/</code>が全プロジェクト、<code>.claude/skills/</code>がそのプロジェクトのみ。</p>
+      <p class="b">落とし穴が3つある。第一に、フロントマターのYAMLが壊れていてもエラーにならず空メタデータで読み込まれる。<code>/スキル名</code>で手動起動はできるのに自動で起動しない、という症状になる。第二に、allowed-toolsは禁止機能ではない。確認プロンプトを省くホワイトリストにすぎず、指定外のツールも呼ばれる。禁止はdisallowed-toolsの側だ。第三に、スキルが増えるとdescriptionは文脈窓1%の予算に収まるよう自動で切り詰められ、使用頻度の低いものから記述が落ちる。「急にトリガーしなくなった」はこれが原因のことがある。<code>/context</code>で消費量が見える。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/skills">Claude Code ドキュメント（Skills）</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
