@@ -99,5 +99,15 @@
    "Qwen3.8-27Bが市販アプリの認証を30分で解析 — 手元の27Bで足りた実例",
    "Torvaldsの「地獄のデバッグ」— AIは何度も『不可能だ』と断言した"
   ]
+ },
+ {
+  "date": "2026-08-25",
+  "weekday": "火",
+  "file": "2026-08-25.html",
+  "titles": [
+   "Anthropicが1日に3度停止、余波でGitHub Copilotも低下 — 8月で7件目",
+   "firebase_core 4.14.0、ネイティブ実装をKotlinとSwiftへ全面移行",
+   "LLMの出力が推論エンジンを乗っ取る道筋 — 実例はvLLMのeval()"
+  ]
  }
 ]
