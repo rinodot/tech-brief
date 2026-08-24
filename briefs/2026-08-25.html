@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月25日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-24.html">← 8/24（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年8月25日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Anthropicが1日に3度停止、余波でGitHub Copilotも低下 — 8月で7件目</h2>
+      <p class="why">— 8/18に書いた「二重依存」の続き。今回は片方の障害がもう片方へ伝わった。</p>
+      <p class="b">8/24、Anthropicのサービスが1日に3度止まった。1件目は05:06 UTC（日本時間14:06）に調査開始と記録された「複数モデルでのエラー増加」で、Opus 5・Fable 5・Mythos 5・Opus 4.8が影響を受け、claude.ai・API・Claude Code・Coworkが一部使えなくなった。05:27に原因特定、解消は08:30前後（分単位は確定できない）。余波はGitHubにも出て、07:12〜07:58 UTCにCopilotのFable 5利用が「上流プロバイダ起因」として低下したとGitHub側のステータスに記録された。残る2件はclaude.ai／Claude Codeのログイン障害で、16:02〜17:16と20:00〜20:26。8月に入って7件目の障害だと報じられている。</p>
+      <figure>
+        <svg viewBox="0 0 400 228" role="img" aria-label="8月24日の障害タイムライン">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="16" font-size="11" fill="#B4B3A8">時刻（UTC）</text>
+            <text x="126" y="16" font-size="11" fill="#B4B3A8">起きたこと</text>
+            <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">05:06</text>
+            <text x="126" y="44" font-size="12" fill="#2E2C27">複数モデルでエラー増加、調査開始</text>
+            <line x1="6" y1="54" x2="394" y2="54" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="76" font-size="12.5" fill="#2E2C27">05:27</text>
+            <text x="126" y="76" font-size="12" fill="#2E2C27">原因を特定と報告</text>
+            <line x1="6" y1="86" x2="394" y2="86" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="108" font-size="12.5" fill="#C6613F" font-weight="700">07:12〜07:58</text>
+            <text x="126" y="108" font-size="12" fill="#2E2C27">GitHub側でもFable 5が低下</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#2E2C27">〜08:30頃</text>
+            <text x="126" y="140" font-size="12" fill="#2E2C27">1件目が解消（時刻は不確定）</text>
+            <line x1="6" y1="150" x2="394" y2="150" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="172" font-size="12.5" fill="#2E2C27">16:02〜17:16</text>
+            <text x="126" y="172" font-size="12" fill="#2E2C27">ログイン障害（2件目）</text>
+            <line x1="6" y1="182" x2="394" y2="182" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="204" font-size="12.5" fill="#2E2C27">20:00〜20:26</text>
+            <text x="126" y="204" font-size="12" fill="#2E2C27">ログイン障害（3件目）</text>
+            <line x1="6" y1="214" x2="394" y2="214" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>赤字が連鎖した2点 — Anthropicの障害がGitHub側に伝わっている</figcaption>
+      </figure>
+      <p class="b">含意: 8/18の号で「AnthropicとGitHubへの二重依存」を書いたが、あのときは別々の原因が偶然重なっただけだった。今回は片方の障害がもう片方へ伝わっている。退避先のつもりのCopilotが同じ上流に載っているなら、それは代替になっていない。</p>
+      <p class="src">出典: <a href="https://status.claude.com/">Anthropic ステータスページ</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>firebase_core 4.14.0、ネイティブ実装をKotlinとSwiftへ全面移行</h2>
+      <p class="why">— リリース済みFlutter/Firebaseアプリの土台が書き換わった。上げる前に一度通したい。</p>
+      <p class="b">FlutterFireのfirebase_coreが8/24にv4.14.0を公開し、ネイティブ実装を刷新した。Android側をKotlinへ、iOS/macOS側をSwiftへ全面移行している（PR #18570と#18569）。あわせてFirebase Android SDKを34.18.0、iOS SDKを12.18.0に上げた。上がったのはfirebase_core単体で、firebase_authやfirebase_messagingは8/3のまま。含意: 土台の書き換えはビルド挙動とプラグイン互換に効きうる。</p>
+      <p class="src">出典: <a href="https://pub.dev/packages/firebase_core/changelog">pub.dev</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>LLMの出力が推論エンジンを乗っ取る道筋 — 実例はvLLMのeval()</h2>
+      <p class="why">— 自前ホスティングなら、モデルの出力は「結果」ではなく「入力」として扱う話。</p>
+      <p class="b">LLMが吐いたトークン列が推論エンジン側のパーサを突き、任意コード実行に至りうる——という攻撃モデルの論考が8/24に公開された。実例はCVE-2025-9141で、vLLM（推論サーバ）のQwen3-Coder向けツールコール解析器が、引数をほぼ無条件で<code>eval()</code>へ渡していた。筆者はGPUで生成する側と解釈する側をマシンごと分けよと勧める。事件ではなく問題提起である点は割り引きたい。含意: モデルの出力は品質だけでなく安全性の観点でも検証対象になる。</p>
+      <p class="src">出典: <a href="https://boydkane.com/essays/llms-could-control-their-host-machines-by-exploiting-inference-engines">boydkane.com</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
