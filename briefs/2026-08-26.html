@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月26日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-25.html">← 8/25（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年8月26日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code v2.1.243 — キャッシュTTLが設定可能に、サブエージェント運用に効く回</h2>
+      <p class="why">— サブエージェントを常用しているなら、消費と可視性の両方が今日から変わる。</p>
+      <p class="b">8/25までに出たv2.1.243に、運用設計まわりの変更がまとまって入った。効くのは2つ。1つはキャッシュ制御で、<code>promptCacheTtl</code>と<code>subagentPromptCacheTtl</code>が追加され、APIキー／クラウド利用ならメイン会話を1時間キャッシュしたままサブエージェントは5分に据え置ける（プロンプトキャッシュ＝前回の文脈を再利用して課金を抑える仕組み）。もう1つは<code>/tasks</code>にサブエージェントの実行モデルとエフォートが出るようになった点だ。Hooksでは、if条件がバッククォートや<code>$()</code>を含むコマンドに誤って一致する不具合が直った。<code>/usage</code>にはLoopsの内訳（loop別の実行回数・総トークン・1回あたり）が加わり、暴走した<code>/loop</code>を見つけられる。</p>
+      <figure>
+        <svg viewBox="0 0 400 196" role="img" aria-label="v2.1.243で変わった系統">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="16" font-size="11" fill="#B4B3A8">系統</text>
+            <text x="150" y="16" font-size="11" fill="#B4B3A8">変わったこと</text>
+            <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">キャッシュ</text>
+            <text x="150" y="44" font-size="12" fill="#2E2C27">本体1時間・子5分を設定できる</text>
+            <line x1="6" y1="54" x2="394" y2="54" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="76" font-size="12.5" fill="#C6613F" font-weight="700">サブエージェント</text>
+            <text x="150" y="76" font-size="12" fill="#2E2C27">実行モデルとeffortが見える</text>
+            <line x1="6" y1="86" x2="394" y2="86" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="108" font-size="12.5" fill="#2E2C27">Hooks</text>
+            <text x="150" y="108" font-size="12" fill="#2E2C27">if条件が誤って一致する不具合</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#2E2C27">/loop</text>
+            <text x="150" y="140" font-size="12" fill="#2E2C27">/usageにloop別の消費内訳</text>
+            <line x1="6" y1="150" x2="394" y2="150" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="172" font-size="12.5" fill="#2E2C27">MCP</text>
+            <text x="150" y="172" font-size="12" fill="#2E2C27">切断後に自動で再接続する</text>
+            <line x1="6" y1="182" x2="394" y2="182" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>赤字が消費に直接効く2つ — 残りは可視性と安定性の改善</figcaption>
+      </figure>
+      <p class="b">配布物も軽くなった。インストーラがzstd圧縮になりLinux x64で340MB→約75MB、常駐メモリも1セッションあたり40〜70MB減った。翌日のv2.1.245はglibc 2.44系での起動クラッシュ修正のみ。含意: キャッシュTTLは消費に直結する。サブエージェントを多用するなら真っ先に見る値だ。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>訂正: FlutterFireの言語移行はfirebase_core単体ではなかった</h2>
+      <p class="why">— 昨日の2番に誤りがあった。実際は5パッケージが同時に動いている。</p>
+      <p class="b">昨日「上がったのはfirebase_core単体」と書いたが、これは誤りだった。8/24の同じ時刻に firebase_auth 6.6.0、cloud_firestore 6.9.0、analytics 12.5.0、cloud_functions 6.4.0 も出ている。進み方は揃っておらず、Kotlin/Swiftの両方が済んだのはcoreとauthのみ、analyticsとfunctionsはSwift化だけ、firestoreは言語移行なしだ。storage・messaging・crashlyticsは8/3のまま手つかず。含意: 過渡期なのでパッケージ単位で判断したい。</p>
+      <p class="src">出典: <a href="https://pub.dev/packages/firebase_auth/changelog">pub.dev</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Perplexityが完全ローカル動作のエージェントを配布 — 動かすのはQwen3.8-27B</h2>
+      <p class="why">— 「ローカルで足りる」の製品化。手元で回した分は課金されない設計だ。</p>
+      <p class="b">Perplexityが8/25、自社エージェントを完全にオンデバイスで動かす「Portable Computer」をPro/Max向けに公開した。主対象はNVIDIA DGX Spark（GB10、統合メモリ128GB）で、RTX搭載PCへの対応も予告。動かすモデルはQwen3.8-27Bと自社で追加学習したPPLX 27B。ローカル処理はクレジット課金なしで、必要なときだけクラウドへ引き上げる。現状Linuxのみ。含意: 「手元で済ませ、足りないときだけ上げる」が製品の既定形になってきた。</p>
+      <p class="src">出典: <a href="https://www.perplexity.ai/hub/blog/introducing-portable-computer-for-local-first-ai">Perplexity</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
