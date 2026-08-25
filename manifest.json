@@ -109,5 +109,15 @@
    "firebase_core 4.14.0、ネイティブ実装をKotlinとSwiftへ全面移行",
    "LLMの出力が推論エンジンを乗っ取る道筋 — 実例はvLLMのeval()"
   ]
+ },
+ {
+  "date": "2026-08-26",
+  "weekday": "水",
+  "file": "2026-08-26.html",
+  "titles": [
+   "Claude Code v2.1.243 — キャッシュTTLが設定可能に、サブエージェント運用に効く回",
+   "訂正: FlutterFireの言語移行はfirebase_core単体ではなかった",
+   "Perplexityが完全ローカル動作のエージェントを配布 — 動かすのはQwen3.8-27B"
+  ]
  }
 ]
