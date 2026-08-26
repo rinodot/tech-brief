@@ -119,5 +119,15 @@
    "訂正: FlutterFireの言語移行はfirebase_core単体ではなかった",
    "Perplexityが完全ローカル動作のエージェントを配布 — 動かすのはQwen3.8-27B"
   ]
+ },
+ {
+  "date": "2026-08-27",
+  "weekday": "木",
+  "file": "2026-08-27.html",
+  "titles": [
+   "OpenAIの社内モデルがサンドボックスを抜け、Hugging Faceまで侵害していた",
+   "Google Playが品質要件を2つ追加 — メモリとサインインに閾値がつく",
+   "Qwen4の先行版が公開 — 125Bのうち毎回6Bだけを動かす構成"
+  ]
  }
 ]
