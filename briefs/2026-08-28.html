@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月28日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-27.html">← 8/27（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年8月28日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Google Playのメモリ閾値が判明 — 4GB機ならアプリ2GBまで</h2>
+      <p class="why">— 昨日「MB値はサポートページ送り」と書いた件の続き。自分のアプリで測れる数字になった。</p>
+      <p class="b">判定はAnonymous RSS+Swapの90パーセンタイル・フォアグラウンド状態で、端末のRAM容量ごとに上限が決まる。4GB機ではアプリ2GB／ゲーム2.25GB、6GB機で2.25／2.75GB、8GB機で2.25／3.5GB、12GB機で3.25／4GB、16GB機で4.25／5GBだ。ビットマップは別枠で、ユーザーが見ている状態とバックグラウンドで200MB超、キャッシュ状態で400MB超が超過扱いになる。DEXコードは、アプリでDEXが10MB超、ゲームで50MB超の場合に、難読化・最適化・縮小のそれぞれで最低25%のカバレッジが要る。超過するとアプリは動作を遅くされ、終了されることがあり、Play Console上での露出と公開能力も落とされる。施行は2027年2月。</p>
+      <figure>
+        <svg viewBox="0 0 400 196" role="img" aria-label="端末RAM別のメモリ上限">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="16" font-size="11" fill="#B4B3A8">端末のRAM</text>
+            <text x="170" y="16" font-size="11" fill="#B4B3A8">アプリ</text>
+            <text x="280" y="16" font-size="11" fill="#B4B3A8">ゲーム</text>
+            <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">4GB</text>
+            <text x="170" y="44" font-size="12.5" fill="#2E2C27">2GB</text>
+            <text x="280" y="44" font-size="12.5" fill="#2E2C27">2.25GB</text>
+            <line x1="6" y1="54" x2="394" y2="54" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="76" font-size="12.5" fill="#2E2C27">6GB</text>
+            <text x="170" y="76" font-size="12.5" fill="#2E2C27">2.25GB</text>
+            <text x="280" y="76" font-size="12.5" fill="#2E2C27">2.75GB</text>
+            <line x1="6" y1="86" x2="394" y2="86" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="108" font-size="12.5" fill="#2E2C27">8GB</text>
+            <text x="170" y="108" font-size="12.5" fill="#2E2C27">2.25GB</text>
+            <text x="280" y="108" font-size="12.5" fill="#2E2C27">3.5GB</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#2E2C27">12GB</text>
+            <text x="170" y="140" font-size="12.5" fill="#2E2C27">3.25GB</text>
+            <text x="280" y="140" font-size="12.5" fill="#2E2C27">4GB</text>
+            <line x1="6" y1="150" x2="394" y2="150" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="172" font-size="12.5" fill="#2E2C27">16GB</text>
+            <text x="170" y="172" font-size="12.5" fill="#2E2C27">4.25GB</text>
+            <text x="280" y="172" font-size="12.5" fill="#2E2C27">5GB</text>
+            <line x1="6" y1="182" x2="394" y2="182" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>安い端末ほど厳しい — 4GB機の2GBが実質の設計上限になる</figcaption>
+      </figure>
+      <p class="b">Zero-Tap Sign-Inのほうは対象がAndroid 9以降のモバイルとタブレットで、2027年4月施行。含意: 画像を多く扱うFlutterアプリなら、まずビットマップの200MB／400MBを実測しておきたい。DartのGCとimage cacheの設定が効く場所だ。</p>
+      <p class="src">出典: <a href="https://support.google.com/googleplay/android-developer/answer/17492799">Google Play ヘルプ</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.247の中身が公開 — API費用の最適化コマンドが入った</h2>
+      <p class="why">— フックのエラー処理を雑に書いていた人が救われる修正が入っている。</p>
+      <p class="b">45項目超の回で、目を引くのは<code>/claude-api cost-optimize</code>だ。既存プロジェクトのAPI利用を走査し、キャッシュ・バッチ・effortの観点から節約案を出す。ほかに、サブエージェントが最初の404で親にフォールバックする不具合と、フックが大量のエラーを吐くとセッションが「Prompt is too long」で固まる不具合を修正。Sonnet 5の自動コンパクトが100万トークン枠の全体（約967K）を使うようになった。含意: 自動化を増やすほどフック起因の停止は起きやすい。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Debianの投票は公式ページ上では今日締切 — 「1週間延長」報道の裏が取れない</h2>
+      <p class="why">— 8/16に取り上げた件の決着日。ただし日程そのものが不確かになっている。</p>
+      <p class="b">「LLM生成コードをどう扱うか」の一般決議は、公式ページ上では今日8/28 23:59 UTCが締切だ。ただしThe Registerが8/26に「DPLが1週間延長した」と報じており、裏が取れない。公式ページは8/14以降ビルドされておらず、メーリングリストはボット対策で読めず、他媒体の追随報道もない。集計ページは投票383件・有効279件・投票者271人で、進行中であることだけを示す。全8案＋棄権のうち、全面禁止のA案だけが3:1の特別多数を要する。</p>
+      <p class="src">出典: <a href="https://www.debian.org/vote/2026/vote_002">Debian 公式投票ページ</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
