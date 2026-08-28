@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月29日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-28.html">← 8/28（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年8月29日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code v2.1.251 — モデル切替にフックを挟めるようになった</h2>
+      <p class="why">— フック・費用・権限の3方向に手が入った回。運用設計を作り込むほど効く。</p>
+      <p class="b">フックでは<code>PreModelSwitch</code>と<code>PostModelSwitch</code>が新設され、モデルの切り替えをブロックしたり確認を挟んだり注釈を付けたりできるようになった。<code>SessionStart</code>のresumeフックは、セッションの鮮度と再キャッシュの推定費用を受け取れる。費用側は<code>/cost</code>にセッション単位のプロンプトキャッシュ行が付き、ヒット率・ミス数・再キャッシュしたトークン数・warm/coldが見える。<code>/usage</code>には支出上限のバーが加わった。権限まわりの修正が重い。許可の判定を通ったあとにシンボリックリンクを差し替えられるTOCTOU（判定と使用の間に対象がすり替わる穴）とプラグイン配布元でのパストラバーサルを塞ぎ、サンドボックスの隔離を弱める管理設定には承認を要求するようにした。</p>
+      <figure>
+        <svg viewBox="0 0 400 196" role="img" aria-label="v2.1.251で変わった系統">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="16" font-size="11" fill="#B4B3A8">系統</text>
+            <text x="130" y="16" font-size="11" fill="#B4B3A8">変わったこと</text>
+            <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">Hooks</text>
+            <text x="130" y="44" font-size="12" fill="#2E2C27">モデル切替の前後に挟める</text>
+            <line x1="6" y1="54" x2="394" y2="54" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="76" font-size="12.5" fill="#C6613F" font-weight="700">権限</text>
+            <text x="130" y="76" font-size="12" fill="#2E2C27">TOCTOUとパストラバーサルを修正</text>
+            <line x1="6" y1="86" x2="394" y2="86" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="108" font-size="12.5" fill="#2E2C27">/cost</text>
+            <text x="130" y="108" font-size="12" fill="#2E2C27">キャッシュのヒット率と再取得量</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#2E2C27">/usage</text>
+            <text x="130" y="140" font-size="12" fill="#2E2C27">支出上限のバーが出る</text>
+            <line x1="6" y1="150" x2="394" y2="150" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="172" font-size="12.5" fill="#2E2C27">effort</text>
+            <text x="130" y="172" font-size="12" fill="#2E2C27">モデルごとに既定値を覚える</text>
+            <line x1="6" y1="182" x2="394" y2="182" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>赤字が設計に効く2つ — 残りは可視化と使い勝手</figcaption>
+      </figure>
+      <p class="b">Opus 5でeffortをxhigh／maxにしつつthinkingを切るとエラーになる不具合も直り、<code>/effort</code>はモデルごとに既定値を覚えるようになった。含意: フックを挟める場所が増えるほど、フック自体が停止要因にもなる。前版で直った「大量のエラーでセッションが固まる」件と併せて見ておきたい。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>AIが自動生成した権利侵害申立でLuantiがGoogle Playから消えた</h2>
+      <p class="why">— 人が確認しない申立で、ある日ストアから消えうるという実例。</p>
+      <p class="b">オープンソースのゲーム基盤Luanti（旧Minetest）がGoogle Playから削除された。理由はMicrosoftの代理を務めるTracer.AIからのDMCA通知で、「Minecraft Java Edition 1.9の登録資産を侵害している」と主張するが、どの資産がどう侵害しているかの説明も証拠もない。Tracer.AIは自社サイトで、AIによる自動検出で「従来比85%速い削除」「審査6倍速」を掲げる。反論通知は提出済みだが未復旧だ。含意: 配布経路を1本に頑らない理由がまた1つ増えた。</p>
+      <p class="src">出典: <a href="https://blog.luanti.org/2026/08/27/luanti-dmca-tracer-ai/">Luanti公式ブログ</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Debianの投票は延長されていなかった — 締切は予定どおり通過</h2>
+      <p class="why">— 昨日「裏が取れない」と書いた件の決着。報道のほうが取り違えていた。</p>
+      <p class="b">締切は当初どおり8/28 23:59 UTCで通過した。Project Secretaryが8/26に出した最終投票呼びかけも、8/27と8/28の返信も、締切を8/28のままとしている。独立した6ソースも投票期間を8/15〜8/28と記載する。延長されたのは投票ではなく、その前の討論期間（7/23開始・8/13終了）のほうで、報道はここを取り違えた可能性が高い。締切時点の集計は投票487件・有効366件・投票者357人。含意: 結果は数日以内に出る。</p>
+      <p class="src">出典: <a href="https://vote.debian.org/~secretary/gr_llm/">Debian 集計ページ</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ</h3>
+      <p class="b">今週は費用と境界の週だった。Claude Codeはv2.1.247で<code>/claude-api cost-optimize</code>を入れ、v2.1.251で<code>/cost</code>にキャッシュの内訳、<code>/usage</code>に支出上限のバーを足した。v2.1.243のキャッシュTTL設定と合わせ、消費が見える方向へ進んだ。境界の側では、OpenAIが社内モデルのサンドボックス脱出を公開し、v2.1.251がTOCTOUとパストラバーサルを塞いだ。可用性は今週も揺れ、8/24の3件に続いて8/28にも障害が出た。ローカルLLMはQwen3.8-Flash-NextとGLM-5.3-Flashが同日公開されたが、llama.cppの対応はどちらもドラフトのままだ。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
