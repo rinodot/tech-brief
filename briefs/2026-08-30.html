@@ -26,6 +26,7 @@
   .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
   main{padding:2px 0 44px;}
   article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
   .num{
     position:absolute; left:0; top:31px;
     font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
@@ -50,7 +51,6 @@
     article{padding-left:40px;}
     .num{font-size:26px; top:35px;}
     h2{font-size:16.5px;}
-    h3.sp{font-size:16px;}
   }
 /*BNAVCSS*/
   .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
@@ -61,7 +61,7 @@
 </style>
 </head>
 <body>
-<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-29.html">← 8/29（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-29.html">← 8/29（土）</a><a href="../index.html">一覧</a><a href="2026-08-31.html">8/31（月）→</a></div></nav><!--BNAV END-->
 
 <header>
   <div class="wrap">
@@ -93,7 +93,7 @@
     <section class="special">
       <h3 class="sp">特集: 8月のローカルLLMで論点が入れ替わった — 密27Bからスパース125Bへ</h3>
       <p class="b">前半の問いは「16GBに27Bの密モデルが載るか」だった。8/16に出たQwen3.8-27Bに対し、8/19にUnslothが量子化を作り直し、UD-IQ4_XSが14.3GB、Q4_K_Mが16.5GB、1bitのUD-IQ1_Sが6.19GBという刻みになった。第三者の計測では4bitはフル精度とほぼ同等を保つ一方、1bitはGPQA Diamondで当てずっぽうの水準まで崩れる。4bitと1bitの間に非線形な壁がある、というのが前半の結論だ。後半はスパースMoEが一斉に来た。8/26のQwen3.8-Flash-Next（総125Bにn-gram埋め込み51B、アクティブ6B）とGLM-5.3-Flash（320B総・18Bアクティブ、MIT）、8/28のTencent Hy4-preview（770B総・49Bアクティブ、Apache 2.0）だ。</p>
-      <p class="b">ここで効く原理は、容量と帯域が別の役割を持つことだ。次にどのエキスパートが呼ばれるかは事前に分からないので、全パラメータをいつでも読める場所に置く必要がある。容量は「載るか」を決める固定コストになる。一方、バッチ1の逐次生成では重みを1回読むだけで再利用しないため速度は帯域律速で、読む量はアクティブパラメータ分しかない。だから総パラメータは容量の許す限り大きく、アクティブは小さく、が設計の答えになる。もう一つ、二乗計算量の古典的なフルアテンション層が、こ3モデルからは消えている。</p>
+      <p class="b">ここで効く原理は、容量と帯域が別の役割を持つことだ。次にどのエキスパートが呼ばれるかは事前に分からないので、全パラメータをいつでも読める場所に置く必要がある。容量は「載るか」を決める固定コストになる。一方、バッチ1の逐次生成では重みを1回読むだけで再利用しないため速度は帯域律速で、読む量はアクティブパラメータ分しかない。だから総パラメータは容量の許す限り大きく、アクティブは小さく、が設計の答えになる。もう一つ、二乗計算量の古典的なフルアテンション層が、この3モデルからは消えている。</p>
       <figure>
         <svg viewBox="0 0 400 140" role="img" aria-label="メモリ帯別の現実的な選択肢">
           <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
@@ -102,7 +102,7 @@
             <line x1="6" y1="22" x2="394" y2="22" stroke="#E4E3DC" stroke-width="1"/>
             <text x="6" y="44" font-size="12.5" fill="#C6613F" font-weight="700">16GB</text>
             <text x="120" y="44" font-size="12" fill="#2E2C27">Qwen3.8-27B（UD-IQ4_XS 14.3GB）</text>
-            <text x="120" y="60" font-size="11.5" fill="#6B6A63">新型MoEは1bitでを72GB超で載らない</text>
+            <text x="120" y="60" font-size="11.5" fill="#6B6A63">新型MoEは1bitでも82GB超で載らない</text>
             <line x1="6" y1="70" x2="394" y2="70" stroke="#F0EFE9" stroke-width="1"/>
             <text x="6" y="92" font-size="12.5" fill="#2E2C27">24GB</text>
             <text x="120" y="92" font-size="12" fill="#2E2C27">同じくQwen3.8-27B、UD-Q6_K 22GBまで</text>
