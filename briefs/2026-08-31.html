@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年8月31日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-30.html">← 8/30（日）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年8月31日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Codeの週次上限、9/14から「恒久25%増」— ただし今日と比べると17%減る</h2>
+      <p class="why">— 週次枠を気にしながら使っているなら、猟予は2週間。その後の常態も決まった。</p>
+      <p class="b">8/29、Anthropicの開発者向けアカウントが「9月14日から、Pro・Max・Team・シート制Enterpriseの標準週次上限を恒久的に25%引き上げる。それまでは現行の50%増を維持する」と告知した。5月13日に始まった50%増プロモは当初8月31日、つまり今日までの予定で、これが9月13日まで延びた形だ。ただし数字の向きに注意がいる。素の上限を100とすると今は150、9月14日以降は125になる。素の水準からは25%増だが、今日と比べれば約17%減る。Anthropic自身もスレッドの返信で「今日と比較すると17%の削減になる」と認めた。最初の投稿は削除して出し直され、Xにはコミュニティノートが付いている。</p>
+      <figure>
+        <svg viewBox="0 0 400 168" role="img" aria-label="週次上限の推移">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="14" font-size="11" fill="#B4B3A8">週次上限（素の上限を100とした指数）</text>
+            <text x="6" y="44" font-size="12" fill="#6B6A63">〜5/12（素）</text>
+            <rect x="112" y="32" width="160" height="16" fill="#D8D6CC"/>
+            <text x="280" y="44" font-size="12" fill="#6B6A63">100</text>
+            <text x="6" y="82" font-size="12" fill="#2E2C27">5/13〜9/13</text>
+            <rect x="112" y="70" width="240" height="16" fill="#C6613F"/>
+            <text x="360" y="82" font-size="12" fill="#C6613F" font-weight="700">150</text>
+            <text x="6" y="120" font-size="12" fill="#2E2C27">9/14〜（恒久）</text>
+            <rect x="112" y="108" width="200" height="16" fill="#8F8D82"/>
+            <text x="320" y="120" font-size="12" fill="#2E2C27" font-weight="700">125</text>
+            <line x1="112" y1="132" x2="352" y2="132" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="112" y="152" font-size="11.5" fill="#C6613F">150 → 125 ＝ 今日比で約17%減</text>
+          </g>
+        </svg>
+        <figcaption>「恒久25%増」の基準は素の上限。現行の50%増からは下がる</figcaption>
+      </figure>
+      <p class="b">5時間ごとの上限には触れていない。「使用量の可視性と制御を高める変更を準備中」とも書く。公式ヘルプ記事は今朝もまだ「8月31日まで50%増、その後は標準に戻る」という旧記述のままで、一次情報はXの告知だけだ。含意: 猟予は2週間。週次枠を大きく食う作業は9/13までに寄せ、以降は素の1.25倍を常態として運用を組み直す。</p>
+      <p class="src">出典: <a href="https://x.com/ClaudeDevs/status/2093742321473065266">@ClaudeDevs</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Google Playのターゲット36要件、締切は今日 — 延長申請は11/1まで</h2>
+      <p class="why">— リリース済みアプリに次のアップデートを出すとき、今日を境に審査で弾かれる。</p>
+      <p class="b">今日8月31日を境に、新規アプリとアップデートの提出はAndroid 16（API level 36）以上をターゲットにしていないと受け付けられない。更新しない既存アプリはAPI 35以上なら配信が続くが、それ未満だとターゲットより新しいAndroid端末の新規ユーザーには表示されなくなる（インストール済みには影響しない）。11月1日までの延長申請がPlay Consoleのポリシーステータスからできる。含意: Flutterなら<code>build.gradle.kts</code>のtargetSdkを見るだけ。</p>
+      <p class="src">出典: <a href="https://support.google.com/googleplay/android-developer/answer/11926878">Google Play Console ヘルプ</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>firebase_auth 6.6.1 — 8/24のKotlin移行で埋め込まれたAndroidビルド失敗の後始末</h2>
+      <p class="why">— 8/24の一斉更新に追随済みで、Kotlinを2.4系に上げる予定があるなら先に踏む。</p>
+      <p class="b">8/27公開。8/24の6.6.0はAndroidをKotlinへ、iOS/macOSをSwiftへ移す改修で、副作用でKotlin 2.4環境では<code>:firebase_auth:compileDebugKotlin</code>が落ちる。IdTokenListenerのラムダで、SAM変換（1メソッドのインターフェースをラムダで書ける仕組み）の型推論がChecker Frameworkの注釈型に届かない。6.6.1は引数型をFirebaseAuthと明示して回避した。含意: 6.6.0で通っているなら急ぎではない。</p>
+      <p class="src">出典: <a href="https://pub.dev/packages/firebase_auth/changelog">pub.dev firebase_auth changelog</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
