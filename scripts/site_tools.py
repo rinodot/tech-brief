@@ -55,14 +55,59 @@ def build():
         prev_e = entries[i-1] if i > 0 else None
         next_e = entries[i+1] if i < len(entries)-1 else None
         open(p, "w", encoding="utf-8").write(inject_nav(html, prev_e, next_e))
-    json.dump(entries, open(os.path.join(SITE, "manifest.json"), "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+    with open(os.path.join(SITE, "manifest.json"), "w", encoding="utf-8") as _mf:
+        json.dump(entries, _mf, ensure_ascii=False, indent=1)
+        _mf.write("\n")
     _write_index(entries)
     print(f"built: {len(entries)} issues")
     for e in entries:
         print(" ", e["date"], e["weekday"], "|", len(e["titles"]), "titles")
 
+INDEX_CSS = """  :root{--bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47; --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{background:var(--bg); color:var(--body); font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; font-size:15px; line-height:1.8;}
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:38px 0 26px;}
+  h1{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif; font-weight:600; font-size:32px; color:var(--ink); letter-spacing:.05em;}
+  .tag{font-size:12.5px; color:var(--soft); margin-top:6px;}
+  main{padding:0 0 56px;}
+
+  .latest{display:block; background:var(--wash); padding:20px 22px 18px; margin:26px 0 34px; text-decoration:none; color:inherit; border-left:2px solid var(--clay);}
+  .latest .lab{font-size:11px; color:var(--clay); letter-spacing:.12em; font-weight:600;}
+  .latest .lt{font-size:17px; font-weight:700; color:var(--ink); margin:5px 0 10px; letter-spacing:.02em;}
+  .latest:hover .lt{text-decoration:underline;}
+
+  h2.mon{display:flex; align-items:baseline; gap:10px; font-size:12px; color:var(--grey); letter-spacing:.1em; font-weight:600; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid var(--hair);}
+  h2.mon .cnt{font-size:11px; color:var(--grey); font-weight:400; letter-spacing:.04em;}
+
+  .issue{display:grid; grid-template-columns:78px 1fr; gap:0 16px; padding:16px 4px 16px 2px; border-bottom:1px solid var(--hair); text-decoration:none; color:inherit;}
+  .issue:hover{background:var(--wash);}
+  .issue:hover .tt{text-decoration:underline;}
+  .date{display:flex; align-items:baseline; gap:5px; padding-top:1px;}
+  .date .dd{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif; font-size:20px; font-weight:600; color:var(--ink); letter-spacing:.02em;}
+  .date .wd{font-size:11.5px; color:var(--grey);}
+
+  ol.tl, .latest ol{list-style:none;}
+  ol.tl li, .latest li{display:flex; gap:9px; font-size:14px; line-height:1.65; padding:3px 0;}
+  ol.tl .n, .latest .n{flex:none; width:1.1em; font-size:11px; color:var(--grey); padding-top:.35em; font-variant-numeric:tabular-nums;}
+  ol.tl .tt{color:var(--ink);}
+  .latest li{font-size:14px;}
+  .latest .tt{color:var(--body);}
+
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:26px;}
+    .issue{grid-template-columns:1fr; gap:6px; padding:15px 2px;}
+    .date{gap:6px;}
+    .date .dd{font-size:17px;}
+    ol.tl li, .latest li{font-size:14px;}
+  }
+"""
+
 def _write_index(entries):
+    os.makedirs(os.path.join(SITE, "assets"), exist_ok=True)
+    open(os.path.join(SITE, "assets", "index.css"), "w", encoding="utf-8").write(INDEX_CSS)
     latest = entries[-1]
     months = {}
     for e in reversed(entries):
@@ -91,48 +136,7 @@ def _write_index(entries):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>テックブリーフ</title>
-<style>
-  :root{{--bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47; --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;}}
-  *{{box-sizing:border-box; margin:0; padding:0;}}
-  html{{-webkit-text-size-adjust:100%;}}
-  body{{background:var(--bg); color:var(--body); font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; font-size:15px; line-height:1.8;}}
-  .wrap{{max-width:720px; margin:0 auto; padding:0 22px;}}
-  header{{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:38px 0 26px;}}
-  h1{{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif; font-weight:600; font-size:32px; color:var(--ink); letter-spacing:.05em;}}
-  .tag{{font-size:12.5px; color:var(--soft); margin-top:6px;}}
-  main{{padding:0 0 56px;}}
-
-  .latest{{display:block; background:var(--wash); padding:20px 22px 18px; margin:26px 0 34px; text-decoration:none; color:inherit; border-left:2px solid var(--clay);}}
-  .latest .lab{{font-size:11px; color:var(--clay); letter-spacing:.12em; font-weight:600;}}
-  .latest .lt{{font-size:17px; font-weight:700; color:var(--ink); margin:5px 0 10px; letter-spacing:.02em;}}
-  .latest:hover .lt{{text-decoration:underline;}}
-
-  h2.mon{{display:flex; align-items:baseline; gap:10px; font-size:12px; color:var(--grey); letter-spacing:.1em; font-weight:600; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid var(--hair);}}
-  h2.mon .cnt{{font-size:11px; color:var(--grey); font-weight:400; letter-spacing:.04em;}}
-
-  .issue{{display:grid; grid-template-columns:78px 1fr; gap:0 16px; padding:16px 4px 16px 2px; border-bottom:1px solid var(--hair); text-decoration:none; color:inherit;}}
-  .issue:hover{{background:var(--wash);}}
-  .issue:hover .tt{{text-decoration:underline;}}
-  .date{{display:flex; align-items:baseline; gap:5px; padding-top:1px;}}
-  .date .dd{{font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif; font-size:20px; font-weight:600; color:var(--ink); letter-spacing:.02em;}}
-  .date .wd{{font-size:11.5px; color:var(--grey);}}
-
-  ol.tl, .latest ol{{list-style:none;}}
-  ol.tl li, .latest li{{display:flex; gap:9px; font-size:14px; line-height:1.65; padding:3px 0;}}
-  ol.tl .n, .latest .n{{flex:none; width:1.1em; font-size:11px; color:var(--grey); padding-top:.35em; font-variant-numeric:tabular-nums;}}
-  ol.tl .tt{{color:var(--ink);}}
-  .latest li{{font-size:14px;}}
-  .latest .tt{{color:var(--body);}}
-
-  @media (max-width:640px){{
-    .wrap{{padding:0 18px;}}
-    h1{{font-size:26px;}}
-    .issue{{grid-template-columns:1fr; gap:6px; padding:15px 2px;}}
-    .date{{gap:6px;}}
-    .date .dd{{font-size:17px;}}
-    ol.tl li, .latest li{{font-size:14px;}}
-  }}
-</style>
+<link rel="stylesheet" href="assets/index.css">
 </head>
 <body>
 <header><div class="wrap">
