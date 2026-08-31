@@ -170,5 +170,15 @@
    "Google Playのターゲット36要件、締切は今日 — 延長申請は11/1まで",
    "firebase_auth 6.6.1 — 8/24のKotlin移行で埋め込まれたAndroidビルド失敗の後始末"
   ]
+ },
+ {
+  "date": "2026-09-01",
+  "weekday": "火",
+  "file": "2026-09-01.html",
+  "titles": [
+   "auto modeが任意コード実行まで抜かれた — 無害な手順を並べるだけで通る",
+   "訂正: llama.cppのQwen3.8-Flash-Next対応は、すでにマージ済みだった",
+   "Claude Code v2.1.252 — 新規プロジェクトで「always allow」が効かない件が直った"
+  ]
  }
 ]
