@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月1日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-08-31.html">← 8/31（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年9月1日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>auto modeが任意コード実行まで抜かれた — 無害な手順を並べるだけで通る</h2>
+      <p class="why">— 8/16の特集で書いた「自分で自分を承認する」仕組みの、裏側が出てきた。</p>
+      <p class="b">Johann Rehbergerが8/26に公開した検証で、Opus 5のauto modeが突破された。起点は「このURLを要約して」だけ。サーバーはWebFetchに415（対応しない形式）を返し、Claudeはcurlに切り替える。ZIPへリダイレクトされ、展開すると記録ファイルと一緒に細工した<code>struct.py</code>が出る。Claudeは中身を読むデコーダを自分で書き、展開先で<code>python3 -c 'import base64, ...'</code>を実行する。Pythonは標準ライブラリより先に実行時のディレクトリを探すため、base64が内部で読むstructとして偽物が読まれ、importした時点でコードが走る。成功率は60〜80%。</p>
+      <figure>
+        <svg viewBox="0 0 400 186" role="img" aria-label="攻撃の連鎖">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="14" font-size="11" fill="#B4B3A8">どの一歩も単体では無害</text>
+            <line x1="6" y1="20" x2="394" y2="20" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="40" font-size="12" fill="#2E2C27">1 「このURLを要約して」</text>
+            <text x="6" y="62" font-size="12" fill="#2E2C27">2 WebFetchが415 → curlへ切替</text>
+            <text x="6" y="84" font-size="12" fill="#2E2C27">3 ZIPへリダイレクト → 展開</text>
+            <text x="6" y="106" font-size="12" fill="#2E2C27">4 デコーダを自作し展開先で実行</text>
+            <line x1="6" y1="118" x2="394" y2="118" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="140" font-size="12.5" fill="#C6613F" font-weight="700">5 base64 が import struct</text>
+            <text x="20" y="160" font-size="12" fill="#C6613F">→ 標準ライブラリより手前の偽物が読まれる</text>
+            <line x1="6" y1="172" x2="394" y2="172" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>分類器は1手ずつしか見ない — 連鎖の最後で初めて悪意が成立する</figcaption>
+      </figure>
+      <p class="b">Anthropicは報告を「Informative」で閉じ、「auto modeはベストエフォートの分類器に支えられた利便性機能で、セキュリティ保証ではない」と回答した。含意: 境界はauto modeではなくサンドボックス側にある。信用できない展開先でpythonを起動しない（<code>python3 -P</code>で実行時ディレクトリをパスから外す）だけでこの経路は切れる。</p>
+      <p class="src">出典: <a href="https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/">Embrace The Red</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>訂正: llama.cppのQwen3.8-Flash-Next対応は、すでにマージ済みだった</h2>
+      <p class="why">— 8/30の特集で「3モデルとも未マージ」と書いたが、1つは動く状態だった。</p>
+      <p class="b">Qwen3.8-Flash-Next（アーキテクチャ名<code>qwen4exp</code>）を追加するPR #27742は、8/27にmasterへマージ済みだった。同モデルの別実装PR #27739は#27742に一本化され8/26にクローズ。未マージなのはGLM-5.3-Flash側で、PR #27754はドラフトのまま、8/29には<code>unknown model architecture: 'glm5next'</code>というIssueが立った。含意: GGUFで待たされているのはGLM側で、Qwen3.8-Flash-Nextは動く。</p>
+      <p class="src">出典: <a href="https://github.com/ggml-org/llama.cpp/pull/27742">llama.cpp PR #27742</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Claude Code v2.1.252 — 新規プロジェクトで「always allow」が効かない件が直った</h2>
+      <p class="why">— リポジトリを立てるたびに同じ許可を聞かれていたなら、原因はこれ。</p>
+      <p class="b">8/31公開。修正4件だけの小さな回だが、1件が地味に効く。<code>.claude/settings.local.json</code>がまだ存在しないプロジェクトで「always allow」を選んでも保存されず、次から聞かれ直していた。残りは、一部のMacでBashが<code>task output swap refused</code>で落ちる件、Claude DesktopやVS Codeがホストするリモートコントロールが接続劣化時に数分固まる件、失敗出力が巨大なバックグラウンドタスク通知がAPIのリクエストサイズ上限を超える件。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/changelog">Claude Code changelog</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
