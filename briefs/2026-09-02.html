@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月2日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-01.html">← 9/1（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年9月2日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Fable 5.1が出た — 同じ枠でより多く回せる方へ替わった</h2>
+      <p class="why">— 9/14に週次上限が今日比17%減る前提なら、乗り換えるだけで実質の手数が増える。</p>
+      <p class="b">9/1、AnthropicがClaude Fable 5.1を公開した。Claude Code v2.1.257に同梱され、Fableの既定モデルが入れ替わっている。価格は100万トークンあたり入力$10・出力$50で据え置きだが、キャッシュ読み出しが$0.25へ下がった（従来比75%減）。一般的な作業でFable 5より約25%、エージェント寄りの重い作業では最夥45%ほど安く済むとAnthropicは書く。コンテクストは1Mトークン。伸び幅が突出しているのは科学研究系のエージェント評価で、それ以外も一段ずつ上がっている。</p>
+      <figure>
+        <svg viewBox="0 0 400 184" role="img" aria-label="Fable 5とFable 5.1のベンチマーク比較">
+          <g font-family="-apple-system,'Segoe UI','Hiragino Kaku Gothic ProN',sans-serif">
+            <text x="6" y="14" font-size="11" fill="#B4B3A8">ベンチマーク</text>
+            <text x="262" y="14" font-size="11" fill="#B4B3A8">Fable 5</text>
+            <text x="336" y="14" font-size="11" fill="#B4B3A8">5.1</text>
+            <line x1="6" y1="21" x2="394" y2="21" stroke="#E4E3DC" stroke-width="1"/>
+            <text x="6" y="42" font-size="12" fill="#C6613F" font-weight="700">Terminal-Bench-Science 0.1</text>
+            <text x="262" y="42" font-size="12" fill="#6B6A63">24.7%</text>
+            <text x="336" y="42" font-size="12" fill="#C6613F" font-weight="700">52.6%</text>
+            <line x1="6" y1="51" x2="394" y2="51" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="72" font-size="12" fill="#2E2C27">Terminal-Bench 4.0</text>
+            <text x="262" y="72" font-size="12" fill="#6B6A63">42.0%</text>
+            <text x="336" y="72" font-size="12" fill="#2E2C27" font-weight="700">55.8%</text>
+            <line x1="6" y1="81" x2="394" y2="81" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="102" font-size="12" fill="#2E2C27">OSWorld 2.0（strict）</text>
+            <text x="262" y="102" font-size="12" fill="#6B6A63">36.1%</text>
+            <text x="336" y="102" font-size="12" fill="#2E2C27" font-weight="700">41.7%</text>
+            <line x1="6" y1="111" x2="394" y2="111" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="132" font-size="12" fill="#2E2C27">CursorBench 3.2.0</text>
+            <text x="262" y="132" font-size="12" fill="#6B6A63">70.5%</text>
+            <text x="336" y="132" font-size="12" fill="#2E2C27" font-weight="700">73.4%</text>
+            <line x1="6" y1="141" x2="394" y2="141" stroke="#F0EFE9" stroke-width="1"/>
+            <text x="6" y="162" font-size="12" fill="#2E2C27">HLE（ツールなし）</text>
+            <text x="262" y="162" font-size="12" fill="#6B6A63">57.8%</text>
+            <text x="336" y="162" font-size="12" fill="#2E2C27" font-weight="700">60.9%</text>
+            <line x1="6" y1="171" x2="394" y2="171" stroke="#E4E3DC" stroke-width="1"/>
+          </g>
+        </svg>
+        <figcaption>科学研究系は倍以上。日常のコーディングは一段ぶんの上積み</figcaption>
+      </figure>
+      <p class="b">注意が要るのは呼び分けだ。Claude appsゲートウェイ経由のセッションでは<code>fable</code>と<code>best</code>が当面Fable 5のまま解決される（ゲートウェイ側がまだ5.1を受け付けないため）。使うには<code>/model</code>で明示的に選ぶ。Mythos 5.1は中身が同じモデルでセーフガードを緩めた版だが、認証プログラムを通った米国の一部組織にしか出ていない。</p>
+      <p class="src">出典: <a href="https://www.anthropic.com/claude-fable-and-mythos-5-1">Anthropic</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>auto modeに封じ込め規則が入った — 昨日の話に製品側が寄せてきた</h2>
+      <p class="why">— 昨日書いた「境界はサンドボックス側」に、Claude Code本体が一歩近づいた。</p>
+      <p class="b">v2.1.257にauto mode向けの変更が3つ入った。「Containment Escape」規則により、クラウドのメタデータ経由の認証情報取得、外向き通信の迂回やテナントをまたぐ到達は、環境が想定内と示さない限り自動承認されなくなった。作業ディレクトリの外を初めて読むとき確認が出るようになり、<code>permissions.blockReadsOutsideWorkingDirectories</code>で禁止もできる。サブシェルや複合コマンドに隠れた命令が<code>permissions.ask</code>をすり抜ける穴も塞いだ。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.257">claude-code v2.1.257</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>週次上限の公式ページが更新 — 9/13までは確定、恒久25%増はまだXだけ</h2>
+      <p class="why">— 8/31号で「一次情報はXの告知だけ」と書いた件の、半分が埋まった。</p>
+      <p class="b">毎日見ている公式ヘルプ記事が9/1付で書き換わった。本文は「5月13日から9月13日まで週次上限が50%高い」「9月13日以降は標準水準に戻る」となり、8月31日期限という旧記述は消えている。5時間ごとの上限は対象外という一文はそのまま。ただし記事タイトルは「May–August 2026」のままで、9月14日・恒久・25%という語はどこにも出てこない。含意: 延長は公式に確定した。素の1.25倍が常態になるという話は、依然Xの告知だけが根拠だ。</p>
+      <p class="src">出典: <a href="https://support.claude.com/en/articles/15910845">Anthropic ヘルプセンター</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
