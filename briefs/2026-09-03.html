@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月3日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-02.html">← 9/2（水）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年9月3日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Android Studio Quail 4が安定版に — Gemma 4がIDEの中でローカルに走る</h2>
+      <p class="why">— 開発機がそのままローカルLLMの実行環境になる。上限の外で回せる作業が増える。</p>
+      <p class="b">9/1、Android Studio Quail 4がStableチャンネルに出た。目玉は2つ。1つはGemma 4（Googleのオープンモデル）のネイティブ統合で、IDEが重みのダウンロード・検証・更新まで面倒を見る。Agentモデルセレクタで選ぶか、Settings &gt; Tools &gt; AI &gt; Model Providers &gt; Gemma から入る。動くのは手元のマシンだ。公式は「複数ファイルのリファクタ計画をエージェントに完全オフラインで走らせられる。ソースコードがローカルを離れず、トークンの割当上限にも当たらない」と書く。必要メモリは最小のモデルで12GB、快適なら32GB以上。</p>
+      <p class="b">もう1つはAndroid Skillsで、23個が最初から入る。AGP 9アップグレード、Android Profiler、Navigation3、Adaptive対応など。公式の説明は「複雑なAndroidのワークフローをLLMに案内させる、モジュール化されたAI向け指示」。含意: 8/23の特集で書いた自作Skillsの型が、製品としてIDEに降りてきた。23個を読んで自分のSkillsと突き合わせるのが早い。</p>
+      <p class="src">出典: <a href="https://android-developers.googleblog.com/2026/09/leverage-gemma-4-android-studio-quail.html">Android Developers Blog</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>LangChainがMCPを取り込み始めた — サーバーをそのままツールに変える</h2>
+      <p class="why">— 自分で書いたMCPサーバーを、Claude Code以外からも同じ資産として使える。</p>
+      <p class="b">9/2公開の1.4.0a4で、<code>langchain.mcp</code>名前空間が入った（まだbeta指定）。中心は<code>MCPAdapter</code>で、MCP（モデルに外部ツールを渡すための共通規約）サーバーをLangChainのツールへ変換する。一覧取得は<code>list_tools</code>に改名され、<code>cache_mode</code>でキャッシュが効く。複数サーバーを束ねた<code>ClientGroup</code>も対象に取れる。elicitation（サーバーが人間に追加入力を求める仕組み）はLangChain側の割り込みになる。依存はfastmcp 4.0系。</p>
+      <p class="src">出典: <a href="https://github.com/langchain-ai/langchain/releases">langchain 1.4.0a4</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Playの延長申請フォーム、公式ページの中で記述が食い違っている</h2>
+      <p class="why">— 8/31の締切に間に合わなかった場合、どこから申請するのかが読み取れない。</p>
+      <p class="b">ターゲットAPI 36の締切は8/31に過ぎた。11月1日までの延長申請はできるはずだが、公式ヘルプは同じページ内で二通りのことを書く。本文は「延長フォームには今年後半にPlay Consoleからアクセスできるようになります」と将来形。一方FAQは「延長フォームはPlay Consoleのポリシーステータスページにある、警告または問題の詳細ページから利用できます」と現在形だ。対象は非準拠アプリだけで、該当すれば通知にもリンクが届く。含意: まずポリシーステータスを開く。警告が無ければ準拠済みだ。</p>
+      <p class="src">出典: <a href="https://support.google.com/googleplay/android-developer/answer/11926878">Google Play Console ヘルプ</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
