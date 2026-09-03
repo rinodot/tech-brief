@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月4日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-03.html">← 9/3（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年9月4日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code v2.1.259 — 複数セッションが互いの設定を巻き戻していた</h2>
+      <p class="why">— サブエージェントを並べて回す使い方だと、MCPやプロジェクト状態が黙って消えていた。</p>
+      <p class="b">9/2公開。効きが大きいのは、同時に走らせたセッションが互いの<code>~/.claude.json</code>への変更を黙って巻き戻していた不具合の修正だ。ワークスペースの信頼設定がリセットされ、MCPやプロジェクトの状態が、セッションを増やすほど失われていた。もう1件、カスタムコマンドとSkillsのフロントマターに書いた<code>model:</code>が対話セッションで無視されていた問題も直った。auto modeがその指定を受けて非対応モデルでターンを回す件も直り、その場合はセッションのモデルを維持する。</p>
+      <p class="b">権限まわりの穴も塞がれた。Bashの<code>Read()</code>拒否ルールが、オプションの値として渡したファイル（<code>--ignore-revs-file=.env</code>、<code>-f.env</code>、<code>@file</code>）や<code>git diff</code>のファイル引数、<code>cd DIR &amp;&amp; cat FILE</code>のような複合コマンドに効いていなかった。新機能では、無人のヘッドレス実行向けに<code>--permission-prompts none</code>が入った。確認が出る操作を自動で拒否しつつ、auto modeを含む権限モードの判断はそのまま活かす。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.259">claude-code v2.1.259</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>llama.cppのMetalに整数あふれ — 深い文脈で出力が静かに壊れる</h2>
+      <p class="why">— Macでローカルモデルを長い文脈で回すなら、モデルを問わず当たりうる。</p>
+      <p class="b">GLM-5.3-Flash対応PRの検証中に、モデル非依存のバグが出た。<code>ggml-metal</code>の<code>kernel_mul_mm</code>が出力オフセットをint32で計算していて、要素数が2の31乗を超えると符号あふれし、書き込み先が約8.59GiB手前へずれ、隣のバッファを壊す。症状は、ある深さで出力が同じトークンの繰り返しへ崩れること。CUDAとVulkanは広い型で、Metalだけ取り残されていた。修正PR #28210はuint64_tへ広げる3行だが、9/2にマージされずクローズ。回避策は<code>-ub 128</code>。</p>
+      <p class="src">出典: <a href="https://github.com/ggml-org/llama.cpp/pull/28210">llama.cpp PR #28210</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>LangChain 1.4.0が正式版に — 昨日のアルファが1日で上がった</h2>
+      <p class="why">— MCPサーバーをLangChain側から使う経路が、実験段階を抜けた。</p>
+      <p class="b">9/3公開。昨日書いた<code>langchain.mcp</code>名前空間と<code>MCPAdapter</code>が、アルファから正式版へ上がった。ドキュメントには動くMCPのサンプルが追加され、Anthropic連携ではミドルウェアのトレース入力を省くことで性能が改善している。エージェントのツールルーティングでモデルの宛先を含めていなかった不具合も直った。同日に<code>langchain-anthropic</code> 1.7.1も出ている。含意: 昨日「まだbeta指定」と書いた部分は1日で消えた。</p>
+      <p class="src">出典: <a href="https://github.com/langchain-ai/langchain/releases">langchain 1.4.0</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
