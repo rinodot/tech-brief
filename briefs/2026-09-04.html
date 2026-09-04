@@ -38,6 +38,7 @@
   figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
   figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
   figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
   .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
   .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
@@ -76,27 +77,30 @@
 
     <article id="item1">
       <div class="num">1</div>
-      <h2>Claude Code v2.1.259 — 複数セッションが互いの設定を巻き戻していた</h2>
-      <p class="why">— サブエージェントを並べて回す使い方だと、MCPやプロジェクト状態が黙って消えていた。</p>
-      <p class="b">9/2公開。効きが大きいのは、同時に走らせたセッションが互いの<code>~/.claude.json</code>への変更を黙って巻き戻していた不具合の修正だ。ワークスペースの信頼設定がリセットされ、MCPやプロジェクトの状態が、セッションを増やすほど失われていた。もう1件、カスタムコマンドとSkillsのフロントマターに書いた<code>model:</code>が対話セッションで無視されていた問題も直った。auto modeがその指定を受けて非対応モデルでターンを回す件も直り、その場合はセッションのモデルを維持する。</p>
-      <p class="b">権限まわりの穴も塞がれた。Bashの<code>Read()</code>拒否ルールが、オプションの値として渡したファイル（<code>--ignore-revs-file=.env</code>、<code>-f.env</code>、<code>@file</code>）や<code>git diff</code>のファイル引数、<code>cd DIR &amp;&amp; cat FILE</code>のような複合コマンドに効いていなかった。新機能では、無人のヘッドレス実行向けに<code>--permission-prompts none</code>が入った。確認が出る操作を自動で拒否しつつ、auto modeを含む権限モードの判断はそのまま活かす。</p>
-      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.259">claude-code v2.1.259</a></p>
+      <h2>GoogleのAndroid SkillsはClaude Codeにそのまま入る — 中に「Play審査の事前監査」がある</h2>
+      <p class="why">— Flutterアプリの Android 側の作業と、自分のSkills設計の両方に効く。</p>
+      <p class="b">Android Studio Quail 4のAndroid Skillsは、GitHubのandroid/skillsで公開され、Claude Codeのプラグインとしてそのまま入る。22個のSKILL.mdが登録済みで、AGP 9アップグレード、Navigation 3、R8解析など。Flutterでも<code>android/</code>配下はAGPで動くので、ネイティブ側にそのまま効く。</p>
+      <p class="b">設計が勉強になる。<code>play-policy-insights</code>はPlay審査の3領域（権限、アカウント、データセーフティ）をコードと申告の突き合わせで監査する。Pythonのオーケストレータが静的解析と目標の列挙を済ませ、LLMは「サブエージェントを呼べるならMode A（並列）、呼べなければMode B（順に自走）」と分岐する。ワーカーへの契約は「結果はJSONでファイルに書け、返事は『SUCCESS』だけ」で親の文脈を汚さない。Googleの原則は「既に知っていることは教えない」「スキル1つで毎回100〜200トークン」「評価はスキルありで通り、なしで落ちる」。含意: 自作Skillsの採用基準と検収基準を、そのまま借りられる。</p>
+      <p class="try">試すなら: Claude Codeで <code>/plugin marketplace add android/skills</code> → <code>/plugin install android-skills@android-skills</code>。Flutterプロジェクトの <code>android/</code> で「AGP 9に上げて」と頼むと agp-9-upgrade が自動で効く。</p>
+      <p class="src">出典: <a href="https://github.com/android/skills">android/skills</a></p>
     </article>
 
     <article id="item2">
       <div class="num">2</div>
-      <h2>llama.cppのMetalに整数あふれ — 深い文脈で出力が静かに壊れる</h2>
-      <p class="why">— Macでローカルモデルを長い文脈で回すなら、モデルを問わず当たりうる。</p>
-      <p class="b">GLM-5.3-Flash対応PRの検証中に、モデル非依存のバグが出た。<code>ggml-metal</code>の<code>kernel_mul_mm</code>が出力オフセットをint32で計算していて、要素数が2の31乗を超えると符号あふれし、書き込み先が約8.59GiB手前へずれ、隣のバッファを壊す。症状は、ある深さで出力が同じトークンの繰り返しへ崩れること。CUDAとVulkanは広い型で、Metalだけ取り残されていた。修正PR #28210はuint64_tへ広げる3行だが、9/2にマージされずクローズ。回避策は<code>-ub 128</code>。</p>
-      <p class="src">出典: <a href="https://github.com/ggml-org/llama.cpp/pull/28210">llama.cpp PR #28210</a></p>
+      <h2><code>claude -p</code>の無人実行が組める形になった — 確認を待たず、拒否して進む</h2>
+      <p class="why">— 夜間バッチやCIにClaude Codeを置くとき、途中で止まる要因が消える。</p>
+      <p class="b">v2.1.259で<code>--permission-prompts none</code>が入った。確認が要る操作は<code>PermissionRequest</code>フックが許可しない限り拒否され、Claudeには「承認者はいない、再試行するな」と伝わる。<code>--permission-mode auto</code>と組めば、分類器が通したものだけ動く。<code>--bare</code>はhooks・Skills・MCP・CLAUDE.mdの自動読み込みを飛ばし、必要な文脈だけ<code>--mcp-config</code>等で渡す。将来<code>-p</code>の既定になる。含意: 定期ジョブの再現性はこの2つで作る。</p>
+      <p class="try">試すなら: <code>claude --bare -p "テストを実行して失敗を直して" --permission-mode auto --permission-prompts none --output-format json | jq '.result, .total_cost_usd'</code>（ANTHROPIC_API_KEY が必要）</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/headless">Claude Code docs — Run programmatically</a></p>
     </article>
 
     <article id="item3">
       <div class="num">3</div>
-      <h2>LangChain 1.4.0が正式版に — 昨日のアルファが1日で上がった</h2>
-      <p class="why">— MCPサーバーをLangChain側から使う経路が、実験段階を抜けた。</p>
-      <p class="b">9/3公開。昨日書いた<code>langchain.mcp</code>名前空間と<code>MCPAdapter</code>が、アルファから正式版へ上がった。ドキュメントには動くMCPのサンプルが追加され、Anthropic連携ではミドルウェアのトレース入力を省くことで性能が改善している。エージェントのツールルーティングでモデルの宛先を含めていなかった不具合も直った。同日に<code>langchain-anthropic</code> 1.7.1も出ている。含意: 昨日「まだbeta指定」と書いた部分は1日で消えた。</p>
-      <p class="src">出典: <a href="https://github.com/langchain-ai/langchain/releases">langchain 1.4.0</a></p>
+      <h2>実例: 「判断は委ね、壊れないよう囲う」— 8月末時点のひとりのClaude Code設定</h2>
+      <p class="why">— auto modeを常用する構成の、具体的な囲い方が1本にまとまっている。</p>
+      <p class="b">kawarimidoll氏が8/31にZennで公開した設定。<code>settings.json</code>は3行で、<code>"defaultMode": "auto"</code>、助言役を別モデルにする<code>"advisorModel": "fable"</code>、表示を絞る<code>"viewMode": "focus"</code>。囲いは2段で、書き込みはcage、読み取りとコマンドはguard-and-guideで絞る。検証はagent-browserとterminal-useに任せ、計画とログは<code>z-ai/</code>へ。含意: auto modeの安全を境界で作る話の、個人規模の例。</p>
+      <p class="try">試すなら: settings.jsonに <code>{"permissions":{"defaultMode":"auto"},"viewMode":"focus"}</code> を足し、計画・ログ用の <code>z-ai/</code> をグローバルの gitignore に入れる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/kawarimidoll/articles/d3f1a7542de71a">Zenn — 202608個人的claude code設定</a></p>
     </article>
 
     <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
