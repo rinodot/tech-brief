@@ -206,9 +206,9 @@
   "weekday": "金",
   "file": "2026-09-04.html",
   "titles": [
-   "Claude Code v2.1.259 — 複数セッションが互いの設定を巻き戻していた",
-   "llama.cppのMetalに整数あふれ — 深い文脈で出力が静かに壊れる",
-   "LangChain 1.4.0が正式版に — 昨日のアルファが1日で上がった"
+   "GoogleのAndroid SkillsはClaude Codeにそのまま入る — 中に「Play審査の事前監査」がある",
+   "claude -pの無人実行が組める形になった — 確認を待たず、拒否して進む",
+   "実例: 「判断は委ね、壊れないよう囲う」— 8月末時点のひとりのClaude Code設定"
   ]
  }
 ]
