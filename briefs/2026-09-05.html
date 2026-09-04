@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月5日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-04.html">← 9/4（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年9月5日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>圧縮後の「ルール忘れ」は SessionStart の compact で塞ぐ — PreCompact では効かない</h2>
+      <p class="why">— 長いセッションで自動圧縮が走ったあと、それまでの合意がすっぽ抜ける現象への正しい対処。</p>
+      <p class="b">自動圧縮が走ると、CLAUDE.mdの規則は残るのに「このタスクではAを優先」といったセッション内の合意が要約から落ち、規則の適用文脈が消える。よく提案されるのがPreCompactフックで<code>active-rules.md</code>を標準出力に流す設計だが、公式リファレンスはPreCompactを「情報提供のみ」と明記しており、stdoutも<code>additionalContext</code>も圧縮には入らない（できるのは終了コード2で圧縮を止めることだけ）。</p>
+      <p class="b">効く経路は<code>SessionStart</code>フックの<code>compact</code>マッチャだ。圧縮後にセッションが再開する瞬間に発火し、コマンドが標準出力へ書いた平文がそのままClaudeの文脈に足される。公式ガイドにも「圧縮後に文脈を再注入する」レシピとして載っている。実例はplayparkの8/18のZenn記事で、PreCompactはブランチ名・<code>git status</code>・直近コミットをファイルに書くだけ、注入はSessionStart側に寄せている。含意: 流し直すのはCLAUDE.md全体ではなく、このセッションで効かせたい制約を3〜5行に絞る。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> に <code>{"hooks":{"SessionStart":[{"matcher":"compact","hooks":[{"type":"command","command":"cat active-rules.md"}]}]}}</code>。<code>active-rules.md</code> には今のセッションの制約だけを3〜5行。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/hooks-guide#re-inject-context-after-compaction">Claude Code docs — Re-inject context after compaction</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2><code>/skill-doctor</code> — 読み込んだSkillsのうち使われていないものと、その文脈コストが見える</h2>
+      <p class="why">— 昨日書いた「スキル1つで毎回100〜200トークン」を、自分の環境で測れるようになった。</p>
+      <p class="b">9/4公開のv2.1.261に入った。<code>/skill-doctor</code>を打つと、読み込まれているSkillsのうち一度も使われなかったものと、それぞれのコンテキストコストが出て、刈り込む判断ができる。Skillsは説明文が常駐する仕組みで、積み上がると毎ターンの費用になる。同リリースで、Bashとバックグラウンドタスクの出力上限を<code>bashOutputMaxChars</code>／<code>taskOutputMaxChars</code>で最大128K文字にできる。含意: 「評価はスキルありで通り、なしで落ちる」の、なし側を作る道具。</p>
+      <p class="try">試すなら: いつものプロジェクトで <code>/skill-doctor</code>。使われていないと出たものは <code>~/.claude/skills/</code> から別フォルダへ退避して1週間様子を見る。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.261">claude-code v2.1.261</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカルLLMのtok/sは「捨て実行1回・3回計測」で測る — 初回は最大300倍ずれる</h2>
+      <p class="why">— モデル選定を初回の数字でやると、判断を丸ごと間違える。</p>
+      <p class="b">yamada-ai-dev氏が9/4にZennで、RTX 4070 Ti（12GB）とOllama v0.33.2で5つの罠を実測した。初回はモデル読み込みで遅く、qwen3:8bは2.19 tok/s、ウォームでは38.09 tok/s。gemma4:12bは初回240秒でタイムアウト、ウォームで44.51 tok/s。<code>ollama ps</code>が100% GPUでも、num_ctx=131,072ではGPUメモリがRAMへ退避し46.6から16.4 tok/sに落ちる。含意: 表示でなく測った数字で決める。</p>
+      <p class="try">試すなら: 計測前に同じプロンプトを1回捨て実行し、3回以上測って min／mean／max を記録する。<code>ollama ps</code> の GPU% と <code>think: false</code> の受理（qwen3:4bでは全26件無視された）は信用せず、出力で確認する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yamada_ai_dev/articles/ollama-measurement-traps">Zenn — ローカルLLM速度計測の罠</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">Claude Fable 5.1が既定になり、1Mコンテキストとキャッシュ読み$0.25で同じ枠でより多く回せる。<code>claude -p</code>は<code>--permission-prompts none</code>と<code>--bare</code>で無人実行が組める。auto modeにContainment Escape規則が入った。Android Skills 22個はClaude Codeのプラグインとして入る。Android Studio Quail 4はGemma 4をローカルで動かす。LangChain 1.4.0の<code>MCPAdapter</code>でMCPサーバーを流用できる。v2.1.260で<code>/diff</code>と<code>/cost</code>のキャッシュミス原因、v2.1.261で<code>/skill-doctor</code>。週次上限の50%増は9/13で終わる。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
