@@ -105,31 +105,43 @@ INDEX_CSS = """  :root{--bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F
   }
 """
 
+INDEX_JS = r"""
+(async function(){
+  const wrap=document.getElementById('list');
+  const jd=d=>{const [y,m,dd]=d.split('-');return `${+m}/${+dd}`;};
+  const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+  const ol=(titles,cls)=>{const o=el('ol',cls);titles.forEach((t,i)=>{const li=el('li');li.append(el('span','n',String(i+1)),el('span','tt',t));o.append(li);});return o;};
+  let entries;
+  try{
+    const r=await fetch('manifest.json?t='+Date.now(),{cache:'no-store'});
+    entries=await r.json();
+  }catch(e){wrap.textContent='一覧を読み込めませんでした。再読み込みしてください。';return;}
+  entries.sort((a,b)=>a.date<b.date?1:-1);
+  const latest=entries[0];
+  const a=el('a','latest');a.href='briefs/'+latest.file;
+  a.append(el('div','lab','最新号'),el('div','lt',`${jd(latest.date)}（${latest.weekday}）のブリーフ`),ol(latest.titles));
+  wrap.append(a);
+  const months=new Map();
+  entries.forEach(e=>{const k=e.date.slice(0,7);if(!months.has(k))months.set(k,[]);months.get(k).push(e);});
+  for(const [mon,es] of months){
+    const rest=es.filter(e=>e.date!==latest.date);
+    if(!rest.length)continue;
+    const [y,m]=mon.split('-');
+    const h=el('h2','mon',`${y}年${+m}月`);h.append(el('span','cnt',`全${es.length}号`));
+    wrap.append(h);
+    rest.forEach(e=>{
+      const r=el('a','issue');r.href='briefs/'+e.file;
+      const d=el('div','date');d.append(el('span','dd',jd(e.date)),el('span','wd',e.weekday));
+      r.append(d,ol(e.titles,'tl'));wrap.append(r);
+    });
+  }
+})();
+"""
+
 def _write_index(entries):
+    """index.html は静的シェル。一覧は manifest.json をブラウザ側で読んで描画する（日次で index.html を push しない）。"""
     os.makedirs(os.path.join(SITE, "assets"), exist_ok=True)
     open(os.path.join(SITE, "assets", "index.css"), "w", encoding="utf-8").write(INDEX_CSS)
-    latest = entries[-1]
-    months = {}
-    for e in reversed(entries):
-        months.setdefault(e["date"][:7], []).append(e)
-    rows = []
-    for mon, es in months.items():
-        y, m = mon.split("-")
-        rest = [e for e in es if e["date"] != latest["date"]]
-        if not rest:
-            continue
-        rows.append(f'<h2 class="mon">{y}年{int(m)}月<span class="cnt">全{len(es)}号</span></h2>')
-        for e in rest:
-            items = "".join(
-                f'<li><span class="n">{i+1}</span><span class="tt">{t}</span></li>'
-                for i, t in enumerate(e["titles"]))
-            rows.append(
-                f'<a class="issue" href="briefs/{e["file"]}">'
-                f'<div class="date"><span class="dd">{jdate(e["date"])}</span>'
-                f'<span class="wd">{e["weekday"]}</span></div>'
-                f'<ol class="tl">{items}</ol></a>')
-    lt = "".join(f'<li><span class="n">{i+1}</span><span class="tt">{t}</span></li>'
-                 for i, t in enumerate(latest["titles"]))
     index = f"""<!doctype html>
 <html lang="ja">
 <head>
@@ -143,14 +155,10 @@ def _write_index(entries):
   <h1>テックブリーフ</h1>
   <div class="tag">毎朝6:00配信 · AIエージェント／Flutter・Android／ローカルLLM</div>
 </div></header>
-<main><div class="wrap">
-  <a class="latest" href="briefs/{latest['file']}">
-    <div class="lab">最新号</div>
-    <div class="lt">{jdate(latest['date'])}（{latest['weekday']}）のブリーフ</div>
-    <ol>{lt}</ol>
-  </a>
-  {"".join(rows)}
+<main><div class="wrap" id="list">
+  <noscript><p>一覧の表示にはJavaScriptが必要です。</p></noscript>
 </div></main>
+<script>{INDEX_JS}</script>
 </body>
 </html>
 """
