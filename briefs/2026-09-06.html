@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月6日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-05.html">← 9/5（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年9月6日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Flutterアプリの公開作業をClaude Codeに任せた実例 — 114項目のQAは「Markdownに○×と日付を書かせる」で回した</h2>
+      <p class="why">— 自分のアプリの次のリリースに、そのまま持ち込める分担と手順が書いてある。</p>
+      <p class="b">きしまる（LEATEQ）氏が8/31にZennで公開した実例。Subrep（サブスク管理、Android）をFlutter＋drift＋RevenueCatで作り、実装は2日ほど、自動テストは160件。QAはリポジトリに置いた114項目のMarkdownをClaude Codeが1項目ずつ検証し、○×と日付を書き込んでコミットで証跡を残す方式で、セッションが切れてもファイルから再開できる。</p>
+      <p class="b">通知はエミュレータの時刻を<code>adb shell "date 0901090026 &amp;&amp; am broadcast -a android.intent.action.TIME_SET"</code>で進め、実時間を待たずに発火条件を踏ませた。ストア素材はPNGのIHDRチャンクを読む自作パーサで、9:16のスクリーンショットと1024×500のフィーチャーグラフィックを送信前に検査。Play Consoleの入力もブラウザ操作で代行。人が握ったのは支払い・審査送信のボタン、実機で触った「もっさり」の判断、審査中はコードを変えない決定。8/7内部テスト、8/13審査提出、8/21公開。含意: 任せる範囲を項目単位で明文化した点が型になる。</p>
+      <p class="try">試すなら: リポジトリに <code>qa/checklist.md</code> を置き「1項目ずつ検証して、結果と日付を書き込んでコミットして」と頼む。通知は <code>adb shell "date MMDDhhmmYY &amp;&amp; am broadcast -a android.intent.action.TIME_SET"</code> で時刻を進めて確認する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/leateq/articles/subrep-release-claude-code">Zenn — Claude Codeと組んでSubrepをPlayストア公開まで</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>OllamaがCPUへ逃がした8層を<code>num_gpu</code>で戻すと3.7→30 tok/s — 16GBで116Kコンテキスト</h2>
+      <p class="why">— VRAMが余っているのに遅いとき、疑う場所が1つ増える。</p>
+      <p class="b">Miyuki-Yumeno氏が9/4にZennで公開。RTX 5060 Ti 16GBで、Qwen3.8系の12GB量子化モデルをnum_ctx 118,784で動かすと3.71 tok/s。ログでは66層中58層しかGPUに載っていなかった。Ollamaの自動見積もりが保守的なためで、Modelfileに<code>PARAMETER num_gpu 66</code>を書いて全層をGPUへ載せると約30 tok/s、VRAM 15,779/16,311 MiB。含意: 見るべきは<code>ollama ps</code>のGPU%ではなくログの層数。</p>
+      <p class="try">試すなら: Modelfileに <code>FROM &lt;model&gt;:latest</code>／<code>PARAMETER num_ctx 118784</code>／<code>PARAMETER num_gpu 66</code> の3行を書いて <code>ollama create &lt;name&gt; -f Modelfile</code>。起動ログの <code>offloaded N/M layers to GPU</code> が N=M になっているか確認する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yumeno/articles/rtx5060ti-qwen38-ollama-context-tuning">Zenn — RTX 5060 Ti 16GBでローカルLLMにもう一度挑んだ話</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: プロンプトキャッシュの原理 — 「先頭一致」がすべてで、$0.25の読みはそこからしか生まれない</h3>
+      <p class="b">Claude Codeは毎ターン、システムプロンプト・プロジェクト文脈（CLAUDE.mdなど）・会話履歴の全部をAPIへ送り直す。モデル側に記憶はない。速くて安いのは、APIがリクエスト先頭からの一致部分（prefix）を直近の処理済み内容と突き合わせ、一致分は再計算せずキャッシュ読みで課金するからだ。一致は完全一致で、途中が1文字変わればそこ以降はやり直し。部分キャッシュはない。</p>
+      <figure>
+        <svg viewBox="0 0 430 186" role="img" aria-label="4ターン分のリクエストを横棒で示した図。ターン2・3は先頭部分がキャッシュ読みで末尾だけ処理。ターン4はシステムプロンプトが変わり全部やり直し">
+          <g font-family="-apple-system,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif" font-size="10.5" fill="#6B6A63">
+            <text x="0" y="22">ターン1</text>
+            <rect x="52" y="10" width="52" height="16" fill="#C6613F" opacity=".85"/><rect x="106" y="10" width="44" height="16" fill="#C6613F" opacity=".85"/><rect x="152" y="10" width="60" height="16" fill="#C6613F" opacity=".85"/>
+            <text x="220" y="22">全部を処理して書き込み</text>
+            <text x="0" y="52">ターン2</text>
+            <rect x="52" y="40" width="52" height="16" fill="#E4E3DC"/><rect x="106" y="40" width="44" height="16" fill="#E4E3DC"/><rect x="152" y="40" width="60" height="16" fill="#E4E3DC"/><rect x="214" y="40" width="46" height="16" fill="#C6613F" opacity=".85"/>
+            <text x="268" y="52">先頭は読むだけ、末尾だけ処理</text>
+            <text x="0" y="82">ターン3</text>
+            <rect x="52" y="70" width="52" height="16" fill="#E4E3DC"/><rect x="106" y="70" width="44" height="16" fill="#E4E3DC"/><rect x="152" y="70" width="60" height="16" fill="#E4E3DC"/><rect x="214" y="70" width="46" height="16" fill="#E4E3DC"/><rect x="262" y="70" width="40" height="16" fill="#C6613F" opacity=".85"/>
+            <text x="0" y="112">ターン4</text>
+            <rect x="52" y="100" width="52" height="16" fill="#C6613F" opacity=".85" stroke="#2E2C27" stroke-width="1.2"/><rect x="106" y="100" width="44" height="16" fill="#C6613F" opacity=".85"/><rect x="152" y="100" width="60" height="16" fill="#C6613F" opacity=".85"/><rect x="214" y="100" width="46" height="16" fill="#C6613F" opacity=".85"/><rect x="262" y="100" width="40" height="16" fill="#C6613F" opacity=".85"/><rect x="304" y="100" width="36" height="16" fill="#C6613F" opacity=".85"/>
+            <text x="52" y="134">↑ システムプロンプトが変わると、以降は全部やり直し</text>
+            <rect x="52" y="150" width="12" height="10" fill="#E4E3DC"/><text x="68" y="159">キャッシュ読み（Fable 5.1は基本料金の0.025倍）</text>
+            <rect x="52" y="168" width="12" height="10" fill="#C6613F" opacity=".85"/><text x="68" y="177">処理して書き込み（1.25倍、1時間TTLは2倍）</text>
+          </g>
+        </svg>
+        <figcaption>左から「システムプロンプト／プロジェクト文脈／会話」。変わりにくい層を前に置くから、伸びるだけの会話層は前の層を壊さない。</figcaption>
+      </figure>
+      <p class="b">Fable 5.1は入力$10/MTokに対し、キャッシュ書きが$12.50（5分TTL）か$20（1時間TTL）、読みは$0.25。読みは基本の0.025倍で、他モデルの0.1倍より深い。書きは高いが、同じprefixを読むほど得になる。寿命は使うたびに延びる。</p>
+      <p class="b">変わりにくい層を前に置く3層構成なので、会話が伸びるだけなら前の2層は当たり続ける。壊すのは前の層に触る操作: <code>/model</code>と<code>/effort</code>（それぞれ別キャッシュ）、fast modeのON、prefixにツール定義が載るMCPサーバーの接続/切断、<code>Bash</code>丸ごとのdeny、<code>/compact</code>、Claude Codeの更新。壊さないもの: ファイル編集、CLAUDE.mdの編集（ただし次の<code>/clear</code>まで反映されない）、Skillsの呼び出し、<code>/rewind</code>、サブエージェント起動。</p>
+      <p class="b">寿命はサブスク枠内の主会話が1時間、サブエージェントや<code>/compact</code>の要約、APIキー利用時は5分。キャッシュはマシン＋作業ディレクトリ単位で、worktreeを並べると別キャッシュになる。<code>/usage</code>の<code>Prompt cache (main)</code>行でキャッシュ比率・ミス回数・warm/coldと、v2.1.260からはミスの推定原因が見える。含意: 今週の「Fable 5.1は同じ枠でより多く回せる」はこの0.025倍が土台。モデルとeffortは冒頭で決め、切り替えは区切りで。</p>
+      <p class="try">試すなら: <code>/usage</code> で <code>Prompt cache (main)</code> の比率とミス原因を見る（v2.1.251以降、原因表示は v2.1.260以降）。APIキー運用なら settings.json に <code>"promptCacheTtl": "1h"</code>（v2.1.242以降）。<code>claude -p "hello" --output-format json</code> の <code>usage.cache_creation</code> に <code>ephemeral_1h_input_tokens</code> が出れば1時間TTLが効いている。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/prompt-caching">Claude Code docs — How Claude Code uses prompt caching</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
