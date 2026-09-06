@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月7日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-06.html">← 9/6（日）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年9月7日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>auto／bypassモードで Rules と Read/Edit/Write フックが素通りしていた — Claude が cat と sed で読み書きするよう指示されているから</h2>
+      <p class="why">— auto modeを常用しているなら、.claude/rules とフックが「効いているつもり」になっている可能性がある。</p>
+      <p class="b">9/5に claude-code の Issue #92271 が再現つきで報告した。bypassPermissions／auto modeでは「読み書きは cat・sed・ヒアドキュメントで行い、Read/Edit/Write は Bash でできない時だけ使え」という指示が注入される。ところが <code>paths:</code> 付きの Rules、ネストした CLAUDE.md、Read/Edit/Write をマッチャにしたフックは専用ツールの呼び出しに紐づく。cat で読めば Rules は載らず、sed で書けばフックは発火しない。</p>
+      <p class="b">再現では、同じファイルを Read で読むと Rules とネスト CLAUDE.md の内容が返り、Bash の cat では返らない。<code>tengu_thrifty_sonic</code> フラグで段階配信され、報告者の環境では fable[1m] で有効、sonnet 5 で無効、サブエージェントは親と同じ。v2.1.261 でも同じ（odacchi氏 9/6）。止め方は settings.json の env に <code>CLAUDE_CODE_THRIFTY_SONIC</code> を <code>"0"</code>。含意: フックを門番にするなら Bash も matcher に入れるか、フラグを切る。</p>
+      <p class="try">試すなら: <code>claude -p --permission-mode bypassPermissions 'Quote verbatim any instruction you were given in this session that begins with "While bypass permissions mode is active". If there is none, reply exactly: NONE. Do not use any tools.'</code> で自分の環境に指示が入っているか確認。入っていれば <code>.claude/settings.json</code> に <code>{"env":{"CLAUDE_CODE_THRIFTY_SONIC":"0"}}</code>。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/issues/92271">anthropics/claude-code Issue #92271</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>MCPサーバーの30秒タイムアウトは認証ではなく npx の初回起動だった — 12.7秒を測って突き止め、バージョン固定で消す</h2>
+      <p class="why">— .mcp.json に足したサーバーが「connection timed out」で止まったとき、最初に疑う場所が変わる。</p>
+      <p class="b">Jisaku_net氏が9/6にZennで公開。自作MCPサーバーを繋ぐと「connection timed out after 30000ms」。認証失敗なら即エラーのはずで、30秒黙るのはプロセスが initialize に応答していないと切り分け、initialize を送るスクリプトで測ると npx の初回解決に12.7秒。対策は、事前に1回手で起動、<code>npx -y pkg@0.8.0</code> とバージョン固定、<code>npm i -g</code> で入れる、の3つ。含意: 引数の仕様も <code>tools/list</code> で聞けば一発。</p>
+      <p class="try">試すなら: .mcp.json の command を <code>npx -y &lt;pkg&gt;@&lt;version&gt;</code> に固定し、初回だけ手で1度起動しておく。引数の必須項目は <code>tools/list</code> の応答で確認する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/jisaku_net/articles/mcp-npx-connect-timeout">Zenn — MCPサーバーの接続タイムアウトはnpxの初回起動だった</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Remote Config は9/1から従量課金 — 「起動時は activate、fetch は裏で」に変えると1日10回の取得が1回になる</h2>
+      <p class="why">— Play に出しているアプリで Remote Config を使っているなら、無料枠10万fetch/日の計算を今のうちに。</p>
+      <p class="b">Firebase公式ブログが8/31に公開。9/1から Remote Config は従量課金で、無料枠は1日10万fetch、既存は3〜5か月猶予。推奨は、起動時は activate() で前回分を即反映し、fetch() は裏で走らせる型。minimumFetchInterval を24時間にすれば、1日10回起動しても取得は1回。fetch はサインインや購入に紐づけ、即時反映が要るフラグだけリアルタイム更新を使い、不要になれば remove() で閉じる。含意: FlutterFire にも同じ API がある。</p>
+      <p class="try">試すなら: firebase_remote_config で <code>setConfigSettings(RemoteConfigSettings(fetchTimeout: const Duration(seconds: 10), minimumFetchInterval: const Duration(hours: 24)))</code> → 起動時に <code>await rc.activate()</code> → 裏で <code>rc.fetch()</code>。即時反映が要るキーだけ <code>rc.onConfigUpdated.listen(...)</code>。</p>
+      <p class="src">出典: <a href="https://firebase.blog/posts/2026/08/optimize-remote-config-usage">Firebase Blog — 3 ways to optimize Remote Config fetch usage</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
