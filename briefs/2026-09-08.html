@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月8日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-07.html">← 9/7（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年9月8日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>/compact の値段を705回分の実ログで測った — 直後の1ターンで通常の26倍を書き込み、元を取るのに12ターン</h2>
+      <p class="why">— 自動圧縮は99.6%が勝手に走る。どこで切るかを自分で決めるための数字。</p>
+      <p class="b">saito氏が9/6にZennで公開。~/.claude/projects/ の2,932セッション・47,217ターンから、compactionを含む148セッション・705回を抽出した。圧縮直前のターンは中央値164,690トークンをキャッシュから読んでいたのが、圧縮後3ターン目には78,084へ半減。ただし直後のターンは cache_creation が43,844トークンで、通常ターンの1,712の約26倍を書き込む。</p>
+      <p class="b">書き2倍・読み0.1倍で計算すると一時費用87,688相当、1ターンの節約8,661相当で損益分岐は約10ターン、実測累積では12ターン。ところが148セッションのうち47（31.8%）は最後の圧縮から12ターン未満で終わり、払っただけで回収していない。要約1回の中央値は157秒、705回で30.7時間。702回（99.6%）は自動発火。含意: 圧縮は作業の切れ目に自分で叩く。継続が要らなければ /clear（費用ゼロ）、方向を捨てるなら /rewind。無人バッチでは autoCompactEnabled を false にし、静かに劣化するより止める。</p>
+      <p class="try">試すなら: 区切りで <code>/compact</code>、不要なら <code>/clear</code>、やり直しは <code>/rewind</code>。<code>claude -p</code> のバッチには settings.json に <code>"autoCompactEnabled": false</code> を入れ、コンテキスト超過を失敗として拾う。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tsutomusaito/articles/claude-code-compact-cost">Zenn — /compact のコストを実ログで測った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>CLAUDE.md は「破られたら気づけるか」で選ぶと74KBが7KBになった — 効くのは検証できる禁止事項</h2>
+      <p class="why">— CLAUDE.mdが太る一方なら、削る基準が1行で手に入る。</p>
+      <p class="b">Quintet Kit氏が9/6にZennで公開。「きれいなコードを書く」のような形容詞の指示は破られても検出できず、モデルが既に知る一般論も効かない。残ったのは「純黒#000000と純白#ffffffを使わない」「Scope外の変更が要るなら止めて報告」のように、違反が分かる禁止事項。最大74KBのCLAUDE.mdは7KBになり、内訳は役割別の権限40%、作業の流れ30%、状態管理20%、例外の明示10%。含意: 昨日のRules素通りと同じで、文章の規則は検出できる形にしてこそ効く。</p>
+      <p class="try">試すなら: CLAUDE.mdの各行に「破られたら気づけるか」を当て、気づけない行を削る。残した禁止事項は grep で検証できる表現に書き直す。</p>
+      <p class="src">出典: <a href="https://zenn.dev/quintetkit/articles/what-belongs-in-claude-md">Zenn — CLAUDE.md に何を書くと効いて、何を書いても効かないのか</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカルの Qwen2.5-VL 7B で日本語契約書のOCRが99.72% — 6GBのモデルで領収書は100%</h2>
+      <p class="why">— レシートや契約書の文字起こしを、クラウドに送らずに済ませられる精度かが数字で分かる。</p>
+      <p class="b">Umamon氏が9/7にZennで公開。M1 Max 64GBのOllama 0.30.8で qwen2.5vl:7b（Q4_K_M、6.0GB）を /api/generate から呼び、レシート・コード画面・日本語契約書を読ませた。出力は23.4〜26.0 tok/sで画像内容に左右されず、画像エンコードは1枚2.4〜2.7秒。精度はレシート123文字で100%、コードは実質100%、契約書は356文字中1文字の誤変換で99.72%。含意: 6GBなら12GB級GPUにも載る。速さは出力トークン数で決まる。</p>
+      <p class="try">試すなら: <code>ollama pull qwen2.5vl:7b</code> のあと、<code>curl localhost:11434/api/generate -d '{"model":"qwen2.5vl:7b","prompt":"この画像の文字をそのまま書き出して","images":["&lt;base64&gt;"],"stream":false}'</code>。</p>
+      <p class="src">出典: <a href="https://zenn.dev/umamon/articles/qwen25vl-m1max-ocr-bench">Zenn — Qwen2.5-VL 7B on M1 Max OCR速度・精度の実測</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
