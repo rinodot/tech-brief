@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月9日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-08.html">← 9/8（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年9月9日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code は計画とレビューに残し、実装は安い側へ渡す — 63日・378回の委譲で完走85%、中央値683秒</h2>
+      <p class="why">— 週次上限が9/13で素に戻る前に、Claude Codeの「使いどころ」を絞る型として。</p>
+      <p class="b">Sei氏が9/7にZennで公開。役割を4つに分け、Claude Codeは司令塔（仕様を書き、成果をレビュー）、実装はCursorをCLIから画面を開かず裏で走らせ、レビューと調査は別のClaudeセッションに持たせた。7/7〜9/7の63日で378回委譲し、85%が最後まで返ってきた。月別では7月73件（89%）、8月161件（81%）、9月は7日間で144件（86%）、1日あたり8→11→21件に増えた。成功した実行の中央値は683秒。</p>
+      <p class="b">検証の型は3つ。実行前に基準値を取る（型エラー238件、通過テスト2,630件のように）、成果は自己申告でなく変更ファイルと指標の差分で受け取る、レビューは作業者と別のセッションに読ませる。Claude Code自身のトークンは減らず、1日の中央値は7月858Mから9月1,022Mへ約2割増え、空いた分が計画とレビューに回った。ただし9月分の95%はキャッシュの読み直しで、費用は2割増より小さい可能性がある。失敗58件の合計は26.9時間で全体の26%。含意: 分業で得るのは費用削減ではなく、Claude Codeの時間を考える仕事に寄せること。</p>
+      <p class="try">試すなら: 委譲する前に <code>flutter analyze</code> と <code>flutter test</code> の件数を基準値として控え、実装役には「変更ファイル一覧と差分」を返させる。レビューは別セッションで <code>claude -p "仕様と差分を照合して不足を列挙"</code> に読ませる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/activecore/articles/claude-plans-cursor-builds">Zenn — Claude Code は計画とレビューに残し、実装は安いモデルへ渡す</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>.claude の設定は「書けているのに黙って無視される」— matcher が効かないイベント10種と、プロジェクト設定では効かない71キー</h2>
+      <p class="why">— フックが「効いているつもり」問題の続き。今日は設定ファイルの側。</p>
+      <p class="b">Quintet Kit氏が9/7にZennで公開、判定器 ccheck も公開。UserPromptSubmit・Stop など10のイベントは matcher を持たず、書いても無視され毎回発火する。<code>if</code> はツール系5イベント専用。プラグイン同梱のMCPツール名には <code>plugin_&lt;plugin&gt;_</code> が挟まるので、サーバー名だけの matcher は当たらない。71の設定キーは user／managed 専用で、プロジェクトの settings.json では何も起きない。含意: 「読み込まれた」と「効いている」は別物。</p>
+      <p class="try">試すなら: リポジトリのルートで <code>npx @quintetkit/ccheck</code>（Node 22.18以上）。指摘には根拠の公式ドキュメントURLが付くので、そのまま原典を確認する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/quintetkit/articles/silently-ignored-config">Zenn — 設定は書けているのに、何も起きない</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>単発ベンチで3.6倍速いローカルLLMランタイムが、エージェントの実タスクでは遅かった — 犯人は1.5万トークンのツール定義のプリフィル</h2>
+      <p class="why">— ローカルLLMをエージェントに使うなら、tok/s より先に見る数字がある。</p>
+      <p class="b">TK氏が9/7にZennで公開。単発ベンチは Rapid-MLX 66.7 tok/s、Ollama 18.6 tok/sなのに、Claude Agent SDKの実タスクでは Ollama 12〜15秒、Rapid-MLX 17〜18秒で逆転。毎回積む約19,000トークンの基礎コンテキスト（約15,000がツール定義）が原因で、Rapid-MLXのプリフィルが6.2秒→36.0秒に伸びた。ツール定義も圧縮する <code>--pflash-include-tools</code> で6.6秒に戻る。含意: 実プロンプト長でプリフィルを測る。</p>
+      <p class="try">試すなら: ベンチのプロンプトに本番のツール定義（1万トークン超）を含め、Ollamaなら /api/generate 応答の <code>prompt_eval_duration</code> と <code>eval_duration</code> を分けて記録する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tklinkworks/articles/8b5ab3e60d91f8">Zenn — ベンチで3.6倍速いランタイムが、実タスクでは遅い側だった話</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
