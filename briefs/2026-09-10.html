@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月10日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-09.html">← 9/9（水）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年9月10日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>「必ず二重チェック」のような古い念押しを剥がすと、安くて正確になる — Anthropic の実測で費用14.6%減・精度5.3%増。<code>/claude-api prompt-audit</code> は自分の CLAUDE.md にも掛けられる</h2>
+      <p class="why">— 9/13 に週次上限が素に戻る。トークンを減らす手が3つ、数字つきで揃った。</p>
+      <p class="b">Anthropic の Lance Martin 氏が9/8に公開。「費用と性能はトレードオフではない」として直し方を3つ示した。①キャッシュ命中率を上げる ②上位モデルへ移るときプロンプトの「アンチパターン」を消す ③effort をタスクに合わせる。②の実測は、きれいなプロンプトに「二重に確認せよ」「最大限に徹底的に」「6段階の必須手順」「矛盾する返金ルール」など6種を1つずつ植え、Opus 4.8→Opus 5 でモデルIDだけ変えた場合と <code>/claude-api prompt-audit</code> を掛けた場合を比較。監査後は平均で費用14.6%減・精度5.3%増。</p>
+      <p class="b">③は SWE-bench Verified で effort を medium にし出力を数文に絞ると、ステップ中央値29→17、費用約55%減。①は tau2-bench retail でキャッシュの区切りを明示し約73%減、合格率は横ばい。含意: 古いモデル向けの念押しは新しいモデルでは費用と精度の両方を削る。prompt-audit は CLAUDE.md や skills も対象なので自分の設定にそのまま使える。</p>
+      <p class="try">試すなら: Claude Code で <code>/claude-api prompt-audit</code>（同梱スキルなので導入不要）。file:line つきの報告と差分案が出るだけで勝手に書き換えないので、CLAUDE.md の「必ず」「絶対」「二重に確認」の行から見直す。effort は <code>/effort medium</code> で1日試し、ステップ数を比べる。</p>
+      <p class="src">出典: <a href="https://claude.com/blog/reducing-cost-and-improving-performance-with-claude-platform">Claude Blog — Reducing cost and improving performance with Claude Platform</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code に effort の天井 <code>maxEffortLevel</code> が入った — 週次上限の中で「どこまで考えさせるか」を設定ファイルで固定できる</h2>
+      <p class="why">— 1件目の「effort を落とす」を、その場の判断でなく仕組みで効かせる手段。</p>
+      <p class="b">v2.1.267（9/9）。<code>maxEffortLevel</code> を settings.json に置くと、<code>/effort</code> や <code>--effort</code> で上を指定しても上限で頭打ちになる。「どのスコープからでも低い方が採用」なので、個人設定に置けば自分への歯止めになる。<code>--system-prompt-snapshot off</code> はシステムプロンプトを毎回描き直す指定で、<code>--append-system-prompt</code> の文面を試すときに再起動が要らない。含意: effort は「その場で下げる」より「上限を決める」方が守れる。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> に <code>"maxEffortLevel": "medium"</code> を足して1日回し、<code>/usage</code> の消費と体感を比べる。上げたい日は設定側を直す（上限が勝つ）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.267">GitHub — anthropics/claude-code v2.1.267</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>PRレビュー8観点のうち軽い4つを Ollama に回して Claude のトークンを約4割減 — Ollama が止まっていればその回だけ Claude に戻る</h2>
+      <p class="why">— 手元の GPU を「Claude の枠を延ばす側」に使う実例。</p>
+      <p class="b">GMOペパボのあたに氏が9/8に公開。code／security／test／spec の重い4観点は Claude、DDD／可読性／ログ／性能の4観点は Ollama の qwen3.6:27b へ。切替は <code>MULTI_REVIEW_OLLAMA=1</code>、Ollama が止まっていればその回だけ Claude に戻る。Claude 側のトークン消費は約40%減。ローカル分は自作の <code>ollama-usage</code> で JSON 記録。記録例は入力15,253トークンで404.5秒。含意: 観点を「品質が要る／要らない」で分けるのが先。</p>
+      <p class="try">試すなら: レビュー観点を2群に分け、軽い群だけ Ollama の <code>/api/chat</code> に投げる。応答の <code>prompt_eval_count</code>／<code>eval_count</code>／<code>total_duration</code> を JSON で残し、Claude 側の <code>ccusage</code> と並べて月次で比べる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/pepabo/articles/claude-ollama-hybrid-review-usage">Zenn — Claudeのrate limitをOllama併用でかわし、コストは自作コマンドで見えるようにした</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
