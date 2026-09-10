@@ -271,5 +271,15 @@
    "Claude Code に effort の天井 maxEffortLevel が入った — 週次上限の中で「どこまで考えさせるか」を設定ファイルで固定できる",
    "PRレビュー8観点のうち軽い4つを Ollama に回して Claude のトークンを約4割減 — Ollama が止まっていればその回だけ Claude に戻る"
   ]
+ },
+ {
+  "date": "2026-09-11",
+  "weekday": "金",
+  "file": "2026-09-11.html",
+  "titles": [
+   "レガシー500本からのSQL抽出を claude -p --tools \"\" で回し、Haiku・Sonnet・Opus を同じ866文で比べた — 取りこぼしゼロは Opus だけ、しかも最速",
+   "Flutter 本体から Material と Cupertino が出た — material_ui／cupertino_ui 1.0.0 へ dart fix で載せ替え、以後はウィジェットの更新が週次で来る",
+   "Google Play の手数料が日本では9/30から変わる — 年間収益100万ドル未満は10%へ、標準は新規インストール20%・既存25%"
+  ]
  }
 ]
