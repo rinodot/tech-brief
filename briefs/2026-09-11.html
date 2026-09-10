@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月11日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-10.html">← 9/10（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年9月11日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>レガシー500本からのSQL抽出を <code>claude -p --tools ""</code> で回し、Haiku・Sonnet・Opus を同じ866文で比べた — 取りこぼしゼロは Opus だけ、しかも最速</h2>
+      <p class="why">— 「大量処理は安いモデルで」の前提を、数字で一度疑う。</p>
+      <p class="b">クラスメソッドの田中聖也氏が9/11に公開。Java 300本・VB.NET 200本の計500ファイルからSQLを抜く作業を、ファイル探索はさせず <code>--tools ""</code> でツールを全部切り、外部スクリプトから <code>claude -p</code> を1ファイルずつ呼ぶ形で組んだ。第1弾は500ファイルから440文を抽出。精度検証は1ファイル4〜8文を含む100ファイル・866文の正解データで、3モデルを同条件で比較。</p>
+      <p class="b">Haiku 4.5 は再現率99.9%（取りこぼし1）、$4.25、21.0分。Sonnet 5.0 は99.8%（取りこぼし1・余計な抽出1）、$7.07、7.4分。Opus 5.0 は100%（どちらもゼロ）、$9.04、6.7分。著者の結論は「Opus のみが全項目クリーン」「安い＝速いではない」。含意: 決定的な作業では単価より「やり直しゼロ」と所要時間を先に見る。差額$4.79で21分が6.7分になり検品が消える。月次で繰り返す処理ほどこの差は積み上がる。</p>
+      <p class="try">試すなら: <code>cat file.java | claude -p --tools "" --output-format json "このコードのSQL文だけを列挙"</code> のように標準入力で渡し、まず正解つきの小さな検証セットで3モデルの取りこぼし数と時間を測る。</p>
+      <p class="src">出典: <a href="https://dev.classmethod.jp/articles/claude-code-headless-legacy-code-sql-extraction/">DevelopersIO — レガシーコード500本からSQLを自動抽出できるのか試してみた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Flutter 本体から Material と Cupertino が出た — <code>material_ui</code>／<code>cupertino_ui</code> 1.0.0 へ <code>dart fix</code> で載せ替え、以後はウィジェットの更新が週次で来る</h2>
+      <p class="why">— 手元のアプリの import が全部対象。次の flutter upgrade の前に。</p>
+      <p class="b">Craig Labenz 氏が9/9に告知。<code>flutter/material.dart</code> と <code>flutter/cupertino.dart</code> を8月に pub.dev の <code>material_ui</code>・<code>cupertino_ui</code> 1.0.0 として同一内容で公開し、切り離しを完了。<code>dart fix</code> で pubspec.yaml に2パッケージを足し、import を置き換える。狙いは3か月周期の安定版を待たない週次リリース。「ドロップインで済むはず」とあり、旧 import の期限は未記載。含意: UI 部品の修正が本体と別の速度で来る。</p>
+      <p class="try">試すなら: <code>dart fix --dry-run</code> で置換対象の import 数を見て、テストが通るのを確認してから <code>dart fix --apply</code>。pubspec の2パッケージは 1.0.0 で固定。</p>
+      <p class="src">出典: <a href="https://flutter.dev/blog/decoupling-material-cupertino">Flutter Blog — Material and Cupertino decoupling are here</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Google Play の手数料が日本では9/30から変わる — 年間収益100万ドル未満は10%へ、標準は新規インストール20%・既存25%</h2>
+      <p class="why">— 収益に直接効く期限。自分が「引き下げ枠」に登録済みかを今のうちに。</p>
+      <p class="b">日本とオーストラリアは2026年9月30日から、その他地域は2027年9月30日から。年間収益100万ドル未満は非定期・定期とも10%＋請求手数料（該当する場合）、標準は新規インストール20%・既存25%、定期購入は10%。新規／既存は「開始日以降に Play から初めてインストールか初めて更新したか」で決まる。請求手数料は米英EEAで5%、他地域は後日。含意: 現行の15%枠は「関連付けられているデベロッパー アカウント」でアカウントグループを作って登録する方式。未登録なら先に。</p>
+      <p class="try">試すなら: Play Console の「関連付けられているデベロッパー アカウント」で登録状況を確認し、10/1以降の収益レポートで新規／既存の区分と適用率を1回見る。</p>
+      <p class="src">出典: <a href="https://support.google.com/googleplay/android-developer/answer/16954621?hl=ja">Play Console ヘルプ — Google Play のサービス手数料引き下げについて</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
