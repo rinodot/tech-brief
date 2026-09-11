@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月12日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-11.html">← 9/11（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年9月12日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>自作 Skill が「呼ばれるか・効いているか」を数字で測れるようになった — <code>claude plugin eval</code> はプラグインあり／なしで各3回走らせ、差分 Δ を出す</h2>
+      <p class="why">— Skill の description を勘で直すのをやめ、Δ で直せる。ただし実行は自分の枠を消費する。</p>
+      <p class="b">v2.1.269（9/11）で入った。プラグインの <code>evals/</code> に「利用者が打ちそうなプロンプト＋採点器」をケースとして置き、<code>claude plugin eval .</code> で回す。1ケースは既定でプラグインあり3回・なし3回の計6回。採点器は6種、regex・tool_used・tool_order・file_exists は転写とファイルから判定して無料、llm と baseline は判定モデルを呼ぶ。結果は WITH／W/OUT／Δ の表と HTML レポートで、公式の例は <code>first-case 1.00 0.33 +0.67 6 $0.41</code>。</p>
+      <p class="b">ケースは <code>claude plugin eval init</code> で Claude に書かせられる。プラグインを読んで「発火すべき／すべきでない」プロンプトと採点器を提案し、1回試してから書く。公式が挙げる最初のつまずきは「Δ がほぼゼロで <code>tool_used: Skill</code> が落ちる」＝自然な言い回しでは Skill が選ばれていない状態で、直すのは description。含意: 全実行が自分のプランの使用量に乗る。まず1ケース・<code>--ablation none</code>（片腕だけで費用半分）から。</p>
+      <p class="try">試すなら: <code>claude --version</code> で 2.1.269 以上を確認し、プラグインのルートで <code>claude plugin eval init</code> → <code>claude plugin eval . --case &lt;name&gt; --runs 1 --ablation none</code> で1回だけ回して採点器の挙動を見る。同じリリースで <code>bashEditDiffEnabled</code>（Bash 経由の編集も差分表示）と <code>/output-style</code> のヘッドレス対応も入った。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/plugin-evals">Claude Code Docs — Test plugins with evals</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>自分の声だけの66分で Whisper large-v3-turbo を LoRA すると、文字誤り率が 24.17%→7.66% — 出来上がりは whisper.cpp の Q5_0 で 574MB</h2>
+      <p class="why">— 音声入力を「汎用モデルの限界」で諦める前に、1時間分の録音でここまで動く。</p>
+      <p class="b">ほーりーふぉっくす氏が9/10に公開。録音を Silero VAD で30秒以内に切り、約66分で Whisper large-v3-turbo の注意層に LoRA を Unsloth で当てた。83区間の短音声で CER は 24.17%→15.17%→再学習後7.66%、60秒超9本の部分再現率は91.91%→95.45%。再学習は RTX 5090 で約198秒。whisper.cpp 用に変換し Q5_0（574MB）で運用。注意: 単一話者・疑似ラベル・テストは初回学習で観測済み。含意: 自分専用なら1時間分で効く。</p>
+      <p class="try">試すなら: 自分の録音を Silero VAD で切り、同じ区間で「素の turbo」の CER を先に測る。改善幅は評価セットが未観測かどうかで割り引いて読む。</p>
+      <p class="src">出典: <a href="https://zenn.dev/holy_fox/articles/7e2d1c8fa2ab6e">Zenn — 自分専用のASRモデルを作ってみた</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>「日本語は1文字1トークン」は一世代前の話 — 6トークナイザーの実測で、現行世代は文字数×0.7〜0.8</h2>
+      <p class="why">— RAG のチャンク上限と費用見積もりが3割ずれている可能性。</p>
+      <p class="b">AI仕事ラボが9/10に公開。16ジャンル40本・9,676字を計測。1文字あたり o200k_base（GPT-4o）0.71、cl100k_base（GPT-4）0.97、Gemma 0.58、Claude 1〜2世代 0.97。現行の Claude と Gemini は非公開で未計測。漢字0.87、ひらがな0.62、ASCII 0.38、全角英数1.55。目安は「現行世代は文字数×0.7〜0.8、GPT-4世代は×1.0」。含意: ローカルの Gemma なら見積もりを4割下げてよい。</p>
+      <p class="try">試すなら: 自分の RAG 文書を <code>tiktoken</code> の <code>o200k_base</code> と使うモデルのトークナイザーで数え、チャンク上限を文字数でなくトークンで決める。</p>
+      <p class="src">出典: <a href="https://zenn.dev/aishigoto_lab/articles/japanese-token-ratio-measured">Zenn — 「日本語は1文字1トークン」を6つのトークナイザーで実測したら</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">「見えない消費を測り、上限を決める」週。<code>/claude-api prompt-audit</code> で CLAUDE.md の古い念押しを洗える（9/10）。<code>maxEffortLevel</code> で effort の天井を固定（9/10）。<code>npx @quintetkit/ccheck</code> は黙って無視される設定を指摘（9/9）。auto／bypass では Read／Edit のフックが素通りする（9/7）。型は3つ: 計画とレビューは Claude Code、実装は安い側（9/9）、軽いレビューは Ollama（9/10）、一括処理は <code>claude -p --tools ""</code>（9/11）。アプリ側は <code>dart fix</code> で material_ui へ（9/11）、Play 手数料の15%枠は9/30までに確認（9/11）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
