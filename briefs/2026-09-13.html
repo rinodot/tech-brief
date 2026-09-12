@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月13日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-12.html">← 9/12（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年9月13日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>同じ Qwen3.8-27B でも Q4 と Q5 でコード生成の正答率が 64.5%→74.8% — 1,692回の実測で「4bit は速いが、MBPP で10ポイント落ちる」</h2>
+      <p class="why">— 16GB に載る Q4 を選ぶ前に、何を捨てているかが数字で分かる。</p>
+      <p class="b">toyoshi氏が9/11に公開。Tesla V100（32GB）で Qwen3.8-27B の3量子化（UD-Q4_K_M 15.33GiB／UD-Q5_K_M 18.41GiB／UD-Q6_K 20.47GiB）を、HumanEval 164問と MBPP 400問・温度0の pass@1 で比較（計1,692回）。MBPP は 64.5%→74.8%→77.2% と単調に上がり、HumanEval は 93.9／93.3／93.3% で差が出ない。生成速度は 32.31→28.13→25.79 tok/s。</p>
+      <p class="b">著者の結論は「Q4→Q5 の10.3ポイントは 3GiB と13%の速度低下に見合う。Q5→Q6 の2.4ポイントは微妙」。注意: 32K コンテキストの f16 KV 込みだと Q4 でも 17.85GiB を使うので、16GB では KV を q8_0 にするかコンテキストを削る。HumanEval は天井に張り付いて差が出ないので、量子化の比較は MBPP 側で見る。含意: ローカルでコードを書かせるなら「載る最小の量子化」でなく「Q5 が載る構成」から考える。</p>
+      <p class="try">試すなら: <code>llama-server -m Qwen3.8-27B-UD-Q5_K_M.gguf -ngl 99 -fa on -c 32768 -ctk q8_0 -ctv q8_0</code> で立て、自分の言語の小問20題を温度0で Q4 と Q5 に解かせて差を見る。速度より先に「落とす問題の数」を数える。</p>
+      <p class="src">出典: <a href="https://zenn.dev/phpmyadmin/articles/v100-coding-llm-quant">Zenn — 量子化はコードの正しさを変えるか: V100で1,692問を実行して測った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2><code>claude --worktree</code> は「変更なしで終了」すると作業ツリーごと消える — 残したいなら名前付きセッションにするか、SessionStart で <code>git worktree lock</code> を掛ける</h2>
+      <p class="why">— 依存を入れ終えた worktree を次回も使い回すための数行。</p>
+      <p class="b">公式仕様では、名前なしセッションは終了時に worktree がクリーンだとディレクトリとブランチを自動削除し、名前付きなら残すか聞かれる。daydreamer氏（9/12、v2.1.263）は自分で <code>git worktree lock --reason</code> を掛けると消えないことを確認し、SessionStart フックで <code>unlock</code>→<code>lock</code> を自動化した。公式にも「自分で掛けたロックは掃除で解除されない」とある。含意: 使い回すなら、まず名前を付ける。</p>
+      <p class="try">試すなら: <code>claude --worktree feat -n feat</code> で始めれば終了時に残すか聞かれる。常に残すなら記事の <code>pin-worktree.sh</code> を <code>.claude/hooks/</code> に置き、<code>.claude/settings.json</code> の SessionStart に登録（著者の環境では <code>settings.local.json</code> では効かなかった）。片付けは <code>git worktree unlock</code> → <code>git worktree remove</code>。</p>
+      <p class="src">出典: <a href="https://zenn.dev/daydreamer/articles/94889b52bf475d">Zenn — Claude Code の --worktree が終了時に消える問題を git worktree lock で防ぐ</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: Claude Code の費用を3つの実ログで分解する — 起動の固定費・1往復の変動費・伸びるほど増える再読費</h3>
+      <p class="b">費用は「トークン数」で来るが、手を打てる単位は3つ。起動のたびに乗る固定費、1往復ごとの変動費、会話が伸びるほど膨らむ再読費。3人の実ログをこの順に並べる（キャッシュの原理は9/6特集）。</p>
+      <p class="b">①固定費 — activecore の Sei氏（9/2）は転写の最初の応答の usage を足し、何もしないうちに 71,657 トークンが乗っていると測った。うち設定側が 32,096（45%）で、Skill 一覧 7,936、MEMORY.md 6,502、CLAUDE.local.md 3,769、起動フック 3,028＋1,264、出力スタイル 2,719、グローバル CLAUDE.md 2,590、ツール定義 2,024、エージェント一覧 1,118。ルール10本を常駐から外して −9,057、CLAUDE.md の書き直しで −5,230、2週間で 43,814→32,096。</p>
+      <p class="b">②変動費 — Shinn_Matsumoto氏（9/10）は30日・132.7億トークン（97.5%がキャッシュ読み）から、費用の単位は時間でなく往復回数だと結論した（5.74回/分、見積もり誤差 3.3倍→2.6倍）。1ターン $0.08 に対しサブエージェント1本 $2.07。「走行コストより帰還コスト。報告が親に丸ごと乗る」ので1回4本まで、安全係数は P90 の1.24倍。</p>
+      <p class="b">③再読費 — hitokraft氏（9/8）の48時間・12,898ターン・40億トークンは 77.5% がキャッシュ読み、出力は 9.3%。最大の1セッション（36.4時間・2,441ターン・平均 509K）だけで全体の3割、同じ1ターンが会話の長さで5倍以上変わる。固定費 45K も全ターンに乗って 14.5%。約200K／300ターンで切る試算は 3,487M→643M。</p>
+      <p class="b">含意: 費用 ≒（固定費＋会話）×ターン数。効く順は、セッションを切る→固定費を削る→ターン数（帰還）を減らす。</p>
+      <p class="try">試すなら: 起動直後に <code>/context</code> で設定側の内訳を見る（目安: 50K 超なら Skill 一覧と CLAUDE.md から削る）。<code>npx ccusage@latest session</code> でセッション別のキャッシュ読み比率を並べ、300ターンを超えるものは <code>/clear</code> で切る。転写 <code>~/.claude/projects/*/*.jsonl</code> の usage を足せば同じ3つの数字が出る（activecore の startup-cost.py、hitokraft の breakdown.mjs）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/activecore/articles/claude-code-resident-cost">Zenn — activecore（常駐費の内訳）</a> ／ <a href="https://qiita.com/Shinn_Matsumoto/items/f6354a4daf029f75b033">Qiita — Shinn_Matsumoto（claude_task.sh）</a> ／ <a href="https://zenn.dev/hitokraft/articles/claude-code-cost-is-conversation-length">Zenn — hitokraft（40億トークンの内訳）</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
