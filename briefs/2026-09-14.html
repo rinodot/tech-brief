@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月14日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-13.html">← 9/13（日）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年9月14日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>プロンプトの頭に <code>ultracode:</code> と書くと、Claude が自分でスクリプトを書いて数十のサブエージェントを回す — 「ダイナミックワークフロー」は保存すれば <code>/名前</code> で毎回同じ手順を再実行できる</h2>
+      <p class="why">— 手で <code>.claude/agents/</code> を並べていた分業を、読める・直せる・再実行できるスクリプトに変えられる。</p>
+      <p class="b"><code>ultracode: src/routes/ 配下の全ハンドラを認可漏れで監査</code> のように書くと、Claude が JavaScript のスクリプトを書き、ランタイムが裏で実行する。中間結果は会話に戻らず、最終結果だけが戻る。実行前に計画の承認画面が出る。<code>/workflows</code> でエージェント数・トークン・経過時間を見ながら <code>p</code> で一時停止、<code>x</code> で停止、<code>s</code> で <code>.claude/workflows/</code> に保存すると次回から <code>/&lt;name&gt;</code> で呼べる。</p>
+      <p class="b">同時実行は最大16体（v2.1.269 の <code>CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS</code> で1〜256）、1回1,000体まで。有料プラン全部で使え、Pro は <code>/config</code> で有効化。<code>/effort ultracode</code> にすると xhigh 推論＋全タスク自動オーケストレーションになり消費が跳ねる。含意: 9/9の「観点ごとにサブエージェントを呼ぶ」型は、ワークフローにすると手順ごと保存して同じ品質で回せる。まず <code>small</code>（5体未満）で1ディレクトリから。</p>
+      <p class="try">試すなら: <code>/config workflowSizeGuideline=small</code> にしてから <code>ultracode: lib/ 配下の全 Widget で dispose 漏れを監査し、指摘を別エージェントに反証させる</code> と打ち、<code>/workflows</code> で各エージェントのトークンを見る。良ければ <code>s</code> で保存し、次回は <code>/&lt;name&gt;</code>。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/workflows">Claude Code Docs — Orchestrate subagents at scale with dynamic workflows</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2><code>deny</code> に書いた <code>Write(パス)</code> は一度も参照されない — ファイルの許可・拒否で効くのは <code>Read(…)</code> と <code>Edit(…)</code> だけ</h2>
+      <p class="why">— 自分の settings.json の deny が「書けているのに効いていない」かを1分で確認できる。</p>
+      <p class="b">Quintet Kit氏（9/12）が <code>"deny": ["Write(src/generated**)"]</code> が無視されていたと報告。公式仕様では、ファイルのパス規則は <code>Read(path)</code> と <code>Edit(path)</code> だけを照合し、<code>Write</code>・<code>NotebookEdit</code>・<code>Glob</code>・<code>MultiEdit</code> にパスを付けた規則は受理されるが参照されず、起動時に警告が出る（v2.1.210以降）。Bash 側は最初の <code>*</code> より前が一致条件なので、<code>Bash(git * main)</code> は git 全部を許す。含意: 起動時の警告を一度は読む。</p>
+      <p class="try">試すなら: <code>claude</code> 起動直後の警告を読み、<code>Write(...)</code>／<code>Glob(...)</code> は <code>Edit(...)</code>／<code>Read(...)</code> に書き換え、<code>*</code> はサブコマンドの後ろに置く（<code>Bash(git diff *)</code>）。<code>npx @quintetkit/ccheck</code> でも検出できる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/quintetkit/articles/permission-rule-allows-more">Zenn — 書いた deny ルールが、一度も参照されていなかった</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカルLLMの JSON 出力で「後ろの欄だけ空」になるのは、Pydantic の既定値が <code>required</code> から落ちるから — 全項目を必須にして空欄率 59%→0%</h2>
+      <p class="why">— Ollama で構造化出力を使っているなら、スキーマ側の1関数で直る。</p>
+      <p class="b">juzo1192氏（9/12）。Ollama の26Bモデル・温度0.2〜0.3で14項目の JSON を出させると、最後の項目が245件中59%で空だった。Pydantic は既定値を持つ項目を <code>required</code> に入れないため、Ollama の文法制約では省略可能になり、低温度では早く <code>}</code> を閉じる。直し方は <code>__get_pydantic_json_schema__</code> を上書きして <code>schema["required"] = list(props)</code> とし、LLM に渡すスキーマだけ全項目必須に。結果は空欄率0%。</p>
+      <p class="try">試すなら: Pydantic モデルに上の上書きを足し、<code>model_json_schema()</code> の <code>required</code> が全項目になったことを確認してから Ollama の <code>format</code> に渡す。空欄が「省略」でなく <code>[]</code> で返るかを見る。リスト要素がオブジェクトなら入れ子のモデルにも同じ上書きを。</p>
+      <p class="src">出典: <a href="https://qiita.com/juzo1192/items/cbc6b9eebfb0e0aa84bf">Qiita — LLMの構造化出力で「後ろの欄だけ空になる」― 原因はrequiredを全指定していないJSON schemaだった</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
