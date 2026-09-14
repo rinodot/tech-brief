@@ -312,5 +312,15 @@
    "deny に書いた Write(パス) は一度も参照されない — ファイルの許可・拒否で効くのは Read(…) と Edit(…) だけ",
    "ローカルLLMの JSON 出力で「後ろの欄だけ空」になるのは、Pydantic の既定値が required から落ちるから — 全項目を必須にして空欄率 59%→0%"
   ]
+ },
+ {
+  "date": "2026-09-15",
+  "weekday": "火",
+  "file": "2026-09-15.html",
+  "titles": [
+   "Firebase に「サービス単位の支出上限」が付いた — AI Logic／Cloud Functions／App Hosting は月額を決めておくと 100% で自動停止する",
+   "llama.cpp の -ngl は「多いほど速い」ではない — RTX 4070 12GB で Qwen3.8-27B を8点測ると、42→44 層でプロンプト処理が 19 分の 1 に落ちた",
+   "机の Claude Code を「サーバー」にしておくと、スマホから開いたセッションごとに別の worktree が切られる — claude remote-control --spawn worktree"
+  ]
  }
 ]
