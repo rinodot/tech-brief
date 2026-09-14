@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月15日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-14.html">← 9/14（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年9月15日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Firebase に「サービス単位の支出上限」が付いた — AI Logic／Cloud Functions／App Hosting は月額を決めておくと 100% で自動停止する</h2>
+      <p class="why">— 個人開発で一番怖い「バグや急増で数万円の請求」に、Functions と Gemini API の分だけでも蓋ができる。</p>
+      <p class="b">Firebase 公式ブログ（9/14、Yvonne Monterroso氏）。プロジェクトごと・サービスごとに月額の上限を置くと、50%・80% でメール、100% でそのサービスの新規利用が月末まで止まる。対象は AI Logic（Gemini API）、Cloud Functions、App Hosting、Extensions。設定は Firebase コンソールの 設定 → Usage and billing → Details &amp; settings の Service-level spend caps。解除は同じ場所の Lift、再開まで最大1時間。</p>
+      <p class="b">注意は2つ。①ハードキャップではない。集計の遅れで停止まで数分かかり、その間の超過分は請求される（公式は「許せる額より少し低く」）。②裏の API 単位で効き、Cloud Functions の上限は Extensions の関数にも、Gemini API の上限は Genkit や ADK からの利用にもかかる。含意: Firestore・Storage・Auth は対象外。Cloud Functions と AI Logic に月額を置き、Firestore は従来の通知だけの予算で見る二段構え。</p>
+      <p class="try">試すなら: Blaze のプロジェクトで Firebase コンソール → 設定 → Usage and billing → Details &amp; settings → Service-level spend caps で Cloud Functions に「許せる上限より少し低い月額」を Configure。50%・80% のメールが自分に届く宛先（請求管理者かプロジェクトオーナー）かも確認する。</p>
+      <p class="src">出典: <a href="https://firebase.blog/posts/2026/09/firebase-spend-caps">The Firebase Blog — Introducing Firebase spend caps</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>llama.cpp の <code>-ngl</code> は「多いほど速い」ではない — RTX 4070 12GB で Qwen3.8-27B を8点測ると、42→44 層でプロンプト処理が 19 分の 1 に落ちた</h2>
+      <p class="why">— 12〜16GB の GPU で 27B を動かすなら、層数は表で決めずに自分で崖を測るしかない。</p>
+      <p class="b">ローカルAIラボ（9/3、9/9更新）。Qwen3.8-27B-Q4_K_M を <code>llama-bench</code> で <code>-ngl</code> 8点。プロンプト処理は 40 層 341.32 tok/s、42 層 318.66、44 層で 16.51 に急落、全層でも 27.30。生成は 42 層の 3.00 tok/s が最速。VRAM は 40 層以上どれも 11.8GB 前後で崖が見えない。仕組みは筆者も未特定（あふれた分のメモリ退避が私の読み）。含意: 生成はベンチと実機で一致、プロンプト処理は5倍遅かったとも。ベンチで当たりを付け、実際の <code>-c</code> で測り直す。</p>
+      <p class="try">試すなら: <code>llama-bench -m Qwen3.8-27B-Q4_K_M.gguf -ngl 36-48+2 -p 512 -n 128</code>（範囲指定は公式 README の書式）。pp が急落する直前の層数で <code>llama-server -ngl 42 -c 32768 -fa on</code> を立て、実際の長さで測り直す。</p>
+      <p class="src">出典: <a href="https://zenn.dev/localai_lab/articles/af372c5dd7e2b9">Zenn — llama.cppの -ngl には崖がある：RTX 4070 12GBで27Bを8点実測</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>机の Claude Code を「サーバー」にしておくと、スマホから開いたセッションごとに別の worktree が切られる — <code>claude remote-control --spawn worktree</code></h2>
+      <p class="why">— このブリーフを読んでいるスマホから、そのまま自宅 PC の Claude Code に仕事を投げられる。</p>
+      <p class="b">公式 Remote Control のサーバーモード。<code>claude remote-control</code> を走らせると、実行も MCP も PC 側のまま、Claude アプリの Code タブから指示と承認ができる。<code>--spawn worktree</code> を付けると、スマホから開くセッションごとに git worktree が切られ、同じファイルを取り合わない。受信ポートは開かないが、転写は Anthropic 側に残る。Pro/Max 以上。含意: ワークフローの進捗も同期されるので、<code>ultracode</code> を PC で走らせ外から見られる。</p>
+      <p class="try">試すなら: リポジトリで <code>claude remote-control --spawn worktree --name "myapp"</code> → スペースキーで QR を出してスマホの Claude アプリで読む → Code タブから新規セッションを2つ開き、<code>git worktree list</code> で別ディレクトリになっているのを確認。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/remote-control">Claude Code Docs — Continue local sessions from any device with Remote Control</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
