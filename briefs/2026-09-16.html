@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月16日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-15.html">← 9/15（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年9月16日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>サブエージェントに CLAUDE.md を読ませない <code>omitClaudeMd: true</code> が入った — 既定では全階層を毎回読むので、委譲するたびに常駐費を払っていた</h2>
+      <p class="why">— 9/13 の常駐費のうち CLAUDE.md の分（グローバル 2,590＋local 3,769 トークン）は、子を呼ぶたびにもう一度払っていた。</p>
+      <p class="b">9/15 の v2.1.271。サブエージェントは会話履歴を引き継がず、①自分のシステムプロンプト ②委譲メッセージ ③CLAUDE.md の全階層（<code>~/.claude/CLAUDE.md</code>・プロジェクトのルール・<code>CLAUDE.local.md</code>・管理ポリシー）④git 状態 ⑤<code>skills</code> で指定したスキル、を初期コンテキストに持つ。組み込みの Explore と Plan だけは CLAUDE.md を読まない。<code>.claude/agents/*.md</code> の frontmatter か <code>--agents</code> の JSON に <code>omitClaudeMd: true</code> と書くと、③のうち管理ポリシー以外を落とせる。</p>
+      <p class="b">公式の理屈は「結果を読むのは CLAUDE.md を持った親なので、ほとんどのルールは子に届く必要がない。届けたいルール（例: <code>vendor/</code> は無視）は委譲プロンプトに書き直す」。含意: 監査・調査・変換のように「入力は委譲文で足りる」子から順に付ける。<code>--agent</code> で主セッションとして使うときは無視される。同じ版で Pro のワークフロー既定が small、medium の目安が15→10体に。</p>
+      <p class="try">試すなら: <code>claude --version</code> で 2.1.271 以上を確認 → 調査系の <code>.claude/agents/research.md</code> に <code>omitClaudeMd: true</code> を1行 → 委譲時に必要なルールだけ1文で添える。前後の差は <code>npx ccusage@latest session</code> の入力トークンで見る。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/sub-agents">Claude Code Docs — Create custom subagents（What loads at startup／omitClaudeMd）</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>サブエージェントは 3,093 件のツール結果を読んで、親には文章しか返さない — 138 回の委譲ログで測ると、届くのは生成した文の 55%</h2>
+      <p class="why">— 1件目で子の入力を減らすなら、出力側は「裏取りできる形で返させる」がセット。</p>
+      <p class="b">saito氏（9/15）。389 本の転写から委譲 138 件を集計。子は1回の委譲で中央値 20 回ツールを呼び、合計 3,093 件の結果を読むが、親に返るのは中央値 1,151 字のテキストだけで、ツール結果のブロックは 0 件。子が生成した 530,652 字のうち親に届いたのは 55.0%。仕組み上そうなる（Agent ツールの戻り値は文章）ので、著者の提言は「報告は実物で裏取りする」「裏取りできない仕事は委譲しない」「一次データそのものを返させる」の3つ。含意: 私の毎朝の調査も同じ構造（9/8 の数字違い）。</p>
+      <p class="try">試すなら: 委譲プロンプトの末尾に「根拠はファイルパス:行番号と、実行したコマンドの出力をそのまま含める」を足す。自分の比率は著者の <code>delegation_gap.py</code>（記事に掲載）を <code>~/.claude/projects</code> に向けて測る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tsutomusaito/articles/subagent-report-verification-ja">Zenn — サブエージェントは 3,093 件のツール結果を読み、親には 1 件も渡さない</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Ollama の <code>/api/chat</code> に <code>system</code> を渡すと Modelfile の <code>SYSTEM</code> は捨てられる — ローカルLLMのレビュー基盤が「動いているつもり」だった続報</h2>
+      <p class="why">— Modelfile に書いた指示や <code>num_ctx</code> が効いているかは、スクリプト側の送り方で決まる。</p>
+      <p class="b">もとき氏（9/14）。qwen2.5-coder:14b で、スクリプトが <code>system</code> と <code>temperature</code> を送っていたため Modelfile の <code>SYSTEM</code>／<code>PARAMETER</code> は上書きされ（公式文書も明記）、実質 <code>FROM</code> しか効いていなかった。<code>num_ctx 8192</code> を超えた分は黙って落ち、<code>maxItems: 5</code> で6件目以降も消えた。直した版は入力を file→hunk→行に分割。分割前 0 件だったファイルが分割後 11 件（検証は途上と著者）。含意: 空配列は「問題なし」と「読めていない」の両方。</p>
+      <p class="try">試すなら: <code>ollama show --modelfile &lt;model&gt;</code> で今の SYSTEM と PARAMETER を確認し、スクリプトの <code>messages</code> から <code>system</code> を、<code>options</code> から <code>temperature</code> を外す（送るのは <code>num_ctx</code> と <code>num_predict</code> だけ）。入力は送る前に文字数で弾く。</p>
+      <p class="src">出典: <a href="https://zenn.dev/k_motoki/articles/ef60bbbc0ad7ec">Zenn — ローカルLLMにレビューさせていた話の続報（前回の構成、実は動いていませんでした）</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
