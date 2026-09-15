@@ -322,5 +322,15 @@
    "llama.cpp の -ngl は「多いほど速い」ではない — RTX 4070 12GB で Qwen3.8-27B を8点測ると、42→44 層でプロンプト処理が 19 分の 1 に落ちた",
    "机の Claude Code を「サーバー」にしておくと、スマホから開いたセッションごとに別の worktree が切られる — claude remote-control --spawn worktree"
   ]
+ },
+ {
+  "date": "2026-09-16",
+  "weekday": "水",
+  "file": "2026-09-16.html",
+  "titles": [
+   "サブエージェントに CLAUDE.md を読ませない omitClaudeMd: true が入った — 既定では全階層を毎回読むので、委譲するたびに常駐費を払っていた",
+   "サブエージェントは 3,093 件のツール結果を読んで、親には文章しか返さない — 138 回の委譲ログで測ると、届くのは生成した文の 55%",
+   "Ollama の /api/chat に system を渡すと Modelfile の SYSTEM は捨てられる — ローカルLLMのレビュー基盤が「動いているつもり」だった続報"
+  ]
  }
 ]
