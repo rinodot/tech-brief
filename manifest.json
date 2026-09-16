@@ -332,5 +332,15 @@
    "サブエージェントは 3,093 件のツール結果を読んで、親には文章しか返さない — 138 回の委譲ログで測ると、届くのは生成した文の 55%",
    "Ollama の /api/chat に system を渡すと Modelfile の SYSTEM は捨てられる — ローカルLLMのレビュー基盤が「動いているつもり」だった続報"
   ]
+ },
+ {
+  "date": "2026-09-17",
+  "weekday": "木",
+  "file": "2026-09-17.html",
+  "titles": [
+   "/goal は「終わったか」を別のモデルに判定させる仕組み — 確認コマンドと変更禁止の範囲を条件に書かないと、抜け道を通って「達成」になる",
+   "Cloud Functions 第2世代で Authentication トリガーが GA — onUserCreated／onUserDeleted を firebase-functions/v2/identity から使える",
+   "claude-code-action の PR コメントが「権限拒否」で消えていた — 原因は本文の ## 見出しで、プロンプトで見出し禁止にしたら拒否 9→0・費用 −78%"
+  ]
  }
 ]
