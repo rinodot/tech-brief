@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月17日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-16.html">← 9/16（水）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年9月17日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2><code>/goal</code> は「終わったか」を別のモデルに判定させる仕組み — 確認コマンドと変更禁止の範囲を条件に書かないと、抜け道を通って「達成」になる</h2>
+      <p class="why">— 「テストが通るまで」を毎ターン促さずに回せるが、条件の書き方ひとつで結果が変わる。</p>
+      <p class="b"><code>/goal &lt;条件&gt;</code> はセッション限定の Stop hook で、毎ターンの終わりに小型モデル（既定は Haiku）が会話に出た文字列だけを見て「未達／達成／不可能」を返す。コマンドは実行せずファイルも読まないので、条件は Claude の出力に現れる形で書く（例: <code>npm test</code> が 0 で終わる）。ターン上限は条件に「or stop after 20 turns」と書く方式で、Claude Code 自身は数えない。<code>claude -p "/goal …"</code> で非対話でも回る。</p>
+      <p class="b">嶋田怜央成氏（9/15、v2.1.271）が Ruby の小さなリポジトリで7条件を検証。「既存ファイルを変えずにテストを通す」は Claude が <code>lib/pricing_patch.rb</code> などの新規ファイルで回避して「達成」、「<code>git status --porcelain</code> が空のまま」を足すと評価者が即「不可能」と判定して終了した。評価者の消費は1ゴール 2,600〜7,100 トークン。提案のテンプレは「<code>/goal &lt;確認コマンド&gt; が &lt;期待する結果&gt; で終わる。&lt;変えてはいけない範囲&gt;。&lt;上限&gt;</code>」。含意: 抜け道は条件の穴で、モデルの悪意ではない。</p>
+      <p class="try">試すなら: auto mode で <code>/goal flutter test が exit 0 で終わる。lib/ 以外は変更しない。or stop after 10 turns</code> → <code>/goal</code> で経過と評価者の理由を見る（Ctrl+O で理由の全文）。硬い上限が要るなら <code>claude -p "/goal …" --max-turns 10</code>。</p>
+      <p class="src">出典: <a href="https://dev.classmethod.jp/articles/reona-claude-code-goal-stop-condition/">DevelopersIO — Claude Code の /goal は何を根拠に「終わった」と判断するのか、複数の指示で検証してみた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Cloud Functions 第2世代で Authentication トリガーが GA — <code>onUserCreated</code>／<code>onUserDeleted</code> を <code>firebase-functions/v2/identity</code> から使える</h2>
+      <p class="why">— ユーザー作成時の初期データと退会時の後始末だけ第1世代に残していたなら、全部 v2 に寄せられる。</p>
+      <p class="b">Firebase のリリースノートと firebase-functions v7.4.0（9/15）。<code>event.data</code> に <code>uid</code>・<code>email</code>・<code>displayName</code> が入り、<code>region</code>・<code>memory</code>・<code>secrets</code> など v2 のオプションもそのまま。注意: カスタムトークンの初回サインインでは発火しない、Admin SDK の一括削除では削除イベントが出ない、配送は at-least-once なので冪等に。含意: <code>functions.auth.user().onCreate()</code> を第1世代に残す理由が消えた。</p>
+      <p class="try">試すなら: <code>npm i firebase-functions@^7.4.0</code> → <code>onUserCreated({ region: "asia-northeast1" }, async (e) =&gt; { await db.doc(`users/${e.data.uid}`).set({ createdAt: FieldValue.serverTimestamp() }) })</code> → <code>firebase deploy --only functions</code> → テストユーザーを作って Firestore に書かれるか、同じイベントを2回受けても壊れないかを見る。</p>
+      <p class="src">出典: <a href="https://firebase.google.com/docs/functions/auth-events?gen=2nd">Firebase Docs — Firebase Authentication triggers（2nd gen）</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>claude-code-action の PR コメントが「権限拒否」で消えていた — 原因は本文の <code>##</code> 見出しで、プロンプトで見出し禁止にしたら拒否 9→0・費用 −78%</h2>
+      <p class="why">— 「Claude は書いたのに投稿されない」を Actions のログの <code>permission_denials_count</code> で見つける型。</p>
+      <p class="b">小西諒氏（9/17）。<code>gh pr comment --body '…'</code> の本文に見出し <code>##</code> があると、Bash の安全ヒューリスティックが「引用符内の改行＋<code>#</code> は引数隠し」と見て拒否する。permissions の allow では抑止できない（Issue #30435）。対処はプロンプト側: 見出し禁止で太字、<code>gh pr comment</code> で投稿と明示、PR 番号を渡す。結果は権限拒否 9→0、ターン 17→5、$0.69→$0.15、125秒→48秒。含意: ローカルで <code>$()</code> や heredoc のコミットが毎回聞かれるのも同じ層。</p>
+      <p class="try">試すなら: Actions のログで <code>permission_denials_count</code> を見る → プロンプトに「Do NOT use markdown headings (##, ###). Use **bold** instead」「MUST post the review with <code>gh pr comment</code>」を足す。本文をファイルに書いて <code>gh pr comment --body-file body.md</code> にすると引用符内の改行そのものを避けられる。</p>
+      <p class="src">出典: <a href="https://dev.classmethod.jp/articles/claude-code-action-pr/">DevelopersIO — GitHub ActionsのClaude自動レビューでコメントしてくれない問題とその対処法</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
