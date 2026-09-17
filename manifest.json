@@ -342,5 +342,15 @@
    "Cloud Functions 第2世代で Authentication トリガーが GA — onUserCreated／onUserDeleted を firebase-functions/v2/identity から使える",
    "claude-code-action の PR コメントが「権限拒否」で消えていた — 原因は本文の ## 見出しで、プロンプトで見出し禁止にしたら拒否 9→0・費用 −78%"
   ]
+ },
+ {
+  "date": "2026-09-18",
+  "weekday": "金",
+  "file": "2026-09-18.html",
+  "titles": [
+   "VRAM 8GB の5年前の PC で 35B の MoE モデルが 20 t/s — llama.cpp の --n-cpu-moe でエキスパートの重みだけ CPU に逃がす",
+   "Claude Code v2.1.274: ヘッドレス実行が「繋がらない MCP サーバー」を待つ時間を CLAUDE_CODE_MCP_STARTUP_WAIT_MS で切れる — 33.4秒→3.5秒",
+   "Google Play の日本向け売上に「代金回収の承認」が必要になった — 招待メールの期限（Hidenori氏の例では 2026年12月1日）を過ぎると全地域の支払いが保留"
+  ]
  }
 ]
