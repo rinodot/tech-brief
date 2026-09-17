@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月18日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-17.html">← 9/17（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年9月18日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>VRAM 8GB の5年前の PC で 35B の MoE モデルが 20 t/s — llama.cpp の <code>--n-cpu-moe</code> でエキスパートの重みだけ CPU に逃がす</h2>
+      <p class="why">— 12〜16GB の GPU なら同じ手で 27B〜35B 級の MoE を「載る前提」で動かせる。</p>
+      <p class="b">「引退間際の非エンジニアがAIと遊ぶ」氏（9/17）が Core i5-10400・RTX 2060 Super 8GB・DDR4 64GB で、Unsloth の Qwen3.6-35B-A3B-UD-Q4_K_M（MoE。総35B、1トークンで動くのは約3B）を llama.cpp b10919 で動かした実測。鍵は <code>-ngl 99</code> で全層を GPU に送りつつ <code>--n-cpu-moe 48</code> で先頭48層のエキスパート重みだけ CPU 側に残すこと。毎トークン使うエキスパートは一部なので、重い部分を RAM に置いても注意機構と KV キャッシュが VRAM にあれば速度が出る。<code>-ctk q4_0 -ctv q4_0</code> で KV キャッシュを約1/4 に、<code>--spec-draft-n-max 2</code> で MTP（2トークン先読みの投機生成）を有効化。</p>
+      <p class="b">結果は生成 12〜24 t/s、プロンプト処理は最大 81.5 t/s。goose で使うと「アクティブなエキスパートが2つ以上同時に立ち上がって」VRAM から溢れ、10 t/s 程度に落ちた。含意: 12〜16GB なら <code>--n-cpu-moe</code> を減らして GPU に載せる層を増やせる分、27B〜35B の MoE が実用域に入る。</p>
+      <p class="try">試すなら: <code>llama-server -m Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 --n-cpu-moe 48 --spec-draft-n-max 2 -ctk q4_0 -ctv q4_0 -c 12288 -b 128 -ub 128</code> で起動し、起動ログに <code>loading MTP tensors</code> が出るか確認 → <code>nvidia-smi</code> を見ながら <code>--n-cpu-moe</code> を 4 ずつ減らし、VRAM が溢れる直前の値で止める（フラグ名は llama.cpp の <code>common/arg.cpp</code> で確認済み。密なモデルには <code>--n-cpu-ffn</code>）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/infra_ojisan/articles/local-llm-old-gaming-pc-llamacpp">Zenn — 5年落ちゲーミングPCでもローカルLLMは戦える（llama.cpp MoEオフロードチューニング編）</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.274: ヘッドレス実行が「繋がらない MCP サーバー」を待つ時間を <code>CLAUDE_CODE_MCP_STARTUP_WAIT_MS</code> で切れる — 33.4秒→3.5秒</h2>
+      <p class="why">— cron や CI から <code>claude -p</code> を回すたびに黙って30秒消えていたなら、環境変数1つで消える。</p>
+      <p class="b">9/17 の v2.1.274 で追加。非対話（<code>claude -p</code>）の最初のターンは、接続中の MCP サーバーが揃うまで待つ。石川覚氏（9/17）の計測では、MCP なし 3.6秒、繋がらないサーバーが1つあると 33.4秒、<code>=0</code> を付けると 3.5秒。<code>0</code> は「待たない」で、遅れて繋がったサーバーのツールはそのターンには来ない。含意: MCP を使わない定期実行は 0、使うなら 5000 程度の上限にし、<code>--strict-mcp-config</code> で必要なサーバーだけに絞る。</p>
+      <p class="try">試すなら: <code>time claude -p "Reply with exactly: ok" --max-turns 1 --strict-mcp-config --mcp-config .mcp.json</code> を素の状態と <code>CLAUDE_CODE_MCP_STARTUP_WAIT_MS=5000</code> 付きで比べる。差が大きければ、どのサーバーが接続に失敗しているかを <code>/mcp</code> で確認して設定から外す。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.274">GitHub — anthropics/claude-code Release v2.1.274</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Google Play の日本向け売上に「代金回収の承認」が必要になった — 招待メールの期限（Hidenori氏の例では 2026年12月1日）を過ぎると全地域の支払いが保留</h2>
+      <p class="why">— 有料機能や課金がある Play アプリの開発者は、メールと Play Console の通知を一度確認しておく。</p>
+      <p class="b">Google のヘルプによると、日本で販売する／日本から販売するデベロッパーは、資金決済法（PSA）に基づき Google が代金回収代理人になることを承認する必要があり、招待状の期限を過ぎると「すべての地域におけるすべての収益がグローバルに保留」。個人開発者 Hidenori氏（9/17）に届いたメールの期限は 2026年12月1日で、PSA はボタン1つで完了、割賦販売法（ISA）側の追加確認は同氏にはまだ来ていない。含意: 売上がある Play アプリなら、メールを探して1分で済ませておく。</p>
+      <p class="try">試すなら: メールで「代金の回収を承認してください」を検索 → なければ Play Console のお支払いプロファイルとお支払いセンターの通知を確認 → [Authorization] → ［続行］ → ステータスが更新されたことを見る。組織アカウントは ISA で法人番号と過去5年の法的措置に関する質問2問が加わる。</p>
+      <p class="src">出典: <a href="https://support.google.com/paymentscenter/answer/17595997?hl=ja">Google お支払いセンター ヘルプ — 日本で販売する、または日本以外で販売するデベロッパーとして本人確認を行う方法</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
