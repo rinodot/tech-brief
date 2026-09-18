@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月19日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-18.html">← 9/18（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年9月19日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code が AGENTS.md をそのまま読むようになった（v2.1.277）— CLAUDE.md がなければ自動、両方読むなら <code>/config</code> の Project instructions。rules 14本を Skills に寄せた実例では起動時のトークンが 41,500→16,700</h2>
+      <p class="why">— 他のエージェントと1つの指示書を共有できる。常時読み込む rules を Skills に移す判断材料にもなる。</p>
+      <p class="b">9/18 の v2.1.277 から、作業ディレクトリとその上に CLAUDE.md（<code>CLAUDE.local.md</code> も含む）がなければ AGENTS.md を読む。両方読ませるには <code>/config</code> の Project instructions を <code>claude-md-and-agents-md</code> に。Bedrock・テレメトリ無効・更新直後の初回では読まれないので、CLAUDE.md に <code>@AGENTS.md</code> を書く従来の方法も残せる。</p>
+      <p class="b">hanafusay氏（9/17）は <code>paths</code> のない rules 14ファイルと auto memory をやめ、AGENTS.md（短い原則と索引）＋Skills（依頼の種類で決まる手順）＋docs/（事実）に分けて、起動時のトークンが約41,500→約16,700。内訳は rules 約19,500・MEMORY.md 約4,600・Skills の説明一覧 約10,000で、消えたのは常時読み込みの rules と memory。含意: 毎回読ませる価値があるのは短い原則と索引だけで、手順は Skills に置けば呼ばれた時だけ読まれる。</p>
+      <p class="try">試すなら: <code>/context</code> の Memory files で常時読み込みの量を見る → rules のうち <code>paths</code> のないものを Skills（<code>.claude/skills/&lt;name&gt;/SKILL.md</code>、description に「何を・いつ使うか」）へ移す → CLAUDE.md を <code>@AGENTS.md</code> の1行にするか、CLAUDE.md を消して AGENTS.md だけにし、起動時に「AGENTS.md loaded」の行が出るか確認する。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/memory#agents-md">Claude Code Docs — How Claude remembers your project（AGENTS.md）</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>本番の Firestore ルールが <code>allow read, write: if true</code> だった — Firebase MCP で本番を読んで直し、rules-unit-testing でテスト 28 件を足すまで実働 6時間40分</h2>
+      <p class="why">— 自分のアプリのルールを「最後に見たのはいつか」を思い出せないなら、同じ手順で今日確認できる。</p>
+      <p class="b">ニイジマ氏（9/13、Next.js＋Firebase）。2人用カレンダーアプリの本番ルールを Firebase MCP で取得したら <code>allow read, write: if true</code>。手順は 本番を読む→前回反映した commit と照合→修正→デプロイ→再照合。<code>@firebase/rules-unit-testing</code> のテスト 28 件をエミュレータで追加。「getBlob() には CORS 設定が必要」という AI の説明は実測で不要だった。含意: 本番を MCP で「読む」工程を挟むと、AI の説明でなく実物を起点に直せる。</p>
+      <p class="try">試すなら: <code>claude mcp add firebase -- npx -y firebase-tools@latest mcp</code> → 「firebase_get_security_rules で本番の Firestore ルールを取得して、リポジトリの firestore.rules と差分を出して」→ 直したら <code>firebase emulators:exec "npm test"</code> でルールのテストを回す（ツール名は Firebase 公式の MCP ページで確認済み）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/nijima/articles/178b0a0351079b">Zenn — 2人で使うカレンダーアプリの Firestore ルールが if true だった</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカルLLMに「判断だけ」させる — Ollama で <code>num_predict=1</code> なら1回 33ms。接続先を <code>localhost</code> と書くと IPv6 の空振りで毎回 2 秒遅くなる</h2>
+      <p class="why">— hooks の判定器に 16GB の GPU を使う型。速さの落とし穴はモデルではなく接続先の書き方だった。</p>
+      <p class="b">circle氏（9/18、Ollama）。「測っていないことを断定した文」を CLAUDE.md や memory に書いた直後に警告する hook の判定器。<code>num_predict=1</code>・<code>temperature=0</code> で応答中央値は qwen3:14b 33.2ms、gemma4:12b 72.8ms。正答率は単体 53〜73%、二段構成で 96.7%（誤検出0・見逃し1）。<code>localhost</code> だと <code>::1</code> を先に引く分、67.8ms が 2,130.8ms に。含意: 判定は1トークンで足り、遅いのはモデルでなく経路。</p>
+      <p class="try">試すなら: hook から叩く URL を <code>http://127.0.0.1:11434/api/chat</code> にし、<code>"think": false</code> と <code>"options": {"num_predict": 1, "temperature": 0}</code> を付ける → 同じ質問を選択肢の順を逆にして2回投げ、答えが変わらないか見る（変わるなら二段構成にする）。実装の3行は著者の有料本にあり、記事は測定結果のみ。</p>
+      <p class="src">出典: <a href="https://zenn.dev/genkunjc/articles/local-llm-judge-only">Zenn — 判断だけさせるローカル LLM のすすめ</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">「何を読ませ、いつ止め、どこまで払うか」を設定で決める週。サブエージェントは <code>omitClaudeMd</code> で CLAUDE.md を外せ（9/16）、<code>/goal</code> は確認コマンドと変更禁止の範囲を条件に書くと止まる（9/17）。deny の <code>Write(パス)</code> は効かず Read／Edit だけ（9/14）、ヘッドレスの MCP 待ちは <code>CLAUDE_CODE_MCP_STARTUP_WAIT_MS</code> で切る（9/18）。費用は Firebase の spend caps で上限（9/15）。<code>-ngl</code> は盛りすぎず（9/15）、MoE は <code>--n-cpu-moe</code> でエキスパートを CPU へ（9/18）。Play の代金回収の承認は期限前に（9/18）、AGENTS.md はそのまま読める（9/19）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
