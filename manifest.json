@@ -352,5 +352,16 @@
    "Claude Code v2.1.274: ヘッドレス実行が「繋がらない MCP サーバー」を待つ時間を CLAUDE_CODE_MCP_STARTUP_WAIT_MS で切れる — 33.4秒→3.5秒",
    "Google Play の日本向け売上に「代金回収の承認」が必要になった — 招待メールの期限（Hidenori氏の例では 2026年12月1日）を過ぎると全地域の支払いが保留"
   ]
+ },
+ {
+  "date": "2026-09-19",
+  "weekday": "土",
+  "file": "2026-09-19.html",
+  "titles": [
+   "Claude Code が AGENTS.md をそのまま読むようになった（v2.1.277）— CLAUDE.md がなければ自動、両方読むなら /config の Project instructions。rules 14本を Skills に寄せた実例では起動時のトークンが 41,500→16,700",
+   "本番の Firestore ルールが allow read, write: if true だった — Firebase MCP で本番を読んで直し、rules-unit-testing でテスト 28 件を足すまで実働 6時間40分",
+   "ローカルLLMに「判断だけ」させる — Ollama で num_predict=1 なら1回 33ms。接続先を localhost と書くと IPv6 の空振りで毎回 2 秒遅くなる",
+   "今週のまとめ — 今週使えるようになったこと"
+  ]
  }
 ]
