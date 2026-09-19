@@ -363,5 +363,15 @@
    "ローカルLLMに「判断だけ」させる — Ollama で num_predict=1 なら1回 33ms。接続先を localhost と書くと IPv6 の空振りで毎回 2 秒遅くなる",
    "今週のまとめ — 今週使えるようになったこと"
   ]
+ },
+ {
+  "date": "2026-09-20",
+  "weekday": "日",
+  "file": "2026-09-20.html",
+  "titles": [
+   "claude.ai で有効にした Skills が、ターミナルの Claude Code にも降りてくるようになった（v2.1.275）— ~/.claude/skills/synced/ に約10分ごと同期。同じリリースで ctrl+enter の「今すぐ送る」と /plugin install --marketplace",
+   "Firebase AI Logic の generateContent を、Cloud Functions で「Gemini に送る前」「アプリに返す前」に検査・書き換え・拒否できるようになった（プレビュー、9/10）",
+   "特集: サブエージェントを worktree に隔離して並列に走らせる — .claude/agents/ の1ファイルから、片付けまで"
+  ]
  }
 ]
