@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月20日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-19.html">← 9/19（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年9月20日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>claude.ai で有効にした Skills が、ターミナルの Claude Code にも降りてくるようになった（v2.1.275）— <code>~/.claude/skills/synced/</code> に約10分ごと同期。同じリリースで ctrl+enter の「今すぐ送る」と <code>/plugin install --marketplace</code></h2>
+      <p class="why">— Cowork と CLI で同じ Skill を二重管理しなくてよくなる。代わりに「どちらを正にするか」を決める必要が出る。</p>
+      <p class="b">9/17 の v2.1.275 から、claude.ai アカウントでサインインしたターミナルには、そのアカウントで有効な Skills（自作や組み込みを含む）が起動時に <code>~/.claude/skills/synced/</code> へ降り、約10分ごとに同期される。<code>/skills</code> と <code>/context</code> では「claude.ai sync」の枠に出て、<code>/名前</code> か <code>/anthropic-skills:名前</code> で呼ぶ。ローカルに同名があればそちらが <code>/名前</code> を取る。同期フォルダの直接編集はアカウントに戻らない。止めるなら user settings に <code>"syncClaudeAiSkills": false</code>。</p>
+      <p class="b">同じリリースで、ctrl+enter（または ctrl+x ctrl+s）で今のターンを中断してキュー済みメッセージを一括送信、<code>/plugin install &lt;plugin&gt; --marketplace &lt;source&gt;</code> は未登録のマーケットプレイスを追加してから入れる。含意: Skills の置き場が「アカウント」と「リポジトリ」の二層になる。端末を跨ぐ汎用の手順はアカウント側、プロジェクト固有は <code>.claude/skills</code> に置き、同名を避ける。</p>
+      <p class="try">試すなら: <code>claude update</code> → <code>/skills</code> で「claude.ai sync」の枠を見る → claude.ai の設定 → Skills で1つ有効にし、10分後に <code>/context</code> に増えるか確認 → 要らなければ <code>~/.claude/settings.json</code> に <code>"syncClaudeAiSkills": false</code>（プラグインは <code>syncClaudeAiPlugins</code>。docs/en/skills で確認済み、docs は v2.1.273 以降と記載）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.275">GitHub — anthropics/claude-code Releases v2.1.275</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Firebase AI Logic の <code>generateContent</code> を、Cloud Functions で「Gemini に送る前」「アプリに返す前」に検査・書き換え・拒否できるようになった（プレビュー、9/10）</h2>
+      <p class="why">— アプリを配り直さずに、プロンプト検査・出力トークンの上限・ユーザー別のログをサーバー側へ寄せられる。</p>
+      <p class="b"><code>firebase-functions/v2/ai</code> の <code>beforeGenerateContent</code>／<code>afterGenerateContent</code> をデプロイすると、AI Logic を通る <code>generateContent</code> ごとに呼ばれる。前段で <code>HttpsError</code> を投げれば Gemini に送られず、書き換えた request を返せば差し替え。イベントの <code>authId</code> でユーザー別の制限も書ける。制約: 各1本／プロジェクト、ストリーミングは対象外、Blaze 必須。含意: ガードレールの更新をアプリの審査待ちから切り離せる。</p>
+      <p class="try">試すなら: <code>functions/</code> で <code>npm i firebase-functions@latest</code> → <code>index.ts</code> に <code>export const guard = beforeGenerateContent((event) =&gt; { if (event.data.api !== geminiV1Beta) return; /* 検査 */ });</code> → <code>firebase deploy --only functions</code> → <code>firebase functions:list</code> に載るか確認。関数の分だけ応答が遅くなるので実機で計る。</p>
+      <p class="src">出典: <a href="https://firebase.google.com/docs/ai-logic/pre-and-post-request-scripts">Firebase Docs — Run scripts before and after requests to Gemini（Firebase AI Logic）</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: サブエージェントを worktree に隔離して並列に走らせる — <code>.claude/agents/</code> の1ファイルから、片付けまで</h3>
+      <p class="b">git worktree（履歴を共有する別の作業ディレクトリ＋ブランチ）をサブエージェント単位で持たせる手順。</p>
+      <p class="b">①下ごしらえ: <code>.gitignore</code> に <code>.claude/worktrees/</code> を足す。<code>.env</code> を新しい worktree にも複製するなら、プロジェクト直下の <code>.worktreeinclude</code> に <code>.env</code> と書く（gitignore 済みのものだけ複製）。②定義: <code>.claude/agents/refactorer.md</code> の frontmatter に <code>name</code>・<code>description</code>・<code>isolation: worktree</code>、本文は「直したらテストを回して報告」。毎回自分の worktree で動き、本体への Edit／Write や <code>git -C</code> はツールエラーになる。③分岐元: 既定はリモートの既定ブランチ。未 push の作業から切るなら <code>.claude/settings.json</code> に <code>{"worktree": {"baseRef": "head"}}</code>。④走らせる: 「refactorer で A と B を並列に」と頼む（定義なしでも「use worktrees for your agents」で同じ隔離）。走行中は <code>git worktree lock</code> が掛かる。⑤片付け: 変更がなければ自動削除。あれば残るので <code>git worktree list</code> で枝を確かめ、<code>git diff main...&lt;枝&gt;</code> を見てマージし、<code>git worktree remove &lt;パス&gt;</code>。放置分は <code>cleanupPeriodDays</code> 後の定期掃除が消すが、未コミット・未 push の作業があれば残る。</p>
+      <p class="b">注意は hooks。<code>${CLAUDE_PROJECT_DIR}</code> は元のプロジェクト直下のままで、worktree の場所は hook 入力 JSON の <code>cwd</code> に入る。含意: 並列化の単位を「ターミナル」から「エージェント」に下げられる。共有ファイルを同時に触る分け方では衝突は消えない — 実装は並列、統合は逐次。</p>
+      <p class="try">試すなら: <code>echo '.claude/worktrees/' &gt;&gt; .gitignore &amp;&amp; printf '.env\n' &gt; .worktreeinclude</code> → <code>.claude/agents/refactorer.md</code> に上の frontmatter → <code>claude</code> で「refactorer を2つ並列で、A は…、B は…」→ 終わったら <code>git worktree list</code>（コマンドと設定キーは docs/en/worktrees と docs/en/sub-agents で確認済み）。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/worktrees">Claude Code Docs — Run parallel sessions with worktrees</a> ／ <a href="https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields">Claude Code Docs — Subagents（supported frontmatter fields）</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
