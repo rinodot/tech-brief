@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月21日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-20.html">← 9/20（日）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年9月21日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>「レビューして」の一言で 3,660万トークン（約$40）が消えた — 94% はキャッシュ再読込。<code>skillOverrides</code> で組み込みの <code>/code-review</code> を「自分で呼んだ時だけ」にし、CLAUDE.md でサブエージェント不使用を指示して塞ぐ</h2>
+      <p class="why">— 週次上限で一番大きい穴は「軽い一言が重い Skill を呼ぶ」経路。設定1行と CLAUDE.md 2行で塞げる。</p>
+      <p class="b">chro96氏（9/20）。追加206行・削除44行の PR に「レビューして」と頼んだ1回で 36,645,850 トークン、API 換算で約$40。94% はキャッシュ読込で、親のコンテキストが23万トークン超に膨らんだ上、サブエージェント11本が各自で差分を読み直していた。</p>
+      <p class="b">対策は2つ。<code>~/.claude/settings.json</code> に <code>"skillOverrides": {"code-review": "user-invocable-only"}</code> を書き、組み込みの <code>/code-review</code> Skill をモデルが勝手に呼べない（<code>/</code> メニューからだけ）状態にする。CLAUDE.md には「通常のレビューはサブエージェントを立てず単独で」「差分を起点に、影響する呼び出し元・依存先だけ探索」と書く。重いレビューだけ <code>/code-review medium &lt;PR番号&gt;</code> と強度を指定して呼ぶ。含意: 費用の単位は往復回数（9/13特集）で、それを一気に増やすのが「一言→組み込み Skill→並列サブエージェント」の経路。プラグインの Skill には <code>skillOverrides</code> が効かない。</p>
+      <p class="try">試すなら: <code>/skills</code> で組み込み Skill の一覧を見る → <code>~/.claude/settings.json</code> に <code>"skillOverrides": {"code-review": "user-invocable-only"}</code> → 次のレビューは <code>/code-review</code> を自分で打ち、終わったら <code>/context</code> で親コンテキストの膨らみを確認する（4つの値と「プラグインには効かない」は docs/en/skills で確認済み）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/chro96/articles/6ac66a2192a958">Zenn — 「レビューして」の一言で3,600万トークンが溶けた話とClaude Codeのトークン効率化設定</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>GitHub Actions で Claude Code を63営業日、毎晩無人で回した記録 — <code>--allowedTools</code> を書かないと書き込みが黙って拒否され、cron は最大9時間遅れる</h2>
+      <p class="why">— 夜間バッチを自分でも組むなら、5つの落とし穴は全部「起きてから気づく」型。先に塞げる。</p>
+      <p class="b">mamedougu氏（9/20）。業務を Claude Code＋GitHub Actions だけで毎晩回して63営業日（74晩、失敗約10晩）。<code>--allowedTools</code> を省くと書き込みが拒否される（初期は毎晩 6〜18件）。落とし穴: ①cron が最大9時間遅れる ②GITHUB_TOKEN は <code>.github/workflows/</code> を push できず成果が消える ③認証鍵2つが同日に失効 ④空振りの success を検知できない ⑤データセンター IP は 404。含意: 無人運用の失敗は Claude でなく周辺で起きる。</p>
+      <p class="try">試すなら: workflow の <code>claude -p</code> に <code>--allowedTools</code> と <code>--max-turns</code> を明示 → <code>--output-format json</code> の結果の <code>permission_denials</code> が空か確認 → 「差分ゼロなら失敗扱い」のステップを足し、<code>.github/workflows/</code> は Claude に触らせない（<code>-p</code> の既定は Manual で、許可のない操作は拒否される — docs/en/headless で確認済み）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/mamedougu/articles/claude-code-github-actions-63days">Zenn — GitHub Actions で Claude Code を63日間毎晩走らせて踏んだ落とし穴5つ（実測つき）</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>RAG の recall@5 が 90% でも、最終正答は 38.3% — 正解文書を渡せた54問のうち31問（57.4%）で生成側が間違えた</h2>
+      <p class="why">— ローカルの小型モデルで RAG を組むなら、測るべきは検索の当たりではなく「当たった後の正答率」。</p>
+      <p class="b">たまです。氏（9/18、rag-mini-wikipedia 60問、生成は SmolLM2-135M）。recall@5 は 90.0% だが正答は 23問（38.3%）。正解文書が上位5件にあった54問でも 31問（57.4%）が誤答で、失敗の最多は「検索は成功、生成が誤り」の 51.7%。提案は recall@k と別に「検索成功時の生成正答率」を計測すること。含意: 135M の極小モデルゆえ生成側の弱さが強く出た数字だが、指標を分けないと「検索を良くしたのに答えが直らない」理由が見えない。</p>
+      <p class="try">試すなら: 自分の評価セットに「正解文書が上位k件に含まれたか」の列を足し、含まれた行だけの正答率を別に出す → 生成モデルを 14B 級に替えて同じ60問で差を見る（データセットは Hugging Face の rag-datasets/rag-mini-wikipedia）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tama_program/articles/5bfac1f1236fed">Zenn — recall@5は90.0%だったのに、正解文書ありでも57.4%が誤答した — rag-mini-wikipediaで60問実測</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
