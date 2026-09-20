@@ -373,5 +373,15 @@
    "Firebase AI Logic の generateContent を、Cloud Functions で「Gemini に送る前」「アプリに返す前」に検査・書き換え・拒否できるようになった（プレビュー、9/10）",
    "特集: サブエージェントを worktree に隔離して並列に走らせる — .claude/agents/ の1ファイルから、片付けまで"
   ]
+ },
+ {
+  "date": "2026-09-21",
+  "weekday": "月",
+  "file": "2026-09-21.html",
+  "titles": [
+   "「レビューして」の一言で 3,660万トークン（約$40）が消えた — 94% はキャッシュ再読込。skillOverrides で組み込みの /code-review を「自分で呼んだ時だけ」にし、CLAUDE.md でサブエージェント不使用を指示して塞ぐ",
+   "GitHub Actions で Claude Code を63営業日、毎晩無人で回した記録 — --allowedTools を書かないと書き込みが黙って拒否され、cron は最大9時間遅れる",
+   "RAG の recall@5 が 90% でも、最終正答は 38.3% — 正解文書を渡せた54問のうち31問（57.4%）で生成側が間違えた"
+  ]
  }
 ]
