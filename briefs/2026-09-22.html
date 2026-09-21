@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月22日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-21.html">← 9/21（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年9月22日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code の開始時入力が 79K〜89K でばらつく理由を「要素を1つずつ外して復元」で分解した — MEMORY.md を空にすると −11,722、MCP 一式（道具名266種）を外すと −8,439、効果はほぼ足し算</h2>
+      <p class="why">— 起動の固定費（9/13特集）を自分の環境で測る手順そのもの。何を減らせば何トークン戻るかが、推測でなく数字で出る。</p>
+      <p class="b">sumitsuke氏（9/20）。同じプロンプトで7セッションを回すと開始時の入力トークンが 86,159・86,613・88,756・89,509→79,440→85,765→88,045 と揺れた。測り方は <code>~/.claude/projects/&lt;dir&gt;/*.jsonl</code> の最初の usage を <code>input_tokens + cache_creation_input_tokens + cache_read_input_tokens</code> で足す。<code>cache_read</code> が 0 のセッションは比較から捨てる。</p>
+      <p class="b">切り分けは「1要素を外す→戻す」の繰り返し。MEMORY.md（15,340字・134行）をほぼ空にすると −11,722、MCP コネクタ一式（道具名266種＋指示文）を外すと −8,439、両方外した実測 53,925 は個別の差を足した期待値 54,072 と 147 しか違わず、要素の寄与はほぼ足し算で効く。含意: 「MEMORY.md を削る」「MCP を減らす」の効果は、その環境で一度測れば何トークン戻るかが先に分かる。hanafusay氏（9/19）の内訳も同じ測り方で自分の数字にできる。</p>
+      <p class="try">試すなら: セッションを開いて同じ短いプロンプトを1回だけ送る → <code>~/.claude/projects/&lt;dir&gt;/&lt;session&gt;.jsonl</code> の最初の assistant 行の usage を3項目足す → <code>claude --strict-mcp-config --mcp-config '{"mcpServers":{}}'</code> で MCP なし起動を同じ手順で測り、差を出す → MEMORY.md を退避して同様に測る。</p>
+      <p class="src">出典: <a href="https://qiita.com/sumitsuke/items/8b0e6383b7eb9f315926">Qiita — Claude Code の開始時入力が 79K→88K に戻った——usage と、要素の除去→復元で「毎回入るもの」を分解する</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Flutter の Widget Previewer をコマンドから撮って比べる CLI「shutter」— <code>@Preview</code> を PNG にし、2回分をピクセル差分で before／after にする（koji_1009氏、9/20）</h2>
+      <p class="why">— UI の変更確認を「見て判断」から「差分率と終了コード」に変えられる。AI に UI を直させる時の検収に置ける。</p>
+      <p class="b"><code>dart install shutter</code>（Flutter 3.47 以上）。<code>shutter shot lib/preview/button_preview.dart</code> が <code>@Preview</code> 関数を PNG にし、<code>shutter diff latest~1 latest --images</code> が前回とのピクセル差分を出す。例ではボタン幅 66.69→98.69px で diff_ratio 0.4337。終了コードは diff が変更なし0／あり1。含意: hook や CI に置け、「差分があれば理由を報告」と書ける。</p>
+      <p class="try">試すなら: <code>dart install shutter</code> → <code>shutter doctor</code> → <code>shutter shot &lt;プレビューのファイル&gt;</code>（プレビュー関数がなければ <code>--widget 'PrimaryButton(label: "OK")' --import lib/ui/button.dart</code>）を UI 変更の前後で2回 → <code>shutter diff latest~1 latest --images</code> で before／after の PNG を見る（pub.dev/packages/shutter v0.1.1、9/20 公開、koji-1009.com の検証済み publisher）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/koji_1009/articles/894dee0c6ba493">Zenn — Widget PreviewerをHuman/AI friendlyにするCLI shutter</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>MCP サーバーのツール定義は、繋いだだけでは全部読まれない — Datadog MCP は定義が 2万〜22万トークンでも Claude Code の増分は +1,097。名前と1行説明だけ先に載せ、引数の仕様は使う直前に読む（tool search）</h2>
+      <p class="why">— MCP を何本繋ぐかで「定義の大きさ」を恐れすぎなくてよい。ただし名前と1行の分は毎回積まれる（1件目の 8,439 はそれ）。</p>
+      <p class="b">miyakeen氏（9/21）。Datadog MCP の定義は <code>toolsets=core</code> で約2万、<code>all</code> で 164,288、書き込み込み 218,183 トークン（curl＋tiktoken）。だが Claude Code に 36本（定義 23,415）を繋いだ実測の増分は +1,097。tool search（v2.1.221 以降は既定、<code>ENABLE_TOOL_SEARCH=false</code> で無効）が起動時は名前と短い説明だけ渡すため。含意: 起動の固定費は本数×（名前＋1行）、重いのはツールを使うターン。</p>
+      <p class="try">試すなら: <code>/mcp</code> でサーバーごとのツール数を見る → 1件目の手順で MCP あり／なしの開始時 usage を比べて1本あたりの固定費を出す → 定義の大きいサーバーは <code>toolsets=core</code> のような絞り込みが README にあるか確認する（tool search の挙動と <code>ENABLE_TOOL_SEARCH</code> は docs/en/mcp で確認済み）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ryomiyake/articles/datadog-mcp-server-field-test">Zenn — Datadog MCP Serverのトークン消費を実測した ― 繋いだだけで2万、全部入りで22万</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
