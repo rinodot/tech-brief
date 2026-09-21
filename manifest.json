@@ -383,5 +383,15 @@
    "GitHub Actions で Claude Code を63営業日、毎晩無人で回した記録 — --allowedTools を書かないと書き込みが黙って拒否され、cron は最大9時間遅れる",
    "RAG の recall@5 が 90% でも、最終正答は 38.3% — 正解文書を渡せた54問のうち31問（57.4%）で生成側が間違えた"
   ]
+ },
+ {
+  "date": "2026-09-22",
+  "weekday": "火",
+  "file": "2026-09-22.html",
+  "titles": [
+   "Claude Code の開始時入力が 79K〜89K でばらつく理由を「要素を1つずつ外して復元」で分解した — MEMORY.md を空にすると −11,722、MCP 一式（道具名266種）を外すと −8,439、効果はほぼ足し算",
+   "Flutter の Widget Previewer をコマンドから撮って比べる CLI「shutter」— @Preview を PNG にし、2回分をピクセル差分で before／after にする（koji_1009氏、9/20）",
+   "MCP サーバーのツール定義は、繋いだだけでは全部読まれない — Datadog MCP は定義が 2万〜22万トークンでも Claude Code の増分は +1,097。名前と1行説明だけ先に載せ、引数の仕様は使う直前に読む（tool search）"
+  ]
  }
 ]
