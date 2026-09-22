@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月23日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-22.html">← 9/22（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年9月23日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code v2.1.280 で Opus 5.5 が全プランの既定モデルに — Pro も Sonnet 5 から切り替わる。1M コンテキスト、effort の既定は medium、以前保存した <code>effortLevel</code> は引き継がれない。公式ブログが「1タスクいくらか」の測り方と抑え方を公開</h2>
+      <p class="why">— 今日から起動するセッションの既定が Opus に変わる。何もしなくても挙動と消費が変わるので、/model と /effort を一度見ておく。</p>
+      <p class="b">v2.1.280（9/22）。<code>claude-opus-5-5</code> が既定の Opus になり、<code>default</code> は Pro を含む全プランで Opus 5.5 を指す（それまで Pro と Team Standard は Sonnet 5）。API 価格は入力 $4／出力 $20／キャッシュ読み $0.20 per Mtok（Opus 5 より入出力 20%・キャッシュ読み 60% 安い）、1M コンテキスト。effort の既定は medium。旧形式の <code>effortLevel</code> は Opus 5.5 に効かず、<code>/effort</code> で選ぶまで既定のまま。</p>
+      <p class="b">同日の公式ブログ（Addy Osmani）の型: <code>/usage</code> で残量、<code>/effort</code> は日常は medium、詰まったら high、機械的な作業は low。<code>/compact</code> は 150K の会話で約 $0.25 かかるので節目だけ、<code>/clear</code> は無料。CLAUDE.md は 200 行未満。検索やログ読みはサブエージェントに <code>model: haiku</code> か <code>sonnet</code> を書いて回す。含意: 既定が Opus になった分「重いモデルを軽い設定で」が基本形。サブスクの消費の重みは明記がないので <code>/usage</code> の減り方を見る。</p>
+      <p class="try">試すなら: <code>claude update</code> → <code>/model</code> で既定が Opus 5.5 になっているか見る → <code>/effort status</code> で medium を確認し、上げるなら <code>/effort high</code> を Enter で保存（Opus 5.5 用に別枠で保存される）→ 検索役のサブエージェントの frontmatter に <code>model: haiku</code> を足す（既定モデル・effort の挙動は docs/en/model-config、価格と手順は claude.com/blog の 9/22 記事で確認済み）。</p>
+      <p class="src">出典: <a href="https://claude.com/blog/what-a-task-costs-on-opus-5-5">Claude Blog — What a task costs on Opus 5.5（Addy Osmani、9/22）。リリース: github.com/anthropics/claude-code/releases/tag/v2.1.280</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>無人の <code>claude -p</code> で「書き込み禁止」にしたつもりが3か所で開いていた — <code>Write(パス)</code> は読まれない、<code>~/.claude/settings.json</code> の <code>defaultMode: auto</code> は <code>-p</code> にも効く、<code>Write</code> を外しても Bash の <code>&gt;</code> は <code>Edit</code> ルールで通る</h2>
+      <p class="why">— 9/14（deny の Write(パス)）と 9/21（GitHub Actions 63営業日）の続き。夜間バッチの権限は「ツール名」でなく「モード＋Edit(パス)」で組む。</p>
+      <p class="b">masamitsu_sera氏（9/22、v2.1.266）。①<code>Write(パス)</code> は受理されても参照されず、<code>Edit(パス)</code> で書く。②ユーザー設定の <code>"defaultMode": "auto"</code> は <code>-p</code> にも効き、書き込みが通った。設定ファイルは組み込み既定に勝つので <code>--permission-mode dontAsk</code> を必ず付ける。③<code>Write</code> を外しても <code>printf 'x' &gt; file</code> は <code>Edit</code> の allow 範囲なら成功する。含意: 止めるのは Edit(パス) の範囲と Bash の有無で、Write の有無ではない。</p>
+      <p class="try">試すなら: 無人ジョブは <code>claude -p "&lt;prompt&gt;" --permission-mode dontAsk --allowed-tools "Read,Glob,Grep" --disallowed-tools "Bash,Write,Edit" --output-format stream-json</code> を型にし、結果はファイルでなく最終メッセージで受け取る → <code>--debug-file debug.log</code> に起動時の「is not matched by file permission checks」警告が出ていないか見る（①〜③は docs/en/permissions と docs/en/permission-modes に同じ記述があり、後者の CI 例も <code>-p … --permission-mode dontAsk --allowedTools</code> の形）。</p>
+      <p class="src">出典: <a href="https://qiita.com/masamitsu_sera/items/03030328d1fc889f4579">Qiita — 無人の claude -p に書込を閉じたつもりが、3つの見落としで開いていた</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>月額600円のサブスクで、Gemini の原価が月6,000円だった — 見積もりは出力トークンを 3,000 と置いて 2.7倍ずれ。無料枠の回数はモデルごとに別に数えられるので、9モデルに順送りすると 1日20回→1,130回（Matthew氏、9/21）</h2>
+      <p class="why">— AI 機能の値付けは、モデルの表示価格でなく <code>usageMetadata</code> の実測トークン×利用回数で決める、という実例。</p>
+      <p class="b">Matthew氏（9/21、React＋Firebase の英単語アプリ）。<code>gemini-3.8-flash</code>（出力 $3.75 per 1M）で1検索が出力約970トークン・約0.67円。1日300語なら月6,030円、売価は月600円。見積もりは出力を3,000トークンと置いて 2.7倍ずれた。対策は上限を1日100語にし、無料枠はモデルごとに数えられるので Flash 系（20回／日）と Lite 系（500回／日）を9本並べ、<code>429</code> で次へ送る。含意: 原価は「1回の円×回数上限」で先に確定させる。</p>
+      <p class="try">試すなら: 自分の Gemini 呼び出しの <code>usageMetadata</code>（<code>promptTokenCount</code>／<code>candidatesTokenCount</code>）を10回分ログに出し、中央値×想定回数×単価で月額を出す → 無料枠のモデル別 RPD は AI Studio の Rate limits 画面で確認し（公式ページは「プロジェクト単位、API キー単位ではない」とだけ記載）、429 時のフォールバック先を決めておく。</p>
+      <p class="src">出典: <a href="https://zenn.dev/matthewstry/articles/a6deffcda2e120">Zenn — 個人開発のLLMアプリ、原価を計算したら月額600円で原価6,000円だった</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
