@@ -393,5 +393,15 @@
    "Flutter の Widget Previewer をコマンドから撮って比べる CLI「shutter」— @Preview を PNG にし、2回分をピクセル差分で before／after にする（koji_1009氏、9/20）",
    "MCP サーバーのツール定義は、繋いだだけでは全部読まれない — Datadog MCP は定義が 2万〜22万トークンでも Claude Code の増分は +1,097。名前と1行説明だけ先に載せ、引数の仕様は使う直前に読む（tool search）"
   ]
+ },
+ {
+  "date": "2026-09-23",
+  "weekday": "水",
+  "file": "2026-09-23.html",
+  "titles": [
+   "Claude Code v2.1.280 で Opus 5.5 が全プランの既定モデルに — Pro も Sonnet 5 から切り替わる。1M コンテキスト、effort の既定は medium、以前保存した effortLevel は引き継がれない。公式ブログが「1タスクいくらか」の測り方と抑え方を公開",
+   "無人の claude -p で「書き込み禁止」にしたつもりが3か所で開いていた — Write(パス) は読まれない、~/.claude/settings.json の defaultMode: auto は -p にも効く、Write を外しても Bash の &gt; は Edit ルールで通る",
+   "月額600円のサブスクで、Gemini の原価が月6,000円だった — 見積もりは出力トークンを 3,000 と置いて 2.7倍ずれ。無料枠の回数はモデルごとに別に数えられるので、9モデルに順送りすると 1日20回→1,130回（Matthew氏、9/21）"
+  ]
  }
 ]
