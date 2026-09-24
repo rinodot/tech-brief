@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月25日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-24.html">← 9/24（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年9月25日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Anthropic が「claude.ai を2週間で3.1倍速くした」手順を公開 — Slack の常設指示で Claude を150本超のスレッドで並列に走らせ、Valgrind の命令数など決定論的な指標だけを追わせ、機能フラグ＋人の承認1回で約3,000変更をマージ</h2>
+      <p class="why">— 「Claude が測れるものは速くできる」の型。自分のアプリの起動時間やテスト時間にそのまま写せる。</p>
+      <p class="b">claude.dev ブログ（Raymond Wang 氏ら、9/23）。初回ロード 3,085→550ms、Cowork のメッセージ送信 928→48ms、13指標の幾何平均で 3.1倍（いずれも p75）。Desktop アプリの起動も 6,310→3,328ms。やり方は Slack チャンネルに常設の指示を置き、Claude（社内モデル、Opus 5.5 相当）が非同期で 150本超のスレッドを回す。</p>
+      <p class="b">鍵は指標の選び方。壁時計の時間はぶれるので、<code>node --predictable</code> で走らせた Valgrind の命令数、React のコミット回数、DOM 変更回数など決定論的な数を測らせ、CI には「前回より悪化したら落ちる」ラチェットを置いた。出荷は機能フラグ＋自動レビュー＋人の承認1回、社員→1%→全員の段階公開で約3,000変更。含意: 人が決めるのは「何を測るか」だけで、下げる作業は並列に任せられる。自分のアプリなら起動時間・テスト時間・ビルド時間が同じ型に乗る。</p>
+      <p class="try">試すなら: 自分のアプリで Claude が読める数値を1つ決める（<code>flutter test</code> の所要秒数、CI の実行時間、integration test のフレーム時間など）→ CLAUDE.md に「変更前後で &lt;計測コマンド&gt; を実行して数値を報告し、悪化したら戻す」を書く → CI に前回値より悪化したら失敗するチェックを置く → 変更は機能フラグと人のレビュー1回を必須にする（手順と数字は記事本文で確認済み。claude.dev は Anthropic のエンジニアリングブログで、ヘッダーから code.claude.com/docs に繋がる）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/how-we-made-claude-ai-faster/">claude.dev Blog — How we made claude.ai 3x faster in two weeks</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>GENDA のエンジニアが自作のオーケストレーション（1,477行・7 Skills）を 312行まで削って最終的に捨てた — Opus 5.5 は「仕事を丸ごと渡して走らせる」方が良く、司令塔役との往復がボトルネックになった</h2>
+      <p class="why">— 昨日の公式手引き「制約を減らす」の実例。CLAUDE.md とサブエージェントの設計を見直す材料。</p>
+      <p class="b">okkun0524氏（9/24）。Claude Code と Codex を役割別に走らせる自作プラグイン baton を、1,477行・7 Skills から 312行・1 Skill に削り、最後はやめた。理由は ①検証指示の明示は過剰検証を招く ②Fable 5.1 の値下げで安いモデルを割る旨味が消えた ③Opus 5.5 は仕様を丸ごと渡す方が良く、司令塔との往復が遅い。残したのは CLAUDE.md の原則とサブエージェント委任。費用は実測なし。含意: プロンプトガイドが更新されるたびに、指示と自作の仕組みを削れないか見る。</p>
+      <p class="try">試すなら: CLAUDE.md とサブエージェントの本文から「必ず〜を検証せよ」系の指示を一度外し、同じタスクで出力と <code>/usage</code> の減り方を比べる → 役割分担が要るなら常駐ペインでなく単発のサブエージェントに → 公式の Prompting Claude Opus 5.5（9/24掲載）と照らして指示を毎回見直す。</p>
+      <p class="src">出典: <a href="https://zenn.dev/genda_jp/articles/baton-retrospective-model-evolution">Zenn — 自作オーケストレーションを使わなくなって考えた、モデルの進化との付き合い方</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>VRAM 10GB の RTX 3080 で 27B モデルが 64 tok/s — Qwen3.8-27B を三値（ternary）量子化した Bonsai 2 は 7.21GB の GGUF で全層が VRAM 9.6GB に載る。ただし専用フォークの llama.cpp が必要</h2>
+      <p class="why">— 12〜16GB の GPU で 27B 級を回す選択肢。品質「98.2%」はベンダー自己申告で、日本語の数量詞の読み違いも出る。</p>
+      <p class="b">masa-555氏（9/23）。HF の prism-ml/Ternary-Bonsai-2-27B-gguf の PQ2_0（7.21GB）で VRAM 9.6GB・生成 64 tok/s。PTQ1_0（5.95GB）なら 8.4GB・53 tok/s。素の llama.cpp では動かず PrismML のフォークが要る。品質「FP16 の 98.2%」はベンダー発表で、著者は単位換算ミスと中国語混入を見た。含意: 速度≠完了時間。9B の Ornith-1.5（85.9 tok/s）は同じ課題を 8 分、Bonsai 2 は 16 分。</p>
+      <p class="try">試すなら: <code>git clone https://github.com/PrismML-Eng/llama.cpp</code>（prism ブランチ）→ <code>cmake -B build -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=&lt;自分のGPUの値。RTX 30 系は 86&gt; -DCMAKE_BUILD_TYPE=Release &amp;&amp; cmake --build build -j$(nproc) --target llama-server</code> → HF から PQ2_0 の GGUF（Apache 2.0）を取って <code>llama-server -m &lt;gguf&gt; --jinja -ngl 99 -fa on -c 65536 -ctk q8_0 -ctv q8_0</code>（記事のコマンド。「Stock llama.cpp will not run these files」は HF のモデルカードで確認済み）→ 自分の日本語タスクで 9B 級と完了時間を比べる。</p>
+      <p class="src">出典: <a href="https://qiita.com/masa-555/items/21d90d09df2940d37296">Qiita — VRAM 10GB の RTX 3080 で 27B が 64 tok/s 出た — ternary 量子化モデル Bonsai 2 実測ノート</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
