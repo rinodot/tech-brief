@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月26日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-25.html">← 9/25（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年9月26日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Anthropic の Claude Code チームが「effort の使い分け」を公開 — 低（1〜2分）で実装、高（11〜33分）で検証、最大（28〜79分）は自律で難問。仕様→低で実装→低で見直し→高で検証のループが推奨の型</h2>
+      <p class="why">— 9/23 の「既定は medium」の続き。いつ上げ下げするかの公式の答えで、<code>/effort</code> を会話の途中で切り替える前提。</p>
+      <p class="b">claude.dev ブログ（Thariq Shihipar 氏、9/25）。4段階の使い分けは、低＝ループの中で速く返してほしい時（ブレスト、下書き、簡単な変更）、中＝普段の実装、高＝検証やエッジケースが大事な仕事（既存コードのバグ修正）、最大＝難問を完全に自律で解かせる時。例示された所要時間は低 1〜2分、中 4〜22分、高 11〜33分、最大 28〜79分で、対話の途中で <code>/effort</code> を切り替える前提。</p>
+      <p class="b">著者の型は「仕様を渡し、足りない点を自分に質問させる → 低 effort で実装 → 要点が合っているか低のまま見直し → 高 effort で検証とテスト」。Terminal-Bench 3.0 では effort を低→最大にするとセキュリティ 64→87%、ハードウェア 34→75%（Fable 5.1／Opus 5.5 の例）で、使うトークンの中央値も段階ごとに増える。含意: 既定の medium を固定せず、書く工程は低、確かめる工程は高に振ると、時間と枠を同時に節約できる。</p>
+      <p class="try">試すなら: <code>/effort low</code> にして仕様の穴を質問させてから実装 → 見直しもそのまま低で → テストと検証だけ <code>/effort high</code>（保存は Enter、9/23 の手順）→ 効果は <code>/usage</code> の減り方と、9/25 の「Claude が読める数値」を1つ決めて前後で比べる（各段階の説明・所要時間・ベンチの数字は記事本文で確認済み）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/spending-your-effort/">claude.dev Blog — Using Claude Code: Spending your effort</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Firestore のセキュリティルールを AI にレビューさせたら指摘 58件 — エミュレータで 122 のテストを流して残ったのは 7件、本当に直したのは 3件。「AI の指摘は再現してから直す」パイプラインの実例</h2>
+      <p class="why">— 9/19 の「本番ルールが if true だった」の続き。指摘を検証せずに直していたら、51件分の無駄な修正をしていた。</p>
+      <p class="b">Iskandar Jajuri氏（9/24）。Firebase アプリ DriveMate のルールを AI にレビューさせ、58件の指摘を <code>probes.cjs</code>（122 のテストケースを <code>firebase emulators:exec</code> で実ルールに投げる）と <code>adjudicate.cjs</code>（指摘と結果を突き合わせる）で検証。再現したのは 7件（約12%）、51件は誤検知。実際に直したのは update の項目制限漏れなど管理者権限が要る 3件。含意: 指摘の採否をエミュレータの結果に任せると、修正は 3件に絞れる。</p>
+      <p class="try">試すなら: AI の指摘1件につき「入力・現状の判定・あるべき判定」を1テストにして <code>firebase emulators:exec</code> でスクリプトごと流す（記事の構成）→ 再現した指摘だけ直し、直した後も同じテストを回帰に残す（土台は 9/19 の rules-unit-testing と同じ）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/iskandar_dev/articles/1f805d5c2a1712">Zenn — AIの指摘を鵜呑みにしないための検証パイプラインを自作した話</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Flutter アプリにローカルLLMを組み込んだら macOS で壁が4つ — flutter_gemma は macOS 非対応の API が多く断念、llama_cpp_dart は dylib をビルド時に Frameworks へ入れて署名しないと Gatekeeper に止められる。日本語は 0.5B の Qwen だと中国語が混ざり TinySwallow-1.5B に</h2>
+      <p class="why">— 完全オフライン・追加費用なしで LLM を Flutter に入れる実例。Android でも「ネイティブ側の組み込みと署名」は同じ論点。</p>
+      <p class="b">maylab氏（9/24）。flutter_gemma は <code>fromBundled()</code> が macOS 非対応、<code>fromNetwork()</code> も初期化で失敗。llama_cpp_dart の <code>dlopen</code> 拒否は、Podfile の post_install で dylib を <code>Contents/Frameworks/</code> に入れて署名し解決。Qwen2.5-0.5B は中国語が混ざり TinySwallow-1.5B-Instruct（約1.1GB）へ。含意: 小型は日本語特化の蒸留版を選び、JSON は切れる前提で括弧を補う。</p>
+      <p class="try">試すなら: まず Dart の CLI スクリプトで llama_cpp_dart と GGUF の読み込みだけ通す（記事の順番）→ macOS なら Podfile の post_install で dylib をコピーして署名、サンドボックスは <code>com.apple.security.network.client</code> を entitlements に → TinySwallow のモデルカードにある「実験的・商用非推奨」の注記を確認してから配布を判断する。</p>
+      <p class="src">出典: <a href="https://qiita.com/maylab/items/c0ea767de403bd421a74">Qiita — FlutterアプリにローカルLLMを組み込む中で立ちはだかった壁</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">「任せる範囲と払う量を測って決める」週。起動の固定費は MEMORY.md と MCP を外して測る（9/22）、「レビューして」は <code>skillOverrides</code> で自動起動を止める（9/21）。Opus 5.5 が既定で effort は medium から（9/23）、書く工程は低・確かめる工程は高に（9/26）。無人の <code>claude -p</code> は <code>dontAsk</code> と Edit(パス) で閉じ（9/23）、環境の <code>ANTHROPIC_API_KEY</code> は外さないと API に課金される（9/24）。Claude に測れる数値を渡せば速くできる（9/25）、AI の指摘は再現してから直す（9/26）。Flutter は Dart の Functions 1本（9/24）、ローカルは 10GB で 27B（9/25）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
