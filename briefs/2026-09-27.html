@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月27日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-26.html">← 9/26（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年9月27日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code に <code>/doctor prompt-audit</code> が入った — CLAUDE.md・Skills・エージェント定義から「古いモデル向けの書き方」を洗い出し、確信度つきの diff で返す（v2.1.283）。公式スキル版で棚卸しした実例は指摘 107件→適用 63件、<code>opus</code> のエイリアスで知らぬ間に Opus 5.5 に変わり effort の設定が外れていた</h2>
+      <p class="why">— 9/23 に既定が Opus 5.5 になった直後。9/25 GENDA の「ガイドが更新されるたびに指示を削れないか見る」を、公式コマンドで機械的にやれる。</p>
+      <p class="b">v2.1.283（9/25）で <code>/doctor prompt-audit</code> が入った。CLAUDE.md・Skills・サブエージェント・カスタムコマンドを読み、大文字の MUST／NEVER、「step by step で考えて」のように API 機能で置き換わった足場、理由のない禁止の羅列を、場所（ファイル:行）・引用・確信度（High／Medium／Low）・対処（remove／rewrite／flag）と提案 diff で返す。自動では書き換えない。</p>
+      <p class="b">nanora氏（9/25）は公式スキル版 <code>/claude-api prompt-audit</code> で棚卸しし、指摘 107件のうち 63件を適用（CLAUDE.md とルールは 21件中10件）。目玉は <code>opus</code> のエイリアス指定で知らぬ間に Opus 5.5 が読んでいたこと — <code>claude-opus-5</code> 向けの <code>modelSettings</code> と <code>CLAUDE_CODE_MAX_THINKING_TOKENS=16000</code> は効いていなかった。成功0回・失敗144回の予備 API キーも見つかった。含意: 削除は仮説。著者は API 30回（$1.46）で前後を比べてから消した。</p>
+      <p class="try">試すなら: <code>claude update</code>（v2.1.283 以上）→ <code>/doctor prompt-audit</code>（<code>/checkup prompt-audit</code> も同じ。末尾にディレクトリを付けると範囲を絞れる。<code>.claude/settings*.json</code> と <code>.mcp.json</code> は対象外）→ 確信度 High の remove から1つずつ、同じタスクで前後の挙動を比べて適用 → モデルが変わるたびに再実行（判定基準と「文脈は cruft ではない」「短さが目的ではない」の keep list は github.com/anthropics/skills の <code>skills/claude-api/shared/prompt-audit.md</code>。実例は zenn.dev/nanora の 9/25 記事、コマンドの書式は dev.classmethod.jp 石川覚氏の 9/26 記事で確認済み）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.283">GitHub — anthropics/claude-code Release v2.1.283</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>「Bash は最後の手段」と CLAUDE.md に書いても守られない — 警告フックで7日数えたら grep 286回・ls／find 64回。数えてから拒否に格上げし、先頭の語だけで判定して <code># tool-exception:</code> の逃げ道を残す</h2>
+      <p class="why">— 昨日の「指摘は再現してから直す」の運用版。ルールは書く前に「どれだけ破られているか」を測る。</p>
+      <p class="b">あいやま氏（9/24）。CLAUDE.md の「ファイル検索は専用ツールを使ってください。Bashは最後の手段です」は守られず、警告だけ出すフックで7日数えると grep 始まりが 286回、ls／find 始まりが 64回の計350回。拒否に格上げした。判定は先頭のコマンド語だけなので <code>git log | grep foo</code> は通り、<code>tail -f</code> は Read で代替できないので通し、<code># tool-exception: &lt;理由&gt;</code> を付けた命令は無条件で通す。含意: 拒否は「放置すると壊れるもの」、警告は「直せば済むもの」に分ける。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> の <code>hooks.PreToolUse</code> に <code>"matcher": "Bash"</code> でスクリプトを登録 → 最初は数えるだけ（exit 0 で通し、先頭の語をファイルに追記）→ 7日分を見て拒否対象を決め、止めるものは exit 2（stderr が Claude に返る）か <code>{"hookSpecificOutput":{"permissionDecision":"deny","permissionDecisionReason":"…"}}</code> を stdout に返す（exit code と JSON の仕様は docs/en/hooks で確認済み。記事はフックの種類を明示していない）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/a1yama/articles/claude-code-hook-deny-vs-prompt">Zenn — CLAUDE.mdに書いても守られなかったので、7日ぶん数えてからフックで拒否しました</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: 実装は並列、マージは直列 — サブエージェントと並列セッションの「分担設計」を4つの原則で組む</h3>
+      <p class="b">worktree の隔離（9/20 特集①）だけでは衝突も同調も消えない。①縄張りを物理的に切る — orca_forge氏（9/15）は3〜5セッションを worktree と担当領域で分け、着手前に範囲を宣言、完了時に基点と触った箇所を報告させて「ファイル競合がほぼ消えた」。②共有ファイルは先に片付け、マージは直列 — Quintet Kit氏（9/18）の衝突源はルーティング定義や package.json など「一覧構造」5種。一覧を持たない構造にするか、共有ファイルの作業を先に1つ通す。</p>
+      <p class="b">③サブには目的と出力先だけ渡し、返すのは JSON だけ — Kaito Narimoto氏（9/24）はログ調査の要約とレビューをサブに出し、渡すのは目的と保存先パスだけ、所見はファイルに書かせてパスだけ受け取る。サブは会話履歴を見ない。渡さない設計が親の文脈を守る。④検証役を同調させない — マルチンゲール氏（9/20）の Dynamic Workflow は指摘9件を全部「再現できた」と通した。同じモデルが同じ文脈を読めば実質1票。実ファイルとテスト結果だけを根拠に反証で問い、最上位モデルを検証に置くと 6採用・1棄却・2未確認、736K→420K トークンに。</p>
+      <p class="b">写す形（<code>.claude/agents/</code>）: 実装役は <code>isolation: worktree</code>／<code>model: sonnet</code>、本文は「依頼の範囲だけ実装、範囲外は止めて報告、一覧ファイルは差分案だけ」。検証役は <code>tools: Read, Grep, Bash</code>／<code>model: opus</code>／<code>omitClaudeMd: true</code>、本文は「誤りを示せ。根拠はテストの結果だけ、迷えば refuted=true。返答は <code>{"refuted":…,"evidence":"…"}</code> の1行」。やらないこと: 同じモデル・同じ入力の検証役を並べる、一覧ファイルを並列で触らせる、司令塔役の常駐（9/25 GENDA）。</p>
+      <p class="try">試すなら: <code>.claude/agents/implementer.md</code> と <code>refuter.md</code> を上の frontmatter で作る → 依頼文に「触ってよいパス／触らないパス」と「共有の一覧ファイルは差分案だけ」を書いて implementer を2つ並列に → 戻った差分を1つずつマージ → refuter に「この変更が誤りであることを示せ」で検証させ、evidence にコマンドと結果が無い判定は採用しない（frontmatter のキー名は docs/en/sub-agents の一覧で確認済み。<code>isolation: worktree</code> の挙動は 9/20 特集①）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/quintetkit/articles/shared-files-kill-parallelism">Zenn — 並列開発を殺すのは、いつも共有ファイル</a> ／ <a href="https://zenn.dev/orca_forge/articles/parallel-claude-code-sessions-teamwork">Zenn — Claude Code を4セッション並列で運用したら「チーム開発」になった</a> ／ <a href="https://zenn.dev/aws_japan/articles/multi-agent-design">Zenn — ワークフロー型 Skill で実現するマルチエージェント設計</a> ／ <a href="https://qiita.com/banquet_kuma/items/f43a22ab24f219ed0569">Qiita — エージェントを増やしても賢くならない</a> ／ <a href="https://code.claude.com/docs/en/sub-agents">Claude Code Docs — Subagents</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
