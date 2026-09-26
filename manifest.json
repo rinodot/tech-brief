@@ -434,5 +434,15 @@
    "Flutter アプリにローカルLLMを組み込んだら macOS で壁が4つ — flutter_gemma は macOS 非対応の API が多く断念、llama_cpp_dart は dylib をビルド時に Frameworks へ入れて署名しないと Gatekeeper に止められる。日本語は 0.5B の Qwen だと中国語が混ざり TinySwallow-1.5B に",
    "今週のまとめ — 今週使えるようになったこと"
   ]
+ },
+ {
+  "date": "2026-09-27",
+  "weekday": "日",
+  "file": "2026-09-27.html",
+  "titles": [
+   "Claude Code に /doctor prompt-audit が入った — CLAUDE.md・Skills・エージェント定義から「古いモデル向けの書き方」を洗い出し、確信度つきの diff で返す（v2.1.283）。公式スキル版で棚卸しした実例は指摘 107件→適用 63件、opus のエイリアスで知らぬ間に Opus 5.5 に変わり effort の設定が外れていた",
+   "「Bash は最後の手段」と CLAUDE.md に書いても守られない — 警告フックで7日数えたら grep 286回・ls／find 64回。数えてから拒否に格上げし、先頭の語だけで判定して # tool-exception: の逃げ道を残す",
+   "特集: 実装は並列、マージは直列 — サブエージェントと並列セッションの「分担設計」を4つの原則で組む"
+  ]
  }
 ]
