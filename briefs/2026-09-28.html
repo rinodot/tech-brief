@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月28日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-27.html">← 9/27（日）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年9月28日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>CLAUDE.md が1往復の 77% を食っていた — 「ok とだけ返して」の1回で 125,424 トークン、うち 96,472 が CLAUDE.md。132,180 字→5,782 字に退避すると同じ1往復が 128,003→34,973 トークン（73%減）。退避先は docs/ とサブエージェント定義、先頭には索引表と grep の1行</h2>
+      <p class="why">— 9/22 の「起動固定費の分解」と昨日の棚卸しの続き。測り方が <code>claude -p</code> の usage 1行で済み、今日から自分の CLAUDE.md で比べられる。</p>
+      <p class="b">yuu_inaka氏（9/25）。「ok とだけ返してください」の1往復を <code>claude -p --output-format json</code> の usage で測ると入力 125,424 トークン、うち 96,472（77%）が CLAUDE.md。中身は消さず退避する: 毎回効く規律だけ残し、日付つきの出来事は docs/lessons/（月別）、手順書は docs/reference/、タスク固有の指示は .claude/agents/ のサブエージェント定義へ。先頭には「何がどこにあるか」の表と <code>grep -rn "&lt;語&gt;" docs/lessons/ docs/reference/</code> の1行だけ置く。</p>
+      <p class="b">結果、CLAUDE.md は 132,180 字→5,782 字、同じ1往復は 128,003→34,973 トークン（73%減）。サブエージェントを6人（定義の合計 22,671 字）足しても常時の文脈は +2,579 トークン。再肥大化は日次の検査で見張る（12,000 字超で警告）。含意: トークン減は費用減ではない。サブエージェントは既定で親のモデルを継ぐので、<code>model:</code> を書かないと Opus のまま動く。</p>
+      <p class="try">試すなら: CLAUDE.md がある場所とない場所で <code>claude -p "ok とだけ返してください" --output-format json | jq '.usage | (.input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens)'</code> を比べる → 差が大きければ「毎回効く規律」以外を docs/ と .claude/agents/ に移し、先頭に索引表と grep の1行を置く → 移した先を読む役には <code>model: sonnet</code> を付ける（測り方・退避先・数字は記事本文、<code>--output-format json</code> に usage と total_cost_usd が入ることは docs/en/headless で確認済み）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yuu_inaka/articles/claude-md-token-diet">Zenn — CLAUDE.mdが毎往復の77%を食っていた。132,180字→5,782字に縮めた記録</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude が「npm を打ってください」と人に作業を頼む返答を Stop フックで止める — 正規表現だけだと正解率 92.3%（誤検知 26）、引っかけた行だけ qwen3:14b に 0／1 で再判定させると 96.7%（誤検知 5）、1行 64ms</h2>
+      <p class="why">— 9/19 の「ローカルLLMに判断だけさせる」の続き。誤検知の多い正規表現の後ろに1段足すだけで、手元の GPU が毎日の運用に入る。</p>
+      <p class="b">circle氏（9/26）。391 行で比べると、正規表現だけは正解率 92.3%（誤検知 26・見逃し 4）、ローカルLLM 単体は 92.8〜93.9% で誤検知はむしろ多い。正規表現が引っかけた行だけを qwen3:14b に「頼んでいるなら 1、報告なら 0。数字1文字だけ」で再判定させると 96.7%（誤検知 5・見逃し 8）。RTX 5060 Ti で中央値 64ms／行（gemma4:12b は 144ms）、14日の実運用で呼び出し 91 回・計約7秒。含意: ローカルLLMは置き換えでなく「後ろの1段」に置くと効く。</p>
+      <p class="try">試すなら: 正規表現のフックはそのまま残し、一致した行だけ Ollama の <code>/api/generate</code> に temperature 0・<code>num_predict: 1</code> で送って 0／1 を受ける → 接続先は <code>127.0.0.1</code>（<code>localhost</code> は IPv6 の空振りで約2秒遅れる、9/19）→ 誤検知と見逃しの件数を2週間ためてから閾値を決める（数字と判定文は記事本文で確認済み。Stop フックの入出力は docs/en/hooks）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/genkunjc/articles/regex-then-local-llm-guard">Zenn — フックの誤爆を減らす、正規表現のあとに置くローカル LLM 1段のすすめ</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Google の Antigravity SDK（Python のエージェント構築ライブラリ）がローカルモデルで動く — <code>LocalOpenAIAgentConfig</code> に Ollama の <code>http://localhost:11434/v1</code> を渡すだけ。16GB の Mac で gemma4:12b が起動 1.9 秒・ファイル作成タスク 16.7 秒、メモリ 8.1GB</h2>
+      <p class="why">— Android Studio にも入った Antigravity のエージェントを、手元の GPU と Ollama で回せる。クラウド課金なしの試作に。</p>
+      <p class="b">公式 docs と amu_lab氏の検証（9/25）。<code>LiteRTAgentConfig</code> は Gemma 4 26B A4B 専用でメモリ 24GB 以上推奨、<code>LocalOpenAIAgentConfig</code> は Ollama／LM Studio／vLLM に繋ぐのでモデルは自由。amu_lab氏は M5 16GB で gemma4:12b（実メモリ 8.1GB）を動かし、起動 1.9 秒、「hello.txt を作って DONE」が 16.7 秒、空きメモリ 10%。含意: 12〜16GB なら 12B 級を Ollama 経由で、26B は載らない。</p>
+      <p class="try">試すなら: <code>pip install google-antigravity litert-lm</code> → <code>ollama pull gemma4:12b</code> → <code>LocalOpenAIAgentConfig(model="gemma4:12b", base_url="http://localhost:11434/v1").lightweight()</code> を <code>Agent(config)</code> に渡す → <code>policy.allow_all()</code> は試作だけにする（クラス名・URL・24GB の推奨・CUDA と Metal の自動検出は antigravity.google/docs/sdk/local-models で確認済み。数字は記事本文）。</p>
+      <p class="src">出典: <a href="https://antigravity.google/docs/sdk/local-models/">Google Antigravity Docs — Local models</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
