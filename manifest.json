@@ -454,5 +454,15 @@
    "Claude が「npm を打ってください」と人に作業を頼む返答を Stop フックで止める — 正規表現だけだと正解率 92.3%（誤検知 26）、引っかけた行だけ qwen3:14b に 0／1 で再判定させると 96.7%（誤検知 5）、1行 64ms",
    "Google の Antigravity SDK（Python のエージェント構築ライブラリ）がローカルモデルで動く — LocalOpenAIAgentConfig に Ollama の http://localhost:11434/v1 を渡すだけ。16GB の Mac で gemma4:12b が起動 1.9 秒・ファイル作成タスク 16.7 秒、メモリ 8.1GB"
   ]
+ },
+ {
+  "date": "2026-09-29",
+  "weekday": "火",
+  "file": "2026-09-29.html",
+  "titles": [
+   "Claude Code の /claude-api hillclimb が「直したら本当に良くなったか」を評価で回す — 社内サポート 44 件で Opus 4.8 の 74.4%・1件 4.6 セントが、プロンプト監査と Sonnet 5 で 98.9%・1 セントに。未見の 14 件でも 78.6%→90.5%、費用は約 1/5（公式 9/28）",
+   "Claude Code v2.1.284 — sonnet が Sonnet 5.5（$2／$10、キャッシュ読み $0.20、1M 文脈）を指すようになり、/mcp reconnect all で落ちた MCP をまとめて再接続、Ultracode は /effort ultracode on|off の独立トグルに",
+   "クラウドセッションが正式版に — Pro は $100・Max は $250 の専用クレジットを 10/7 までに受け取る。motani氏はルーティンで毎朝 7:00 に 27 フィード→10 本の日本語要約を Notion へ、PC は閉じたまま"
+  ]
  }
 ]
