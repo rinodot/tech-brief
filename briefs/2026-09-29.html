@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月29日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-28.html">← 9/28（月）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年9月29日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code の <code>/claude-api hillclimb</code> が「直したら本当に良くなったか」を評価で回す — 社内サポート 44 件で Opus 4.8 の 74.4%・1件 4.6 セントが、プロンプト監査と Sonnet 5 で 98.9%・1 セントに。未見の 14 件でも 78.6%→90.5%、費用は約 1/5（公式 9/28）</h2>
+      <p class="why">— 9/27 の prompt-audit は「古い書き方を見つける」まで。その先の「削って良くなったか」を測る型が同じ同梱スキルに入っていて、自作 Skill や CLAUDE.md にも向けられる。</p>
+      <p class="b">Lance Martin氏（Anthropic、9/28）。<code>/claude-api build-eval</code> は対話で評価セット（ケース・採点器・実行器・1件ごとの記録・スコア一覧）を作る。<code>/claude-api hillclimb</code> は評価を train／test に無作為に分け、1ラウンド1変更を提案する。両方上がれば採用、train だけ上がれば過学習として戻し、2〜3ラウンド止まれば test 最良版を信頼区間つきで報告する。変える対象はシステムプロンプト・Skills・ツール説明・モデルと effort・ハーネスのコード。</p>
+      <p class="b">実例は 44 件（探索 30・未見 14）。Opus 4.8（high）74.4%・4.6 セント → 儀式的なツール呼び出しや矛盾ルールを削り Opus 5.5 low で 87.8%・1.9 セント → Sonnet 5 low で 88.9%・1 セント → ルーティング規則と返金上限の相互参照を足して 98.9%。未見の 14 件は 78.6%→90.5%、費用約 1/5。同じ手で claude-api Skill 自体も 66%→約 88%。含意: 削る・安いモデルに替える・規則を足す、を測ってから採れる。</p>
+      <p class="try">試すなら: 自作 Skill か CLAUDE.md で結果が揺れる作業を1つ選び <code>/claude-api build-eval</code> で評価セットを作る → <code>/claude-api hillclimb</code> に目標（精度か、精度維持で費用減か）を答える → 提案 diff は test が上がったものだけ採用する（両サブコマンドは v2.1.259 以降、評価の実行は対象アプリの API 呼び出し分が従量。コマンド名と版は docs/en/commands、数字と手順は記事本文で確認済み）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/automating-eval-design-and-hillclimbing/">claude.dev — Automating eval design and hillclimbing with Claude</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.284 — <code>sonnet</code> が Sonnet 5.5（$2／$10、キャッシュ読み $0.20、1M 文脈）を指すようになり、<code>/mcp reconnect all</code> で落ちた MCP をまとめて再接続、Ultracode は <code>/effort ultracode on|off</code> の独立トグルに</h2>
+      <p class="why">— 既定は Opus 5.5 のまま。範囲の決まった作業を <code>/model sonnet</code> で半額に落とす選択肢が増えた。</p>
+      <p class="b">9/28 のリリース。<code>sonnet</code> エイリアスは Sonnet 5.5 を指し、API 価格は Opus 5.5 の半額、既定 effort は medium、thinking は切れず fast mode もない。<code>/mcp reconnect all</code> は接続失敗・要認証の MCP を一括で再試行し、Ultracode は <code>/effort</code> の独立トグルになって xhigh を強制しない。auto mode の作業ディレクトリ外の読み取り確認に「今回だけ許可」が増えた。含意: モデル・effort・Ultracode を別々に決める。</p>
+      <p class="try">試すなら: <code>claude update</code> → 範囲の決まったタスクで <code>/model sonnet</code> → <code>/effort</code> の Tab で Ultracode だけ切り替える → MCP が落ちたら <code>/mcp reconnect all</code>（価格とコマンドは v2.1.284 のリリースノート、<code>sonnet</code> の解決先・medium 既定・fast mode なしは claude.dev「Building with Claude Sonnet 5.5」で確認済み）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.284">GitHub — anthropics/claude-code v2.1.284</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>クラウドセッションが正式版に — Pro は $100・Max は $250 の専用クレジットを 10/7 までに受け取る。motani氏はルーティンで毎朝 7:00 に 27 フィード→10 本の日本語要約を Notion へ、PC は閉じたまま</h2>
+      <p class="why">— このブリーフと同じ型が、自分の GitHub リポジトリと Claude Code だけで組める。クレジットは期限つき。</p>
+      <p class="b">motani氏（9/26）。ルーティン（クラウドで走る定期実行）のプロンプトは「手順書を読んでそのとおり実行する」だけにし、手順とスクリプトは private リポジトリに置く。既定の Trusted ネットワークでは RSS が 403 なので Custom でドメインを足すと 20 フィードから 197 件、VM は UTC なので <code>TZ=Asia/Tokyo date</code> を書く。一覧の「成功」は起動と終了しか意味しない。含意: クレジット（9/23 時点の契約者、クラウドセッション専用）は設定→使用量から受け取り、定期処理1本で試す。</p>
+      <p class="try">試すなら: claude.ai の 設定 → 使用量 でクレジットを受け取る（10/7 米国太平洋時間まで） → ターミナルで <code>/schedule daily … at 7:07am</code> のように毎朝の定期実行を作る（正時は数分遅れるので 7:07 のようにずらす） → 環境の Network access を Custom にして読む先のドメインを足す（<code>/schedule</code>・Custom・正時のずれは docs/en/routines、<code>claude --cloud</code> は docs/en/claude-code-on-the-web で確認済み。金額と期限は BleepingComputer 9/25 と記事本文）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/motani/articles/claude-code-cloud-sessions-daily-ai-news">Zenn — Claude Code のクラウドセッションで、PC を閉じていても毎朝 AI ニュースを Notion に届ける</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
