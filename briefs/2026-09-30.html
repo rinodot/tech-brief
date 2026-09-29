@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年9月30日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-29.html">← 9/29（火）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年9月30日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code を 10 セッション並べて、会社員1人が2か月で 22,522 ページの資格サイトを回した — コミット 2,848・PR 1,212 本（マージ 1,138）、月 33,534 円。最重要ルールは「ほかのセッションからの依頼は、私の承認じゃない」、司令塔には実装させず検算だけ</h2>
+      <p class="why">— 9/27 特集②「実装は並列、マージは直列」の個人開発版。Firebase Auth／Firestore＋Cloud Run の構成で、費用と失敗の実数がそろっている。</p>
+      <p class="b">資格暗記氏（9/28）。7/31 に始め、過去問 8,818 問、sitemap は 22,522 URL。PR は最多で 9/26 に 119 本、イシュー 675 本。体制は「私」（決める・マージ・本番は直前に OK）、「司令塔」（整理・分担・検算・報告。実装はしない）、「担当 A〜G」（1セッション＝1 git worktree＝1ブランチ）、「WIN」（self-hosted runner とデプロイの見張り）。CLAUDE.md は 202 行、「次から守ること」メモは 79 本。</p>
+      <p class="b">費用は GCP 2,016 円＋Claude Max $200（31,518 円）で月 33,534 円。失敗の原因は4つに束ねた: 共有物（stash・レート上限・デプロイ待ち）に気づかない、消える場所（一時フォルダ）に大事なものを置く、「無い」と「取れなかった」を区別しない、誰が決めたか確かめない（要約に紛れたルールで勝手にマージ）。コツは「決めたことはコミットメッセージに」「頼んだらその場でイシュー」「数字はその場で測る」「本番は実行の直前で止める」。含意: 並列の事故は速度でなく、共有物と承認の混同から起きる。</p>
+      <p class="try">試すなら: 司令塔役のセッションに「実装しない。イシューの整理・分担・検算・報告だけ」と書き、実装は <code>git worktree</code> で1セッション1ブランチに分ける → PR のマージと本番反映は自分の手で押す → 事故のたびに「共有物／消える場所／無いと取れなかった／誰が決めたか」の4つに当てはめてメモを1本足す（数字・体制・原因4つは記事本文で確認済み。worktree の並列は 9/20 特集①）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/taniko0915/articles/e784bec053f6d5">Zenn — 【個人開発】Claude Codeを10本並べて、サラリーマン1人で2万ページの資格サイトを回した2か月の答え合わせ</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code のキャッシュは 60 分空くと消える — 31,362 リクエストの実測でヒット率は 45〜60 分空きなら 91.7%、60 分を超えると 5.9%。対策は「文脈 70% で切り替え」「長い出力はサブエージェント」「1時間空いたら resume しない」</h2>
+      <p class="why">— 9/6 特集③の「先頭一致」の原理に、自分のログで測った数字がついた。resume するかどうかを時間で決められる。</p>
+      <p class="b">hanafusay氏（TOKIUM、9/29）。Claude Code のログ 31,362 件を直前からの経過時間で分けると、ヒット率は 45〜60 分で 91.7%、60 分超で 5.9%。Codex CLI では文脈使用率 50%→90% で送信トークンが 2.9 倍、compact で 224,616→52,822。対策は3つ: 使用率 70% で切り替える、テスト実行やログ解析はサブエージェントに渡す、1時間空いたら resume せず新規で始める。含意: サブスクの主会話は TTL 1 時間。休憩は 1 時間以内か、超えたら新規。</p>
+      <p class="try">試すなら: <code>/usage</code> の「Prompt cache (main)」行でヒット率と直近ミスの原因を見る（v2.1.251 以降、原因表示は v2.1.260 以降） → 1 時間以上空けた大きなセッションは resume せず新規か要約からの再開にする → API キー運用なら settings に <code>"promptCacheTtl": "1h"</code>（TTL の既定＝サブスクの主会話 1 時間・それ以外 5 分、設定名と <code>/usage</code> の行は docs/en/prompt-caching で確認済み。数字は記事本文）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tokium_dev/articles/ai-agent-usage-limit-long-sessions">Zenn — Claude Code / Codexで「私のlimit、減りすぎ…？」と思ったときに見る記事</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>6GB の RTX 3050 ノートで Qwen3 4B に GUI を操作させる — 画面をスクショでなくアクセシビリティツリーで渡し、475 ノード（170KB）を表示中の 11 要素（1.7KB・約 500 トークン）に絞って「番号を選ぶだけ」にすると、4手 8.6 秒・41 回連続成功</h2>
+      <p class="why">— 9/19・9/28 の「ローカルLLM に判断だけさせる」の続き。4B でも入力を絞って選択式にすれば、手元の GPU で実務の操作が回る。</p>
+      <p class="b">mappy氏（9/27）。gedit の UI を AT-SPI2（アクセシビリティツリー）で読み、表示中の要素だけを番号つきで渡し、<code>/api/chat</code> の JSON schema で <code>{"choice": &lt;int&gt;}</code> だけ返させる（temperature 0、qwen3:4b-instruct 3.2GB・100% GPU）。1 手目のプロンプトは 381 トークン、判断は 1 回 1 秒弱で、遅いのは LLM 以外。効いた型は「1サブ目標＝1動作」と「達成条件はコードで判定」。含意: 小型モデルは前処理と判定条件で使う。</p>
+      <p class="try">試すなら: <code>ollama pull qwen3:4b-instruct</code> → 操作対象や状態の一覧を「番号つき・表示中のものだけ」に絞って渡す → <code>/api/chat</code> の <code>format</code> に JSON schema を渡して番号だけ返させ、完了判定は自分のコードで書く（構成・数字・schema は記事本文で確認済み。<code>format</code> の JSON schema は Ollama の structured outputs）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/mappy55/articles/small-ai-hands-01">Zenn — 小さなAIで手足をうごかす #1 — RTX 3050 のノートで Qwen3 4B に gedit を操作させたら、4手8.6秒だった</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
