@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月1日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-09-30.html">← 9/30（水）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年10月1日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code に「進めて」と打つ回数が 12.5%→2.3% に — <code>tasks/todo.md</code> に <code style="white-space:nowrap">- [ ]</code> が残る間は Stop フックで応答終了を差し戻し、未 push のコミットも止める。「本当に出た？」には本番の SHA・ルートの実バイト数・直近5分のログの3証拠で答えさせる</h2>
+      <p class="why">— 9/27 特集②の「CLAUDE.md はお願い、止めるのはフック」を、自分の催促の回数で測った個人開発の実例。終わりの条件をフックに書けば、私の「進めて」も減る。</p>
+      <p class="b">momozaki氏（9/27）。7/15〜8/17 は「進めて」だけの1行が 96 件（12.5%）、「まだ？」「残タスクは？」を足すと 135 件（17.5%）が催促だった。①Stop フック <code>continue-guard.js</code>: <code>tasks/todo.md</code> に <code style="white-space:nowrap">- [ ]</code> が残っていれば <code>{"decision":"block"}</code> で応答終了を差し戻す。条件は 30 分以内に更新された todo だけ・1セッション 2 回まで・<code>stop_hook_active</code> が true なら判定しない。②<code>unpushed-guard.js</code>: 30 分以内のコミットが未 push なら差し戻す。③「本当に出た？」は deploy-verify が本番の SHA とデプロイ時刻・各ルートの status と実バイト数・直近 5 分のログの 3 証拠をそろえるまで「出た」と言わせない。</p>
+      <p class="b">8/25〜9/27 の 1,439 件では「進めて」33 件（2.3%）、「まだ？」0、「残タスクは？」3。著者は環境やモデルの更新が重なったため「全部がこのフックの効果とは言えない」と明記。含意: 催促は Claude が終わりの条件を持たない症状で、フックに書けば回数で効果を測れる。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> の <code>hooks.Stop</code> に <code>{"type":"command","command":"node ~/.claude/scripts/continue-guard.js"}</code> を足し、スクリプトは stdin の <code>stop_hook_active</code> が true なら exit 0、<code>tasks/todo.md</code> に <code style="white-space:nowrap">- [ ]</code> が残るときだけ <code>{"decision":"block","reason":"todo.md に未完了があります"}</code> を出す → 差し戻し回数の上限は自分で数える（Claude Code 側は連続 8 回で無効化、<code>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</code> で変更。Stop の <code>decision: block</code>・<code>stop_hook_active</code>・8 回の上限は docs/en/hooks と hooks-guide で確認済み。件数と 3 証拠は記事本文）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/momozaki/articles/7275ae3f1b46d0">Zenn — Claude Codeに「進めて」「本当に出た？」「前も言ったよね」を言わずに済ませる、最近の使い方3選</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>1,674 セッションの実測で、トークンの 94.2% はキャッシュ読み＝毎ターン再送される文脈だった — ビルド出力をフィルタなしで流した回が 48%。AGENTS.md に書いても 2,141 回中 751 回は素通りしたので、PreToolUse フックでコマンド自体を書き換えて 18,200 トークン→32 に</h2>
+      <p class="why">— 9/30 の「キャッシュは 60 分で消える」の続き。出力を削るより、文脈に入る前に削る。<code>flutter test</code> の出力も同じ構造で、フックの形はそのまま写せる。</p>
+      <p class="b">Antoine van der Lee氏（9/28）。1,674 セッションの集計で、トークンの 94.2% はキャッシュ読み、出力は 0.6%。費用は文脈の大きさ×ターン数で決まる。ビルド 13,323 回のうち 48% がフィルタなし。対策は PreToolUse フックで、フィルタのないビルドに <code>| xcsift</code> を足した command を <code>updatedInput</code> で返す（18,200→32 トークン）。ほかにサブエージェントの 85% が親のモデルを継承。含意: 指示は守られない前提で、コマンドの書き換えをフックに落とす。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> の <code>hooks.PreToolUse</code>（<code>"matcher": "Bash"</code>）に小さなスクリプトを置き、<code>flutter test</code> に <code>--reporter</code> が無ければ <code>--reporter failures-only</code>（失敗したテストだけ出力）を付けた command を <code>{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"allow","updatedInput":{"command":"…"}}}</code> で返す → 探索用サブエージェントは <code>.claude/agents/*.md</code> に <code>model: sonnet</code> を明記（<code>updatedInput</code> は docs/en/hooks、<code>--reporter failures-only</code> は flutter_tools の test.dart で確認済み。数字は記事本文で対象は Xcode。記事にはスポンサー製品の言及あり）。</p>
+      <p class="src">出典: <a href="https://www.avanderlee.com/ai-development/reduce-token-usage-claude-code-codex-cursor/">SwiftLee — How to reduce token usage in Claude Code, Codex, and Cursor</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Whisper が無音で「ご視聴ありがとうございました」を連呼する原因は「直前の出力を次の窓のプロンプトに使う」既定 — <code>condition_on_previous_text=False</code> だけで 44 分の会議の書き起こしが 1,300 字→5,600 字。用語集を initial_prompt に入れると逆効果（類似度 0.526→0.380）</h2>
+      <p class="why">— 9/12 の Whisper LoRA、9/26 の Flutter×ローカルLLM に続く音声側の実用値。引数名は faster-whisper でも同じなので、私の GPU にそのまま移せる。</p>
+      <p class="b">ひろたに氏（9/29、Mac mini M4）。Whisper は既定で直前の出力を次の窓のプロンプトに使うので、無音で出た幻聴が自己増殖する。<code>condition_on_previous_text=False</code> だけで 1,300 字が 5,600 字に戻った。類似度は large-v3 0.659、turbo 0.526、用語集を initial_prompt に足すと 0.380 に低下。44 分の音声で turbo 約 2 分、large-v3 約 6 分 45 秒。含意: 幻聴対策はモデル変更でなく引数 1 つ。</p>
+      <p class="try">試すなら: faster-whisper なら <code>model.transcribe(path, language="ja", condition_on_previous_text=False, vad_filter=True)</code>（VAD で無音区間を落とす）→ 用語集は initial_prompt でなく後段の LLM に渡す → Ollama の要約は <code>num_ctx</code> を 16384 に（<code>condition_on_previous_text</code>・<code>vad_filter</code> は faster-whisper の transcribe.py で確認済み。数字は記事本文、Mac の mlx-whisper での値）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/htanijiri/articles/01-local-llm-transcribe-gotchas">Zenn — ローカルLLMで文字起こし・要約をやってハマった話（mlx-whisper × Ollama）</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
