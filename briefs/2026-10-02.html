@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月2日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-01.html">← 10/1（木）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年10月2日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code v2.1.287 で「Mods」が使えるようになった — プラグインに入れた JS の関数が Claude Code の中で動き、ツール呼び出しを止めたり書き換えたり、プロンプト上の帯やペインを描ける。作るのは「make a mod that …」と頼むだけで、ターン終了ごとに自動リロード</h2>
+      <p class="why">— 9/27 特集②「止めるのはフック」の次の段。設定フックは外のシェルで止める・記録するだけだったが、Mods は Claude Code の画面と挙動そのものを足せる。</p>
+      <p class="b">公式 docs（10/1）。Mod はプラグインの一種で、<code>hooks.json</code> の <code>modules</code> が指す JS／TS が Claude Code のプロセス内で動く。hook は <code>on('tool.call', ($, e, next) => …)</code> の形で、イベントを観察・書き換え・肩代わり（next を呼ばない）の3通りで扱う。セッションで「make a mod that …」と頼むと組み込み skill <code>plugin-authoring</code> が <code>~/.claude/dev-mods/&lt;session-id&gt;/</code> に書き、「Enable for this session」でターン終了ごとにホットリロード。手書きなら <code>claude --plugin-dir ./first-mod</code> で読む。</p>
+      <p class="b">注意は権限。Mod は自分の権限で動き、秘密を読め、<code>ask</code> ルールや PreToolUse フックが止めた呼び出しも承認できる。入れる前に <code>claude plugin validate</code> で握るイベントを一覧する。描画は CLI と Desktop の Code タブだけ（VS Code 拡張・<code>claude -p</code> では動くが描かれない）。含意: 「フックで止める」の次は、挙動そのものをコードで差し替える段階。</p>
+      <p class="try">試すなら: <code>claude --version</code> が 2.1.287 以上なのを確認 → セッションで「make a mod that shows the current git branch above the prompt」と頼み「Enable for this session」→ 残したい mod は <code>~/.claude/dev-mods/&lt;session-id&gt;/&lt;name&gt;/</code> を <code>~/mods/</code> などへコピーして <code>claude --plugin-dir ~/mods/&lt;name&gt;</code> で読む → 同リリースの <code>/plugin enable cc-plugin-you-should-know@builtin</code>（見落としを横から指摘する組み込み mod）も1日試す（手順・コマンド・権限の注意は docs/en/plugins/mods/overview と /create、you-should-know は v2.1.287 のリリースノートで確認済み）。</p>
+      <p class="src">出典: <a href="https://code.claude.com/docs/en/plugins/mods/overview">Claude Code Docs — Mods overview</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Max 20x の使用枠は「出力トークンは入力の 5 倍、キャッシュ読みは 1/40」の重みで減っていた — プロキシで 220 リクエストを測った非公式の逆算。headless（<code>claude -p</code>）は 5 時間枠を対話の 2 倍、平日 21:00〜翌 3:00 は 2.86 倍の速さで消費</h2>
+      <p class="why">— 10/1 の「費用の 94% はキャッシュ読み」が、枠の消費でも効く理由。自動化ジョブを走らせる時刻とモデルを、この重みで決められる。</p>
+      <p class="b">tksfjt1024氏（10/1）。プロキシで <code>usage</code> と使用率ヘッダを記録し、1% 進む量から逆算。重みは input 1・cache write 1.25・output 5・cache read 0.025。モデル係数は Haiku 4.5＝1 で Sonnet 5.5 が 1.5、Opus 5.5 が 2.2、Opus 5 が 2.75、Fable 5.1 が 10。headless は 5 時間枠を対話の 2 倍、平日 21〜翌 3 時は 2.86 倍で消費。含意: 枠はキャッシュを切らさない→自動化を深夜帯から外す→モデルを下げる、の順で守る。</p>
+      <p class="try">試すなら: 定期実行の <code>claude -p</code> を平日 21:00〜翌 3:00 の外へ動かす → 同じ作業を Opus 5 と Opus 5.5 で回して <code>/usage</code> の進み方を比べる → 1 時間以上空く前に <code>/compact</code>（9/30 既報の TTL とこの重みの合わせ技。重みの表・測定法・9/18 の変更は記事本文。公式の係数ではないので自分の <code>/usage</code> で再確認）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tksfjt1024/articles/25c0ab111c277c">Zenn — Claude Code の使用量はどう数えられているのか ── Max 20x で実測した重みは API 料金表と違った</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカル RAG の埋め込みモデルを既定の nomic-embed-text から embeddinggemma に替えただけで、1 位正解率 25.9%→58.9%・MRR 0.336→0.676 — 521 チャンク・185 クエリの自前評価セットで 6 モデルを比べ、上位 4 つは統計的に差がないので「速さ」で選んだ</h2>
+      <p class="why">— 9/21 の「recall@5 90% でも正答 38%」、9/30 のリランキングに続く検索側の実測。再学習なし・GPU なしで、手元のコーパスで同じ比較ができる。</p>
+      <p class="b">yuya_h氏（9/30）。個人ナレッジ検索 gbrain の日本語 521 チャンクに、手作り 35 問＋<code>qwen3.5:4b</code> 生成 150 問で Ollama の埋め込み 6 種を比較。最良は embeddinggemma（308M・768 次元）だが、上位 4 つ（qwen3-embedding・snowflake-arctic-embed2・bge-m3）は Cochran の Q 検定で p=0.449 と差がなく、決め手はバッチ速度（他の 2.4〜6.5 倍）。含意: 埋め込みは学習より選定、選定は自前の評価セットで。</p>
+      <p class="try">試すなら: 自分のチャンクから <code>qwen3.5:4b</code> などに質問文を 100 本ほど生成させて評価セットにする → <code>ollama pull embeddinggemma</code> と <code>nomic-embed-text</code> の両方で埋め込み、hit@1／MRR を比べる → 同率なら速い方を採る（評価コードは github.com/yuya0408/gbrain-embedding-eval。数字と手順は記事本文、<code>embeddinggemma</code> のタグ名も記事の表記）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yuya0408/articles/gbrain-embedding-eval">Zenn — gbrainの埋め込みモデルを個人最適化したら、検索精度がほぼ倍になった</a></p>
+    </article>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
