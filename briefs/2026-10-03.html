@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月3日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-02.html">← 10/2（金）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年10月3日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code を 9 セッション並べて一晩半で 581 コミット・テスト 1,310 件全部緑 — でもアプリは通しで動かなかった。衝突を防いだのは「1 ファイル 1 所有者・契約が先・書いた本人はマージしない」の 5 つ、足りなかったのは最初に通す e2e 1 本と「件数でなく終了コード」の報告</h2>
+      <p class="why">— 9/27 特集②「実装は並列、マージは直列」と 9/30 の 10 セッション運用を、失敗まで書いた実例。並列を増やす前に「統合で緑を測る」を入れる。</p>
+      <p class="b">Shune氏（10/2）。tmux の 1 ウィンドウを 9 ペインに割り、それぞれで独立した Claude Code を起動（統括の Lead 1 体＋担当 8 体。機能を縦に通す 5 体と共通層 3 体、Max 20x の 1 アカウント）。衝突を防ぐ仕組みは 5 つ: 1 ファイル 1 所有者、契約（CONTRACTS.md）が先、[PLAN][READY] など 14 種のタグ付きメッセージ、書いた本人はマージできない、事故は PITFALLS.md に番号付きで残す（46 件、うち 17 件は今回起きた）。結果は一晩と半日で 581 コミット・マージ 98 回・テスト 1,310 件が全部緑。</p>
+      <p class="b">それでも「部分は全部緑なのに、全体が動かない」。壊れたのは担当と担当の境目で、CONTRACTS.md は最初の 1 時間で 9 回改版され今は v1.12。対策は 3 つ: 「起動→作業作成→ターミナル表示→片付け」の通し 1 本を最初に e2e にする、提出条件を「統合ブランチに載せて新しい worktree で make check と e2e が通る」にして緑を統合側で測る、報告は件数でなく終了コード。含意: 並列の数より先に、統合で測る 1 本を置く。著者も「半分は実験のつもりだった」と書く n=1。</p>
+      <p class="try">試すなら: まず 2〜3 セッションで、①着手前に CONTRACTS.md（境界の API と各ファイルの所有者）を書く ②PITFALLS.md に事故を番号付きで追記し、番号は振り直さない ③提出は「統合ブランチで新しい worktree を切って <code>make check &amp;&amp; make e2e; echo $?</code> が 0」で判定し、報告にその終了コードを書かせる ④通しの e2e は最初の 1 本目に作る（5 つの仕組み・数字・提出フォーマットは記事本文。9 体にした効果の比較はなく、著者も実験と明記）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/shune/articles/54501fc4fd6398">Zenn — Claude Code を9体並べてチーム開発させた。テスト1,310件は全部緑で、アプリは通しで動かなかった</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>サブエージェントの effort は親を継ぐので、<code>.claude/agents/*.md</code> に <code>model: sonnet</code>＋<code>effort: medium</code> と書いて固定する — 目安は「収集・集計・テスト実行＝Sonnet medium、レビュー＝high、不可逆変更＝Opus max」。Sonnet 5.5 のレビューは medium だと思考トークン平均約 670、high にすると得点 1.33→7.0（/17）</h2>
+      <p class="why">— 10/1 の「サブの 85% が親モデルを継承」と 10/2 のモデル係数（Sonnet 5.5＝1.5、Opus 5.5＝2.2）を、設定ファイル 1 枚に落とす型。</p>
+      <p class="b">ichikawa_y氏（9/29）。Agent tool で渡せるのは <code>model</code> だけで、effort は親を継ぐ。だから目安を frontmatter に固定する: 収集・集計・テスト実行＝Sonnet medium、レビュー＝high、承認前・不可逆変更＝Opus max。自前 4 題材×3 回の比較では、Sonnet 5.5 のコードレビューは medium だと思考トークン平均約 670、設計書レビューは high で 1.33→7.0（/17。Opus 5.5 high は 5.33）。含意: レビューは既定 effort で回さない。</p>
+      <p class="try">試すなら: <code>.claude/agents/worker.md</code> の frontmatter に <code>model: sonnet</code> と <code>effort: medium</code>、<code>.claude/agents/reviewer.md</code> に <code>model: opus</code>（または sonnet）と <code>effort: high</code> を書く → 承認前の最終確認だけ <code>effort: max</code> の別エージェントに回す（<code>effort</code> の値 low／medium／high／xhigh／max と「Default: inherits from session」は docs/en/sub-agents で確認済み。記事には agent 5 本と skill 2 本の全文あり。数字は著者の小規模比較）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ichikawa_y/articles/claude-code-model-effort-benchmark">Zenn — Claude Codeのモデルとeffortの選び方：作業別の目安とカスタムエージェントでの固定</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Raspberry Pi 5 の CPU だけで動く個人メモの RAG — 日本語メモでは全文検索（SQLite FTS5）が埋め込み検索より強く（recall@5 0.88 vs 0.83）、両方を RRF で合わせると 0.92。埋め込みは multilingual-e5-small の int8 で 1 節 20ms</h2>
+      <p class="why">— 10/2 の「埋め込みは選定で倍になる」の裏側。日本語の自分用メモでは語彙検索を捨てないほうが効く、という 24 問の実測。</p>
+      <p class="b">85store氏（10/2）。メモ約 10 万字を <code>##</code> 見出し単位に切り、SQLite FTS5（trigram）と multilingual-e5-small（int8、Pi 5 の CPU で 1 節 20ms）を RRF（k=60）で統合し、MCP で引かせる。24 問の自作評価で recall@1／@5 は全文検索 0.71／0.88、意味検索 0.63／0.83、ハイブリッド 0.79／0.92。含意: 小さな日本語コーパスでは全文検索が主、埋め込みは補助。差は 24 問中 1〜2 問なので、自分のメモで測ってから。</p>
+      <p class="try">試すなら: Python の sqlite3 で <code>CREATE VIRTUAL TABLE notes USING fts5(body, tokenize='trigram')</code> を作り、メモを見出し単位で入れる → 10/2 の要領で質問 20〜30 本を作り、FTS5 だけ／埋め込みだけ／RRF（各順位の 1/(60+順位) の和）の recall@5 を比べる → 3 文字未満の語は trigram で引けないので LIKE で補う（<code>tokenize='trigram'</code> は手元の SQLite 3.45 で動作確認。数字は記事本文、n=24）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/85store/articles/memo-mcp-hybrid-rag">Zenn — Pi 上のメモを、エージェントが節単位で引ける RAG にした（SilverBullet × MCP × ローカル埋め込み）</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">「並列と費用を設定ファイルに固定する」週。CLAUDE.md は docs/ へ逃がして 73% 減（9/28）、Stop フックに終わりの条件を書くと「進めて」が 12.5%→2.3%（10/1）、規則で止まらない出力はフックでコマンドを書き換える（10/1）。キャッシュは 60 分で消え（9/30）、枠は出力 5 倍・headless 2 倍で減る（10/2）、サブエージェントは model と effort を frontmatter で固定（10/3）。並列は 9 体でも「統合で緑を測る」1 本が先（10/3）。Mods でフックの次へ（10/2）。ローカルは embeddinggemma で MRR 2 倍（10/2）、日本語メモは全文検索が主（10/3）、Whisper は引数 1 つ（10/1）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
