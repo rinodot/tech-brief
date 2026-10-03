@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月4日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-03.html">← 10/3（土）</a><a href="../index.html">一覧</a><span class="dis">最新号</span></div></nav><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年10月4日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>CLAUDE.md の規約を別ファイルに追い出すと、最初の入力は 8,230 トークン減るが、規約を使う作業では読みに行く往復で合計入力が 1.42〜1.86 倍 — 直書き・「場所だけ書く」・<code>@ファイル名</code> の 3 通りを 6 条件×5 回で実測。<code>@</code> は直書きと同じ重さ</h2>
+      <p class="why">— 9/28 の「CLAUDE.md を docs/ へ逃がして 73% 減」の裏取り。減るのは最初の 1 回だけで、毎回使う規約は直書きのままが得。</p>
+      <p class="b">ぬまーん氏（10/3）。25,820 バイトの規約を、CLAUDE.md に直書き／場所だけ書く（224 バイト）／<code>@ファイル名</code> 1 行の 3 通りに置き、6 条件×5 回。最初の入力は 49,786／41,556／49,838 トークン、規約を使う作業の合計は 99,766〜99,821／142,136〜185,248／99,918〜99,979。規約に触らない用事なら 8,230 トークンの得で終わる。ルール順守は 3 通りとも 5/5。含意: 毎回使う規約は直書き、たまにしか使わない規約だけポインタに。</p>
+      <p class="try">試すなら: CLAUDE.md を「毎回効く規約（直書き）」「一部のファイルにだけ効く規約（<code>.claude/rules/*.md</code> に <code>paths:</code> 付きで置く。該当ファイルを触るときだけ読まれる）」「たまにしか使わない手順（場所だけ書く）」に分ける → <code>@docs/rules.md</code> は起動時に展開されるので削減目的では使わない（imports は起動時に読み込まれ文脈コストを減らさない・path-scoped rules・「200 行以内」は docs/en/memory で確認済み。数字は記事本文、claude-sonnet-5・v2.1.283、各条件 n=5・規約 1 種類・単純な作業のみ。場所だけ書く版は規約を 3〜4 回読みに行っていた）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/numarn/articles/claude-md-pointer-vs-inline-rules-handson">Zenn — AIへの指示書を別ファイルに追い出したら、最初の入力は8230トークン減った。でも合計は最大1.86倍に増えた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>16GB の GPU に 16.2 GiB のモデルを載せると一部が CPU に溢れて 6.4 tok/s、12.85 GiB のモデルなら 88.5 tok/s — 別モデル同士の比較だが、溢れたかは <code>/api/ps</code> の size と size_vram で分かる。<code>num_ctx</code> 未指定だと長いプロンプトは先頭から黙って切られる</h2>
+      <p class="why">— 下の特集③の実例。式で VRAM に収まるか先に計算し、API で溢れを確かめる手順が今日から使える。</p>
+      <p class="b">chiaki_ai_lab氏（10/1）。RTX 5060 Ti 16GB・Ollama 0.33.2 で、gemma3:27b（16.2 GiB）は 6.4 tok/s、gpt-oss:20b（12.85 GiB）は 88.5 tok/s。別モデル同士の比較だが、載ったかは <code>/api/ps</code> で分かる。落とし穴は 3 つ: <code>num_ctx</code> 未指定だとプロンプトが先頭から黙って切られる、<code>num_thread</code> 未指定で PC が操作不能、Docker 越しの <code>stream: false</code> は切られる。含意: 速さの前に「載っているか」を確かめる。</p>
+      <p class="try">試すなら: <code>curl localhost:11434/api/ps</code> で <code>size</code> と <code>size_vram</code> を比べ、差があれば溢れている（<code>ollama ps</code> の PROCESSOR 列でも可） → 溢れるなら特集の式で <code>num_ctx</code> を下げるか KV を q8_0 に → リクエストの <code>options</code> に <code>num_ctx</code>（既定 4096）と <code>num_thread</code> を毎回入れ、長い生成は <code>stream: true</code>（<code>size_vram</code>・<code>keep_alive: 0</code>・既定 4096 は Ollama の API docs と FAQ で確認済み。数字は記事本文、n=1）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/chiaki_ai_lab/articles/ollama-vram-16gb-nodejs-pitfalls">Zenn — VRAMに載らないと13.8倍遅い ─ Ollamaを Docker + Node.js から叩いて踏んだ3つの落とし穴</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集: VRAM と帯域の内訳 — 1 層溢れただけで 19 分の 1 になる理由を、KV キャッシュの式 1 本で読む</h3>
+      <p class="b">VRAM に載るのは重み・KV キャッシュ・作業領域。文脈で増えるのは KV。kas_blog氏（9/20）の式は M_KV＝B×T×L×2×H_KV×d_head×s（同時系列数×系列長×層数×K と V の 2×KV ヘッド数×ヘッド次元×バイト数）。32 層・32 KV ヘッド・128 次元・4,096 トークン・2 バイトで 2 GiB、1 トークン 512 KiB。llama3.1:8b なら 128 KiB。</p>
+      <p class="b">減らせる変数は 2 つ。H_KV は GQA（複数の Q ヘッドで 1 つの KV ヘッドを共有）で減り、同氏 9/24 の例は 8,192 トークンで MHA 4 GiB→GQA 1 GiB→MQA 128 MiB。Qwen3.6-35B-A3B はフル注意 4 層に 1 層・KV ヘッド 2 で 1 トークン 20,480 バイト、128K でも +2.59 GiB（istb16氏、10/3）。s は KV 量子化で q8_0 なら半分。</p>
+      <p class="b">崖は載り切らない瞬間に来る。RTX 5080 16GB の llama3.1:8b Q4_K_M を 65,536 トークンにすると、KV が f16 なら 16.7GB で溢れて 26 tok/s、q8_0 なら 12.5GB に収まって 132 tok/s（図鑑）。9/15 既報の RTX 4070 12GB も、-ngl 42→44 層で溢れた途端プロンプト処理が 319→16.5 tok/s。溢れた分は PCIe 越しに CPU 側のメモリを読むので桁が落ちる。</p>
+      <p class="b">載り切っても上限は帯域。生成は 1 トークンごとに重み全部を読むので、速度の上限≈帯域÷読むバイト数。内蔵 GPU の Qwen3-8B Q4_K_M（4.68 GiB）は 6.04 t/s（汐見セツ氏、9/24）、同じ 8B Q4 が 16GB カードでは 128 tok/s。プロンプト処理は計算律速で、128K なら 21〜24 分（istb16氏）。含意: 文脈長は「式で載る T」まで、速度は帯域の上限まで。量子化・GQA・KV 量子化は全部「読むバイト数」を減らす同じ手。</p>
+      <p class="try">試すなら: ①<code>nvidia-smi --query-gpu=memory.used,memory.total --format=csv</code> で空きを見る ②モデルの層数・KV ヘッド数・ヘッド次元（GGUF のメタデータか HF のモデルカード）を式に入れ、空き VRAM−重みで使える T を出す ③Ollama は <code>OLLAMA_FLASH_ATTENTION=1 OLLAMA_KV_CACHE_TYPE=q8_0</code>、llama.cpp は <code>-fa on -ctk q8_0 -ctv q8_0</code> で s を半分に ④<code>ollama ps</code> の PROCESSOR が <code>100% GPU</code> か確認し、溢れていたら <code>num_ctx</code> か <code>-ngl</code> を 1 段ずつ下げて tok/s を記録する（式と例の数字は各記事本文、図鑑は 6/6 公開・9/24 更新。<code>OLLAMA_KV_CACHE_TYPE</code> の f16／q8_0／q4_0 と <code>ollama ps</code> の表示は docs.ollama.com/faq、<code>-fa</code>／<code>-ctk</code>／<code>-ctv</code>／<code>-ngl</code> は llama.cpp の arg.cpp で確認済み。図鑑のページには Amazon リンクあり、istb16氏の機材は 93.6 GiB の Vulkan 環境で絶対値は写せない）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/kas_blog/articles/20260509-llm-17-kv-cache">Zenn — KV Cacheのtensor形状・計算量・メモリ見積もりを整理する</a> ／ <a href="https://zenn.dev/kas_blog/articles/20260509-llm-20-gqa-mqa">Zenn — GQA/MQAのhead mappingとKV Cache削減を実装視点で整理する</a> ／ <a href="https://ai-hardware-zukan.com/local-llm-context-length-vram-kv-cache-quantization/">AIハードウェア図鑑 — VRAM 16GBでローカルLLMのコンテキスト長はどこまで伸ばせるか</a> ／ <a href="https://qiita.com/istb16/items/b3fc166f6f7a7b22cbe0">Qiita — コンテキストを 128K まで伸ばしたら、壁はメモリではなく待ち時間だった</a> ／ <a href="https://zenn.dev/setsu_shiomi/articles/local-llm-on-igpu">Zenn — 内蔵GPUでQwen3-8Bを動かしたら 6 t/s だった</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
