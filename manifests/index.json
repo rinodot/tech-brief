@@ -1,0 +1,9 @@
+{
+ "legacy": {
+  "file": "manifest.json",
+  "until": "2026-10-04"
+ },
+ "days": [
+  "2026-10-05"
+ ]
+}

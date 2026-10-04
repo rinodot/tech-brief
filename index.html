@@ -22,8 +22,12 @@
   const ol=(titles,cls)=>{const o=el('ol',cls);titles.forEach((t,i)=>{const li=el('li');li.append(el('span','n',String(i+1)),el('span','tt',t));o.append(li);});return o;};
   let entries;
   try{
-    const r=await fetch('manifest.json?t='+Date.now(),{cache:'no-store'});
-    entries=await r.json();
+    const q='?t='+Date.now(), o={cache:'no-store'};
+    const ix=await (await fetch('manifests/index.json'+q,o)).json();
+    const lg=ix.legacy?await (await fetch(ix.legacy.file+q,o)).json():[];
+    entries=lg.filter(e=>!ix.legacy.until||e.date<=ix.legacy.until);
+    const days=await Promise.all((ix.days||[]).map(d=>fetch('manifests/'+d+'.json'+q,o).then(r=>r.json())));
+    entries=entries.concat(days);
   }catch(e){wrap.textContent='一覧を読み込めませんでした。再読み込みしてください。';return;}
   entries.sort((a,b)=>a.date<b.date?1:-1);
   const latest=entries[0];
