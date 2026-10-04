@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""テックブリーフ静的サイト生成: briefs/ とmanifestからindexを再生成し、各号にナビを注入する（冪等）"""
+"""テックブリーフ静的サイト生成: 凍結した manifest.json と manifests/YYYY-MM-DD.json から一覧データを再生成し、各号にナビを注入する（冪等）。新号は `site_tools.py add YYYY-MM-DD`"""
 import json, re, os, sys
 
 import argparse
@@ -8,10 +8,13 @@ _ap.add_argument("--site", default="/home/claude/site")
 _ap.add_argument("--file")
 _ap.add_argument("--prev", default="null")
 _ap.add_argument("--next", default="null")
-_ap.add_argument("cmd", nargs="?", default="rebuild", choices=["rebuild", "index", "nav"])
+_ap.add_argument("cmd", nargs="?", default="rebuild", choices=["rebuild", "index", "nav", "add"])
+_ap.add_argument("date", nargs="?")
 _ARGS = _ap.parse_args()
 SITE = _ARGS.site
 BRIEFS = os.path.join(SITE, "briefs")
+MANIFESTS = os.path.join(SITE, "manifests")
+LEGACY_UNTIL = "2026-10-04"  # manifest.json（凍結）が受け持つ最終日。以後は manifests/YYYY-MM-DD.json
 
 WD = {"Mon":"月","Tue":"火","Wed":"水","Thu":"木","Fri":"金","Sat":"土","Sun":"日"}
 
@@ -22,6 +25,15 @@ NAV_CSS = """
   .bnav a:hover{text-decoration:underline;}
   .bnav .dis{color:var(--grey);}
 """
+
+# 最新号の「最新号」表示を、公開後に出た次号へのリンクに置き換える（前日ファイルを再pushしなくてよい）
+NEXT_JS = ('<script>(function(){var s=document.getElementById("bnext");if(!s)return;'
+           'var m=location.pathname.match(/(\\d{4}-\\d{2}-\\d{2})\\.html$/);if(!m)return;var d=m[1];'
+           'fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})'
+           '.then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;'
+           'return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})})'
+           '.then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;'
+           'a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script>')
 
 def jdate(d):
     y, m, dd = d.split("-")
@@ -39,14 +51,39 @@ def inject_nav(html, prev_e, next_e):
     if "/*BNAVCSS*/" not in html:
         html = html.replace("</style>", f"/*BNAVCSS*/{NAV_CSS}</style>", 1)
     left = f'<a href="{prev_e["file"]}">← {jdate(prev_e["date"])}（{prev_e["weekday"]}）</a>' if prev_e else '<span class="dis">←</span>'
-    right = f'<a href="{next_e["file"]}">{jdate(next_e["date"])}（{next_e["weekday"]}）→</a>' if next_e else '<span class="dis">最新号</span>'
+    right = f'<a href="{next_e["file"]}">{jdate(next_e["date"])}（{next_e["weekday"]}）→</a>' if next_e else '<span class="dis" id="bnext">最新号</span>'
     nav = (f'<!--BNAV START--><nav class="bnav"><div class="wrap">{left}'
-           f'<a href="../index.html">一覧</a>{right}</div></nav><!--BNAV END-->\n')
+           f'<a href="../index.html">一覧</a>{right}</div></nav>{NEXT_JS}<!--BNAV END-->\n')
     return html.replace("<body>", "<body>\n" + nav, 1)
 
+def load_entries():
+    """凍結した manifest.json（LEGACY_UNTIL まで）と manifests/YYYY-MM-DD.json（それ以後）を合わせて返す"""
+    legacy = json.load(open(os.path.join(SITE, "manifest.json"), encoding="utf-8"))
+    entries = {e["date"]: e for e in legacy if e["date"] <= LEGACY_UNTIL}
+    if os.path.isdir(MANIFESTS):
+        for fn in sorted(os.listdir(MANIFESTS)):
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}\.json", fn):
+                e = json.load(open(os.path.join(MANIFESTS, fn), encoding="utf-8"))
+                entries[e["date"]] = e
+    return sorted(entries.values(), key=lambda e: e["date"])
+
+def write_manifests(entries):
+    """LEGACY_UNTIL より後の号を 1 日 1 ファイルで書き、manifests/index.json に日付一覧を書く（毎日 push するのはこの 2 つだけ）"""
+    os.makedirs(MANIFESTS, exist_ok=True)
+    days = []
+    for e in entries:
+        if e["date"] <= LEGACY_UNTIL:
+            continue
+        days.append(e["date"])
+        with open(os.path.join(MANIFESTS, e["date"] + ".json"), "w", encoding="utf-8") as f:
+            json.dump(e, f, ensure_ascii=False, indent=1)
+            f.write("\n")
+    with open(os.path.join(MANIFESTS, "index.json"), "w", encoding="utf-8") as f:
+        json.dump({"legacy": {"file": "manifest.json", "until": LEGACY_UNTIL}, "days": days}, f, ensure_ascii=False, indent=1)
+        f.write("\n")
+
 def build():
-    entries = json.load(open(os.path.join(SITE, "manifest.json"), encoding="utf-8"))
-    entries.sort(key=lambda e: e["date"])
+    entries = load_entries()
     # 各号にナビ注入
     for i, e in enumerate(entries):
         p = os.path.join(BRIEFS, e["file"])
@@ -55,9 +92,7 @@ def build():
         prev_e = entries[i-1] if i > 0 else None
         next_e = entries[i+1] if i < len(entries)-1 else None
         open(p, "w", encoding="utf-8").write(inject_nav(html, prev_e, next_e))
-    with open(os.path.join(SITE, "manifest.json"), "w", encoding="utf-8") as _mf:
-        json.dump(entries, _mf, ensure_ascii=False, indent=1)
-        _mf.write("\n")
+    write_manifests(entries)
     _write_index(entries)
     print(f"built: {len(entries)} issues")
     for e in entries:
@@ -113,8 +148,12 @@ INDEX_JS = r"""
   const ol=(titles,cls)=>{const o=el('ol',cls);titles.forEach((t,i)=>{const li=el('li');li.append(el('span','n',String(i+1)),el('span','tt',t));o.append(li);});return o;};
   let entries;
   try{
-    const r=await fetch('manifest.json?t='+Date.now(),{cache:'no-store'});
-    entries=await r.json();
+    const q='?t='+Date.now(), o={cache:'no-store'};
+    const ix=await (await fetch('manifests/index.json'+q,o)).json();
+    const lg=ix.legacy?await (await fetch(ix.legacy.file+q,o)).json():[];
+    entries=lg.filter(e=>!ix.legacy.until||e.date<=ix.legacy.until);
+    const days=await Promise.all((ix.days||[]).map(d=>fetch('manifests/'+d+'.json'+q,o).then(r=>r.json())));
+    entries=entries.concat(days);
   }catch(e){wrap.textContent='一覧を読み込めませんでした。再読み込みしてください。';return;}
   entries.sort((a,b)=>a.date<b.date?1:-1);
   const latest=entries[0];
@@ -165,9 +204,21 @@ def _write_index(entries):
     open(os.path.join(SITE, "index.html"), "w", encoding="utf-8").write(index)
 
 def gen_index_only():
-    entries = json.load(open(os.path.join(SITE, "manifest.json"), encoding="utf-8"))
-    entries.sort(key=lambda e: e["date"])
-    _write_index(entries)
+    _write_index(load_entries())
+
+def add_issue(date):
+    """新号を登録: manifests/<date>.json を書いてから rebuild（weekday と titles は HTML から）"""
+    import datetime
+    assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", date), date
+    wd = WD[datetime.date.fromisoformat(date).strftime("%a")]
+    fn = date + ".html"
+    html = open(os.path.join(BRIEFS, fn), encoding="utf-8").read()
+    e = {"date": date, "weekday": wd, "file": fn, "titles": extract_titles(html)}
+    os.makedirs(MANIFESTS, exist_ok=True)
+    with open(os.path.join(MANIFESTS, date + ".json"), "w", encoding="utf-8") as f:
+        json.dump(e, f, ensure_ascii=False, indent=1)
+        f.write("\n")
+    build()
 
 def nav_one():
     e_prev = json.loads(_ARGS.prev)
@@ -178,6 +229,8 @@ def nav_one():
 if __name__ == "__main__":
     if _ARGS.cmd == "index":
         gen_index_only()
+    elif _ARGS.cmd == "add":
+        add_issue(_ARGS.date)
     elif _ARGS.cmd == "nav":
         nav_one()
     else:
