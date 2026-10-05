@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月6日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-05.html">← 10/5（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年10月6日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code（Opus 5.5）に麻雀の点数計算アプリを 20 時間で作らせて公開 — 先に用意したのは CLAUDE.md の「完了の定義」、TDD の強制、ドメインを純粋関数に閉じる、ADR は Why だけ、文章もテストの 5 つ。自動テスト 1,087 本が全部通っても、サイト名の由来だけは AI の創作だった</h2>
+      <p class="why">— 10/5 の無人ループ、10/4 の CLAUDE.md の重さに続く「個人開発を AI に任せる」実例。公開アプリを 1 人で回す読者が、自分の CLAUDE.md と .claude/rules/ にそのまま写せる形で書かれている。</p>
+      <p class="b">ふーころ氏（10/5）。Web アプリ「符ナビ」を約 20 時間で公開。本体 3,533 行にテスト 2,627 行・自動テスト 1,087 本、ADR 28 本、AI 利用料は月約 3,000 円。先に用意した 5 つ: CLAUDE.md に「完了の定義」（<code>docker compose run --rm test</code> と <code>typecheck</code> が通る、code-map.md が実装と一致、方針を決めたら ADR）。<code>.claude/rules/tdd.md</code> で Red（失敗の確認）を強制し、符計算に必ず含めるケースを列挙。<code>domain/</code> は DOM も <code>window</code> も import せず、失敗は Result 型で返す。ADR は Why だけ。解説 74 個の文体と早見表 176 マスもテスト。</p>
+      <p class="b">それでも抜けたのが 1 件。ドメイン名 fu-koro は運営者名なのに、AI は「符から取った」という由来をトップページに書き、テストは全部通っていた。対処は CLAUDE.md に 1 行、ADR に 1 枚、全ページを確かめるテスト 1 本。含意: テストは「決めた正しさ」しか守らない。人間に残るのは、何を作るか言葉にし、正しさの基準を決め、使う人の目で見ること。n=1、自作アプリへのリンクあり。</p>
+      <p class="try">試すなら: CLAUDE.md に「完了の定義」を 3 行で書く（例: <code>flutter test</code> と <code>dart analyze</code> が通る／方針を決めたら docs/adr/ に 1 枚／docs/code-map.md が実装と一致）→ <code>.claude/rules/tdd.md</code> に「テストが失敗するのを見てから実装する」と、自分のドメインで必ず含めるテストケースの一覧を置く（<code>.claude/rules/</code> と <code>paths:</code> は docs/en/memory で 10/4 に確認済み）→ AI の間違いを見つけたら、直すだけでなく CLAUDE.md の 1 行とテスト 1 本に変換する（記事の設定名と数字は本文、n=1）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/fukorohouse/articles/127839090d6c25">Zenn — Claude Code（Opus 5.5）で麻雀点数計算アプリを20時間で公開した。先に用意した5つの仕組み</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>mizchi 氏の 2026 年 10 月版「AI プログラミング手法」— 人間の仕事はコードでなく評価指標とループを作ること。完了条件を数値にできる仕事（テスト、Lint 警告数、hyperfine の実行時間、Mutation Test の Kill 率、VRT の一致率）は Umbrella Issue にまとめて <code>/goal</code> に渡し、自律で回す</h2>
+      <p class="why">— 9/17 既報の <code>/goal</code> を「何を渡すか」まで具体化した運用の型。公式 docs の条件の書き方（測れる終端＋確かめ方＋制約）と噛み合う。</p>
+      <p class="b">mizchi 氏（10/5）。人間の役割はループの構築・評価指標の作成・テストと CI の調整で、「数値化できるものなら AI で自動化できる」。問題を洗い出す→Umbrella Issue にまとめる→<code>/goal Issues を全部潰して</code> で順に処理。指標は RSS・hyperfine、Lint 警告数・循環複雑度、Mutation Test の Kill 率、VRT の一致率。含意: 自分の仕事を「基準を数値にする」側へ寄せるほど、Claude Code に渡せる範囲が広がる。実測値はなく、著者も「またすぐ変わる」と留保。</p>
+      <p class="try">試すなら: 直したい点を Issue に分けて 1 本の Umbrella Issue にぶら下げ、各 Issue に「<code>flutter test</code> が exit 0」「<code>dart analyze</code> の warning 0」「<code>hyperfine</code> で起動 N ms 以下」のように測れる終端を書く → auto mode で <code>/goal Umbrella Issue #N の子 Issue を全部閉じる。or stop after 20 turns</code> → 途中経過は <code>/goal</code>（引数なし）、止めるなら <code>/goal clear</code>。無人なら <code>claude -p "/goal …" --output-format stream-json --verbose</code>（<code>/goal</code> はターン終了ごとに小型モデルが条件を判定する Stop フックの包み紙。条件は「測れる終端・確かめ方・制約」で最大 4,000 字、ターン上限の句も書ける — docs/en/goal で確認。指標の選び方は記事本文）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/mizchi/articles/ai-coding-loop-formal">Zenn — 俺のAIプログラミング手法(2026/10/05)</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>sqflite のマイグレーションは「古いスキーマの DB を実際に作り、新コードで開く」テストで守る — <code>sqflite_common_ffi</code> でテストから本物の SQLite を開き、<code>PRAGMA table_info</code> で新規作成と移行後の列定義を比べたら NOT NULL と DEFAULT が食い違っていた</h2>
+      <p class="why">— 公開済み Flutter アプリの DB 変更で一番怖い「既存ユーザーの端末でだけ壊れる」を、実機なしのテスト 2 本で公開前に捕まえる型。</p>
+      <p class="b">hk_work 氏（10/4）。<code>shelf_id</code> 列を足す移行を、<code>databaseFactoryFfi</code> のテストで実機なしに検証。v1 の CREATE TABLE で古い DB を作り 1 件 insert→本番の DB クラスで開き直し、<code>onUpgrade</code> 後に行と新列を expect。<code>PRAGMA table_info</code> では新規作成が notnull 1・default 1、移行後は notnull 0・default null（NOT NULL 列には DEFAULT が必須）。含意: 公開後なら移行がもう 1 段要る差を、公開前に止めた。</p>
+      <p class="try">試すなら: <code>dev_dependencies</code> に <code>sqflite_common_ffi: ^2.4.3</code>（pub.dev 最新、9/10）を足す → test/ に「v1 の CREATE TABLE で作って 1 行入れる→自分の DB クラスで開く→行と新列を expect」と「新規作成と移行後の <code>PRAGMA table_info</code> を比べる」の 2 本を書き、<code>flutter test</code> で回す → 新列は <code>NOT NULL</code> なら必ず <code>DEFAULT</code> を付ける（<code>sqfliteFfiInit()</code> と <code>databaseFactoryFfi</code> は pub.dev の README、コードと列定義の差は記事本文）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/hk_work/articles/sqflite-migration-test-old-schema">Zenn — sqflite のマイグレーションを、古いスキーマの DB を実際に作ってテストする</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">クラウドセッションのクレジット（Pro $100／Max $250、9/29 既報）の受け取り期限は 10/7（PT）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
