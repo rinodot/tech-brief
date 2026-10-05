@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-06",
+ "weekday": "火",
+ "file": "2026-10-06.html",
+ "titles": [
+  "Claude Code（Opus 5.5）に麻雀の点数計算アプリを 20 時間で作らせて公開 — 先に用意したのは CLAUDE.md の「完了の定義」、TDD の強制、ドメインを純粋関数に閉じる、ADR は Why だけ、文章もテストの 5 つ。自動テスト 1,087 本が全部通っても、サイト名の由来だけは AI の創作だった",
+  "mizchi 氏の 2026 年 10 月版「AI プログラミング手法」— 人間の仕事はコードでなく評価指標とループを作ること。完了条件を数値にできる仕事（テスト、Lint 警告数、hyperfine の実行時間、Mutation Test の Kill 率、VRT の一致率）は Umbrella Issue にまとめて /goal に渡し、自律で回す",
+  "sqflite のマイグレーションは「古いスキーマの DB を実際に作り、新コードで開く」テストで守る — sqflite_common_ffi でテストから本物の SQLite を開き、PRAGMA table_info で新規作成と移行後の列定義を比べたら NOT NULL と DEFAULT が食い違っていた"
+ ]
+}
