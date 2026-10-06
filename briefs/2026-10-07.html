@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月7日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-06.html">← 10/6（火）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年10月7日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>クラウドセッションの公式ガイドが出た — <code>claude --cloud "…"</code> で手元のリポジトリの作業を別 VM（約 4 vCPU・16GB・30GB）に投げ、「30 回連続で通して証明して」と終わりの証拠まで渡す。7 つの型（バックログの並列消化、flaky テストの証明、手元で plan→クラウドで実装→<code>--teleport</code> で戻す、スマホから確認、CI 失敗を渡す、routines、信頼できないコードは使い捨て VM で）。クレジット（Pro $100／Max $250）の受け取りは今日まで</h2>
+      <p class="why">— 9/29 既報のクレジットが今日 10/7（PT）で締め切り。何に使えば元が取れるかを、公式が「貼れるプロンプト」で示した。実機・エミュレータ・GPU が要る作業は手元に残す、という線引きも書いてある。</p>
+      <p class="b">Addy Osmani 氏（claude.dev、10/6）。1 セッション 1 タスクで、<code>claude --cloud "npm test が 4 回に 1 回落ちる。テストでなくコードの原因を直し、30 回連続で通して証明して"</code> と終わりの証拠まで入れる。手元で plan した計画を docs/ に push して <code>claude --cloud "docs/migration-plan.md を実行して"</code>、終わったら <code>claude --teleport &lt;session-id&gt;</code> で手元へ。進捗はスマホの Code タブ、追加指示は <code>claude -p "…" --cloud &lt;session-id&gt;</code>。</p>
+      <p class="b">VM は約 4 vCPU・16GB RAM・30GB。前景コマンドは既定 2 分（最大 10 分）、以後は背景で最大 30 分。準備は SessionStart フックと CLAUDE.md（VM は手元の <code>~/.claude</code> を継がない）。5 分以内のセットアップはキャッシュされ約 7 日で作り直し。並列 5 本は使用枠も約 5 倍速く減る。手元に残すのは実機・エミュレータ・GPU。含意: 画面を見なくていい作業（テスト追加、依存更新、docs）から投げる。Flutter SDK の有無は未確認。</p>
+      <p class="try">試すなら: <code>/claim-credit</code>（または claude.ai/code/claim-credit）で今日中に受け取る（失効 11/4）→ <code>/web-setup</code> で手元の gh の認証を渡す → push 済みのリポジトリで <code>claude --cloud "&lt;テストコマンド&gt; で落ちるテストを直して、30 回連続で通して証明して"</code> → スマホの Code タブで進捗を見て、終わったら <code>claude --teleport</code> で手元に戻す（<code>--cloud</code>／<code>--teleport</code>／<code>-p … --cloud &lt;id&gt;</code>／<code>/web-setup</code> は docs/en/claude-code-on-the-web、VM の仕様と時間制限とクレジットの期限は記事本文）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/claude-code-in-the-cloud/">claude.dev — Claude Code in the cloud: a field guide to cloud sessions</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Flutter（Riverpod）の設計規約を Agent Skill にし、3 タスク×Skill あり／なしの採点で 9 回育てた — Skill なしは機能要件 17/21・規約 3/33、ありは 21/21・33/33。ただし時間 1.5 倍・トークン 3.1 倍。一度全通過しても同じ条件を 3 回回すと Freezed の適用漏れが出た</h2>
+      <p class="why">— 9/29 既報の「評価で測ってから採る」を自分の Skill に当てた Flutter の実例。採点側に実装側の報告を渡さない、同条件を 3 回回す、の 2 点がそのまま写せる。</p>
+      <p class="b">hiromoo 氏（10/6）。機能追加・OpenAPI 連携・リファクタの 3 タスクを、機能要件 7 項目・規約 11 項目・機械的チェックで採点。Iteration 3 で規約 11/11 の代わりに機能が 4/7 に落ち、3 回ずつ回す 9 回目で 33/33。規約は「Freezed を使う」でなく「既存の公開データクラスがあれば Freezed の対象にする」と適用条件で書く。含意: 規約の満点と動作は別に数える。実装・採点とも GPT-6 系で Claude Code での再現は未確認、固定 3 タスクなので過学習の懸念も著者が明記。</p>
+      <p class="try">試すなら: <code>git clone https://github.com/hiromoo/flutter-riverpod-skill.git ~/.claude/skills/flutter-riverpod-skill</code>（MIT。README は Codex と Claude Code 対応）→ 中身を自分の規約に差し替える前に、自分のアプリの代表タスク 3 つと採点項目（機能／規約／<code>flutter analyze</code>・<code>flutter test</code>）を evals に書く → Skill あり／なしで各 3 回回し、規約と機能を別々に数える（手順と数字は記事と EVALUATION.md、計測モデルは GPT-6 系）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/hiromoo/articles/flutter-riverpod-agent-skill-evaluation">Zenn — FlutterのAgent Skillを評価で育てる——一度の全通過で終わらせなかった改善記録</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Claude Code v2.1.290〜292（10/5〜10/6）で使えるようになったこと — サブエージェント呼び出しに effort を指定、WebSearch の回数制限が「200 回で終わり」から「1 時間に 100 回ずつ回復」に、WebFetch は 10 万字を超えたら未読分を伝えて <code>offset</code> で続きを読める、<code>claude plugin install</code> に <code>--marketplace</code></h2>
+      <p class="why">— 10/3 既報の「effort は agents/*.md に固定」の続き。修正中心の 3 本から、運用に効く変更だけ拾った。</p>
+      <p class="b">Agent ツールに <code>effort</code> が付き、呼び出しごとに low／high を指定できる（これまでは agents/*.md か親の継承）。WebSearch は 200 回で打ち止めから 1 時間 100 回の回復式に（<code>CLAUDE_CODE_WEB_SEARCH_REFILLS_PER_HOUR</code>）。<code>claude attach &lt;名前&gt;</code> で背景セッションに名前で入れる。<code>/code-review</code> の medium が cleanup と CLAUDE.md 規約の指摘も出す。含意: effort の使い分けが設定ファイルでなく依頼文で書ける。</p>
+      <p class="try">試すなら: <code>claude update</code> で 2.1.292 に → サブエージェントへの依頼に「effort は low で」と添え、<code>/usage</code> で前後を比べる → 長いページは WebFetch の結果に未読量が出たら offset で続きを頼む → プラグインは <code>claude plugin install &lt;plugin&gt; --marketplace &lt;source&gt;</code> の 1 行で登録と導入をまとめる（いずれも github.com/anthropics/claude-code/releases の v2.1.290〜292 本文で確認。docs への反映は未確認）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.292">GitHub — anthropics/claude-code Releases v2.1.292</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">クラウドセッションのクレジット（Pro $100／Max $250、9/29 既報）の受け取り期限は本日 10/7（PT）＝日本時間 10/8（木）15:59 まで。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
