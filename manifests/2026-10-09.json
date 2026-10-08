@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-09",
+ "weekday": "金",
+ "file": "2026-10-09.html",
+ "titles": [
+  "Pro の 5 時間枠を長持ちさせる分担 — メインの Opus 5.5 は計画と diff レビューだけ、実装は Sonnet、調査と commit／push は Haiku 5.5 のサブエージェントに回したら、PR 1 本あたり $3.59→$2.14（約 40% 減）、5 時間枠の消費は 1 本あたり約 10%→約 6%。効いたのは Sonnet の安さより「メインセッションの文脈を小さく保つ」こと（平均 75→54 リクエスト、119k→107k トークン）",
+  "Firebase・Android・Google Cloud の公式ドキュメントを Claude Code の根拠にできる Google 公式の MCP サーバーが出た — claude mcp add google-developer-knowledge --transport http … の 1 行で、検索・全文取得・回答生成の 3 ツール。公開ドキュメントのみ・英語のみ、Flutter の収録は明記なし",
+  "Claude Code v2.1.294〜295（10/8）で使えるようになったこと — command／HTTP フックに onFailure: \"block\"（起動できない・タイムアウト・想定外の終了コードなら通さず止める）、Stop の prompt 型フックを指示文で書いたときの判定を改善（早く止まりにくく）、claude -p が最終ターン後に何を待っているかを stderr に 1 行、tool search 経由の MCP ツール説明が 2,048→16,384 字"
+ ]
+}
