@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月9日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-08.html">← 10/8（木）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年10月9日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Pro の 5 時間枠を長持ちさせる分担 — メインの Opus 5.5 は計画と diff レビューだけ、実装は Sonnet、調査と commit／push は Haiku 5.5 のサブエージェントに回したら、PR 1 本あたり $3.59→$2.14（約 40% 減）、5 時間枠の消費は 1 本あたり約 10%→約 6%。効いたのは Sonnet の安さより「メインセッションの文脈を小さく保つ」こと（平均 75→54 リクエスト、119k→107k トークン）</h2>
+      <p class="why">— 10/3 既報の「effort の固定」（agents/*.md に model＋effort）と 10/7 既報の Agent ツールの effort を、使用枠の視点で測った実例。1 PR あたりの枠消費を自分のログで数える手順つき。</p>
+      <p class="b">Andrea Grandi 氏（10/7、Pro）。.claude/agents/ に 4 体。implementer は <code>model: sonnet</code>・<code>effort: medium</code>、scoper は <code>model: haiku</code>・<code>permissionMode: plan</code>・<code>maxTurns: 12</code>、shipper は <code>model: haiku</code>・<code>effort: low</code>・<code>maxTurns: 10</code>、reviewer は opus で頼まれたときだけ。settings.json は <code>"model": "opus"</code> と effort medium、CLAUDE.md に「サブエージェントを使うのは常設の依頼」の 1 行。</p>
+      <p class="b">結果は Opus のみ 24 PR の $3.59／本に対し 13 PR で $2.14／本、5 時間枠の消費は約 10%→約 6%／本（1 枠で約 10 本→約 16 本の見込み）。メインの平均は 75→54 リクエスト、119k→107k トークン。著者の見立ては、単価差ではなく実装のループを子に逃がしてメインの文脈が膨らまないこと。含意: 計画と承認だけをメインに残す分担は、費用より「同じ枠で何本やれるか」で効く。n=1、PR の規模（248→392 行）が違う、金額は API 換算。</p>
+      <p class="try">試すなら: <code>.claude/agents/implementer.md</code> の frontmatter に <code>model: sonnet</code> と <code>effort: medium</code>、<code>scoper.md</code> に <code>model: haiku</code>・<code>permissionMode: plan</code>・<code>maxTurns: 12</code> を書く（キーは docs/en/sub-agents の表で確認。<code>maxTurns</code> に達すると partial で返り、再開できる）→ CLAUDE.md に「実装と調査はサブエージェントに任せる。頼まれるのを待たない」を 1 行 → 1 PR ごとに <code>/usage</code> の 5 時間枠の前後差を控え、1 本あたりの % を 10 本ほど並べて前と比べる（数字と構成は記事）。</p>
+      <p class="src">出典: <a href="https://www.andreagrandi.it/posts/claude-code-subagents-to-save-usage/">andreagrandi.it — How I use Claude Code subagents to make my Claude Pro limits last longer</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Firebase・Android・Google Cloud の公式ドキュメントを Claude Code の根拠にできる Google 公式の MCP サーバーが出た — <code>claude mcp add google-developer-knowledge --transport http …</code> の 1 行で、検索・全文取得・回答生成の 3 ツール。公開ドキュメントのみ・英語のみ、Flutter の収録は明記なし</h2>
+      <p class="why">— Firestore のルールや Functions の API を Claude が古い知識で書く問題への、Google 側からの手当て。10/8 既報のとおり MCP はツール名の一覧が起動の固定費になるが、これは 3 ツール。</p>
+      <p class="b">Google（10/7、public preview）。Firebase・Google Cloud・Android・Maps の公式ドキュメントを検索・全文取得・回答生成する Developer Knowledge API と、その MCP サーバー・gcloud コマンド・エージェントスキルが同時に出た。ツールは検索・全文・回答の 3 つ、認証は API キーをヘッダーで渡す。含意: Firebase の実装は書く前に公式を引かせる手が 1 行で入る。公開・英語のみ、Flutter／Dart の収録は明記なし、料金の記載なし。</p>
+      <p class="try">試すなら: <code>gcloud services enable developerknowledge.googleapis.com --project=&lt;PROJECT_ID&gt;</code> → API キーを作り <code>claude mcp add google-developer-knowledge --transport http https://developerknowledge.googleapis.com/mcp --header "X-Goog-Api-Key: &lt;KEY&gt;"</code>（キーは URL のクエリに入れない。MCP が使えない環境は <code>npx skills add google/skills --skill retrieving-developer-knowledge</code>）→ 「Firestore のルールで request.auth.token のカスタムクレームを使う書き方を公式ドキュメントで確認して」と頼み、<code>search_documents</code> が呼ばれるのを確認する（コマンドとツール名は developers.google.com/knowledge/mcp、発表は developers.googleblog.com 10/7。クォータ超過は 429）。</p>
+      <p class="src">出典: <a href="https://developers.google.com/knowledge/mcp">Google for Developers — Connect to the Developer Knowledge MCP server</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Claude Code v2.1.294〜295（10/8）で使えるようになったこと — command／HTTP フックに <code>onFailure: "block"</code>（起動できない・タイムアウト・想定外の終了コードなら通さず止める）、Stop の prompt 型フックを指示文で書いたときの判定を改善（早く止まりにくく）、<code>claude -p</code> が最終ターン後に何を待っているかを stderr に 1 行、tool search 経由の MCP ツール説明が 2,048→16,384 字</h2>
+      <p class="why">— 10/8 既報の prompt 型 Stop フックの差し戻し率と、9/9 既報の「止まった hook は非ブロック」の両方に当たる変更。修正多数の中から運用に効くものだけ。</p>
+      <p class="b">v2.1.294 は prompt／agent フックを指示文で書くと通してしまう件と、Stop の prompt フックの判定を直した 2 件。v2.1.295 は command／HTTP フックに <code>onFailure: "block"</code> が付き、起動できない・タイムアウト・想定外の終了コードのとき、既定の「通す」でなく「止める」を選べる。ほかに <code>claude -p</code> が何を待っているかを stderr に出す、tool search 経由の MCP ツール説明は 16,384 字まで。含意: 守りのフックを fail-closed にできる。</p>
+      <p class="try">試すなら: <code>claude update</code> で 2.1.295 に → 秘密情報や危険コマンドを止める PreToolUse の command フックに <code>"onFailure": "block"</code> を足し、わざと <code>exit 3</code> で終わらせて止まるか確かめる → Stop の prompt フックの文面は指示文でなく判定文（「次の場合だけ ok=false: …」）に揃え、10/8 既報の差し戻し率を 1 週間数え直す（変更点は github.com/anthropics/claude-code/releases の v2.1.294・v2.1.295 本文。<code>onFailure</code> の docs 記載は未確認）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.295">GitHub — anthropics/claude-code Releases v2.1.295</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Max／Team に月次の API クレジット（Max 5x $100、Max 20x $200、Team は席あたり $20〜$100・上限 $500。繰り越しなし）。claude.ai の Settings → Billing → API credits → Link organization で Console 組織に紐付ける。使えるのは API キーで動かす Claude API・Agent SDK・Managed Agents・<code>claude -p</code>。プランのアカウントでサインインした対話型 Claude Code（ターミナル・IDE・デスクトップ・Web）と <code>claude -p</code> は従来どおり使用枠から減る。<a href="https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans" style="color:inherit">support.claude.com</a>（10/7）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
