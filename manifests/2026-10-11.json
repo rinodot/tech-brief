@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-11",
+ "weekday": "日",
+ "file": "2026-10-11.html",
+ "titles": [
+  "サブエージェントの書き込みを本当に止める設定はどれか — yorusuzu 氏が検証用 11 体を claude -p で実測（10/10、計 $0.06）: tools から Write を外しても Bash のリダイレクトで書ける、親の deny は Edit(...) なら親も子も止まるが Write(...) は素通り、子の permissionMode: plan は親が acceptEdits だと無視される、孫の起動は tools に Agent を書かなければ起きない",
+  "Claude Code を手元の Ollama モデルで動かす公式手順 — ollama launch claude --model glm-5.3-flash の 1 行（docs.ollama.com）。settings.json の env に ANTHROPIC_BASE_URL・ANTHROPIC_AUTH_TOKEN と ANTHROPIC_DEFAULT_HAIKU_MODEL などを書けば、haiku／sonnet／opus の枠ごとに別モデルを割り当てられる（uhu 氏 10/10）。条件は tools 対応モデルと 64k 以上の文脈",
+  "特集④ 実例の分解 — 何を分担し、どこで壊れ、何で測ったか。5 か月・2 か月・17 日・一晩の 4 つの運用記録を同じ 3 段で読む"
+ ]
+}
