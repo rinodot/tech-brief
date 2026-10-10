@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月11日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-10.html">← 10/10（土）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年10月11日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>サブエージェントの書き込みを本当に止める設定はどれか — yorusuzu 氏が検証用 11 体を <code>claude -p</code> で実測（10/10、計 $0.06）: <code>tools</code> から Write を外しても Bash のリダイレクトで書ける、親の deny は <code>Edit(...)</code> なら親も子も止まるが <code>Write(...)</code> は素通り、子の <code>permissionMode: plan</code> は親が acceptEdits だと無視される、孫の起動は <code>tools</code> に Agent を書かなければ起きない</h2>
+      <p class="why">— 9/14 既報「deny の Write(パス) は参照されない」をサブエージェントまで広げた実測。9/20 特集①の worktree 隔離や 10/9 既報の分担で、子に渡す権限を決める根拠になる。</p>
+      <p class="b">検証用の子 11 体を haiku で 2 回。<code>disallowedTools: Write, Edit</code> はツール自体が消える。親の deny は <code>Edit(...)</code> なら親も子も止まり、<code>Write(...)</code> は書けた。<code>tools: Read, Bash</code> の子はリダイレクトで書け、<code>Edit</code> の deny で止まる。<code>permissionMode: plan</code> は親が acceptEdits なら無視される。PreToolUse（exit 2）は両方止める。含意: 子の書き込み制限は <code>Edit(...)</code> の deny かフックで決める。Windows・各 1 回。</p>
+      <p class="try">試すなら: 読み取り専用にしたい子の <code>.claude/agents/scoper.md</code> に <code>disallowedTools: Write, Edit, Agent</code>（孫も止める。入れ子の既定は 3 層、<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1</code> で全体を止められる）→ settings.json の <code>permissions.deny</code> に <code>"Edit(src/**)"</code> を足す → <code>claude -p "scoper で src/ を調べて要約して" --max-budget-usd 1</code> の後に <code>git status</code> で何も変わっていないこと、Bash の <code>&gt;</code> 経路も止まったことを確かめる → <code>permissionMode: plan</code> は親の mode に依存するので、確実に止めたい経路は PreToolUse の command フック（exit 2）に（frontmatter のキーと入れ子の既定は docs/en/sub-agents、deny の挙動は記事）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yorusuzu/articles/claude-code-subagent-permissions-test">Zenn — Claude Codeのサブエージェントの権限設定は効くか。tools・disallowedTools・denyを実行して確かめた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code を手元の Ollama モデルで動かす公式手順 — <code>ollama launch claude --model glm-5.3-flash</code> の 1 行（docs.ollama.com）。settings.json の env に <code>ANTHROPIC_BASE_URL</code>・<code>ANTHROPIC_AUTH_TOKEN</code> と <code>ANTHROPIC_DEFAULT_HAIKU_MODEL</code> などを書けば、haiku／sonnet／opus の枠ごとに別モデルを割り当てられる（uhu 氏 10/10）。条件は tools 対応モデルと 64k 以上の文脈</h2>
+      <p class="why">— 9/10 既報「軽い観点は Ollama」を Claude Code 本体で。使用枠を減らさない下書き・要約・ログ読みを 12〜16GB の GPU で回す入口。</p>
+      <p class="b">Ollama 公式の統合ページ。<code>ollama launch claude</code> が Claude Code を Ollama 向けの環境変数つきで起動する。条件は tools 対応モデルと 64k 以上の文脈、例に glm-5.3-flash・qwen3.5。uhu 氏（10/10）は settings.json の env で枠ごとに別モデルを割り当て、既定外のモデルは 200K で圧縮されるので <code>[1m]</code> を付けると書く（経験則）。含意: 使用枠を使わない作業を分ける道が公式にある。WebSearch など一部ツールは非対応。</p>
+      <p class="try">試すなら: <code>ollama pull glm-5.3-flash</code> → 文脈を <code>OLLAMA_CONTEXT_LENGTH=65536</code> で起動した Ollama に対し <code>ollama launch claude --model glm-5.3-flash</code> → <code>/status</code> で接続先が localhost:11434 か確認 → 枠を分けるなら settings.json の <code>"env"</code> に <code>"ANTHROPIC_BASE_URL": "http://localhost:11434"</code>、<code>"ANTHROPIC_AUTH_TOKEN": "ollama"</code>、<code>"ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-5.3-flash"</code> を書き、<code>haiku</code> 指定の作業（要約・ログ読み・サブエージェントの scoper）だけローカルに流して、同じ作業の品質を 1 週間比べる（コマンドと変数は docs.ollama.com/integrations/claude-code と docs/en/model-config、<code>OLLAMA_CONTEXT_LENGTH</code>（既定 4096）は docs.ollama.com/faq。uhu 氏の記事は <code>:cloud</code> モデル中心で手元のデータが外に出る点に注意）。</p>
+      <p class="src">出典: <a href="https://docs.ollama.com/integrations/claude-code">Ollama Docs — Claude Code</a></p>
+    </article>
+
+    <section class="special">
+      <h3 class="sp">特集④ 実例の分解 — 何を分担し、どこで壊れ、何で測ったか。5 か月・2 か月・17 日・一晩の 4 つの運用記録を同じ 3 段で読む</h3>
+      <p class="b">分担。Cockroach Labs（10/9）は issue を患者に見立て、実装役とは「別のインスタンス」のレビュー役、30 分ごとの停滞巡回役、差し戻し 3 回超で動く安全性レビューを置いた。welchi 氏（10/10）は作業役とレビュー役を別会話に。閉店後 開発者氏（10/11）は読み取り専用の点検を先に、実装は領域で分けた worktree で合流。共通点は、書く役と判定する役を別インスタンスにし、状態を会話の外に置くこと。</p>
+      <p class="b">どこで壊れたか。Cockroach では指示文書 約 10 万語の 23% が「消しても結果が変わらない」と判定され、issue 1777 は 1 行の修正に差し戻し 11 回・2 日。閉店後 開発者氏は単体テスト 1,450 件が通っても効果音が鳴らず（テストも同じエージェントが書いた）、AI の自己採点は点検のたびに下がった。cucinakiyo_ai 氏（10/10）の無人ループは「拒否がなければ合格」で未実行の回まで合格にし、成功報告 23 件中 13 件が否定された。3 種: 書き手＝判定者、測れない回を数える、文書の肥大。</p>
+      <p class="b">何で測ったか。Cockroach は Db2 対応が 2 日弱・$4,172（Oracle は 9 か月・約 16 万ドル）、コミットの 85% がパイプライン製。閉店後 開発者氏はボット 3 回で −19% に見えた指標が 6 回で −5%、境界の判定は 48 回に増やした。welchi 氏は 2 週間の不満 184 件を仕組みに変え、指標は週 1 枚、正解データは判定器にも見せない。cucinakiyo_ai 氏は判定器に「測れていない」の箱を足した。</p>
+      <p class="b">移せるのは 4 点。レビューは別インスタンスで、まず読み取り専用から。差し戻しは回数で止める（3 回超で人に戻す）。測定は回数を増やし測定器を先に疑い、測れなかった回を合否から外す。指示文書は月 1 回棚卸し。welchi 氏も「普通の業務開発なら 2〜3 並列で十分」と書く。4 本とも n=1・宣伝つき。</p>
+      <p class="try">試すなら: <code>.claude/agents/reviewer.md</code> の冒頭に「あなたは実装したセッションとは別のインスタンス。読み取り専用で、直さず報告する」と書き、1 件目の <code>disallowedTools: Write, Edit</code> を付ける → 差し戻しは Stop フックの判定役で数え、3 回を超えたら ok=false をやめて人に戻す（10/8 既報の <code>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</code> と対で使う）→ 自動テストや無人ループの結果は「試した」「測れなかった」「通った」の 3 列で台帳に残し、通った数だけで判断しない → <code>wc -w CLAUDE.md .claude/skills/*/SKILL.md</code> を月 1 回記録し、増え続ける文書は削る候補にする（数字は各記事本文。Cockroach の issue 1 件あたりの金額は分母が記事内で合わないので使っていない）。</p>
+      <p class="src">出典: <a href="https://www.cockroachlabs.com/blog/experiment-running-hospital-code/">Cockroach Labs — Five months treating bugs like patients and coding agents like a medical team</a> ／ <a href="https://zenn.dev/welchi/articles/ai-20parallel-pm">Zenn — AIを20並列で回したら、PMになっていた</a> ／ <a href="https://zenn.dev/afterclosegame/articles/b9be8925bd97dc">Zenn — AIエージェントに任せて4ストアに出して壊れたもの</a> ／ <a href="https://zenn.dev/cucinakiyo_ai/articles/2bcb273ec33b5c">Zenn — AI秘書の「できました」は23件中13件が否定された</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
