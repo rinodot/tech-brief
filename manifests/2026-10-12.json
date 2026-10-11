@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-12",
+ "weekday": "月",
+ "file": "2026-10-12.html",
+ "titles": [
+  "無人の claude -p の記録上のコストを 48% 減らした 2 つの設定 — キャッシュ TTL を 5 分に（CLAUDE_CODE_PROMPT_CACHE_TTL=5m）、起動時に読むユーザー設定・MCP・スキル・自動メモリを外す（--setting-sources project,local --strict-mcp-config --disable-slash-commands と CLAUDE_CODE_DISABLE_AUTO_MEMORY=1）。koki_n22 氏の実測: 1 時間保持のキャッシュ書き込みが費用の 66.2%、$8.09→$4.22、テスト 17/17 は変わらず",
+  "RAG で質問文の「確認」が正解を押し出していた — 字句検索の多出語を文書頻度（DF）12 で足切りしたら 10 ケースの正解到達が 28→31 件（tom 氏）。重みを下げる案は逆効果、RRF は同じ id が両方の表に出ると点が足される",
+  "16GB の GPU でローカルのエージェントが止まる 2 つの理由 — Ollama の既定 num_ctx 4096 に system prompt の 18k トークンが入らず HTTP 400、会話が上手いモデルがツールを呼ばない。ぷゆるる氏が RTX 5070 Ti＋Hermes Agent で踏んだ順と直し方"
+ ]
+}
