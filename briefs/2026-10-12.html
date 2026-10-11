@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月12日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-11.html">← 10/11（日）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年10月12日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>無人の <code>claude -p</code> の記録上のコストを 48% 減らした 2 つの設定 — キャッシュ TTL を 5 分に（<code>CLAUDE_CODE_PROMPT_CACHE_TTL=5m</code>）、起動時に読むユーザー設定・MCP・スキル・自動メモリを外す（<code>--setting-sources project,local --strict-mcp-config --disable-slash-commands</code> と <code>CLAUDE_CODE_DISABLE_AUTO_MEMORY=1</code>）。koki_n22 氏の実測: 1 時間保持のキャッシュ書き込みが費用の 66.2%、$8.09→$4.22、テスト 17/17 は変わらず</h2>
+      <p class="why">— 9/30 既報の TTL（サブスク 1h・API キー 5m）と 10/8 既報の起動時の一覧を、無人の <code>claude -p</code> で同時に効かせた実測。10/5 既報の毎時ループの固定費を下げる具体策。</p>
+      <p class="b">koki_n22 氏（10/11）。Kotlin の小さなライブラリを 4 タスクに分け、無人の <code>claude -p</code> で実装させた記録 543 ステップ・計 $277.31 を集計すると、費用の 66.2% が 1 時間保持のキャッシュ書き込みだった。1 時間保持の書き込みは通常入力の 2 倍、5 分保持は 1.25 倍。そこで TTL を 5 分にし、起動時に読むユーザー設定・MCP・スキル・自動メモリを外すと、同じ仕様・同じ Opus 5.5 で全実行 $8.09→$4.22（48% 減）。採点テスト 17/17 とマージ 4/4 は前後で同じ、起動時コンテキストは約 32.3k→約 9.3k トークン。</p>
+      <p class="b">5 分保持で足りるのは、無人実行はターンの間隔が短く失効しないから（変更後の API 外の待ちは最大 80 秒。732 秒待った別の回は失効した可能性が高い）。<code>--bare</code> は同じ省略を一度にやるがサブスクのログインを使えない（9/24 既報）ので、サブスクならこのフラグ群になる。含意: 無人ループの固定費は TTL と起動時の読み込みで半分にできる。注意: 前後各 1 回でターン数も 190→163 と減っており、ドル額は API 換算で請求額ではなく、使用枠への影響と処理時間は未計測。</p>
+      <p class="try">試すなら: いつもの無人タスク 1 本を <code>CLAUDE_CODE_PROMPT_CACHE_TTL=5m CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 claude -p "…" --setting-sources project,local --strict-mcp-config --disable-slash-commands --tools Read,Grep,Glob --effort high --output-format json | jq '.total_cost_usd'</code> で前後 3 回ずつ回し、費用と成果物を比べる（<code>--effort</code> はユーザー設定を外すと既定に戻るので明示）→ 起動時の読み込みは <code>/context</code> で前後を見る → 長いビルドやテストで待ちが 5 分を超える工程があるなら、その工程だけ <code>1h</code> に戻して比べる（変数は docs/en/env-vars: <code>5m</code>／<code>1h</code> のみ、v2.1.242 以降、<code>promptCacheTtl</code> 設定より優先。フラグは docs/en/cli-reference。<code>--bare</code> が API キー課金になる点は docs/en/headless）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/koki_n22/articles/20d628b3ceb99f">Zenn — claude -pのキャッシュと起動設定を見直したら、記録上のコストが約半分になった</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>RAG で質問文の「確認」が正解を押し出していた — 字句検索の多出語を文書頻度（DF）12 で足切りしたら 10 ケースの正解到達が 28→31 件（tom 氏）。重みを下げる案は逆効果、RRF は同じ id が両方の表に出ると点が足される</h2>
+      <p class="why">— 10/3 既報の Pi 上ハイブリッド RAG や 10/5 既報の grep と埋め込みの併用で起きる典型的な事故。日本語で字句検索を足すなら、先に語ごとの DF を見る理由。</p>
+      <p class="b">tom 氏（tomtom55555、10/11）。承認済み 144 件の記録を引く RAG で、質問文の「確認」が字句検索で 17 行に当たり、RRF（k=60。同じ id が両方の表に出ると点が足される）の上位を埋めて、意味検索 3 位の正解が採用枠 18 件から落ちた。字句の重みを 0.4 に下げると 9 ケースで 27→25 件と悪化。文書頻度（DF）が 12 を超える語を字句照合から外すと、10 ケースの正解到達は 28→31 件。含意: 日本語の字句検索は多出語を外してから足す。閾値は絶対件数なので記録が増えたら見直す。小規模。</p>
+      <p class="try">試すなら: 自分の RAG の評価質問 10 問で、質問を 2 文字以上の語に割り、語ごとの DF を <code>SELECT count(*) FROM chunks WHERE text LIKE '%語%'</code> で数える → DF が上位の語を字句照合から外す閾値を「なし／12／6」の 3 段で比べ、正解到達数が増えた閾値を採る → 閾値は件数で固定せず、評価のたびにコーパス件数と語ごとの DF を表示して、両者が近づいたら相対値（コーパス比）に切り替える（数字と式は記事。DF を数える式と候補を拾う式は同じ関数にまとめる、が記事の要点）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tomtom55555/articles/ff27671349a277">Zenn — RAG で「確認」という 2 文字が正解を押し出していた — RRF の二重掲載と、文書頻度での足切り</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>16GB の GPU でローカルのエージェントが止まる 2 つの理由 — Ollama の既定 <code>num_ctx</code> 4096 に system prompt の 18k トークンが入らず HTTP 400、会話が上手いモデルがツールを呼ばない。ぷゆるる氏が RTX 5070 Ti＋Hermes Agent で踏んだ順と直し方</h2>
+      <p class="why">— 10/11 既報「Claude Code を手元の Ollama で」の条件（tools 対応・64k 以上）を、同じ 16GB 級の GPU で踏み外すと何が起きるかの実例。</p>
+      <p class="b">ぷゆるる氏（10/11）。RTX 5070 Ti 16GB で Hermes Agent v0.19.0（Ollama）を動かすと、gemma4:12b はツールを呼ばず、Ornith-1.0-9B では初回の 18,358 トークンが既定の 4096 を超えて HTTP 400。Hermes 側は上限 262,144 を信じるので、Modelfile の <code>PARAMETER num_ctx 65536</code> の派生モデルを作り、Hermes の <code>context_length</code> も揃えた。含意: 文脈長とツール呼び出しの最小テストを先に通す。試行は少数。</p>
+      <p class="try">試すなら: Ollama を <code>OLLAMA_CONTEXT_LENGTH=65536</code> で起動するか、モデルごとに <code>FROM &lt;model&gt;</code>＋<code>PARAMETER num_ctx 65536</code> の Modelfile から <code>ollama create &lt;name&gt;-64k -f Modelfile</code> → 本番のタスクの前に「<code>ls</code> を 1 回呼ぶ」「ファイルを 1 つ読んで要約」の 2 問でツール呼び出しが起きるかを見る → <code>ollama ps</code> と <code>nvidia-smi</code> で GPU に載っているか確かめる（Claude Code 側は 10/11 既報の <code>ollama launch claude</code> が v0.40.2 からモデルの最大文脈長で起動するので、この罠は settings.json の env で自前接続するときに踏む。<code>OLLAMA_CONTEXT_LENGTH</code> は docs.ollama.com/faq、<code>num_ctx</code> は docs.ollama.com/modelfile）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/puyururu/articles/hermes-local-llm-16gb-pitfalls">Zenn — 16GB VRAM で Hermes Agent をローカル LLM で動かす — tool-calling で詰まった3点</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Ollama v0.40.3（10/11）: 10/10 短報の「旧版で落としたモデルを裏で更新」は埋め込みなどの応答性能のため一時停止、<code>ollama launch claude</code> の connectors 警告が消えた（<a href="https://github.com/ollama/ollama/releases/tag/v0.40.3" style="color:inherit">release notes</a>）。Java 不要の Firestore エミュレータ hidane v0.1.0（Rust、のむのむ氏 10/11）: 起動 5.5ms・待機 7.4MiB、<code>hidane exec -- firebase emulators:start --only firestore</code> で差し替え。ただし Security Rules 未対応（全許可、v0.2 で予定）で Flutter は未検証（<a href="https://zenn.dev/nomunomu0504/articles/hidane-firestore-emulator" style="color:inherit">記事</a>）。Firebase の期限: Test Lab は非推奨で 2027/9/30 に終了（移行先 Developer Device Platform、9/30 告知）、Extensions は 2027/3/31 に終了（function kits へ、7/20 告知）（<a href="https://firebase.google.com/support/releases" style="color:inherit">release notes</a>）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
