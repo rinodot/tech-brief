@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-13",
+ "weekday": "火",
+ "file": "2026-10-13.html",
+ "titles": [
+  "git push を deny しても git -C . push は素通りする — deny は命令文字列との照合なので、PreToolUse フック（Python）で前置きと -C／-c を飛ばして subcommand を見る。\"onFailure\": \"block\"（v2.1.295）でフックが失敗しても止め、「止める形 22・通す形 7」のテストを先に作る（飯島紘一氏、Windows）",
+  "9/25 既報の三値 Bonsai 2 27B を RTX 4070 12GB で — PTQ1_0 は VRAM 7.6GB・56 tok/s（同じ 27B の Qwen3.8 Q4_K_M は層が溢れて 3.55）。ただし文脈 64K で 48.9→17.1 tok/s の崖があり、-fa on -ctk q8_0 -ctv q8_0 なら 128K でも 55.7（ローカルAIラボ氏）",
+  "Flutter 3.47 で分かれた material_ui への移行は dart fix --apply --code=migrate_design_widgets で 14 ファイル 17 件が自動、手で直すのは 3 点（barrel の export、ローカライズの delegates、any のバージョン固定）。marwaMejri 氏の小さなアプリでテスト 10/10 は移行後も同じ"
+ ]
+}
