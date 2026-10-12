@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月13日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-12.html">← 10/12（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年10月13日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2><code>git push</code> を deny しても <code>git -C . push</code> は素通りする — deny は命令文字列との照合なので、PreToolUse フック（Python）で前置きと <code>-C</code>／<code>-c</code> を飛ばして subcommand を見る。<code>"onFailure": "block"</code>（v2.1.295）でフックが失敗しても止め、「止める形 22・通す形 7」のテストを先に作る（飯島紘一氏、Windows）</h2>
+      <p class="why">— 9/14 既報「deny の Write(パス) は参照されない」、10/11 既報「Write(...) は素通り」に続く deny の限界と、10/9 既報の <code>onFailure: "block"</code> を実際に使った設定例。</p>
+      <p class="b">飯島紘一氏（k_iijima、10/12）。deny に <code>Bash(git push *)</code> と書いても、<code>git -C . push</code>、<code>git -c push.default=current push</code>、<code>git 'push'</code>、<code>sh -c '…'</code> は文字列が一致せず通る。そこで PreToolUse の Python フックが、命令を <code>;</code>・<code>&amp;&amp;</code>・<code>|</code> で分け、<code>env</code>・<code>sudo</code> などの前置きと <code>-C</code>／<code>-c</code> を飛ばして subcommand を見る。<code>bash -c</code> と <code>$( )</code> の中身も同じ手順で読み、読めない命令は "git" を含むだけで止める（終了コード 2）。</p>
+      <p class="b">要点は 2 つ。<code>"onFailure": "block"</code>（v2.1.295 以降）で、フックが起動できない・時間切れでも命令を通さない（既定は素通り）。先に「止める形 22・通す形 7」のテストを作り、わざと壊して 5 個の抜けを見つけた。含意: deny は入口の網で、本当に止めたい操作は構文を読むフックと fail-closed の組で守る。限界: <code>$( )</code> の入れ子・alias・PowerShell は読めず、settings もフックも AI が書き換えられるので著者は AI 専用の OS アカウントで分けた。Windows、n=1。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> の <code>hooks.PreToolUse</code> に <code>{"matcher": "Bash", "hooks": [{"type": "command", "command": "python \"$CLAUDE_PROJECT_DIR/.claude/hooks/block_git.py\"", "onFailure": "block"}]}</code> を置き、フックは stdin の JSON の <code>tool_input.command</code> を読んで、止めるときは stderr に理由・終了コード 2 → 先に <code>git -C . push</code>、<code>sh -c 'git push'</code>、<code>$(echo git) push</code> を含む「止める形」と <code>git status</code>・<code>git log</code> の「通す形」をテストに書く → フックをわざと <code>exit 1</code> に壊して、それでも命令が止まることを確かめる（終了コード 2 の扱い・<code>onFailure</code> の値 continue／block と既定 continue・<code>CLAUDE_PROJECT_DIR</code> は docs/en/hooks。<code>Bash(...)</code> の deny が書かれた形にしか当たらない点は docs/en/permissions の bash-rule-limits）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/k_iijima/articles/ae926619c45882">Zenn — Claude Code の deny だけでは git push を止めきれない話</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>9/25 既報の三値 Bonsai 2 27B を RTX 4070 12GB で — PTQ1_0 は VRAM 7.6GB・56 tok/s（同じ 27B の Qwen3.8 Q4_K_M は層が溢れて 3.55）。ただし文脈 64K で 48.9→17.1 tok/s の崖があり、<code>-fa on -ctk q8_0 -ctv q8_0</code> なら 128K でも 55.7（ローカルAIラボ氏）</h2>
+      <p class="why">— 10/4 特集③の KV キャッシュの式がそのまま速度に出た実測。12GB で長い文脈を使うときの既定値の罠と、回避の 1 行。</p>
+      <p class="b">ローカルAIラボ氏（10/12、RTX 4070 12GB）。PrismML 版 llama.cpp で PTQ1_0（5.95GB）は 56.2 tok/s・VRAM 7,608 MiB、Qwen3.8-27B Q4_K_M は 3.55。だが KV が既定の 16bit だと PQ2_0 は 64K で 17.05 tok/s に落ち、エラーは出ない。<code>-fa on -ctk q8_0 -ctv q8_0</code> なら PTQ1_0 は 128K でも 55.71。含意: 12GB では文脈長を先に決め、KV を 8bit にしてから崖を測る。1 環境・品質は未検証。</p>
+      <p class="try">試すなら: 手持ちのモデルで <code>llama-server -m &lt;model&gt;.gguf -ngl 99 -c 65536 -fa on -ctk q8_0 -ctv q8_0 --parallel 1</code> を起動し、8K／32K／64K の入力で tok/s を 3 回ずつ取って崖が消えるかを自分の GPU で見る → Bonsai 2 を試すなら PrismML-Eng/llama.cpp のリリース版と <code>prism-ml/Ternary-Bonsai-2-27B-gguf</code> の PTQ1_0 から（素の llama.cpp では動かない。9/25 既報）→ 思考を切るなら起動時に <code>--chat-template-kwargs '{"enable_thinking": false}'</code>（<code>-fa</code>・<code>-ctk</code>／<code>-ctv</code>（既定 f16）・<code>--chat-template-kwargs</code>・<code>--reasoning-budget</code> は llama.cpp の tools/server/README。8bit KV の品質差は未検証なので、評価セット 1 本で前後を比べてから常用）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/localai_lab/articles/e99753d9876882">Zenn — Ternary Bonsai 2 27BをRTX 4070で動かす：PrismML版llama.cpp、思考の止め方、文脈枠の崖</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Flutter 3.47 で分かれた material_ui への移行は <code>dart fix --apply --code=migrate_design_widgets</code> で 14 ファイル 17 件が自動、手で直すのは 3 点（barrel の <code>export</code>、ローカライズの delegates、<code>any</code> のバージョン固定）。marwaMejri 氏の小さなアプリでテスト 10/10 は移行後も同じ</h2>
+      <p class="why">— 9/11 既報の material_ui 1.0.0 から 55 日で 7 リリース。自分のアプリを移すときの最短手順と、自動では直らない所。</p>
+      <p class="b">marwaMejri 氏（dev.to、10/12、material_ui 1.6.0）。<code>dart fix --dry-run --code=migrate_design_widgets</code> で 14 ファイル 17 件が自動。残る手直しは 3 点: barrel の <code>export</code>（残ると既定色が紫にずれる）、ローカライズの delegates の置き換え（放置すると仏語テスト 3 件が落ちる）、<code>any</code> を <code>^1.6.0</code> に固定。含意: サードパーティ UI なしなら短時間、<code>ThemeData</code> を受け渡すパッケージは橋渡しでも救えない。n=1。</p>
+      <p class="try">試すなら: ブランチを切って <code>dart fix --dry-run --code=migrate_design_widgets</code> で件数だけ見る → <code>--apply</code> 後に <code>grep -rn "flutter/material.dart" lib/</code> で残った <code>export</code> 行を探し <code>package:material_ui/material_ui.dart</code> に書き換える → <code>flutter test</code> と、<code>MaterialApp</code> の <code>localizationsDelegates</code> が <code>GlobalMaterialLocalizations.delegates</code>（material_ui 版）になっているかを確認 → <code>ThemeData</code> を受け取るサードパーティ UI パッケージが 1 つでもあれば本番は待つ（手順と <code>MaterialUiCompatibilityBridge</code> は pub.dev/packages/material_ui の README。1.6.0 は 10/6 公開）。</p>
+      <p class="src">出典: <a href="https://dev.to/marwamejri/can-you-migrate-to-materialui-yet-1aa1">DEV Community — Can you migrate to material_ui yet?</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: koki_n22 氏の続報（10/12、<a href="https://zenn.dev/koki_n22/articles/66198694ea028c" style="color:inherit">記事</a>）: <code>--json-schema</code> の値を変えると起動時のキャッシュが全部作り直される（同条件の再起動は cache read 約 4.8k・write 0 が 5/5、スキーマだけ変えると write 約 4.8k・read 0 が 2/2。StructuredOutput ツールの定義が変わるため、と推定）。ホーム配下の worktree では <code>~/.claude/CLAUDE.md</code> が project 指示として読まれ <code>--setting-sources</code> では外れないので <code>claudeMdExcludes</code> で除外、$3.90→$3.71。無人 <code>claude -p</code> のスキーマは固定して使い回す。karaage 氏（10/12、<a href="https://zenn.dev/kagaage/articles/b046f8a597c63a" style="color:inherit">記事</a>）: Whisper を日本語 100 クリップで 6 サイズ比較、文字誤り率は tiny 40.0%／small 13.5%／medium 6.9%／large-v3-turbo 4.6%／large-v3 4.4%。固有名詞を <code>initial_prompt</code> に渡すと雑音下でも turbo が 47/47 だが、ヒントは最初の区間にしか効かないので数十秒で区切る（Mac M4・mlx-whisper、会議音声は合成）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
