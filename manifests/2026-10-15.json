@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-15",
+ "weekday": "木",
+ "file": "2026-10-15.html",
+ "titles": [
+  "OWASP ASVS の再点検を Claude Code の Skill に任せたら、全面点検 12 分 01 秒・$5.43 が「差分＋Bash あり」で 6 分 25 秒・$2.89（47% 減）。Bash を禁じると 4 分 21 秒まで縮むが退行を見逃し、依存コードを渡せば検出が戻る。--allowedTools は「それだけに制限」ではなく、Bash を止めるなら --disallowedTools Bash（suna 氏）",
+  "Claude Code v2.1.299／300: 20 万トークン超の会話を約 54 分放置すると、1 時間キャッシュが切れる前に自動で compact（\"idleCompaction\": false で停止）。/usage が max effort・常時文脈・巨大ツール結果を警告、OpenTelemetry にキャッシュ書き込みの 5 分／1 時間内訳、MCP の許可ルールはサーバー名を完全一致に",
+  "Claude Code に「Projects」（公開ベータ、Pro／Max）— 1 本の会話で Claude が司令塔になり、頼んだ仕事ごとにクラウドセッション（スレッド）を起こして並列に進め、ブランチと PR で返す。既定は全部 Opus・スレッド high なので、最初に「2 本まで」「開始前に提案」と伝える"
+ ]
+}
