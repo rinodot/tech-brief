@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月16日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-15.html">← 10/15（木）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年10月16日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code の費用（API 換算）の 97.9% は「キャッシュの読み直し」— 97 セッション・21,095 リクエストの集計。効いたのは ①終わったら <code>/clear</code>・途中は <code>/compact</code>（13 回で約 $330）②大きいファイルはサブエージェントに読ませる（CLAUDE.md の一行で 0 回→82 回）③独立したツール呼び出しは 1 応答にまとめる（約 22% 減）。「毎回読むファイルを短くする」は −0.5% で効かなかった（r.iguchi 氏）</h2>
+      <p class="why">— 10/12 既報「TTL 5 分と起動の固定費」と昨日のアイドル compact を、自分のログで裏付ける方法。費用の正体が「文脈の大きさ×往復数」なら、節約は設定より運用の型で決まる。</p>
+      <p class="b">r.iguchi 氏（ムクイル、10/15）。対策前の 97 セッション・21,095 リクエストでは、入力トークンの 97.9% がキャッシュ読み取り。1 往復の費用は会話の長さで 30 倍以上開き、最悪は 1 会話を 13 日・5,065 リクエスト。①終わったら <code>/clear</code>、途中は <code>/compact</code>。手動 compact で会話は平均約 8 分の 1、13 回で少なくとも約 $330。②大きいファイルはサブエージェント（Read・Grep・Glob、sonnet）に読ませる。対策前 0 回が、CLAUDE.md の一行「大きいファイルはサブエージェントで読む（常に守る。頼まれるのを待たない）」で、以後 7,427 リクエスト中 82 回に。</p>
+      <p class="b">③ツールを呼んだ応答の 84.2% が 1 つだけ。「関係のない呼び出しは 1 回の応答にまとめる」で平均 1.17→1.50 個、リクエスト約 22% 減。含意: 読み直し費用は文脈の大きさ×往復数。固定費より往復数と会話の長さを減らす方が桁で効く。注意: 個人のログ、API 換算（読み取り $0.50/M の仮定）、前後でモデルも変わり③はルールだけの効果と言えない、compact の額は下限。</p>
+      <p class="try">試すなら: 記事付録の <code>cc_usage.py</code> を保存して <code>CACHE_READ_PRICE=0.5 python cc_usage.py</code>（Windows は <code>PYTHONIOENCODING=utf-8</code> を前置）で <code>~/.claude/projects/&lt;プロジェクト&gt;/&lt;セッションID&gt;.jsonl</code> を集計し、キャッシュ読み取りの割合と長く続いた会話を確認 → <code>.claude/agents/code-explorer.md</code> を <code>name: code-explorer</code>／<code>tools: Read, Grep, Glob</code>／<code>model: sonnet</code> で作る → CLAUDE.md に「作業が終わったら /clear」「大きいファイルはサブエージェントで読む（常に守る。頼まれるのを待たない）」「関係のないツール呼び出しは 1 回の応答にまとめる」の 3 行 → 1 週間後に同じスクリプトで再集計（単価は公式料金表で差し替え。昨日のアイドル compact は放置時の保険、<code>/clear</code> は能動の節約）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/mukuil_blog/articles/bda0dfd84be48e">Zenn — Claude Code の料金の98%は「読み直し」だった ── 2万リクエストを集計して分かった3つの節約術</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>FlutterFire が一斉にメジャー更新（10/15）: firebase_core 5.0.0・cloud_firestore 7.0.0・firebase_auth 7.0.0・firebase_ai 5.0.0。Android は Firebase BoM 35 で minSdk 24 以上が必須、Apple は Swift Package 経路が Firebase Apple SDK 13（macOS 11 以上。CocoaPods 経路は 12.19.0 のまま）。<code>flutter pub upgrade --major-versions</code> の前に minSdk を確認</h2>
+      <p class="why">— 自分のアプリが使う 4 パッケージが同日に破壊的変更。Android 7.0 未満を切る判断が先、上げるのは後。</p>
+      <p class="b">10/15 に 4 パッケージが同時にメジャー更新。共通は Android SDK 35・iOS SDK 13 への更新で、Android は minSdk 24 以上、Swift Package は macOS 11 以上が必要（iOS の最低は 15.0 のまま）。Apple SDK 13 は CocoaPods 配布を終えたので、Podfile 経路は 12.19.0 のまま、SPM 経路だけ 13。含意: 上げるなら minSdk→ビルド→実機の順。急がなければ 4.x 据え置きも成立。</p>
+      <p class="try">試すなら: <code>grep -n minSdk android/app/build.gradle android/app/build.gradle.kts 2&gt;/dev/null</code> → 数値なら 24 以上に、<code>flutter.minSdkVersion</code> 任せなら <code>grep -n minSdkVersion "$(dirname "$(dirname "$(command -v flutter)")")/packages/flutter_tools/gradle/src/main/kotlin/FlutterExtension.kt"</code>（master は 24）→ Play Console の Android バージョン別の統計で API 23 以下の利用者が残っていないか確認 → ブランチで <code>flutter pub upgrade --major-versions firebase_core cloud_firestore firebase_auth firebase_ai</code> → Android 実機でサインインと Firestore の読み書きをスモーク → iOS を出しているなら Podfile か SPM（<code>flutter config --enable-swift-package-manager</code>）かを確認してからビルド（Android BoM 35（10/7）が多くのライブラリの minSdkVersion を API 24 に引き上げ、FlutterFire の CocoaPods 据え置きは PR #18783。firebase_ai 5.0.0 は非推奨 API を削除。個別の変更は pub.dev の各 changelog）。</p>
+      <p class="src">出典: <a href="https://pub.dev/packages/firebase_core/changelog">pub.dev — firebase_core changelog 5.0.0</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカル LLM の喋り出しが遅い原因は「プロンプトの順序」— 毎回変わる部分より前に固定の約 2,000 トークンを置き直しただけで、再 prefill 2,067→約 180〜240 トークン、TTFT 約 10.7 秒→約 1.7〜2.2 秒（M3 16GB・mlx_lm.server）。生成速度は約 18 tok/s のまま（OEC-7m 氏）</h2>
+      <p class="why">— 10/9 既報の KV キャッシュ・10/12 既報の TTL と同じ「接頭辞が一致した分だけ省ける」原理をローカルで。llama-server も既定でプロンプトキャッシュが有効なので、順序の見直しだけで効く。</p>
+      <p class="b">オーイーシー OEC-7m 氏（10/14）。ロボット対話の喋り出し約 10.7 秒の原因は組み立て順。毎回変わる場所一覧・想起メモリの後ろに約 2,000 トークンのマニュアルがあり、キャッシュに当たらず毎回 prefill されていた。マニュアルを固定ルールの直後へ上げただけで、再 prefill 2,067→約 180〜240 トークン、TTFT 約 1.7〜2.2 秒。同じ質問の連投では差が消え、著者も一度「効果なし」と誤判定。含意: 変わらないものを前、変わるものを後ろ。M3 16GB・MLX の 1 台、モデル名なし。</p>
+      <p class="try">試すなら: 組み立て順を「システム規則→大きな固定資料（マニュアル・few-shot）→検索結果など毎回変わる部分→履歴→今回の発話」に並べ替える → llama-server はプロンプトキャッシュが既定で有効（無効化は <code>--no-cache-prompt</code>）なので、別々の質問を続けて投げ、<code>"stream": true, "return_progress": true</code> を付けたリクエストの <code>prompt_progress</code> で <code>cache</code>（再利用できたトークン）と <code>processed</code>（prefill したトークン）を比べる → 同じ質問の連投で測らない → 中間だけ変わる構成なら <code>--cache-reuse 256</code>（既定 0。一致しない部分を KV シフトで飛ばして再利用）も試す（フラグは llama.cpp tools/server/README）。</p>
+      <p class="src">出典: <a href="https://qiita.com/OEC-7m/items/4bc4740b2cc9de46b85a">Qiita — ローカル LLM が遅い原因は、モデルでもエンジンでもなく「プロンプトの順序」だった</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.301（10/15）: 無人リトライ <code>CLAUDE_CODE_RETRY_WATCHDOG</code> に <code>CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS</code> が加わり、リセットが遠い使用量上限では待たずに終了できる（kindledai 氏の 10/15 <a href="https://zenn.dev/kindledai/articles/bb0ebc19dfe84f" style="color:inherit">記事</a>では、タスクスケジューラ起動の <code>claude -p</code> が週次上限で 16 回連続失敗し、Codex の代役も無料枠切れで 0 回稼働。「代役の代役」より、この変数で止め方を決める方が筋）。ほかに OTel の <code>tool_decision</code> に <code>classifier_verdict</code>・<code>permission_mode</code>（auto mode の分類器判断と許可ルールを区別）、vim の <code>%</code>、VS Code で LaTeX 描画。platform release notes 10/15: Opus 5.5 の fast mode が research preview を終了（<code>fast-mode-2026-02-01</code> ヘッダー不要、全 usage tier に既定のレート上限）。Claude Code では <code>/fast</code>、$8／$40 per MTok、Pro／Max は usage credits からのみ。さっと氏（ZOZO、10/15、<a href="https://zenn.dev/zozotech/articles/1a26d1775c06f7" style="color:inherit">記事</a>）: 自動 compact の決め方を 1 本に整理 — <code>/autocompact 500k</code> はモデル別に保存、settings の <code>autoCompactWindow</code> は全モデル、サブエージェント frontmatter の <code>autoCompactWindow</code> は親より小さい時だけ効く、<code>DISABLE_AUTO_COMPACT=1</code> はアイドル compact も止める。statusLine の <code>used_percentage</code> は窓全体に対する割合なので compact のしきい値とはずれる。LightOn の ColGrep-Agent（hathat 氏の 10/15 紹介、一次は <a href="https://huggingface.co/blog/lightonai/colgrep-agent" style="color:inherit">HF ブログ 10/12</a>）: 手元の 2B モデル（GGUF 約 2.5GB、NVIDIA は Vulkan）が Claude Code のコード探しを hook で代行し、52 問×3 回×4 設定で API トークン 142k→93k（−34.3%）、1 問 7.3→4.4 セント、正答率 83.3→80.8%（有意差なし）、所要 13.0→21.6 秒。<code>cargo install colgrep &amp;&amp; colgrep --install-agent</code> → <code>colgrep init</code> → <code>colgrep --install-claude-code</code>。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
