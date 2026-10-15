@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-16",
+ "weekday": "金",
+ "file": "2026-10-16.html",
+ "titles": [
+  "Claude Code の費用（API 換算）の 97.9% は「キャッシュの読み直し」— 97 セッション・21,095 リクエストの集計。効いたのは ①終わったら /clear・途中は /compact（13 回で約 $330）②大きいファイルはサブエージェントに読ませる（CLAUDE.md の一行で 0 回→82 回）③独立したツール呼び出しは 1 応答にまとめる（約 22% 減）。「毎回読むファイルを短くする」は −0.5% で効かなかった（r.iguchi 氏）",
+  "FlutterFire が一斉にメジャー更新（10/15）: firebase_core 5.0.0・cloud_firestore 7.0.0・firebase_auth 7.0.0・firebase_ai 5.0.0。Android は Firebase BoM 35 で minSdk 24 以上が必須、Apple は Swift Package 経路が Firebase Apple SDK 13（macOS 11 以上。CocoaPods 経路は 12.19.0 のまま）。flutter pub upgrade --major-versions の前に minSdk を確認",
+  "ローカル LLM の喋り出しが遅い原因は「プロンプトの順序」— 毎回変わる部分より前に固定の約 2,000 トークンを置き直しただけで、再 prefill 2,067→約 180〜240 トークン、TTFT 約 10.7 秒→約 1.7〜2.2 秒（M3 16GB・mlx_lm.server）。生成速度は約 18 tok/s のまま（OEC-7m 氏）"
+ ]
+}
