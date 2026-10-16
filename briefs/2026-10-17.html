@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月17日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-16.html">← 10/16（金）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年10月17日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code チームのコードレビュー運用を公式が公開（10/15）: Claude が同リポジトリのコードの約 90% を書き、6〜9 月でマージ PR は 2 倍超・差し戻し率は 40% 超減。AI レビュアー導入で実質的なコメントが付く PR は 16%→54%、再レビューの平均は 2.08→1.32 回。鍵は <code>REVIEW.md</code>・3 ラウンド上限・差分だけ再レビュー・リスク別の承認（Low は人不要／High は 2 人）</h2>
+      <p class="why">— 10/11 特集④「別インスタンスでレビュー」「差し戻しは回数で止める」を、本家が数字つきで裏付けた。個人でも <code>REVIEW.md</code> と上限 3 回はそのまま使える。</p>
+      <p class="b">Addy Osmani 氏ら（claude.dev、10/15）。Claude Code 自身のコードは約 90% を Claude が書き、6〜9 月でマージ PR は 2 倍超、差し戻し率は 40% 超減。AI レビュアー導入後、社内 PR で実質的なコメントが付く割合は 16%→54%。指摘され続けたものの約 59% は初回から残っていたコードで、対策は「3 ラウンドで止めて設計から考え直す」と「数回目以降は新しい差分だけ再レビュー」。これで 1 回で通る PR は 65%→78%、5 ラウンド以上は 8.9%→1.5%、平均 2.08→1.32 回。</p>
+      <p class="b">承認はリスク別。Low（文書・フラグ裏の追加）は自動レビューと安全チェックが緑なら人は不要、Medium は 1 人、High（認証・課金・リリース）は 2 人。<code>REVIEW.md</code> はコードオーナーが書く短い文書で、「失敗はどう見えるか」（docs なら嘘、config なら誤経路）、細かい指摘の上限、飛ばすパス、根拠はファイルと行、件数から始まる要約を求める。含意: レビューの質は「何を見るか」の明文化と「いつ止めるか」の上限で決まる。注意: 社内モノレポの数字、個人規模の比較なし。</p>
+      <p class="try">試すなら: リポジトリに <code>REVIEW.md</code> を置き「このコードで失敗はどう見えるか」「細かい指摘は N 件まで」「飛ばすパス」「根拠はファイルと行」の 4 点を書く → 作業の終わりに <code>/code-review</code> と <code>/security-review</code>（または文脈を持たない別セッションかサブエージェントのレビュー）→ PR テンプレートに「Testing」「Risk」「How to revert」を足す → 差し戻しは 3 回で止めて設計を見直し、4 回目以降は新しい差分だけ見せる → 事故と差し戻しを評価セットにし、レビュアーのプロンプトやモデルを変えたら採点し直す（公式の「How you can adopt this process」の順。Code Review 製品自体は Team／Enterprise の GA で Pro／Max は対象外）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/solving-code-review-at-anthropic/">claude.dev — How the Claude Code team does code review</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code の「直しました」を Stop フックで検査し、根拠のない完了報告を記録→次のターンで 1 回だけ注意を注入する仕組み。9/27〜10/16 の 4,331 返答で、証拠なしの完了は週ごとに 1.2%→8.3%→5.2%。言葉の見張りより効いたのは「作業の最後に AI 自身へ外から読み直させる手順」（キリヌキ自動化ラボ）</h2>
+      <p class="why">— 10/14 既報「出力側の門」の続き。禁止では消えない虚偽報告を「まず測る→次ターンで直させる」に変えた型。</p>
+      <p class="b">キリヌキ自動化ラボ氏（10/16）。「直しました」が事実でない返答を検出する仕組み。Stop フックが最後の返答を読み、完了を示す語があるのに同じ段落に根拠がなければ記録。次の UserPromptSubmit で「直前の返答に根拠のない完了があった」と 1 回だけ文脈に足す。9/27 からの 4,331 返答で、証拠なしの完了は週ごとに 1.2%（2,430 中 30）→8.3%（818 中 68）→5.2%（889 中 46）。減らず、理由は未特定。含意: 門は「ゼロにする」より「見つけて次で直す」装置。n=1。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> に <code>"Stop": [{"hooks": [{"type": "command", "command": "python reply_lint_min.py"}]}]</code> と <code>"UserPromptSubmit": [{"hooks": [{"type": "command", "command": "python reply_lint_inject.py"}]}]</code> → スクリプトはフック入力の <code>transcript_path</code> から最後の返答を読み、完了語 <code>(完了しました|できました|直りました|直しました|差し替えました|入れました|上がりました)</code> と根拠 <code>(開いて|測った|確かめました|照合|一致|\d+(?:\.\d+)?\s*(?:件|本|秒|%|枚|行|回))</code> を自分の語彙に置き換える → CLAUDE.md に「自己申告で『直った』と言わない。テストの終了コードと実物だけが根拠」「報告は開いた・測った物の数字を付ける」 → 1 週間ためて割合を見る（検出語を増やしたら週をまたいで比べない。フック仕様は docs/en/hooks、fail-closed は 10/13 既報）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/kirinukiauto/articles/510930af48266f">Zenn — Claude Codeの「直しました」を信じないために作った仕組みと、それでも5%残る話</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Riverpod 2.6.1→3.4.2 に上げたら「Cannot use the Ref of ＜provider＞ after it has been disposed.」で、ユーザーには「タップしても何も起きない」に見える不具合。原因は Provider より長生きした関数と、画面を閉じた後の state 代入。対処は用途別に <code>ref.mounted</code>・<code>keepAlive</code>・<code>watch</code> で寿命を揃える・サービスへ切り出し・<code>ref.onDispose</code>（日本トレカセンター 尾松氏）</h2>
+      <p class="why">— 自分のアプリも Riverpod 3 系。クラッシュとして記録されない沈黙の不具合なので、移行後は一覧→詳細の導線を手で踏む価値がある。</p>
+      <p class="b">尾松氏（10/16）。flutter_riverpod 2.6.1→3.4.2 で、一覧をタップしても詳細が開かない。原因は①破棄済み Provider の関数を呼んだ ②画面を閉じた後に破棄済み Notifier へ state を代入。対処は用途別: 表示更新だけなら <code>ref.mounted</code>、必ず要る副作用は <code>keepAlive</code> か使う側の <code>watch</code>、保存はサービスへ、画面専用の通信は <code>ref.onDispose</code>。含意: Provider ごとに「誰が生かすか」を決める。<code>ref.mounted</code> は競合も取消も防がない。</p>
+      <p class="try">試すなら: <code>flutter pub deps | grep riverpod</code> で 3 系か確認 → 一覧→詳細、保存→戻る、を実機で通し、ログで "after it has been disposed" を検索 → 出た箇所を「表示だけ／副作用／取り消したい通信」に分け、表示だけは <code>await</code> の直後に <code>if (!ref.mounted) return;</code>、副作用は <code>@Riverpod(keepAlive: true)</code> か呼び出し側の <code>ref.watch</code>、通信は <code>ref.onDispose(cancelToken.cancel)</code>（API docs の <code>Ref.mounted</code> は "Whether this Ref is still active"。可能なら <code>onDispose</code> を優先、と明記。記事の検証環境は Dart 3.13.1・riverpod 3.4.3）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/jtcc/articles/riverpod-v3-ref-lifecycle">Zenn — Riverpod 3 移行で遭遇した Ref disposed と、その対処で気をつけたいこと</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.302（10/16）: <code>CLAUDE_CODE_AUTO_MODE_MODEL</code> で手元側 auto mode 分類器のモデルを選べる、<code>/config</code> に Idle compaction の行、fork サブエージェント（<code>subagent_type: "fork"</code>）が <code>claude -p</code>・SDK・デスクトップ・VS Code でも既定 ON（<code>CLAUDE_CODE_FORK_SUBAGENT=0</code> で停止）、第三者プロバイダの <code>claude -p</code> は permission mode 未指定なら <code>default</code> で開始、同じイベントのフックは同時 12 本まで。Ollama v0.40.5 正式版（10/14）: Nemotron 3.5 Super（120B、1M 文脈）と Bolt（74B、24GB GPU 向け）、decision model の cloud 実行（<code>clef:cloud</code>）。RTX 4070 12GB の実測が 2 本。k1nos 氏（Qiita、<a href="https://qiita.com/k1nos/items/f35139cb8c94e86c4a72" style="color:inherit">10/15</a>）は Ollama 0.40.4（Docker）で qwen3:8b が 83.7〜85.0 tok/s・VRAM 6,957/12,282 MiB・context 4096、NVIDIA OpenShell v0.1.3 でエージェントの外向き通信を既定で遮断し、許可した実行ファイルから Ollama だけ通す（承認から反映まで約 7.5 秒）。aiota 氏（Qiita、<a href="https://qiita.com/aiota/items/54c70f15b96afe79c6b4" style="color:inherit">10/16</a>）は Windows 11 で qwen3:14b（9.7GB）が 40.5〜45.9 tok/s・VRAM 10,647 MiB。どちらも各 1〜2 回の計測。</p>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">無人 <code>claude -p</code> は TTL 5 分で 48% 減（10/12）。フックは <code>onFailure: block</code> で fail-closed（10/13）。Bonsai 2 は 64K に崖、KV q8_0 で 128K（10/13）。material_ui 移行は <code>dart fix</code>（10/13）。費用の天井は Functions で強制（10/14）。<code>--allowedTools</code> は許可であって制限でない（10/15）。アイドル compact は約 54 分（10/15）。費用の 97.9% は読み直し、<code>/clear</code>（10/16）。FlutterFire 5.0.0 は minSdk 24 が先（10/16）。固定部を前で TTFT 10.7→1.7 秒（10/16）。<code>REVIEW.md</code> と 3 ラウンド上限（10/17）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
