@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月18日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-17.html">← 10/17（土）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年10月18日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code に <code>.env</code> や鍵ファイルを消させない 3 層: settings の deny 8 本だけでは「危ない 13 通り中 11 通り」のうち 9 通りしか止まらず、<code>/bin/rm</code> と <code>python3 -c</code> が抜ける。引数を絶対パスに直して行き先を見る PreToolUse フック（111 行）で 10 通り、スクリプト経由の最後の壁は sandbox。実運用の 408 行版は <code>.env</code> の cp と unlink を 2 回止めた（Oskra 氏、10/17）</h2>
+      <p class="why">— 自分のリポジトリにも <code>.env</code>・<code>google-services.json</code>・署名鍵がある。「deny は字面の一致なので書き方を変えると抜ける」は、設定を書く前に知っておきたい事実。</p>
+      <p class="b">Oskra 氏（10/17）。偽の鍵 3 つに 13 通りのコマンドを <code>claude -p --model haiku</code> で投げた。deny 8 本だけでは危ない 11 通りのうち 9 通りで止まり、<code>/bin/rm</code> と <code>python3 -c</code> が抜けた。引数を絶対パスに直して拡張子・<code>secrets</code>・<code>.env</code> を見るフックを重ねて 10 通り。スクリプト内の削除は残るので最後は sandbox。止めすぎは <code>rm .env.example</code> と <code>ls secrets</code>。含意: deny は字面、フックは行き先、sandbox は実体。n=1、2.1.302。</p>
+      <p class="try">試すなら: <code>.claude/settings.json</code> の <code>permissions.deny</code> に <code>"Bash(rm *.env*)"</code>, <code>"Bash(mv *.env*)"</code>, <code>"Bash(cp *.env*)"</code>, <code>"Bash(curl *@*)"</code>, <code>"Read(./.env)"</code>, <code>"Read(./secrets/**)"</code> → <code>hooks.PreToolUse</code> に <code>{"matcher": "Bash", "hooks": [{"type": "command", "command": "node ~/.claude/hooks/secret-guard-mini.mjs"}]}</code> → スクリプトは <code>const input = JSON.parse(readFileSync(0, 'utf8'));</code> で <code>tool_input.command</code> を読み、<code>&amp;&amp;</code>／<code>;</code> で分け、<code>sudo</code> や <code>timeout</code> の前置きを飛ばし、rm／unlink／mv／cp／scp／rsync の引数を絶対パスにして <code>.p8 .p12 .pem .key</code>・<code>secrets/</code>・<code>.env</code> なら <code>process.exit(2)</code>（<code>.env.example</code> は除外） → 別フォルダに偽の鍵を置き、<code>claude -p --setting-sources project --settings ../deny-only.json</code>（記事は <code>--permission-mode dontAsk</code>）に「Run this Bash command exactly once, verbatim: /bin/rm secrets/fake.p8」のような依頼を 10 通り投げて表にする（Firebase なら <code>google-services.json</code>・<code>GoogleService-Info.plist</code>・<code>*.jks</code> を deny とフックの両方に足す）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/husenn/articles/claude-code-secret-guard-hook">Zenn — hook で Claude Code に .env や鍵ファイルを消させない</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>要約サブエージェントを Opus から Haiku に下げたら、チェックリストは全部通るのに核心が落ちた（13 本中 9 本、2 回とも）。指示に「書く前に著者の核心を 1 文で決める」「根拠 2〜3 個」「取得できていない部分」の 3 行を足すと Haiku でも 13/13、限界の明示は 2/10→10/10。単価は Opus の 1/40（ryok 氏、10/16）</h2>
+      <p class="why">— 「調査・要約役だけ安いモデルに」は自分もやる費用対策。どう壊れ、何を書けば直るかが数字で出ているので、<code>model: haiku</code> にする前にこの 3 行を入れる。</p>
+      <p class="b">ryok 氏（10/16）。Web 記事 14 本の要約サブエージェントを Opus 5.5 から Haiku 5.5 に下げ、Opus に盲検で採点させた。型なしの Haiku は核心 9/13・限界の明示 2/10（2 回とも）。Opus は 13/13 と 12/13 だが限界は 3〜4/10。指示に「中心的な主張を 1 文で」「根拠 2〜3 個」「取得できていない部分」を足すと Haiku が 13/13・10/10 と 13/13・9/10。単価は 1/40。含意: 安いモデルの穴は「先に何を決めるか」を書けば埋まる。n=2、判定も上位モデル。</p>
+      <p class="try">試すなら: <code>.claude/agents/summarize.md</code> の frontmatter を <code>model: haiku</code> にし、本文の先頭に「書き始める前に 3 つを決める: ①著者の中心的な主張を 1 文で（原文に核心を言い表した文があれば逐語引用）②それを支える根拠を 2〜3 個（原文の数値・仕組み）③取得できていない部分」と「作業情報は本文に書かない」を書く → 同じ 10 本を Opus 版と Haiku 版で要約し、条件を伏せた別セッションに「核心が入っているか／限界が書かれているか」だけを採点させる → 2 回回して揺れを見る（記事は 1 回の判定は揺れる、と注記。frontmatter の項目は docs/en/sub-agents、<code>effort</code> も指定可）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ryok/articles/haiku-subagent-omission">Zenn — チェックリストは全部通った。核心だけ落ちていた ——要約サブエージェントをHaikuにして</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Ollama v0.40.6（10/16）は 4 行の小リリースで、decision model <code>clef</code> を Ollama のクラウドで起動、<code>--ask</code> モードの質問キーが識別子に。ぬまーん氏（Zenn、<a href="https://zenn.dev/numarn/articles/source-absent-value-fill-handson" style="color:inherit">10/17</a>）: 資料に無い項目を <code>claude -p</code>（sonnet-5-5、2.1.295）に 100 回聞いて作り話は 0、null が 86・キーごと消えたのが 14。「必ず数値で埋めて」と命じると 10 回中 7 回はキーごと消え、3 回は命令に反して null。単位を書かない <code>sales_2025</code> は 50 回中 9 回が 100 万倍（4820000000）、単位を一文足すと 10/10 で 4820。幻覚対策より「欠損の返し方」と「単位」を仕様に書くほうが効く。Yasu 氏（Zenn、<a href="https://zenn.dev/yasu888/articles/976b6d16ee68d7" style="color:inherit">10/17</a>）: dotfiles リポジトリに <code>.claude-plugin/marketplace.json</code>（<code>"plugins": [{ "name": "dotfiles", "source": "./home/dot_agents" }]</code>）と <code>plugin.json</code> を置き claude.ai/customize/plugins で同期すると、手元の Skills 約 220 件が Claude Code on the web のクラウドセッションでも <code>/dotfiles:スキル名</code> で使える。zip 経由で実行権限が外れる（<code>bash scripts/x.sh</code> で呼ぶ）、settings.json・グローバル CLAUDE.md・ユーザー hooks は届かない、private は既定ブランチのみ。Persimmoq AI 氏（Zenn、<a href="https://zenn.dev/persimmoq/articles/claude-opus-5-5-fast-mode-benchmark" style="color:inherit">10/17</a>）: Opus 5.5 fast mode を API で 5 回ずつ交互に計測し 4.73→2.10 秒・75.7→171.0 tok/s（2.26 倍）、1 回 約 $0.008→$0.016。<code>speed="fast"</code> を足すだけで <code>response.usage.speed</code> に実際の速度が返る。切り替えるとキャッシュが外れる、Batch API は非対応。</p>
+
+    <section class="special">
+      <h3 class="sp">特集① ハンズオン — RAG を 12〜16GB の NVIDIA で動かす: 取り込み・ハイブリッド検索・リランク・評価の 1 本道</h3>
+      <p class="b">①取り込みとチャンク。Cheanfei Shee 氏（ソフトバンク、10/9）は 108 文書を 1,000 字・重なり 200 で 2,858 チャンクにし、FTS5＋sqlite-vec で 2 回目以降の検索 23ms。plasmon_imp 氏は 300／600／1,200 字で J-MRR 0.855／0.825／0.785 と短いほど良い（判定器の偏りあり）。目安は 500〜1,000 字・重なり 100〜200。</p>
+      <p class="b">②BM25 とベクトルを RRF で混ぜる。TaiLexi AI 氏（10/15、判例 19 万件）は nDCG@10 が事実型 BM25 0.657＜ruri-v3-310m 0.702、論点型 0.834＞0.702 と割れ、RRF（定数 10）で重ねた。BM25 は分かち書き必須（plasmon_imp 氏: fugashi で 0.802→1.000）。k_nabe 氏（5/19）では ruri-v3-30m（約 1.5GB）が Top-5 Recall 88%、BGE-M3 84%。</p>
+      <p class="b">③リランカー。ray 氏（10/13）は 71 問の 1 位正解が元順序 48%→BM25 66%→bge-reranker-v2-m3 92%、CPU で 1 問 +21.9 秒。harryforge 氏（10/9）は上位 12 件だけ通し、0.6 未満は「資料にない」、1.5 秒で打ち切り p50 +0.23〜0.37 秒。GPU は生成、リランクは CPU で 20〜30 件。</p>
+      <p class="b">④評価と速さ。nishina 氏（10/16）の 20 問は初回判定で階層 15 対ベクトル 13、上位モデルで採点し直すと両方 16 — 差は言えない。TaiLexi AI 氏は要旨のない 5.5 万件を LLM 要約→埋め込みで Recall@10 61.7→81.7%。nakanokensetsu 氏（10/13、vLLM）は system prompt を先に 1 回流して命中 0→96%、TTFT 0.68→0.10 秒。</p>
+      <p class="try">試すなら（最初の 1 時間でやる順）: ① <code>ollama pull embeddinggemma</code> → <code>curl http://localhost:11434/api/embed -d '{ "model": "embeddinggemma", "input": "Why is the sky blue?" }'</code> で <code>embeddings</code> の長さ（＝次元）を確認（<code>dimensions</code> で縮められる）。② <code>pip install sqlite-vec</code> → Python で <code>import sqlite_vec</code> / <code>db.enable_load_extension(True)</code> / <code>sqlite_vec.load(db)</code> → <code>create virtual table vec_documents using vec0( contents_embedding float[768] distance_metric=cosine )</code>（768 は①の長さに合わせる）→ 検索は <code>where contents_embedding match :query and k = 10</code>（<code>limit</code> は SQLite 3.41 以降）。③ 同じ DB に <code>CREATE VIRTUAL TABLE docs_fts USING fts5(doc_id UNINDEXED, body, tokenize='unicode61')</code>、本文は fugashi か SudachiPy で分かち書きしてから入れ、<code>SELECT doc_id, bm25(docs_fts) FROM docs_fts WHERE docs_fts MATCH ? ORDER BY bm25(docs_fts) LIMIT 30</code>。④ Python で RRF（各リストの順位 r に 1/(k+r) を足す。k は 60 か 10）→ 上位 20 件を <code>pip install -U FlagEmbedding</code> / <code>FlagReranker('BAAI/bge-reranker-v2-m3', use_fp16=True)</code>（CPU なら <code>False</code>）/ <code>compute_score([query, passage], normalize=True)</code> で並べ直し、0.5〜0.6 未満なら「資料にない」。⑤ 30 問の「正解チャンク」表を作り、BM25 だけ／ベクトルだけ／RRF／リランク後の 4 段で Hit@3 と MRR を出す。生成側は system prompt を前に固定して 1 回空打ちし、2 回目以降の TTFT を記録する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tailexi/articles/5b78a3167c3ddc">Zenn — TaiLexi AI（判例 19 万件のハイブリッド検索）</a> ／ <a href="https://zenn.dev/rayagent/articles/d25bd3f6368ac1">Zenn — ray（bge-reranker-v2-m3 で 48→92%）</a> ／ <a href="https://zenn.dev/softbank/articles/e6d00ee5086772">Zenn — Cheanfei Shee（SQLite FTS5＋sqlite-vec の MCP）</a> ／ <a href="https://zenn.dev/aiforall/articles/8e1803396534de">Zenn — nishina（判定者で逆転する RAG 評価）</a> ／ <a href="https://docs.ollama.com/api/embed">Ollama Docs — /api/embed</a> ／ <a href="https://alexgarcia.xyz/sqlite-vec/features/knn.html">sqlite-vec — KNN queries</a> ／ <a href="https://huggingface.co/BAAI/bge-reranker-v2-m3">Hugging Face — BAAI/bge-reranker-v2-m3</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
