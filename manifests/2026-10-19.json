@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-19",
+ "weekday": "月",
+ "file": "2026-10-19.html",
+ "titles": [
+  "Claude Code の Routines（クラウドの定期実行）で公式ドキュメント 12 ページの差分を毎朝 Slack に流す、1 人運用の実例。差分の検出は Python、モデルは判断と文章だけ。\"cron_expression\": \"0 0 * * *\"（UTC＝日本の 9 時）・Sonnet 5.5、手動実行は 23 秒・8 ターン／51 秒・9 ターン、差分なしの回は数千トークン。公式 docs の裏取り: 作成は /schedule、最小間隔 1 時間、正時は数分遅れるので 9:07、permission mode の選択なし（Persimmoq AI 氏、10/16）",
+  "無人の claude -p は、ツールの許可がなくて何もしなかった回でも終了コード 0・is_error false・subtype success のまま。25 回の起動（14 回はモデル実行、合計約 $0.023）で 1 になるのは引数の誤り・認証なし・存在しないモデル・--max-turns・--max-budget-usd だけ。拒否を見つける手がかりは --output-format json の permission_denials と成果物の有無（yorusuzu 氏、10/18）",
+  "「24GB 推奨」の Nemotron 3.5 Bolt（74B-A9B）を RTX 5070 Ti 16GB の Ollama 0.40.5 で: IQ2 量子化でピーク VRAM 約 15,300 MiB、思考オフで約 36〜46 tok/s。内蔵の投機的デコード（DFlash）は構造化出力で受理率 約 75%、自由な日本語では 約 26% に落ちて逆に遅く、無効化で 46→60 tok/s。日本語品質は llm-jp-eval 0.630（Lightning 0.556、nano 0.464）（kougi 氏、10/18）"
+ ]
+}
