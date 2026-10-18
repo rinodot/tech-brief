@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月19日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-18.html">← 10/18（日）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年10月19日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code の Routines（クラウドの定期実行）で公式ドキュメント 12 ページの差分を毎朝 Slack に流す、1 人運用の実例。差分の検出は Python、モデルは判断と文章だけ。<code>"cron_expression": "0 0 * * *"</code>（UTC＝日本の 9 時）・Sonnet 5.5、手動実行は 23 秒・8 ターン／51 秒・9 ターン、差分なしの回は数千トークン。公式 docs の裏取り: 作成は <code>/schedule</code>、最小間隔 1 時間、正時は数分遅れるので 9:07、permission mode の選択なし（Persimmoq AI 氏、10/16）</h2>
+      <p class="why">— 自分の毎朝の配信と同じ「監視→判断→通知」を、手元の PC を起動せず Pro／Max の枠内で回せる公式の仕組み。何を Python に任せ、何をモデルに任せるかの線引きがそのまま使える。</p>
+      <p class="b">Persimmoq AI 氏（10/16）。公式ドキュメント 12 ページを毎朝 Routines で見に行き、差分があれば Zenn の下書きを GitHub に push し、要約を Slack に投稿する。要点は「差分の検出は Python に任せ、判断と文章だけをモデルにやらせる」。差分なしの回は数千トークンで、定額プランの枠内。手動 2 回は 23 秒・8 ターン、51 秒・9 ターン。手順書に <code>git pull --rebase origin main</code> の先行、Slack 2,000 字未満、「テスト済みと書かない」。</p>
+      <p class="b">公式 docs（research preview）で裏取り: 作成は claude.ai/code/routines か <code>/schedule</code>、custom cron は <code>/schedule update</code>、最小間隔 1 時間、正時指定は数分遅れるので 9:07 に。permission mode の選択はなく、repo のシェル・Skills・コネクタを承認なしで実行。上限は定期実行 100 回／時。含意: 「監視は決定的な処理、判断だけ LLM」は自分の配信にも効く。n=2。</p>
+      <p class="try">試すなら: Claude Code で <code>/schedule</code> を実行し「毎朝 9:07 に docs の差分を確認して Slack に要約」のように答えていく（または claude.ai/code/routines → New routine → Cloud。モデルは入力欄のセレクタで選ぶ）→ repo に <code>watch.py</code>（取得→前回スナップショットと diff→差分だけを標準出力）と手順書を置き、プロンプトに「<code>python watch.py</code> の出力が空なら何もしない」「変更があれば要約を Slack コネクタに 2,000 字未満で投稿」「テスト済みと書かない」→ コネクタは Slack と GitHub だけ残す（既定では接続中の全コネクタが付き、承認なしで書き込める）→ 1 週間は <code>/schedule list</code> と <code>/schedule why did my nightly review do nothing this morning?</code>（v2.1.227+）でログを読む（緑の状態表示は「セッションが落ちなかった」だけで、仕事の成否は transcript で見る、と docs に明記。削除は Web から）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/persimmoq/articles/claude-code-routines-docs-watch-agent">Zenn — Claude Code だけで、寝てる間に働く AI 部下を作った話 ― 公式ドキュメントの差分を毎朝 Slack に流す</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>無人の <code>claude -p</code> は、ツールの許可がなくて何もしなかった回でも終了コード 0・<code>is_error</code> false・<code>subtype</code> success のまま。25 回の起動（14 回はモデル実行、合計約 $0.023）で 1 になるのは引数の誤り・認証なし・存在しないモデル・<code>--max-turns</code>・<code>--max-budget-usd</code> だけ。拒否を見つける手がかりは <code>--output-format json</code> の <code>permission_denials</code> と成果物の有無（yorusuzu 氏、10/18）</h2>
+      <p class="why">— cron や CI の <code>claude -p</code> を「exit 0 なら成功」で見ていると、権限不足で何もしなかった回を成功に数える。昨日の deny／フックの話の裏側。</p>
+      <p class="b">yorusuzu 氏（10/18）。Windows・haiku で 25 回起動して表にした。終了コード 1 は引数の誤り、認証なし、<code>--max-turns</code>・<code>--max-budget-usd</code> の超過。許可なしで Write を頼んだ回（<code>default</code>・<code>dontAsk</code> とも）は 0・false・success で、<code>permission_denials</code> 1 件とファイル未作成だけが手がかり。既定の <code>text</code> 形式ではそれも見えない。含意: 終了コードは「claude が正常に終わったか」、仕事が済んだかは成果物で見る。各条件 1〜3 回。</p>
+      <p class="try">試すなら: 無人実行は必ず <code>--output-format json</code>（か <code>stream-json</code>）にし、終了コード → <code>is_error</code>／<code>subtype</code> → <code>permission_denials</code> の件数 → 成果物（ファイル・PR）の順で判定する → シェルは <code>set -o pipefail</code>（パイプで終了コードが隠れる）→ 拒否が出たら許可を「検証の経路ごと」に足す（tekuteku 氏、10/18: launchd の <code>claude -p</code> に <code>Bash(go test:*)</code> を許可してもテスト用ファイルを書く <code>Edit(verify/**)</code> が無ければテストは一度も走らず、終了コードは 0。拒否は <code>stream-json</code> の最終 result に <code>permission_denials</code> として並ぶ。<code>--permission-prompts none</code> で無人実行の拒否を明示、<code>Write(path)</code> のルールは参照されない）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yorusuzu/articles/claude-code-p-exit-code-is-error-subtype">Zenn — claude -p の失敗は終了コードで分かるか: is_error・subtype・permission_denials を条件別に実測</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>「24GB 推奨」の Nemotron 3.5 Bolt（74B-A9B）を RTX 5070 Ti 16GB の Ollama 0.40.5 で: IQ2 量子化でピーク VRAM 約 15,300 MiB、思考オフで約 36〜46 tok/s。内蔵の投機的デコード（DFlash）は構造化出力で受理率 約 75%、自由な日本語では 約 26% に落ちて逆に遅く、無効化で 46→60 tok/s。日本語品質は llm-jp-eval 0.630（Lightning 0.556、nano 0.464）（kougi 氏、10/18）</h2>
+      <p class="why">— 16GB で 74B 級が載る実例。「ドラフターは日本語の自由文では足を引っ張る」は、投機的デコード付きのモデルを使うなら自分の環境でも測る価値がある。</p>
+      <p class="b">kougi 氏（10/18）。RTX 5070 Ti 16GB、Ollama 0.40.5。<code>nemotron-3.5-bolt:74b-a9b-iq2</code> はピーク VRAM 約 15,300 MiB、思考オフで約 36〜46 tok/s（Lightning 30B-A3B は約 74〜81）。内蔵ドラフターは受理率が構造化出力 約 75%・自由な日本語 約 26% で、後者は無効化で 46→60 tok/s。llm-jp-eval 0.630（Lightning 0.556）。含意: 日本語の自由文が主なら投機的デコードは切って測る。n=1。</p>
+      <p class="try">試すなら: <code>ollama pull nemotron-3.5-bolt:74b-a9b-iq2</code>（16GB 向け。12GB なら <code>nemotron-3.5-lightning:30b-a3b</code>）→ OpenAI 互換の <code>/v1/chat/completions</code> に <code>reasoning_effort: "none"</code> を付けて思考オフ（記事では <code>think: false</code> はこの経路で効かず）→ 構造化出力と自由な日本語の 2 種類を 300 トークンずつ測り、記事が使った <code>draft_num_predict=0</code>（投機的デコード無効）と比べる（この設定は docs/api に記載が見当たらないので、渡し方は Ollama のリリースノートか GitHub で確認）→ <code>nvidia-smi</code> でピーク VRAM を見て、<code>num_ctx</code> を上げても増えないことを確かめる（長い入力の処理時間は記事も未測定）。</p>
+      <p class="src">出典: <a href="https://qiita.com/kougi/items/1e7b3bfbad0545653ab5">Qiita — 24GB推奨のモデルを16GBで:Nemotron 3.5 Bolt の速度・日本語品質・エージェント実験</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Ollama v0.40.7-rc0（10/18）: llama-server がドラフト（投機的デコード）の種類を自動判定、Responses API の effort を非思考モデルにも、PPLX Decider v1.2（MLX）。Tsukineko 氏（Zenn、<a href="https://zenn.dev/nekoai_lab/articles/013b347bc56ebb" style="color:inherit">10/18</a>）: AI に開発を任せた自作のセキュリティガードが素通りしていた — <code>cat</code>／<code>grep</code> の名前で止めていたので <code>node -e</code> で <code>.env</code> が読めた（→ <code>permissions.deny</code> に <code>Read(.env)</code>、判定はファイル名で）、<code>shlex</code> が改行を空白扱いして 2 行目の <code>git push -f origin main</code> が通った（→ <code>punctuation_chars=";&amp;|()\n"</code>）、PR 内の <code>.mcp.json</code> をレビュー役が読む構造（→ <code>--setting-sources user --strict-mcp-config</code>、審査ルールはベース側を <code>git show</code> で読む）。合成コマンド 15 件・フックのテスト 40 件は全件期待どおり。昨日の Oskra 氏の 3 層と同じ結論。SONG 氏（Qiita、<a href="https://qiita.com/songchong/items/542892c6d4c569c9c15f" style="color:inherit">10/18</a>）: 指示・命令・資料の並び 8 通り×各 3 回で、差が出たのは Haiku 5.5 だけ（資料を先頭に置くと平均 6.7 点、最後に置くと 7.8 点。8 点満点。Fable 5.1 は全条件 8 点）。資料の途中に置いた指示は 36 回中 8 回しか従われず、ツール説明や CLAUDE.md が前に入る Claude Code の条件では並びの差は 0.5 点未満。Google Play: ターゲット API 36 の延長申請は 11/1 まで（残り 13 日。Play Console の「ポリシーのステータス」から）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
