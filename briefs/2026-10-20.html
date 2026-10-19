@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月20日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-19.html">← 10/19（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年10月20日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2><code>"model": "opusplan"</code>（計画は Opus、実行は Sonnet）を Pro プランで実測: 長い作業はコスト 0.55 倍・時間 0.61 倍、質問や 1 か所の修正は 4〜5 割安いが、小さな文書は 1.6〜1.8 倍と逆に高い。CLAUDE.md に「計画モードに入る基準」を書くと文書・全工程の依頼 20 回は全部入り、質問・小修正 16 回は 1 回も入らない。ただし基準を手元の課題に合わせて具体化すると、別の課題では 15/15→11 に悪化（mahitotsu 氏、10/19）</h2>
+      <p class="why">— Opus 5.5 を常用すると使用枠が速く減る自分の運用で、「どこで Opus を使い、どこで Sonnet に落とすか」をモデル名 1 つと CLAUDE.md 数行で決められる。小さな文書では損をする、は先に知っておきたい。</p>
+      <p class="b">mahitotsu 氏（10/19）。Opus 単独・Sonnet 単独・opusplan（計画は Opus、実行は Sonnet に自動で切替）を Pro プランで比べた（各条件 1〜3 回）。Opus 単独比で、質問・1 か所の修正はコスト約 4〜5 割減・時間 0.6〜0.9 倍、長い作業は 3/3 合格でコスト 0.55 倍・時間 0.61 倍。小さな文書は 1.6〜1.8 倍・時間 1.0〜1.6 倍。費用に占める計画（Opus）分は、質問 0%、長い作業 30〜34%、小さな文書 52〜71%。</p>
+      <p class="b">計画に入るかはモデル任せなので、CLAUDE.md に基準を書いて数えた。「新機能・複数ファイル・設計判断」「人が読む文書」は入る、「値や場所を聞く質問、1 か所の小さな修正」「計画承認後の実行」は入らない、迷ったら「文書なら入る」。文書・全工程の依頼 20 回は全部入り、質問・小修正 16 回は 1 回も入らなかった。基準を具体化すると調整に使った課題では 15/15 だが、別の課題では 11 回に下がった（元の基準は 12/12）。含意: 計画の費用は「文書の割合」で決まる。基準は手元の課題に合わせすぎない。コストは計算値、n は小さい。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> に <code>{ "model": "opusplan" }</code>（セッション内なら <code>/model opusplan</code>）→ CLAUDE.md に「## 計画モードの使い方」として「入る: 新しい機能の実装、複数のファイルにまたがる変更、設計の判断が絡む依頼。人が読む文書（要件定義、設計書、報告書）を書く依頼」「入らない: 値や場所を聞く質問、1か所の小さな修正。計画を承認した後の実行」「迷ったとき: 文書を書く依頼なら入る。それ以外は入らない」「計画に書くこと: 変更するファイルと手順、確かめ方。短くてかまわないが決める点は省かない」を書く → 1 週間、自分の依頼を「質問／小修正／実装／文書」に分けて計画モードに入った回数と <code>/usage</code>（API なら <code>/cost</code>）の減りを控える → README や設計メモのような小さな文書は <code>/model sonnet</code> で直接書かせる方が安い。</p>
+      <p class="src">出典: <a href="https://zenn.dev/akring/articles/dd53158f8da0a2">Zenn — 計画に入る判断はエージェント任せ。測って再認識した opusplan</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>ローカル RAG（Ollama＋LlamaIndex、qwen3:14b＋bge-m3）で 13 問を設定ごとに測ると、効いたのは「256 トークン分割」「リランカーで 20 件→4 件」「思考オフ（21.0→4.3 秒）」の 3 つで、併用すると MRR 1.000・6.2 秒。効かなかったのは「資料にないことは答えない」の厳しい指示（正答率 0.923→0.769）と文脈長（3,900〜40,960 で精度は不変、メモリだけ 9.8→12GB）（岡山 勇治 氏、10/19）</h2>
+      <p class="why">— 日曜の特集で組んだ構成（チャンク・リランカー・評価）を、設定 1 つずつ変えて測った実測。「強く禁じる指示が精度を下げる」は自分の RAG プロンプトでも疑う価値がある。</p>
+      <p class="b">岡山 勇治 氏（10/19、Mac）。社内文書 5 本・13 問で、基準（512 トークン分割・検索 4 件）は MRR 0.962・正答率 0.923。256 トークン分割で MRR 1.000、リランカー（20 件→4 件）で 1.000、思考オフで 4.3 秒、3 つ併用で 1.000・0.923・6.2 秒。「資料にないことは答えない」と強く書くと 0.769。ctx は 3,900〜40,960 で精度不変、検索 8 件とハイブリッドは 1 問だけ改善。含意: 効くのは分割・並べ直し・思考の 3 つ、禁止文は副作用を測ってから。各 1 回。</p>
+      <p class="try">試すなら: 日曜の構成に 3 つ足す: チャンクを 256 トークン前後に → 検索 20 件→<code>bge-reranker-v2-m3</code> で上位 4 件 → 生成は思考オフ（Ollama の <code>/v1/chat/completions</code> なら <code>reasoning_effort: "none"</code>。<code>temperature=0</code> のまま思考 ON だと 1 問で 10 分固まることがある、と記事）→ 「資料にないことは答えない」を入れる前と後で同じ 13 問を採点し直す → <code>ollama ps</code> の CONTEXT 列で実際の文脈長を確認（LlamaIndex は未指定だとモデル最大の 40,960 を使っていた。公式 docs: VRAM 24GiB 未満の既定は 4k、エージェント用途は 64000 以上を推奨、<code>OLLAMA_CONTEXT_LENGTH=64000 ollama serve</code>。大きくするほどメモリが要るので PROCESSOR 列が 100% GPU のままか見る）。</p>
+      <p class="src">出典: <a href="https://qiita.com/y-okayama-tb/items/8daa4f34a30c45d51f5d">Qiita — ローカルRAGで効いた設定・効かなかった設定を測ってみた（Ollama + LlamaIndex）</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Flutter 製アプリを Google Play に出すまでの記録: FFmpeg を外して arm64 APK 123,392,433→62,003,118 バイト、R8 の <code>-keep</code> のパッケージ名 typo で release だけ白画面、16KB ページ対応は <code>zipalign -c -P 16 -v 4</code> と <code>getconf PAGE_SIZE</code>＝16384 のエミュレータで確認、release マニフェストから INTERNET 権限を外して通信 0 を実測、12 人×14 日のクローズドテスト（はんぺん 氏、10/17）</h2>
+      <p class="why">— 自分の Play アプリの次回更新でそのまま使えるチェックリスト。16KB ページサイズ（Android 15 以上をターゲットにするアプリの要件）と R8 の release 限定の白画面は、debug では気づけない。</p>
+      <p class="b">はんぺん 氏（10/17）。FFmpeg を外した arm64 release APK は 123,392,433→62,003,118 バイト。R8 の <code>-keep</code> のパッケージ名が typo で効かず、release だけ <code>UnsatisfiedLinkError</code> で白画面。debug は R8 を通さず気づけない。Data safety「収集なし」のため release マニフェストで INTERNET を外し、約 101〜128 秒の実行で送受信増分 0。含意: release 専用の検査を 1 本持つ。n=1、16KB の実行検証は一部未了。</p>
+      <p class="try">試すなら: <code>flutter build apk --release --target-platform android-arm64</code> → <code>zipalign -c -P 16 -v 4 build/app/outputs/flutter-apk/app-release.apk</code>（build-tools 35 以上。16KB は Android 15 以上をターゲットにするアプリの要件）→ 16KB システムイメージのエミュレータで <code>adb shell getconf PAGE_SIZE</code> が 16384 のまま主要画面を 1 周 → release ビルドだけ通る起動スモークテスト（最初のフレームでログを 1 行出し <code>adb logcat</code> で待つ。R8 の <code>-keep</code> は実際のパッケージ名を jar の中身で確かめる）→ 通信しないアプリなら <code>android/app/src/release/AndroidManifest.xml</code> に <code>&lt;uses-permission android:name="android.permission.INTERNET" tools:node="remove" /&gt;</code> を置き、<code>adb shell dumpsys netstats</code> で UID の送受信の増分を見る（Firebase を使うアプリには当然 INTERNET が要る）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/hampen2929/articles/20261014-gorupippi-android-release">Zenn — Flutter製ゴルフアプリをGoogle Playに出すまで — FFmpeg除去・R8・16KB・Data safety</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.303（10/18）は「Bug fixes and reliability improvements」のみで新機能なし。おじさんAIラボ氏（Zenn、<a href="https://zenn.dev/ojisan_ai_lab/articles/claude-code-idle-compaction-20261019" style="color:inherit">10/19</a>）: アイドル圧縮の実ログ — 最終リクエストから 55.6 分後に 272,422→13,522 トークン（105,880 ms）、過去 3 回も 55.4〜56.9 分で、1 時間のプロンプトキャッシュが切れる直前に動く。止めるなら settings.json に <code>"idleCompaction": false</code>、閾値は <code>CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS</code>（下限 100,000）。ぬまーん氏（Zenn、<a href="https://zenn.dev/numarn/articles/read-vs-write-permission-ask-handson" style="color:inherit">10/19</a>）: 既定設定の <code>claude -p</code> で、ファイルの読み取り依頼は 10 回とも許可不要、書き込みは 10 回ともブロック。シェルは 19 種×3 回で <code>ls</code>・<code>cat</code>・<code>grep</code>・<code>head -1</code> など 8 種は通り、読むだけの <code>awk</code>・<code>node -e "console.log(1+1)"</code>・<code>python3 -c</code> は 3/3 ブロック、<code>head -1 note.txt &gt; copy.txt</code> と <code>&gt;</code> を足すと 3/3 ブロック。87 回とも終了コード 0（昨日の yorusuzu 氏と同じ）。nanora 氏（Zenn、<a href="https://zenn.dev/nanora/articles/20261019-claude-code-session-watch-telegram" style="color:inherit">10/19</a>）: 止まった Claude Code セッションを Raspberry Pi 5 の 2 分おきの監視で分類し Telegram のボタンで再開。状態は公式の <code>claude agents --json</code>、再開は <code>claude --bg --resume &lt;sessionId&gt;</code>、再開前に <code>git log --all --since=… -- &lt;編集したファイル&gt;</code> で後続コミットを確認。3 回とも完了、SIGKILL からの復旧約 12 秒、v2.1.303。HS Solution 氏（Zenn、<a href="https://zenn.dev/hssolution/articles/b5d5dfffa2ee45" style="color:inherit">10/19</a>）: Flutter の in_app_purchase 3.3.1 で価格表が「準備中」のまま固まる件は、接続 15 秒・問い合わせ 20 秒のタイムアウト、5 秒→30 秒→2 分の再試行、結果は上書きでなくマージ（<code>_products = {..._products, ...found};</code>）、<code>AppLifecycleListener(onResume: …)</code> で復帰時に再試行。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
