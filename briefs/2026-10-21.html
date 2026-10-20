@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月21日（水）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-20.html">← 10/20（火）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">水曜日 · 2026年10月21日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>サブエージェントのキャッシュだけ 5 分枠だった: 約 7 分空けて呼び直すと料金 2.26 倍、<code>.claude/settings.json</code> の <code>"subagentPromptCacheTtl": "1h"</code> 1 行で払い直しが消え、定義に <code>tools: []</code> と書くとキャッシュ対象が 26,310→1,643 トークン。公式 docs の裏取り: サブエージェント・ワークフロー・圧縮はサブスクでも既定 5 分、v2.1.242 以降で枠を選べる（ぬまーん氏、10/20）</h2>
+      <p class="why">— 補助役を数分おきに呼ぶ運用（監視→判断、レビュー役の往復）は、本体より先にサブエージェント側のキャッシュが切れて静かに割高になる。設定 1 行で直せる種類の無駄。</p>
+      <p class="b">ぬまーん氏（10/20）。「PONG」と返すだけのサブエージェント課題を、呼ぶ間隔だけ変えて 16 回実行した（Claude Code 2.1.296）。本体のキャッシュは 1 時間枠（約 8,140 トークン）なのに、サブエージェントは 5 分枠（713 トークン）。5 秒後の再実行は 0.0128 USD、約 7 分空けると 0.0289 USD（2.26 倍）で、サブエージェントが 6,692 トークンを払い直していた。</p>
+      <p class="b"><code>.claude/settings.json</code> に <code>{"subagentPromptCacheTtl": "1h"}</code> を書くと、6 分 51 秒後も 13 分 46 秒後も 0.0128 USD で払い直しなし。ただし 1 時間枠は書き込み単価が高く、同じ 26,310 トークンの初回は 0.1087→0.1457 USD（1.34 倍）。定義を <code>tools: []</code> にするとキャッシュ対象は 26,310→1,643 トークン。公式 docs も「サブエージェント・ワークフロー・圧縮はサブスクでも 5 分」と明記。含意: 数分おきに呼ぶ補助役は 1h、連続で叩く用途は 5m のまま。n=1、費用は API 換算。</p>
+      <p class="try">試すなら: <code>claude -p "hello" --output-format json</code> の <code>usage.cache_creation</code>（<code>ephemeral_1h_input_tokens</code>／<code>ephemeral_5m_input_tokens</code>）で今どちらの枠かを見る → 作業フォルダの <code>.claude/settings.json</code> に <code>{"subagentPromptCacheTtl": "1h"}</code>（v2.1.242 以降。環境変数 <code>CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL=1h</code> でも可、比較は <code>FORCE_PROMPT_CACHING_5M=1</code>）→ 特定のサブエージェントだけなら frontmatter の <code>experimental:</code> に <code>cacheTtl: 1h</code>（v2.1.248 以降。usage credits を消費中は 1h が無視される）→ 補助役の定義は <code>tools: []</code> か必要な道具だけ列挙し、初回のキャッシュ書き込みを小さくする → 効果は <code>/usage</code> の <code>Prompt cache (main)</code> 行（v2.1.251 以降）とサブエージェントの <code>total_cost_usd</code> で比べる。5 分以内に連続で呼ぶ用途は 1h にしない（書き込み 1.34 倍だけ損）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/numarn/articles/claude-subagent-cache-5m-expiry-handson">Zenn — AIの裏方のキャッシュだけ5分枠だった。約7分空けた2回の料金は2.26倍と2.25倍、設定1行で元に戻った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.304／305（10/19・10/20）: <code>/auto-mode-setup</code> がプロジェクトと直近セッションを読んで auto mode に環境を教える、放置した会話の再開が 5 時間枠を大きく使うときは警告（Pro／Max）、<code>CLAUDE_CODE_AUTO_COMPACT_WINDOW=200k</code> が黙って 100K になっていた修正、<code>/usage</code> の警告は <code>f</code> で直せる。おじさんAIラボ氏の実測: 3.7 日放置・42 万トークンの会話を再開しても警告は出なかった</h2>
+      <p class="why">— 2 日で 2 版。auto mode を使うなら <code>/auto-mode-setup</code> は一度走らせる価値があり、<code>AUTO_COMPACT_WINDOW</code> を k 付きで書いていた人は設定が効いていなかった。</p>
+      <p class="b">v2.1.304（10/19）: <code>/auto-mode-setup</code> がプロジェクトと直近セッションから auto mode に環境を教える、放置した会話の再開が 5 時間枠を大きく使うなら警告、<code>CLAUDE_CODE_AUTO_COMPACT_WINDOW=200k</code> が 100K になっていた修正。v2.1.305（10/20）: <code>/usage</code> の警告を <code>f</code> で直せる。おじさんAIラボ氏は Max 20x で 3.7 日放置・424,459 トークンの会話を再開しても警告なし。含意: 警告は当てにせず、再開前に ctx% を見る。n=1。</p>
+      <p class="try">試すなら: <code>claude update</code> → auto mode を使う repo で <code>/auto-mode-setup</code>（Bedrock／Vertex でも可）→ <code>CLAUDE_CODE_AUTO_COMPACT_WINDOW</code> を設定している人は値を <code>200k</code> のまま再起動し、<code>/autocompact</code> の表示で窓が意図どおりか確認（範囲外なら警告が出るようになった）→ <code>/usage</code> を開き、警告行があれば <code>f</code> で直す → 古い会話を開くときは <code>claude --resume ＜ID＞</code> の前に <code>/statusline</code> で ctx% を出しておく（警告の閾値は非公開。実測は n=1）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.304">GitHub — anthropics/claude-code v2.1.304（v2.1.305 も同ページの releases）</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Flutter の PlatformView 新方式 HCPP（Hybrid Composition++、3.44 から実験的）を実機で計測: 従来 HC はメインスレッド 4ms の負荷でジャンク率 84.8%・74.5 FPS に崩れ、HCPP は 2.7%・121.0 FPS を維持。条件は Android 14 以上＋Impeller の Vulkan、<code>AndroidManifest.xml</code> の meta-data 1 つで有効化、満たさない端末は自動で従来方式（ogikun 氏、10/20）</h2>
+      <p class="why">— 広告バナー・地図・WebView を載せた Flutter 画面のカクつきは PlatformView 合成の問題であることが多い。公式が「実験的」のうちに自分の端末で測れる。</p>
+      <p class="b">ogikun 氏（10/20）。Galaxy Z Fold7（Android 16）・Flutter 3.47.7 の profile で 15 秒スクロール×3 回の中央値。負荷なしの FPS／ジャンク率は TLHC 120.4／0.7%、HC 94.8／63.3%、HCPP 121.2／0.4%。メインスレッドに 4ms 足すと HC は 74.5／84.8% に崩れ、HCPP は 121.0／2.7%。8ms では HCPP も 69.7／62.9% で TLHC 並み。含意: HCPP は TLHC と同等、HC だけ別格に崩れる。n=1、実験的機能。</p>
+      <p class="try">試すなら: Flutter 3.44 以上で <code>flutter run --enable-hcpp</code>（<code>flutter test</code> も可、<code>flutter build</code> には付けられない）→ 本番は <code>AndroidManifest.xml</code> の <code>&lt;application&gt;</code> 内に <code>&lt;meta-data android:name="io.flutter.embedding.android.EnableHcpp" android:value="true" /&gt;</code>（公式 docs）→ 記事の確認法: debug で <code>adb logcat | grep "platform view rendering strategy"</code> に <code>Using HCPP…</code> か <code>legacy…</code> が出る → 自作 PlatformView は <code>HybridAndroidViewController.checkIfSupported()</code>（api.flutter.dev に記載）で判定し、false なら従来 API へ → 既知の制限: 透明な PlatformView の 4 層重ね、<code>BackdropFilter</code>・<code>ImageFilter</code>・<code>StretchingOverscrollIndicator</code> が効かない。Android 13 以下の端末では従来方式のままなので、両方で測る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ogikun/articles/aff2a539fd9723">Zenn — Flutter で地図や WebView を置くと重くなる問題、新方式 HCPP で解決するのか検証した</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: eight 氏（Zenn、<a href="https://zenn.dev/eight_blog/articles/930e61ec56bab0" style="color:inherit">10/20</a>）: 13 分 33 秒の日本語録音で whisper.cpp の large-v3 が turbo に負けた（CER 23.9% vs 14.8%）原因は 2 つ — 前の区間を手がかりにする既定（<code>condition_on_previous_text</code>）が一度の失敗を引きずることと、−58〜−64dB の小さな声の文が丸ごと落ちること。<code>-mc 0</code>（Python 版は <code>condition_on_previous_text=False</code>）と <code>ffmpeg -af "dynaudnorm=f=200:g=5:m=100"</code> の両方で turbo 3.3%・large-v3 4.3%、消えた文 8→0。<code>--vad</code> は逆効果（8→12 文）。Apple M4 の測定だが設定は NVIDIA でも同じ。acerola 氏（Zenn、<a href="https://zenn.dev/acerola_jp/articles/claude-code-unattended-stops" style="color:inherit">10/20</a>）: 無人の Claude Code を 10 日回して止まった 7 箇所 — 許可待ちで約 1 時間半（→ 指示文に「許可できる人がいない。必要なら未実施と LOG.md に書いて先へ進む」）、GitHub Actions の schedule が 7:00 指定で 9:59 起動、状態は会話でなく STATE.md（100 行以内を <code>check.sh</code> で検査）、6 日コミットがなければ AI を使わない heartbeat が Issue を立てる。Firebase AI Logic: 初期化は <code>FirebaseAI.vertexAI(location:)</code> から <code>FirebaseAI.agentPlatform(location:)</code> へ（firebase_ai 3.15.0 以降。既定ロケーションは <code>us-central1</code>→<code>global</code>、公式 FAQ は「できるだけ早く移行を」。Dart 側の旧構文の削除版は未記載で、5.0.0 の changelog は「deprecated apis を削除」とだけ）。Google Play: ターゲット API 36 の延長申請は 11/1 まで（残り 11 日）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>

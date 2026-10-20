@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-21",
+ "weekday": "水",
+ "file": "2026-10-21.html",
+ "titles": [
+  "サブエージェントのキャッシュだけ 5 分枠だった: 約 7 分空けて呼び直すと料金 2.26 倍、.claude/settings.json の \"subagentPromptCacheTtl\": \"1h\" 1 行で払い直しが消え、定義に tools: [] と書くとキャッシュ対象が 26,310→1,643 トークン。公式 docs の裏取り: サブエージェント・ワークフロー・圧縮はサブスクでも既定 5 分、v2.1.242 以降で枠を選べる（ぬまーん氏、10/20）",
+  "Claude Code v2.1.304／305（10/19・10/20）: /auto-mode-setup がプロジェクトと直近セッションを読んで auto mode に環境を教える、放置した会話の再開が 5 時間枠を大きく使うときは警告（Pro／Max）、CLAUDE_CODE_AUTO_COMPACT_WINDOW=200k が黙って 100K になっていた修正、/usage の警告は f で直せる。おじさんAIラボ氏の実測: 3.7 日放置・42 万トークンの会話を再開しても警告は出なかった",
+  "Flutter の PlatformView 新方式 HCPP（Hybrid Composition++、3.44 から実験的）を実機で計測: 従来 HC はメインスレッド 4ms の負荷でジャンク率 84.8%・74.5 FPS に崩れ、HCPP は 2.7%・121.0 FPS を維持。条件は Android 14 以上＋Impeller の Vulkan、AndroidManifest.xml の meta-data 1 つで有効化、満たさない端末は自動で従来方式（ogikun 氏、10/20）"
+ ]
+}
