@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月22日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-21.html">← 10/21（水）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年10月22日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>cron の <code>claude -p "ok"</code> が 1 回 39,968 トークン: <code>--safe-mode</code>（CLAUDE.md・フック・MCP を読まない）で −58%、<code>--tools ""</code> で −93%、<code>--system-prompt</code> の置き換えで 737 トークン（−98%）、<code>--effort low</code> で思考 102→0。公式 CLI リファレンスの裏取り: <code>--safe-mode</code> はトラブルシュート用、スクリプト向けの <code>--bare</code> はサブスクの OAuth では認証エラー（yosiki 氏、10/21）</h2>
+      <p class="why">— 無人の <code>claude -p</code> は、プロジェクトの文脈が要らない仕事でも CLAUDE.md とフックの固定費を毎回払う。自分の設定を厚くするほど、その固定費が黙って増える。</p>
+      <p class="b">yosiki 氏（10/21）。認証切れの確認に定期的に撃っていた <code>claude -p "ok"</code> が、毎回 CLAUDE.md・フックの注入・MCP・全ツール定義を読み込んで 39,968 トークン（haiku）。<code>--settings '{}'</code> は 0%、<code>--safe-mode</code> で 16,798（−58%）、さらに <code>--tools ""</code> で 2,931（−93%）、<code>--system-prompt "Reply with exactly: OK"</code> で 737（−98%、約 54 分の 1）。1 日 4 回なら週 112 万→2 万トークン。</p>
+      <p class="b">差分からの内訳は CLAUDE.md・フック・MCP が約 23,000、組み込みツール定義が約 13,900、既定のシステムプロンプトが約 2,200。個人用 CLAUDE.md は約 2.8 万字で、7 月の 37,994 から 3 か月で約 2,000 増えていた。出力側も <code>--effort low</code> で思考 102→0 トークン。含意: CLAUDE.md やフックを厚くするほど、それを使わない自動化の固定費まで一律に上がる。無人ジョブは「読ませない起動」に分ける。各条件 1 回、macOS・2.1.295。</p>
+      <p class="try">試すなら: まず <code>claude -p "ok" --output-format json &lt; /dev/null | jq '.usage | .input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens'</code> で自分の固定費を測る → 文脈の要らない無人ジョブは記事の最終形 <code>claude -p "ok" --model haiku --safe-mode --tools "" --system-prompt "Reply with exactly: OK" --effort low --no-session-persistence &lt; /dev/null</code>（<code>&lt; /dev/null</code> が無いと 3 秒待って警告が出る）→ 公式 CLI リファレンスの位置づけ: <code>--safe-mode</code> は「壊れた設定のトラブルシュート用」で CLAUDE.md・skills・plugins・hooks・MCP・auto memory を読まず、認証・モデル・組み込みツール・権限は通常どおり（<code>CLAUDE_CODE_SAFE_MODE</code> が立つ）。<code>--tools ""</code> は組み込みツールだけで MCP には効かない（MCP も外すなら <code>--disallowedTools "mcp__*"</code>）。<code>--system-prompt</code> は安全指示ごと置き換わるので返答の形が決まった用途だけ → 公式が「スクリプト向けの最小モード」とする <code>--bare</code> は、記事ではサブスクの OAuth で認証エラー（<code>claude --help</code> では API キーか apiKeyHelper のみ）。サブスクの利用枠がキャッシュ読みをどう数えるかは記事も未確認なので、節約の実感は <code>/usage</code> で見る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yosiki/articles/claude-p-cron-token-diet">Zenn — cronのclaude -pが"ok"だけで4万トークン——--safe-modeと--tools ""で98%削減</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Pro プラン 1 本・約 4 週間でテスト 1,118 件の Flutter Web アプリ: <code>.claude/commands/</code> の <code>model:</code> で <code>/design</code>（Opus、PLAN.md を書いて止まる）→<code>/build</code>（Sonnet）→<code>/check</code>（Opus、直さず差し戻す）に分け、受け入れテスト全体は 67→8 秒、500 行×12 列の表は 17.7→1.8 秒（aburachudoku 氏、10/21）</h2>
+      <p class="why">— 10/20 の opusplan（計画だけ Opus）を、コマンド単位で手で組んだ形。Flutter の性能退行をテストで数値化して Sonnet に直させる手順まで書いてある。</p>
+      <p class="b">aburachudoku 氏（10/21）。Pro 1 本で Flutter Web のメモアプリを約 4 週間。Opus だけだと上限で止まるので、<code>/design</code>（Opus。コードを変えず PLAN.md を書いて停止）→<code>/build</code>（Sonnet。PLAN.md 通りに実装）→<code>/check</code>（Opus。diff を PLAN.md に照らし、直さず差し戻す）に分けた。テスト 1,118 件、アプリ約 3.5 万行。受け入れテスト 67→8 秒、500 行×12 列の表 17.7→1.8 秒。含意: 計画と監査だけ Opus。n=1、宣伝あり。</p>
+      <p class="try">試すなら: <code>.claude/commands/design.md</code> の frontmatter に <code>model: opus</code>、<code>build.md</code> に <code>model: claude-sonnet-5-5</code>（公式 docs: コマンドやスキルの frontmatter の <code>model</code> はそのターンだけモデルを切り替え、キャッシュは作り直しになる）→ design.md の本文は「コードは一切変更しない」「PLAN.md を書いたら停止し、要点を日本語で短く報告する」、PLAN.md の章は 目的・要件／影響範囲／実装手順／単体テストの項目／受け入れテストの項目／懸念・未決事項 → CLAUDE.md の掟は「同じエラーで 2 回続けて失敗したら止まって報告」「環境起因のエラーは深掘りしない（冗長ログの再実行も自分から始めない）」「UI 改修は <code>integration_test/</code> の Robot シナリオを必ず追加」→ 性能の退行は <code>debugOnRebuildDirtyWidget</code> で再ビルド回数を数え、<code>expect(counter.total, greaterThan(0))</code>（計測の素通り防止）と <code>expect(counter.countOf&lt;CanvasArea&gt;(), 0, reason: counter.report())</code> のようにテストで固定する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/aburachudoku/articles/nebulark-hands-on">Zenn — Claude Proプラン1本で、テスト1,118件の思考整理アプリを4週間で作った──Opusは設計と監査だけ</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>VRAM からあふれた分の代償を同じモデルで実測: gemma4 12B q8_0（13.1GB）は全部 GPU で 40.5〜43.5 tok/s、76% しか載らない 12GB 相当で 17.2、50% の 8GB 相当で 8.2、CPU のみ 4.6。<code>ollama ps</code> の PROCESSOR 欄が「100% GPU」かどうかが分かれ目（shacikku3 氏、10/21）</h2>
+      <p class="why">— 12〜16GB で「少し大きいモデル」を選ぶときの判断材料。あふれ方と速度の関係が 1 本のモデルで並んでいる。</p>
+      <p class="b">shacikku3 氏（10/21）。RTX 4080 の VRAM を絞り、同じ <code>gemma4:12b-it-q8_0</code> の生成速度を比べた。全部 GPU で 40.5〜43.5 tok/s、12GB 相当（約 76% が GPU）で 17.2、8GB 相当（約 50%）で 8.2、CPU のみ 4.6。4 分の 3 が載っても速度は半分以下。含意: 全部載る量子化と文脈長を選び、<code>ollama ps</code> の PROCESSOR 欄を先に見る。MoE はあふれても 64k で約 88 tok/s と注記、別に測る。模擬、Ollama 0.32.6、各 1〜2 回。</p>
+      <p class="try">試すなら: <code>ollama ps</code> の PROCESSOR 列を見る（<code>100% GPU</code> なら全部載っている。<code>39%/61% CPU/GPU</code> のように出たらあふれ）→ あふれていたら量子化を 1 段落とす（q8_0→q4_K_M）か文脈長を下げて 100% GPU に戻し、<code>ollama run &lt;model&gt; --verbose</code> の eval rate で前後を比べる → 10/20 の <code>OLLAMA_CONTEXT_LENGTH=64000</code> と組むなら、伸ばしたあとにもう一度 <code>ollama ps</code>（長文脈ほど CPU 側に押し出される。記事は文脈 65536＋補完用 1.1GB モデル同時で 43%/57%）→ MoE（LLM-jp-4.1 32B-A3B など）は 10/19 の <code>--n-cpu-moe</code> のとおり、あふれても遅くなりにくいので dense と分けて測る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/shacikku3/articles/vram-8gb-12gb-local-llm-speed">Zenn — VRAM 8GB・12GB でローカルLLMはどれだけ遅くなる？ 同じモデルで実測した</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.306（10/21）は修正 2 件のみ。Ollama は v0.40.7 が正式版に（10/18。<code>ollama launch claude</code> が <code>CLAUDE_CODE_AUTO_COMPACT_WINDOW</code> を Claude Code の対応範囲に丸める、<code>ollama show</code> に renderer／parser／template_source、llama-server がドラフトの種類を自動判定）、v0.40.8-rc0（10/21）は Recursive の Flint 40B MoE（262K 文脈、<code>ollama run flint</code>、今は macOS のみ）。chin 氏（e-dash Tech Blog、<a href="https://zenn.dev/edash_tech_blog/articles/3476d88801674d" style="color:inherit">10/21</a>）: Routines で AI ニュースを 3 か月（日刊 65 本・週刊 10 本、1 回 8〜12 分）— クラウドの sandbox から hooks.slack.com は 403 なので routine は git push だけし、GitHub Actions が Slack へ送るリレーに。手順書は <code>.claude/skills/claude-news/SKILL.md</code>、週次上限に当たった朝は止まった。tamao825 氏（<a href="https://zenn.dev/tamao825/articles/claude-code-hooks-onfailure-block-exit-code-json" style="color:inherit">10/21</a>）: hook の <code>onFailure: "block"</code> を Windows・2.1.303 で実測 — スクリプトなし・exit 1・タイムアウト・<code>{</code> で始まり <code>}</code> で終わる壊れた JSON は止まる、閉じ括弧のない出力や平文は通る、exit 2 は設定に関係なく止まる。Quickchat AI（<a href="https://quickchat.ai/post/claude-code-multi-agent-code-review" style="color:inherit">10/21</a>、競合製品の作者）: <code>/code-review max</code> は 1 回平均 $20.95・56 分、<code>high</code>（Opus 5.5）は $0.33・78 秒で、重大 27 件の検出は 23 対 22。platform release notes 10/21: API バージョン <code>2026-10-21</code> と SDK の新メジャー（Python 2.0.0・TypeScript 1.0.0。API 版と無関係な破壊的変更あり、Apache 2.0 へ）— 自動更新している人は版を固定してから。SafeDep（<a href="https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/" style="color:inherit">10/21</a>）: PyPI の litellm 1.107.0 に認証情報を盗む <code>cook.pth</code>／<code>cook.py</code>／<code>sitecustomize.py</code> が混入（1.106.2 は無事）。LiteLLM を Claude Code やローカル LLM の中継に使っているなら <code>pip show litellm</code> で版を確かめ、鍵を回す。Google Play: API 36 の延長申請は 11/1 まで（残り 10 日）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>

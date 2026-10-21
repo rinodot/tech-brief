@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-22",
+ "weekday": "木",
+ "file": "2026-10-22.html",
+ "titles": [
+  "cron の claude -p \"ok\" が 1 回 39,968 トークン: --safe-mode（CLAUDE.md・フック・MCP を読まない）で −58%、--tools \"\" で −93%、--system-prompt の置き換えで 737 トークン（−98%）、--effort low で思考 102→0。公式 CLI リファレンスの裏取り: --safe-mode はトラブルシュート用、スクリプト向けの --bare はサブスクの OAuth では認証エラー（yosiki 氏、10/21）",
+  "Pro プラン 1 本・約 4 週間でテスト 1,118 件の Flutter Web アプリ: .claude/commands/ の model: で /design（Opus、PLAN.md を書いて止まる）→/build（Sonnet）→/check（Opus、直さず差し戻す）に分け、受け入れテスト全体は 67→8 秒、500 行×12 列の表は 17.7→1.8 秒（aburachudoku 氏、10/21）",
+  "VRAM からあふれた分の代償を同じモデルで実測: gemma4 12B q8_0（13.1GB）は全部 GPU で 40.5〜43.5 tok/s、76% しか載らない 12GB 相当で 17.2、50% の 8GB 相当で 8.2、CPU のみ 4.6。ollama ps の PROCESSOR 欄が「100% GPU」かどうかが分かれ目（shacikku3 氏、10/21）"
+ ]
+}
