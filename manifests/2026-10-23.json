@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-23",
+ "weekday": "金",
+ "file": "2026-10-23.html",
+ "titles": [
+  "CLAUDE.md を索引にして知識をメモへ分けたら、入力トークンはむしろ約 8,700→約 15,000 に増えた: メモ 40 件・質問 5 問の実測で、全部直書き A 約 8,700、索引＋frontmatter メモ B 約 15,000、決まりまでメモへ移した D 約 16,800。正答は 4 方式とも全問、架空の秘密値が渡ったのは D だけ 5 回中 1 回。「開く前に要る決まりだけ CLAUDE.md に残し、メモが小さいうちは分けない」（やまと氏、10/22）",
+  "Claude Code v2.1.307: 権限ルール・auto mode・hook・sandbox が止めたツール呼び出しが OpenTelemetry の claude_code.safety_event として 1 件ずつ残るようになった。ほかに同時起動した fork サブエージェントの取り合い防止、壊れたツール呼び出しの 2 回再試行、/claude-api api-version（API 2026-10-21 への移行）、Code Review の @claude review stop。v2.1.308（10/22）は修正のみ",
+  "Flutter 公式の Claude Code プラグイン dart-flutter: claude plugin marketplace add flutter/agent-plugins → claude plugin install dart-flutter@dart-flutter の 2 行で、Flutter スキル 10 本＋Dart スキル 14 本＋Dart MCP サーバー（アナライザー・Widget Inspector・hot reload）が入る。10/20 の公式ブログで案内、10/21 に 3.47 対応の更新。規則（rules/）だけは CLAUDE.md へ手で写す"
+ ]
+}
