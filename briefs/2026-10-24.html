@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月24日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-23.html">← 10/23（金）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年10月24日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Haiku 5.5 はどこで Opus 5.5 に負けるか、163 回の実測: 仕様が明確な課題（L2〜L5）は Haiku も全問満点、差が出たのは「報告に書かれていない境界ケース」を含む難しいバグ 1 件だけで、Sonnet 10 回中 8 回・Opus 6 回・Haiku 1 回。1 回あたりの費用は Haiku $0.026・Sonnet $0.19・Opus $0.45（Haiku は Opus より約 94% 安い）。テスト実行を許可すると通過数は変わらず、他の部分を壊した回数が 15 回中 2→0（yunany90 氏、10/24）</h2>
+      <p class="why">— 10/22 の「計画 Opus／実装 Sonnet」に、Haiku をどこまで下ろせるかの数字が足された。<code>npm test</code> を allow に入れる効果も測っている。</p>
+      <p class="b">yunany90 氏（10/24）。Windows ノート 1 台で、Claude Code の Haiku 5.5・Sonnet 5.5・Opus 5.5（いずれも effort medium）に空フォルダから課題 L2〜L6 を解かせて計 163 回。隠しチェック 9〜38 件の L2〜L5 は 3 モデルとも全問満点。差が出たのは実在ライブラリ marked のバグ 3 件（L6）のうち、報告に書かれていないコードスパン内バッククォートの境界ケースで、7 件中 6 件を通したのが Sonnet 10 回中 8 回、Opus 6 回、Haiku 1 回。完全に直した実行はなし。</p>
+      <p class="b">費用は全段階の 1 回平均で Haiku $0.026、Sonnet $0.19、Opus $0.45。テスト実行（node・<code>npm test</code>・読み取り専用 git。インストールと通信は禁止）を許可した 15 回では通過数は変わらず、テストなしで 2 回あった「他の部分を壊す」が 0 回になった。含意: 仕様がテストで書けている仕事は Haiku のサブエージェントで足り、Opus は「仕様に無い境界」を疑う役に絞る。難しいバグは 1 件・各 10 回、著者は計測サイト TokenSave の運営者。</p>
+      <p class="try">試すなら: <code>.claude/agents/</code> の実装係に <code>model: haiku</code>、レビュー係だけ <code>model: opus</code> を置き、まず仕様がテストで書けているタスクで比べる → 許可は記事と同じ最小構成（<code>Bash(npm test)</code>・<code>Bash(node:*)</code>・読み取り専用 git。Flutter なら <code>Bash(flutter test:*)</code>）にして、<code>claude -p --output-format json</code> の <code>total_cost_usd</code> と <code>usage</code> で 1 回ごとの費用を記録する → 失敗が「報告にないケース」に偏るなら、そこだけ Opus に回す（記事の L6 がそれ）。163 回分のデータは CC BY 4.0 で tokensave.app/data/ai-coding-limit-line に公開。</p>
+      <p class="src">出典: <a href="https://qiita.com/yunany90/items/b0fa22097f7e9bcf8642">Qiita — Claude HaikuはどこでOpusに負けるのか：163回測って見えた「報告にないケース1つ」の差</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>FlutterFire 5.1.0（10/23）: cloud_firestore 7.1.0 に <code>FieldValue.minimum()</code>／<code>maximum()</code>（今の値と比べて小さい方・大きい方をサーバー側で書く）と Pipeline の <code>findNearest</code> に距離を返すフィールド名、firebase_ai 5.1.0 に TextPart の SpeechMetadata。全パッケージで Android SDK 35.0.2 と Gradle の代入記法修正、iOS は侵害された eMudhra 系ルート証明書を削除</h2>
+      <p class="why">— 10/16 の 5.0.0（minSdk 24）に上げた人の最初のマイナー。同時更新で壊れやすい「最小値・最大値の更新」が <code>increment</code> と同じ書き方で済む。</p>
+      <p class="b">10/23 の BoM 5.1.0 で主要パッケージが同時更新。Firestore の <code>FieldValue.minimum(値)</code>／<code>maximum(値)</code> は <code>set</code>／<code>update</code> で「今の値と比べて小さい（大きい）方」をサーバー側で書く。読んで比べて書く往復が要らず、同時更新でも負けない（フィールドが無ければその値）。Pipeline の <code>findNearest</code> は距離を入れるフィールド名を指定でき、Android で無視・iOS で落ちていた分も直った。含意: 最小・最大の更新はトランザクションを書かずに済む。</p>
+      <p class="try">試すなら: pubspec を <code>firebase_core: ^5.1.0</code>・<code>cloud_firestore: ^7.1.0</code>・<code>firebase_auth: ^7.0.1</code>・<code>firebase_ai: ^5.1.0</code> にして <code>flutter pub get</code> → ハイスコアや最安値のように「今より良い時だけ更新」する欄は <code>doc.update({'bestScore': FieldValue.maximum(score)})</code>（トランザクション不要。flutterfire #18697）→ ベクトル検索で距離も要るなら Pipeline の <code>findNearest</code> に距離用フィールド名を渡す（#18838、Android／iOS／Web SDK と同じ指定）→ 5.0.0 の minSdk 24・Apple SDK 13 の条件はそのまま。Firebase release notes 10/23 にも Flutter SDK v5.1.0 が載った。</p>
+      <p class="src">出典: <a href="https://pub.dev/packages/cloud_firestore/changelog">pub.dev — cloud_firestore 7.1.0 changelog</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>DB の読みにくさだけで Claude Code の費用が 1.9 倍: 同じ EC データで命名・コメント・型・外部キーだけ変えた 2 つの DB に同じ集計クエリを 5 回ずつ頼むと、$0.21→$0.41、ターン 18.8→26.2、60→109 秒、実 DB を叩く Bash 5.0→11.8 回。読みにくい側は 5 回中 1 回、書かれていないタイムゾーンを推測して誤答（北野氏、10/23）</h2>
+      <p class="why">— AI に読ませる前提でスキーマのコメントと命名を整えるのは費用対策になる。Firestore なら「フィールドの意味・型・時刻の基準」を CLAUDE.md かスキーマ文書に書く、に置き換わる。</p>
+      <p class="b">北野氏（10/23）。MySQL の EC データで、A は英単語の命名・カラムコメント・Enum、B は略語とローマ字・コメントなし・<code>sts = 9</code>・<code>prc_a</code>／<code>prc_b</code>。<code>claude -p</code>（Sonnet 5.5）に同じ命令を 5 回ずつ。平均費用 $0.21 対 $0.41、ターン 18.8 対 26.2、output 7,050 対 13,215、Bash 5.0 対 11.8 回。B の 1 回は <code>odt</code> が JST と書かれておらず UTC 変換して不正解。含意: 書かれていない前提は AI が推測で埋める。n=5・検定なし。</p>
+      <p class="try">試すなら: 自分のスキーマで「AI が推測で埋めそうな前提」を 3 つ探す（時刻の基準、状態コードの意味、金額が税込か）→ MySQL ならカラムコメントと Enum、Firestore なら CLAUDE.md か <code>docs/schema.md</code> に「<code>orderedAt</code> は JST の Timestamp」「<code>status</code> は <code>cancelled</code> 等の文字列」と 1 行ずつ → 測るなら同じ依頼を <code>claude -p --output-format json</code> で 5 回流し、<code>total_cost_usd</code> と <code>num_turns</code> を前後で比べる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/actbe_tech/articles/8b4a9991d5365d">Zenn — 「読みにくいDB」はAI開発のコストを1.9倍にする――Claude Codeで検証したDB設計の影響</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.309（<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.309" style="color:inherit">10/23</a>）は修正が中心。運用に触るのは、<code>sed -i</code> が通常の Bash 権限確認になり <code>/rewind</code> で戻らなくなった点、Desktop／VS Code の bypass 権限モードで危険な <code>rm</code> が確認でなく即拒否＋書き換え案になった点、<code>claude ultrareview</code> が workspace trust 必須（スクリプトは <code>--trust-workspace</code>）。Ollama v0.40.9 正式版（<a href="https://github.com/ollama/ollama/releases/tag/v0.40.9" style="color:inherit">10/22</a>）: Flint が Linux／Windows でも動く、<code>ollama launch</code> がクラウドモデルの文脈長と機能をコーディングツールに渡すようになり compaction 設定のずれを修正、d3 判定モデル（2B〜27B、<code>--ask</code>）、Apple Silicon の音声合成 Phonon。v0.40.10（10/23）: NVIDIA Nemotron 3.5 Bolt E4B（Gemma 4 ベースの小型 VLM、128K、DFlash ドラフト同梱、<code>ollama run nemotron-3.5-bolt:e4b</code>）。Firebase release notes: 10/22 に Firestore の DML（insert／upsert）GA と CLI 15.34.1、10/21 に Android BoM 35.1.0。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/subagent-team-from-oneline-goal-handson" style="color:inherit">10/23</a>）: 「サブエージェントを提案して」で止めると <code>.claude/agents/</code> は 0 個、「提案して、チームを編成して」まで言うと 6〜7 個（各 3 回、$0.045 対 $0.147）。kenimo49 氏（<a href="https://qiita.com/kenimo49/items/7eb0e0b244bc09b5f933" style="color:inherit">10/23</a>）: Claude Code の WebFetch 相当をローカル qwen3.5:9b（<code>think=false</code>・<code>num_ctx 32768</code>・temperature 0・先頭 24,000 字）に回すと、比較できた 11 件中 8 件が一致、1 件 6〜66 秒。Take 氏（Linc'well、<a href="https://zenn.dev/lincwell_inc/articles/ab2a642ea8f6f0" style="color:inherit">10/23</a>）: Riverpod の override を <code>main()</code> でしか渡していないと、<code>@pragma('vm:entry-point')</code> で起動する着信や通知のバックグラウンド経路で <code>UnimplementedError</code>。全経路共通の <code>coreOverrides({required …})</code> に集約。Anthropic（<a href="https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation" style="color:inherit">10/22</a>）: Agent Skills の標準を Linux Foundation 傘下の Agentic AI Foundation に寄贈、SKILL.md の仕様変更はなし。Google Play: API 36 の延長申請は 11/1 まで（残り 8 日）。</p>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b">.env は deny＋フック＋sandbox の 3 層（10/18）。<code>claude -p</code> の拒否は <code>permission_denials</code>（10/19）。opusplan は長い作業ほど安い（10/20）。RAG はリランカー 20→4 で 4.3 秒（10/20）。サブエージェントは <code>subagentPromptCacheTtl: "1h"</code>（10/21）。HCPP は <code>--enable-hcpp</code>（10/21）。無人ジョブは <code>--safe-mode</code>（10/22）。計画と監査だけ Opus（10/22）。CLAUDE.md は開く前に要る決まりだけ（10/23）。弾かれた操作は <code>safety_event</code>（10/23）。Flutter 公式 <code>dart-flutter</code>（10/23）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
