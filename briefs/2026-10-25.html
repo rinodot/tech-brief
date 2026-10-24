@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月25日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-24.html">← 10/24（土）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年10月25日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2><code>claude -p</code> にテストを渡しても差はゼロ、効くのは「仕様がテストにしかない」ときだけ: Sonnet 5.5 で Python 12 問×テストあり／なし×3 回＝72 試行。仕様が文章にある 11 問は隠しテスト 690 ケースで不合格 0（両条件とも）、仕様がテストにしかない 1 問だけ失敗率 74.5%→7.8%。許可が足りず自己確認を拒否された試行が 15 中 7、全 72 試行で約 $2（かくしごと氏、10/24）</h2>
+      <p class="why">— 昨日の yunany90 氏「テスト許可で他を壊すのが 2→0」の裏側。無人 <code>claude -p</code> では allow が足りないと「確認」が黙って拒否される。</p>
+      <p class="b">かくしごと氏（10/24）。Claude Code 2.1.309・Sonnet 5.5 で Python 12 問を「テストを渡す／渡さない」各 3 回、計 72 試行。採点は見せない隠しテスト。仕様が文章で書かれた 11 問は 690 ケースで不合格 0、テストの有無で差なし。差が出たのは仕様がテストにしかない 1 問だけで、失敗率 74.5%→7.8%。python を自分で動かそうとした 15 試行のうち 7 は許可不足で拒否され、一度も確認できなかった。含意: テストを渡す前に、仕様を文章で書く。</p>
+      <p class="try">試すなら: 無人実行は記事と同じ隔離フラグ <code>claude -p --model sonnet --output-format stream-json --permission-mode acceptEdits --permission-prompts none --safe-mode --setting-sources "" --strict-mcp-config --no-session-persistence --max-budget-usd 1</code> → <code>--allowedTools</code> に <code>Read Write Edit Glob Grep "Bash(python3 *)"</code> のように自己確認のコマンドまで明示する（足りないと <code>--permission-prompts none</code> が黙って拒否する。Flutter なら <code>"Bash(flutter test *)"</code>）→ 記事のプロンプトは「<code>python test_public.py</code> を実行して、すべて通るまで直して」。拒否の理由は stream-json の tool_result に残る（例: "Contains brace with quote character"）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/kakushigoto/articles/claude-code-verification-loop">Zenn — Claude Code にテストを渡しても差はゼロだった。作者の「最重要のコツ」を 72 回試してわかった効く条件</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>「サブエージェントをメインループに畳む」を第三者が実測: モック EC サポート 12 タスク×3 回で、オーケストレーター＋サブエージェント構成は平均 13.49 秒・$0.0241／タスク、スキル段階開示のシングルループは 6.30 秒・$0.0093。成功は 34/36 対 35/36 で差なし、全 12 タスクで畳んだ方が速い（p≈0.00024）。実験費 約 $5.1（八兵衛氏、10/24）</h2>
+      <p class="why">— 10/23 短報の Anthropic「fold subagents」を数字で確かめた記事。自分の <code>.claude/agents/</code> を増やす前の判断材料。</p>
+      <p class="b">八兵衛氏（Qiita、10/24）。Sonnet 5.5 のエージェントで、A＝組織図どおりのオーケストレーター＋サブエージェント、B＝1 文脈のシングルループ＋スキルの段階開示を、モックの EC サポート 12 タスク×3 回で比較。B は平均 6.30 秒・$0.0093／タスク、A は 13.49 秒・$0.0241。API 呼び出し 3.53 対 7.17、出力トークン 609 対 1,497。正答は 35/36 対 34/36 で同等。含意: 分ける理由が「組織図」だけなら畳む方が速くて安い。モックで待ち時間ゼロ、n は小さい。</p>
+      <p class="try">試すなら: サブエージェントを足す前に「文脈が膨れて壊れる／並列が要る／ツール選択が難しい」のどれに当たるかを 1 行書く（Anthropic 10/22 記事の 3 条件）→ 既存の <code>.claude/agents/</code> のうち親と同じツールしか使わない係は親に戻し、手順だけ <code>.claude/skills/&lt;名前&gt;/SKILL.md</code> に残す → 比べるなら同じ 12 依頼を <code>claude -p --output-format json</code> で各 3 回流し、<code>total_cost_usd</code>・<code>duration_ms</code>・<code>num_turns</code> を並べる。記事のコードは github.com/hatyibei/zenn-articles の bench/subagent-fold。</p>
+      <p class="src">出典: <a href="https://qiita.com/hathibei7/items/b3b6aa8874aab70717ff">Qiita — サブエージェントはメインループに「畳む」べきか？Anthropicの記事をモックECサポートで実測してみた</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.310（<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.310" style="color:inherit">10/24</a>）は修正中心。運用に触るのは、Windows で Git Bash が無いと PreToolUse／PermissionRequest フックがツール呼び出しを素通しさせていた修正、<code>-p</code>／SDK の巨大 transcript 圧縮時のメモリ改善、非対話で MCP の elicitation が無応答のまま timed out したときに「再呼び出しするな」と伝えるエラー文、Monitor ツールが Bedrock／Vertex／Foundry でも使えること。Ollama v0.40.11（10/24）は本文が Speech と d3 の再掲で Linux／Windows 向けの新項目なし。Firebase Android BoM 35.1.0（10/21）の中身: Firestore 27.1.0 に Pipeline の DML ステージ <code>insert()</code>／<code>upsert()</code>／<code>update()</code>／<code>delete()</code> と <code>withAtomic()</code>、AI Logic 18.1.0 に <code>OnDeviceConfig</code> の <code>enableThinking</code> と on-device／hybrid の <code>systemInstruction</code>（FlutterFire 側は未反映）。orca forge 氏（Qiita、<a href="https://qiita.com/orca-forge/items/4a2b9871def2c3c8ea84" style="color:inherit">10/24</a>）: Ollama にツール 29 個を渡すと応答が切れた原因は、OpenAI 互換 <code>/v1/chat/completions</code> 経路で文脈長の指定が届かず <code>context_length</code> が 4,096 になっていたこと（超過分は 400 を返さず先頭から黙って切られる）。<code>/api/chat</code> に <code>options.num_ctx: 16384</code> を渡して解決、<code>tool_choice: required</code> は付けない。masaki mori 氏（<a href="https://zenn.dev/masaki_mori72/articles/0b191e77715037" style="color:inherit">10/25</a>）: <code>~/.claude/projects/</code> の JSONL で auto mode に止められた操作を数えると約 1 か月のツール呼び出し 19,952 回中 62 件（約 0.3%）、Production Deploy 21・Irreversible Local Destruction 6・Secret-Store Writes 5。同じ宛先への deploy は <code>Bash(gcloud run deploy *)</code> のような狭い allow か <code>autoMode.environment</code> に書く。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/session-record-context-breakdown-handson" style="color:inherit">10/24</a>）: <code>claude -p</code> の記録から料金を再現するなら <code>cost-state</code> の 1 行だけを読む（発言行を足すと裏方込み／抜きの 2 通りになる）。同じ依頼 3 回で初回 $0.1168、2 回目以降 $0.0648。Yevhen Beshkarov 氏（dev.to、<a href="https://dev.to/ybeshkarov/flutter-firebase-analytics-screen-tracking-with-gorouter-1iij" style="color:inherit">10/24</a>）: go_router に <code>FirebaseAnalyticsObserver</code> を渡す方式はタブ復帰・push 戻り・ネスト route で画面を取りこぼす。<code>router.routerDelegate.addListener</code> で最上位ページを読んで <code>logScreenView</code>、go_router 17 以降の shell route は <code>notifyRootObserver: false</code> で二重記録を防ぐ（go_router 18.1.1・firebase_analytics 13.0.0）。Google Play: API 36 の延長申請は 11/1 まで（残り 1 週間）。</p>
+
+    <section class="special">
+      <h3 class="sp">特集② 使い方の型 — 指示と記憶の置き場を決める: CLAUDE.md は「開く前に要る決まり」だけ、手順・状態・学びは別の場所に</h3>
+      <p class="b">CLAUDE.md に何でも書くと決まりが埋もれる。docs は「200 行以内」「文脈であって強制ではない」と書き、v2.1.309 からサブフォルダの CLAUDE.md は 200K 窓で 40,000 字を超えると先頭しか読まれない（おじさんAIラボ氏が実測）。一方、やまと氏（10/23）の実測ではメモ 40 件なら全部直書きが約 8,700 トークンで最安、索引に分けると約 15,000。小さいうちは分けても得をしない。</p>
+      <p class="b">置き場は 4 つ。①決まりは CLAUDE.md に短く。R.Sawada 氏（10/24）では書かなかった同時実行対策が落ち、1 行足すと直った。②手順と経緯は docs/ に置き、索引だけ渡す。やまと氏（10/24）はメモ 126 件に tags・summary を付けて FTS5 で探し、約 5,300 トークンが約 1,270 で正答 5/5。③状態は STATE.md（100 行上限）。④学びは 1 件 1 行。たくやauto 氏の <code>lessons.jsonl</code> は 43 件中 33 件が再発 0。</p>
+      <p class="b">上限は検査で守る。前田氏（9/26）は 7 ファイルを AGENTS.md 1 本（上限 60 行、現在 38 行）にし、context.md は 45 行以内をフックで検査。「長くなったら削る」は 1 週間で破られ、行数チェックに替えて約 2 週間再発なし。ひとり事業主と AI 氏（10/23）は CLAUDE.md を地図と数個の禁止だけにし、手順はスキル 18 本、メモリは 1 事実 1 ファイル約 80 件、毎回読むのは索引だけ。</p>
+      <p class="b">私への含意: CLAUDE.md を「開く前に要る決まり」「索引」「状態」「学び」に分け、決まり 30 行・状態 100 行の上限をフックの <code>wc -l</code> で検査する。手順は <code>.claude/skills/</code> か docs/ に移し、CLAUDE.md には案内 1 行だけ残す。学びは 1 件 1 行で再発を数え、再発 0 が続いた行は消す。<code>/doctor prompt-audit</code> で古い指示と矛盾を点検する。</p>
+      <p class="try">試すなら: ① <code>wc -l CLAUDE.md</code>・<code>wc -m CLAUDE.md</code> で今の大きさを測り、「開く前に要る決まり」以外の行を <code>docs/notes/</code> か <code>.claude/skills/&lt;名前&gt;/SKILL.md</code> に移す → ② CLAUDE.md の末尾は <code>@docs/notes/INDEX.md</code>（1 行 1 件の索引）と <code>STATE.md</code>（100 行以内）への案内だけにする → ③ 学びは <code>docs/lessons.jsonl</code> に 1 件 1 行（symptom／cause／rule／verify／recurrence）→ ④ 行数上限は PostToolUse フックで <code>wc -l</code> を見て exit 2 で差し戻す（前田氏の <code>docs:check</code> と同じ型）→ ⑤ <code>/doctor prompt-audit</code> で古い指示と矛盾を点検。行数の目安・入れ子の上限・<code>/doctor prompt-audit</code> は code.claude.com/docs/en/memory に記載、各数字は出典の記事で確認。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yamato_snow/articles/claude-md-index-design">Zenn — やまと（4 つの置き方を測った話）</a> ／ <a href="https://zenn.dev/yamato_snow/articles/rag-memo-126-search-quarter">Zenn — やまと（メモ 126 個に 4 項目を足して SQLite で探す）</a> ／ <a href="https://zenn.dev/ojisan_ai_lab/articles/claude-code-nested-claudemd-limit-20261024">Zenn — おじさんAIラボ（入れ子 CLAUDE.md の境目）</a> ／ <a href="https://zenn.dev/swdrk/articles/a18eca9e53d582">Zenn — R.Sawada（書いたことは守り、書かなかったことは落とす）</a> ／ <a href="https://qiita.com/maeda-kazutoshi/items/2633e0984551bfe2b124">Qiita — maeda-kazutoshi（AGENTS.md を 38 行に）</a> ／ <a href="https://zenn.dev/hitoribocchi_ai/articles/15d0e403f9c92f">Zenn — ひとり事業主とAI（「前にも言ったよね」を言わなくなった）</a> ／ <a href="https://zenn.dev/takuyaauto/articles/d9db23c55571dd">Zenn — たくやauto（lessons.jsonl）</a> ／ <a href="https://code.claude.com/docs/en/memory">Claude Code Docs — How Claude remembers your project</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
