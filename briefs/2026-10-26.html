@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月26日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-25.html">← 10/25（日）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年10月26日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>スキルは「候補に選ばれる」と「実際に読まれる」の 2 段階で発火する: 説明文だけを見せる一覧テストでは 9/9 で選ばれるスキルが、実作業のセッションでは 0/2 で読まれず、description に「比較対象を開く前に読め」と足しても 0/2。UserPromptSubmit hook で依頼文に「棲み分け｜整理｜統合…」の動詞を見つけたら additionalContext で名指しすると 2/2 で先に読んだ（Codex も 2/2）。節目ごとに hook から選び直させる別の実測では読まれる率 45%→83%（pacy 氏・こかげ氏、10/25）</h2>
+      <p class="why">— 自作スキルが「入れたのに使われない」原因を、description の書き方ではなく発火の段階で切り分けた。hook で名指しする型は読者の Skills 運用にそのまま入る。</p>
+      <p class="b">pacy 氏（10/25）。Claude Code と Codex 共用の dotfiles、4 スキルで測定。説明文だけ見せて選ばせる一覧テストでは skill-restructuring が 9/9 で選ばれるのに、実際に「Linear 証跡と GIF 録画の 2 スキルを棲み分けたい」と頼むと、その 2 つを直接開いて 0/2 で読まれない。description に「比較対象を開く前に読め」と足しても 0/2。選ぶ段と読む段は別で、説明文は後段に効かない。</p>
+      <p class="b">効いたのは UserPromptSubmit hook。依頼文に <code>/棲み分け|整理|統合|分割|改名|分け方|重複/</code> が当たり、かつ skill という語かスキル名があれば、additionalContext で「比較対象を開く前に skill-restructuring を読んで使え」と英語 1 文を添える。これで 2/2 先に読み、Codex でも 2/2。スキル同士の参照は「届ける側が作る側を名指しする」一方向に限る。各条件 2〜3 回の現象報告。こかげ氏（10/25）も、コード→文書→検証→リリースの節目で hook から選び直させると読まれる率 17/38（45%）→52/63（83%）と報告。</p>
+      <p class="try">試すなら: 使われないスキルがあるなら、まず「候補になるスキルを挙げて」と一覧で聞き、選ばれるのに実作業で読まれないのかを切り分ける → 読まれない側なら <code>~/.claude/settings.json</code> の <code>hooks.UserPromptSubmit</code> に <code>node skill-reminder.mjs</code> を登録し、stdin の JSON の <code>prompt</code> に正規表現が当たった時だけ <code>{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"Load and use the ＜skill 名＞ skill now, before …"}}</code> を標準出力に返す（公式 docs/en/hooks: UserPromptSubmit は依頼文を置き換えられず additionalContext を添えるだけ。exit 0 の素の stdout も文脈として渡る）→ 誤発火が出たら当たる語を絞る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/lilpacy/articles/claude-code-skill-two-stage-activation">Zenn — Claude Codeのskillが「選ばれるのに読まれない」理由：発火を2段階に分けて測った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code のプロンプトキャッシュは、サブスクなら保持 1 時間（30・50・55・58 分後は読めて 61 分以降は外れた）。期限切れ後の 1 ターンは読めた時の 11 倍の費用、65 分空けた書き直しは $0.175、先に /compact してあれば $0.032。先頭を変えない（日時を書かない、途中でモデルや MCP を変えない）が基本で、公式 docs は保持を <code>promptCacheTtl</code>（5m/1h）で選べると明記（songchong 氏 10/26）</h2>
+      <p class="why">— 休憩明けの 1 ターンが遅くて高い理由がこれ。<code>claude -p</code> の自動化は API 課金で保持 5 分なので、1 時間にしたいなら設定が要る。</p>
+      <p class="b">songchong 氏（10/26）。サブスクの Claude Code＋Sonnet 5.5 で再開間隔を変えると、30〜58 分は読めて 61 分以降は外れた。2 ターン目は 53,801 トークン中 49,997 が読み、3,802 が書き込みで、費用の 75% は書き込み側。先頭の日時行で 10,774、MCP 1 個追加で 3,786、モデル切替で 12,764 トークンが書き直しになる。公式 docs: 保持はサブスクの本会話 1 時間、API キーと usage credits は 5 分で、<code>promptCacheTtl</code>（5m/1h）で選べる。</p>
+      <p class="try">試すなら: <code>/usage</code> の「Prompt cache (main)」で命中率と warm かを見る（v2.1.251 以降。最後のミスの推定原因は v2.1.260 以降）→ 1 時間を超えて離れる前に区切りで <code>/compact</code>（公式 docs: 冷えてからの compact は全履歴を非キャッシュで読み直すので最も高い）→ <code>claude -p</code> や API キー運用は <code>~/.claude/settings.json</code> に <code>"promptCacheTtl": "1h"</code>（または <code>CLAUDE_CODE_PROMPT_CACHE_TTL=1h</code>）、確認は <code>claude -p "hello" --output-format json</code> の <code>usage.cache_creation.ephemeral_1h_input_tokens</code> → セッション中はモデル・MCP を変えない（effort の変更は Opus／Sonnet／Haiku 5.5 と Fable 5.1 ならキャッシュ維持）。</p>
+      <p class="src">出典: <a href="https://qiita.com/songchong/items/7144594b0ad9529a168b">Qiita — トークン代 9 割減？プロンプトキャッシュの仕組みと効果の実測 — 保持時間が過ぎるとコスト 11 倍に</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>日本語 RAG のリランカー比較（国税庁タックスアンサー 345 チャンク・40 問）: 1 位正解率はリランカーなし 65%、Cohere Rerank 5 Pro 94%、5 Fast 90%、ローカルの ruri-v3-reranker-310m（CPU 4 スレッド）も 90%。遅延は API 416〜499 ms に対し CPU の ruri は p50 7,789 ms。Context Focus で渡すトークン 3,450→1,327（62% 減）でも根拠文は 100% 残った（Dayaa 氏 10/25）</h2>
+      <p class="why">— ローカル LLM で RAG を組む読者には「310M の日本語リランカーで API 版と同じ 90%」が要点。CPU で 7.8 秒なら GPU に載せる価値がある。</p>
+      <p class="b">Dayaa 氏（10/25）。源泉所得税 65 ページ→345 チャンク、質問 40 問（答えなし 8 問を含む）、一次検索は ruri-v3-310m の上位 20 件。1 位正解率はなし 65%、Rerank 5 Pro 94%、5 Fast 90%、ruri-v3-reranker-310m 90%（MRR 0.941 対 0.962）。費用は 1 問 5 Pro $0.00018・Fast $0.00011。答えなし 8 問は公式閾値（Pro 0.50・Fast 0.45）で 8/8 弾けた。限界: 31 問・コーパス 1 種、評価データは Claude Code 製。</p>
+      <p class="try">試すなら: <code>git clone https://github.com/dayaa-arch/cohere-rerank-5-rnd</code> → <code>uv sync</code> → 保存済みの応答から表を再生成するだけなら API キー不要（記事の手順: <code>uv run python -m rerank_ja_bench.pipeline --run results/2026-10-25</code>）→ 自分のコーパスで試すなら一次検索は ruri-v3-310m のままにし、<code>cl-nagoya/ruri-v3-reranker-310m</code> を GPU に載せて p50 を測る（記事は CPU 4 スレッドで 7.8 秒、GPU 値なし）→ 答えのない質問を 2 割混ぜ、閾値未満なら「該当なし」を返せるかを先に確かめる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/codetech/articles/cohere-rerank5-ja-rag-eval">Zenn — Cohere Rerank 5 に乗り換える価値はあるか：日本語の業務文書40問で精度・Context Focus・較正スコアを実測した</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: こかげ氏（<a href="https://zenn.dev/kokagex/articles/d6a7e09257590b" style="color:inherit">10/25</a>）: 1 番で触れた節目ごとの選び直し。PreToolUse の deny 文に「先に Skill tool で /japanese-tech-writing を読み、その決まりに合わせて書き直してください」と理由を書くと、Haiku の書き直しテストでは名前だけで 6/6 書き直し・4/6 が規則どおり、決まりの中身を添付すると規則どおりは 1/6 に落ちた。deny の遅延 398 ms。Takuma 氏（<a href="https://zenn.dev/outsidernotes/articles/933adb87f7e8de" style="color:inherit">10/25</a>）: auto mode で freee 公式 MCP の取引の作成・更新・削除が 3 つとも確認なしで通った（テスト事業所、Opus 5.5、2.1.310）。<code>permissions.ask</code> に <code>mcp__freee__freee_api_post</code>／<code>_put</code>／<code>_patch</code>／<code>_delete</code> を並べると止まる。<code>mcp__freee__*</code> だと読み取りも毎回止まる。いわい氏（<a href="https://zenn.dev/pepe_3_go/articles/claude-code-last-step-by-human" style="color:inherit">10/25</a>）: 「メールは下書きまで」など 4 つの約束のうち仕組みで止めていたのは 1 つ。送信ツールを <code>permissions.deny</code>（<code>mcp__＜コネクタID＞__outlook_send_mail</code> 等 3 つ）に、納品は PreToolUse で 3 段階判定にし、過去コマンド 1,367 件を流し直して止める 47→47・新たに確認 63・誤って止める 0 を見てから入れた。Krenin 氏（<a href="https://krenin88.github.io/devlog/2026/10/25/agent-device-test-automation-1.html" style="color:inherit">10/25</a>、韓国語）: Callstack の agent-device 0.21.31 を Claude Code の MCP にして Flutter アプリをエミュレータで操作。<code>Key</code> はアクセシビリティツリーに出ないので <code>Semantics(identifier:)</code> を付ける、<code>install</code> は絶対パス、<code>@e5</code> 形式の参照は画面が変わると失効、<code>npx skills add callstack/agent-device</code> は auto mode で止まるので skills/ を手で <code>~/.claude/skills/</code> へ。Persimmoq AI（<a href="https://zenn.dev/persimmoq/articles/litellm-1-107-0-compromise-check" style="color:inherit">10/25</a>）: LiteLLM 1.107.0（10/21 11:39 UTC 公開、同日削除）は .pth と sitecustomize.py で <code>import litellm</code> なしでも Python 起動のたびに動き、Claude／Cursor／Codex CLI の認証情報まで集める。確認は <code>python3 -m pip show litellm | grep -i '^version'</code>（安全版 1.106.2）、再発防止は uv の <code>exclude-newer = "3 days"</code> か <code>PIP_UPLOADED_PRIOR_TO=P3D</code>。songchong 氏（<a href="https://qiita.com/songchong/items/235bed0f8c72f268477e" style="color:inherit">10/26</a>）: 資料を毎ターン貼り直すのをやめて「題名で参照」にすると入力費用は Claude Code で約 58% 減。SKILL に移すと +38%、CLAUDE.md は +1%、外部ファイルは +26%（各 1 回、2.1.310）。susie000720 氏（<a href="https://qiita.com/susie000720/items/fb78dc07897d3cf89426" style="color:inherit">10/26</a>）: Flutter の Release に開発用の証明書緩和が残らないよう、<code>HttpOverrides.global</code>・<code>badCertificateCallback</code>（許可は 1 ファイルのみ）・Android の user CA と cleartext・iOS の <code>NSAllowsArbitraryLoads</code> を標準ライブラリだけの <code>scripts/check_release_tls.py</code> で CI のビルド前に検査。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
