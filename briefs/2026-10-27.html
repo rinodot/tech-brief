@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月27日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-26.html">← 10/26（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年10月27日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>CLAUDE.md の決まりとコードが食い違うと、Sonnet 5.5 は 36 回中 23 回（64%）で古い CLAUDE.md の方に従った。しかも 23 回のうち 18 回は食い違いに気づいて報告している。末尾に「文書とコードが食い違うときは既存コードに従い、食い違いを最後に 1 つずつ指摘せよ」の 1 行を足すと 0/36（英語・日本語訳とも）、Opus 5.5 も 3/18→0/18、AGENTS.md だけでも 4/6→0/6。計 168 回、Claude Code 2.1.310 の <code>claude -p</code>（かくしごと氏 10/26）</h2>
+      <p class="why">— CLAUDE.md の直し忘れは誰にでもある。1 行で「気づいても古い方に従う」挙動が消えるなら、読者の全プロジェクトに入れる価値がある。</p>
+      <p class="b">かくしごと氏（10/26）。小さな Python リポジトリ 6 課題で CLAUDE.md の決まり 1 行だけを古いまま残し、<code>claude -p</code> で計 168 回（Sonnet 5.5 132 回・Opus 5.5 36 回、2.1.310）。1 行なしの Sonnet は 36 回中 23 回（64%）で古い CLAUDE.md に従い、従うとテストが壊れる種類でも 18 回中 5 回、壊れない種類は 18 回中 18 回。しかも 23 回のうち 18 回は最終報告で食い違いに触れていた。気づいても文書を優先する。</p>
+      <p class="b">末尾に「リポジトリのドキュメントと既存のコードが食い違うときは、既存のコードの書き方に従い、最後の返答で、見つけた食い違いを 1 つずつ指摘すること」と足すと、英語でも日本語訳でも 36 回中 0 回。Opus 5.5 は 1 行なしで 18 回中 3 回、ありで 0 回。AGENTS.md だけでも 6 回中 4 回→0 回。コードを古い文書に合わせて書き換えた回は 168 回中 0。含意: 文書を先に直してコードを移している最中は逆効果になり得ると著者も注意。判定は Opus、32 件を抜き取り確認、人の目視なし。</p>
+      <p class="try">試すなら: CLAUDE.md の末尾に 1 行 <code>リポジトリのドキュメントと既存のコードが食い違うときは、既存のコードの書き方に従い、最後の返答で、見つけたドキュメントとコードの食い違いを 1 つずつ指摘すること。</code>（記事には英語版もあり、同じく 0/36）→ 自分のリポジトリでわざと古い決まりを 1 行残し、<code>claude -p "＜小さな修正の依頼＞" --output-format json</code> を数回回して、最終報告に食い違いの指摘が出るか・古い決まりに従っていないかを見る → 文書を先に直してコードを移している最中のリポジトリではこの 1 行を外す → 必ず守らせたい決まりは CLAUDE.md でなく hook か <code>permissions.deny</code> に（公式 docs/en/memory: CLAUDE.md は「context, not enforced configuration」）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/kakushigoto/articles/stale-claude-md-vs-code">Zenn — CLAUDE.md とコードが違ったら、Claude Code はどちらに従う？：Sonnet は気づいても古い方に従った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>呼ぶと落ちる MCP サーバーは <code>/mcp</code> では最後まで connected のまま、無人の <code>claude -p</code> は 43 回すべて終了コード 0・stderr 0 バイトで終わった。同じことができる CLI を置いただけでは完遂 11 回中 1 回、依頼文に「コマンド … も同じ確認コードを返します」の 1 行を足すと 7 回中 7 回（ぬまーん氏 10/26）</h2>
+      <p class="why">— routines や cron の <code>claude -p</code> で MCP が死ぬと「成功」に見えたまま成果物だけ無い。終了コードで見張っている人はここを塞ぐ必要がある。</p>
+      <p class="b">ぬまーん氏（10/26）。確認コードを返す自作 MCP を、起動時に落ちる・ツール呼び出しで落ちるの 2 通りに壊し、<code>claude -p</code> を 6 条件 43 回（2.1.301、Sonnet 5.5）。呼ぶと落ちる方は接続表示が最後まで connected で、痕跡はツール結果の "Connection closed" だけ。完遂は健全 7/7、落ちる 2 通り 0/7、代替 CLI を置いただけ 1/11、依頼文で教示 7/7。43 回とも終了コード 0・stderr 0 バイト。再試行は 2 回で止まる。限界: 回数が少なく条件間に交絡。</p>
+      <p class="try">試すなら: 無人 <code>claude -p</code> の成否は終了コードでなく成果物（ファイル・コミット・JSON の中身）で判定する → MCP に頼る手順には同じことができる CLI を用意し、依頼文か CLAUDE.md に「コマンド <code>…</code> も同じ結果を返す」と 1 行書く（置いてあるだけでは 1/11）→ 落ちた痕跡はツール結果の <code>Connection closed</code> だけなので、transcript（<code>~/.claude/projects/＜dir＞/*.jsonl</code>）を grep する（記事の観察で公式の保証ではない）→ 再接続は 2 回で止まる挙動だったので、長い作業は先に MCP を 1 回呼んで生きているか確かめる手順を入れる。</p>
+      <p class="src">出典: <a href="https://zenn.dev/numarn/articles/mcp-server-down-fallback-handson">Zenn — 呼ぶと死ぬMCPサーバーは最後まで connected。回り道を置いても、言わなければ11回中1回しか完遂しなかった</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>Flutter の <code>dart:io</code> HttpClient は OS のネットワーク設定を通らない: 端末の proxy 設定は読まず（環境変数 <code>http_proxy</code> だけ）、Android では証明書検証も内蔵 BoringSSL で OS の失効リストを見ない。侵害された eMudhra 中間 CA を塞ぐ修正は Dart 3.13.7／Flutter 3.47.8（GHSA-frr6-h895-5pxp、10/23、High）で、アプリの再ビルドと再配布が要る。OS の経路を使うなら <code>cronet_http</code>／<code>cupertino_http</code>（koji_1009 氏 10/26）</h2>
+      <p class="why">— Play で配っている Flutter アプリの Android 版は、3.47.8 で作り直して出し直すまで OS 側の証明書失効が効かない。読者の公開アプリに直接かかる。</p>
+      <p class="b">koji_1009 氏（10/26）。<code>dart:io</code> は TLS まで SDK 内の自前実装で、OS の proxy 設定を読まず、Android では証明書も内蔵 BoringSSL で検証して OS の失効リストを見ない。公式勧告（10/23、High）: eMudhra の中間 CA 8 枚が侵害、Android・Windows・Linux が対象（Web・iOS・macOS は対象外）。修正は Dart 3.13.7／Flutter 3.47.8。ブロックリストはアプリ側に入るので再ビルド・再配布が要る。</p>
+      <p class="try">試すなら: <code>flutter upgrade</code> → <code>flutter --version</code> で 3.47.8 以上（Dart 3.13.7 以上）を確認 → Android 版をビルドし直して Play に出し直す（勧告の対処は「上げて再ビルド・再配布」のみ、回避策なし）→ OS の proxy・証明書・更新を活かしたい通信は <code>http</code> の Client を Android で <code>CronetClient.fromCronetEngine(CronetEngine.build(), closeEngine: true)</code>、iOS／macOS で cupertino_http に切り替える（dio なら <code>Dio()..httpClientAdapter = NativeAdapter()</code>。例外型が SocketException から ClientException 系に変わる、<code>Image.network</code> は dart:io のまま、Windows は非対応）→ <code>badCertificateCallback</code> で true を返す実装は全証明書を通すので使わない。</p>
+      <p class="src">出典: <a href="https://zenn.dev/koji_1009/articles/b222c501f9561c">Zenn — dart:ioと端末のネットワーク設定</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: しかまる氏（<a href="https://zenn.dev/shikamaru/articles/d3142afedf9997" style="color:inherit">10/26</a>）: 約 3,400 行のスキルを単独 vs サブエージェント 3 方式で（Opus、各 2 回）。単独 18 分 53 秒・$7.95、サブエージェントが自分で規約を読む 29 分 47 秒・$10.82、メインが読んでから <code>subagent_type: "fork"</code> 24 分 04 秒・$7.51、定義ファイルに規約を書く 25 分 02 秒・$7.61。正答は 1,129 中 1,124〜1,127 で差なし、メインの最大コンテキストは 44.5 万→10.9 万。「この規模では単独が最速、分けるなら fork」。越井氏（<a href="https://dev.classmethod.jp/articles/claude-code-supabase-mcp-read-only-connector/" style="color:inherit">10/26</a>）: Supabase MCP を <code>read_only=true</code> で繋いでも、claude.ai 側の Supabase コネクタが Claude Code に読み込まれ、承認すると <code>execute_sql</code> で DELETE が通った（2.1.304、Opus 5.5、5 件）。塞ぐには <code>.claude/settings.json</code> の <code>deniedMcpServers</code> に <code>{ "serverName": "claude.ai Supabase" }</code> か、起動時に <code>ENABLE_CLAUDEAI_MCP_SERVERS=false</code>。他のコネクタでも起きうると著者。公式（<a href="https://claude.com/resources/articles/auto-mode-default-in-claude-code" style="color:inherit">8/7、10/22 更新</a>）: Pro／Max／Team の新規セッションは auto mode が既定で、10/22 の更新で「most Claude apps」にも順次。許可ルールは分類器より先に効くが、<code>python:*</code> のような広い allow は auto mode 中は脇に置かれる。変えるなら CLI は Shift+Tab、組織は <code>defaultMode</code>／<code>disableAutoMode</code>。1,053 人の試験で人の確認は危険コマンドの 13.6%、分類器は 89% を止めた。鈴木大樹氏（<a href="https://zenn.dev/vellum_office/articles/5727fe983a897b" style="color:inherit">10/26</a>）: デスクトップの Code タブのローカル定期タスクが WebFetch の承認待ちで 95 分止まり、通知なし（10/20、Manual）。<code>grep -n "WebFetch\|WebSearch" ~/.claude/scheduled-tasks/*/SKILL.md</code> で指示書を点検し、Run now で一度「Yes, and don't ask again」を選ぶか、WebFetch を使わない。manabu_dev 氏（<a href="https://qiita.com/manabu_dev/items/d4a16488ddc4178fb722" style="color:inherit">10/26</a>）: claude.ai で設計→受け渡しフォルダ→自作 mod が 15 秒以内に検知→<code>claude -p</code> が <code>handoff/＜メモ名＞</code> ブランチで実装→別の <code>claude -p</code> がレビュー→OK なら main へ push。1 か月弱で設計メモ約 360 件、直近 3 日で 31 件完了、上限は実装 $5・レビュー $2（実測 $1.19／$0.12）、<code>--permission-prompts none</code>、deny に <code>git push*</code>・<code>git reset --hard*</code>・<code>rm *</code>。mod は未公開、失敗率なし。Firebase release notes（<a href="https://firebase.google.com/support/releases" style="color:inherit">10/26</a>）: Google AI Studio で作る Android アプリに Firebase AI Logic と App Check が自動で組み込まれる（テストはデバッグトークン、Play 本番は reCAPTCHA Enterprise）。Android ネイティブ向けで Flutter の記述なし。warrobotsxyz 氏（<a href="https://qiita.com/warrobotsxyz/items/e4833747d780886e1d8b" style="color:inherit">10/26</a>）: RTX 4060 8GB・Ollama 0.40.4 で qwen3:8b を既定の文脈長 40960 のまま動かすと 11GB で CPU/GPU 46%/54%・9.1 tok/s、<code>num_ctx</code> 4096 なら 5.6GB・100% GPU・33.3 tok/s。<code>ollama ps</code> の PROCESSOR 列で見る（有料書籍の宣伝あり）。Wisteria 氏（<a href="https://zenn.dev/wisteriacorp/articles/wisteria-218be5072ded" style="color:inherit">10/26</a>）: faster-whisper の <code>initial_prompt</code> は約 224 トークン＝目安 190 字を超えると黙って切り捨て。CPU の base／small は「火曜」を取り違え、medium は辞書注入で全文一致（1 文・少数回、CER なし）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
