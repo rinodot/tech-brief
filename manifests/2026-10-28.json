@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-28",
+ "weekday": "水",
+ "file": "2026-10-28.html",
+ "titles": [
+  "MCP の道具 40 個を「一覧」と「呼び出し」の窓口 2 本の裏に隠しても、節約できる前払いは道具 1 個あたり約 15 トークン（39 個で 587）だけ。窓口から一覧を 1 回取ると 4,225 トークン払う（1 対 7.2）。道具を 1 回しか呼ばない仕事では窓口方式の方が高く、費用は約 $0.055 対 $0.073〜0.076。偽物 39 個を混ぜても呼び間違いは 12 回中 0（ぬまーん氏 10/27、Claude Code 2.1.302・Sonnet 5.5）",
+  "Claude Code は起動フォルダから上の全階層の CLAUDE.md／CLAUDE.local.md を読む（CLAUDE.md が 1 つも無ければ AGENTS.md も）。だから Downloads やホーム直下で claude を起動すると、ブラウザが黙って置いたファイルが指示になる。研究元の自社検証では Claude Code が .claude/settings.json に ANTHROPIC_BASE_URL を書かされたのが約半数、Codex は 9 割超（ほし氏 10/28、SupportApp3 Lab・遠藤氏 10/27）",
+  "日本語の文字起こし 11 モデルを無料の T4 で比較: 読み上げ（FLEURS 650 発話）の 1 位 Qwen3-ASR-1.7B は CER 5.36% だが、放送音声（ReazonSpeech 1,000 発話）では 25.98% で 8 位。両方で崩れないのは parakeet-tdt_ctc-0.6b-ja（6.37%／11.21%、1 発話 約 0.05 秒）と whisper-large-v3-turbo（6.03%／13.64%）。順位の相関は 0.24、Whisper は 88 文字の文に 506 文字を出す暴走 1 件が誤りの 22〜25%（JA Model Bench 10/27）"
+ ]
+}
