@@ -1,0 +1,10 @@
+{
+ "date": "2026-10-30",
+ "weekday": "金",
+ "file": "2026-10-30.html",
+ "titles": [
+  "Flutter アプリの保守を Claude Code に任せたら、Crashlytics で致命的エラーに遭った利用者の割合が 1.4.1 の 8.65%（5,272 人）→ 1.4.2 の 0.63% → 1.5.0 の 0.12%（854 人）。起票 9 件中 7 件を 2 回のリリースで修正、費用はトリアージ 1 回 $0.2〜0.3・修正 PR 1 件 $0.6〜1.3（当初見積り $5〜12）（まえくん氏 10/29、Claude Code 2.1.311・Opus 5.5・Flutter 3.44）",
+  "Android Studio Rabbit 2 が安定版: ACP 対応の外部エージェント 40 以上（Claude Agent・Codex・Junie・Antigravity）を Studio 内で使え、Skills Manager に Android と Firebase の skill が同梱。Claude Code 側には Android CLI プラグインが出て、android preview は社内テストで UI 作業 77% 速く・トークン最大 1/3、play-policy-insights は提出前に Play ポリシーを監査（Android Developers Blog 10/28）",
+  "Claude Code の 665 回のターン終了を 30 日分数えたら、暴走でなく「止まりすぎ」が 17%（116 回、広く取れば 24%）。止まった理由は着手の許可 54%・選択肢 39% で、人の返事の 78% は「推奨で進めて」の無修正承認。ルール追記は 23→25% で効かず、実ログの語彙で作った Stop フックは差し戻し 6 回（krbrr 氏 10/29、Windows 11）"
+ ]
+}
