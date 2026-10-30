@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年10月31日（土）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-30.html">← 10/30（金）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">土曜日 · 2026年10月31日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件＋今週のまとめ · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>同じ小課題を 4 モデルに 96 回解かせた実測: Haiku 5.5・Sonnet 5.5・Opus 5.5 は 24/24、Fable 5.1 は 23/24 で成功率は横並び。成功 1 回あたりの費用は 0.0078／0.067／0.152／0.432 ドルと 55 倍の開き、所要の中央値は Sonnet の 13.9 秒が最短。結論は「まず Haiku か Sonnet で回し、落ちたら上げる」（アセロラ氏、10/30）</h2>
+      <p class="why">— 10/24 の yunany90 氏（163 回）に Fable 5.1 と「成功 1 回あたりの費用」が足された。無人 <code>claude -p</code> や Flutter 保守の定型作業で、既定モデルをどこに置くかの根拠になる。</p>
+      <p class="b">アセロラ氏（10/30）。Python 標準ライブラリだけの小課題 6 つ（1〜2 ファイル、仕様は文章で明確）を Haiku 5.5・Sonnet 5.5・Opus 5.5・Fable 5.1 に各 4 回、計 96 回。成否は隠しテストの全通過（60 秒で打ち切り）、費用は <code>--output-format json</code> の <code>total_cost_usd</code>。成功は 24/24・24/24・24/24・23/24 で、Fable の 1 回は安全装置による停止。成功 1 回あたり 0.0078／0.067／0.152／0.432 ドル、所要の中央値は 19.4／13.9／27.2／40.6 秒。</p>
+      <p class="b">含意: この大きさの仕事は「まず Haiku か Sonnet、落ちたら上げる」で足り、上位が要る場面はこの実測では出なかった。キャッシュが冷えた初回は Sonnet で 0.186 ドル、2 回目以降の中央値 0.040 ドル（4.7 倍）なので連続実行は間隔を空けない。<code>--tools</code> で道具を絞った別の 36 回では安全装置の停止が Opus 4/9・Fable 9/9 と上位ほど起きた。各モデル 24 回・課題は小さく、大きなリポジトリや曖昧な依頼は未測定。2.1.303、effort は既定。</p>
+      <p class="try">試すなら: 記事のコマンドは <code>claude -p "Complete the task described in TASK.md …" --model claude-haiku-5-5 --output-format json --allowedTools Bash,Read,Edit,Write,Glob,Grep,Task --permission-mode acceptEdits --setting-sources project --strict-mcp-config --disable-slash-commands --max-turns 80 --max-budget-usd 10 &lt; /dev/null</code>。自分の定型作業（Crashlytics の起票文、テスト追加）で Haiku を 1 週間回し、失敗した回だけ <code>--model claude-sonnet-5-5</code> で再実行する 2 段構えにして、<code>total_cost_usd</code> を集計する。</p>
+      <p class="src">出典: <a href="https://zenn.dev/acerola_jp/articles/claude-code-model-cost-96runs">Zenn — Claude Code のモデル4種に同じ課題を96回解かせた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.314（10/30）: 作業ディレクトリの外への Write／Edit を全権限モードで拒否する <code>permissions.blockWritesOutsideWorkingDirectories</code> が入った。<code>claude -p</code> の起動失敗は「終了コード 0・無出力」から「エラー表示・終了コード 1」に、Monitor ツールのシェルコマンドにも Bash 向けフックが効くように</h2>
+      <p class="why">— 10/19 の読み取り側 <code>blockReadsOutsideWorkingDirectories</code> と対になる書き込み側。無人運転の「成功と誤認する穴」も 1 つ塞がった。</p>
+      <p class="b"><code>permissions.blockWritesOutsideWorkingDirectories: true</code> で Write・Edit・NotebookEdit が作業ディレクトリの外を全権限モードで拒否する。Bash 経由の書き込みは対象外なので deny かサンドボックスと併用。ほかに <code>claude -p</code> が起動に失敗すると終了コード 1 でエラーを出す（従来は 0 で無出力＝成功扱いの穴）、Monitor のシェルコマンドにも Bash 向けフックが走る（止める・尋ねるのみ）。含意: 無人運転の守りが設定 1 行で増える。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> の permissions に <code>"blockWritesOutsideWorkingDirectories": true</code> と <code>"blockReadsOutsideWorkingDirectories": true</code> を並べる → 無人スクリプトは <code>claude -p</code> の終了コード 1 を失敗として扱う分岐があるか確認 → Monitor 向けに書いた <code>Bash(tail *)</code> 系の hook <code>if</code> 条件が意図せず一致しないか見直す。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.314">GitHub — anthropics/claude-code v2.1.314 release notes</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>4B のローカル LLM に 5 分類させると、カテゴリ名だけでは正解 11/30 で、外れ 19 件のうち 18 件が「その他」に逃げる。各カテゴリに一言の目安を足すと 22/30、新規 20 件でも 15/20。詳細ガイドは調整用 25/30 でも新規 14/20 と伸びない（みんなのおたすけ研究所、10/30）</h2>
+      <p class="why">— 10/29 の RAG 判断モデルと同じ「小さいモデルに判定だけ任せる」構成で、精度を決めるのはモデルよりプロンプトの目安 1 行だという実測。</p>
+      <p class="b">みんなのおたすけ研究所。<code>qwen3-vl:4b-instruct</code>（3.3GB）を Ollama・temperature 0 で動かし、架空のメモを仕事／家庭／地域／学び／その他に分類。答えは <code>format</code> で JSON の型と enum を固定。カテゴリ名だけだと 11/30、一言の目安を足すと 22/30 で「その他」への逃げは 0、外れ 8 件は全部「仕事」。外れたメモを見て書いた詳細ガイドは 25/30 だが新規 20 件では 14/20。含意: 小さいモデルの判定は目安の文で決まる。目安は実際のデータを見ながら育てる。</p>
+      <p class="try">試すなら: Ollama の <code>format</code> に <code>{'category': {'type': 'string', 'enum': CATEGORIES}}</code> を渡し、プロンプトに「分類の目安: 仕事＝会議・見積り・取引先／…／その他＝どれにも当てはまらないものだけ」を 1 行足す（記事のコード）→ 手元の 30 件で名前だけと比べ、外れが「その他」に偏るかを見る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/hilopon/articles/local-llm-classify-falls-into-other">Zenn — 小さなローカルLLMは、迷うと「その他」に逃げる。ふさぐと「仕事」に逃げる</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: ぬまーん氏（<a href="https://zenn.dev/numarn/articles/task-steps-split-vs-one-request-handson" style="color:inherit">10/30</a>）: 6 工程を 1 つの依頼文で 1 回頼むか、1 工程ずつ 6 回（<code>--resume</code> で引き継ぎ）に分けるかを各 5 試行。達成は 30/30 対 30/30 で同じ、料金 0.356→0.551 ドル（1.55 倍）、所要 1.85 倍、入力トークン 2.51 倍。引き継いだ呼び出しの <code>total_cost_usd</code> は累計なので足さず最後の値を使う（2.1.304・Sonnet 5.5）。crossclub 氏（<a href="https://zenn.dev/crossclub_lab/articles/claude-p-windows-task-scheduler" style="color:inherit">10/30</a>）: Windows のタスクスケジューラで毎朝 <code>claude -p</code>。<code>--max-turns 12</code>・<code>--max-budget-usd 1</code>・<code>--model sonnet</code>、STOP ファイルで停止、終了コード 0 の日だけ済み印、スケジューラ側は ExecutionTimeLimit 45 分・MultipleInstancesPolicy IgnoreNew・StartWhenAvailable。<code>.cmd</code> は <code>call claude</code> でないと戻らない。y.azuma 氏（Gemcook、<a href="https://zenn.dev/gemcook/articles/rn-agent-device-cli-benchmark" style="color:inherit">10/30</a>）: iOS シミュレータ操作 3 ツール×CLI／MCP の 6 条件で実バグ 5 件を 180 回。agent-device CLI は 1 回 $0.70・2 分 05 秒、同 MCP は $0.95。画面 1 回の読み取りが CLI 約 580 字、MCP 約 5,300 字で、差はバグを直せるかではなく画面の渡し方（Opus 5.5・2.1.310、Android は未検証）。redamoon 氏（<a href="https://zenn.dev/redamoon/articles/article54-code-spec-extractor" style="color:inherit">10/30</a>）: コードから仕様書を起こす Skill <code>code-spec-extractor</code>。3 画面×10 項目で合格 30/30 対 26/30、<code>file:line</code> の根拠 121 対 0、トークンは約 1.4 倍（各条件 1 回、Dart は対応表になし）。zaiwa 氏（<a href="https://zenn.dev/michy/articles/d4c97cd7a57240" style="color:inherit">10/30</a>）: EmbeddingGemma 2＋ロジスティック回帰で申告 11,862 件を 14 種に分け、件数を「1 つに決める」と合計のずれ 144 件、確率で按分すると 55 件（個別正解率 78.6%、M1 Pro で 105.8 件/秒、MPS は float32）。ロリョウ氏（Sun*、<a href="https://zenn.dev/sun_asterisk/articles/8370ad0dbca870" style="color:inherit">10/30</a>）: ローカル LLM 7 つにプロンプトインジェクション 11 種。防御なしで Granite 4.2 3B 4/11・Qwen3 4B 3/11、ツールの許可リストを入れると全モデル 0/11、宛先許可＋出力 DLP だけでは登録漏れの S3 URI 7 件が漏れた（Mac、各 1 試行）。Cursor の告知（<a href="https://cursor.com/ja/blog/claude-code-extension-security-notice" style="color:inherit">10/29、10/30 更新</a>）: Cursor の拡張機能マーケットプレイスで Claude Code 拡張 2.1.312／2.1.313 の改変版が PT 10/29 2:27〜13:35 に配布された（Anthropic 製ではない。他の配布版への影響の証拠はなしと告知）。該当する人は <code>grep -qs svc-telemetry ~/.ssh/authorized_keys</code> で確認。Google Play: ターゲット API 36 の延長申請は明日 11/1 まで。Billing Library 8 への更新の延長期限も同じ 11/1（<code>in_app_purchase_android</code> 0.5.0 以上）。</p>
+
+    <section class="special">
+      <h3 class="sp">今週のまとめ — 今週使えるようになったこと</h3>
+      <p class="b"><code>claude -p</code> にテストを渡しても差はゼロ、仕様は文章で（10/25）。組織図だけが理由のサブエージェントは畳む（10/25）。スキルは UserPromptSubmit hook で確実に発火（10/26）。本会話のキャッシュは 1 時間、61 分空くと 11 倍（10/26）。古い CLAUDE.md には「コードに従い最後に指摘」の 1 行（10/27）。1 回しか呼ばない MCP に窓口は損（10/28）。規約は書けば守る、破らせたい時は別に 1 文（10/29）。RAG の裏付けは判断モデルで文脈 −62.6%（10/29）。Crashlytics の定型保守は 4 役割を別実行（10/30）。止まりすぎは Stop フックで末尾 600 字を検査（10/30）。</p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
