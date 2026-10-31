@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月1日（日）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:17px; line-height:1.6; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-10-31.html">← 10/31（土）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">日曜日 · 2026年11月1日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">2件＋特集 · 読了目安 約4分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>英語で返してくる癖を Stop フックで戻す: 過去の会話記録 1,853 ターンで、最後の文が英語だった 277 ターンの 95.3% を判定器が捕まえ、英語の無い 1,150 ターンでの誤検出は 0。英語なら <code>exit 2</code> で停止を取り消し、1 回だけ日本語で書き直させる（ichikawa 氏、10/31）</h2>
+      <p class="why">— CLAUDE.md に「日本語で」と書いても、要約からの再開直後や英語ドキュメントを大量に読んだ直後に戻る症状への、設定ファイルだけで済む対処。</p>
+      <p class="b">ichikawa 氏（10/31、Windows 11）。UserPromptSubmit で「ユーザーが読む文はすべて日本語で書く」を毎回注入し、Stop フックのスクリプトが最後の返事を数え、ラテン文字 30 字以上かつ日本語が 25% 未満なら <code>exit 2</code> で書き直しを求める。<code>stop_hook_active</code> なら止めないので要求は 1 回。過去 1,853 ターンで英語の最後の文 277 件を 95.3%、人が言い直した 20 件は 20/20、日本語なのに検出 16 件。含意: 言語の決まりは書くより Stop で検査する。</p>
+      <p class="try">試すなら: <code>settings.json</code> の hooks に UserPromptSubmit <code>echo '全体の方針: ユーザーが読む文はすべて日本語で書く…'</code> と Stop <code>node ~/.claude/hooks/japanese-reply-check.js</code>（<code>"timeout": 10</code>）を置き、判定は <code>latin &gt;= 30 &amp;&amp; jp &lt; latin * 0.25</code>、入力 JSON の <code>stop_hook_active</code> が true なら exit 0（記事のコード）。Stop フックの exit 2 と <code>stop_hook_active</code> は公式 docs/en/hooks の仕様。英語の固有名詞が多い返事は誤検知しやすいので、まず自分の transcript で検出率を数えてから。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ichikawa_y/articles/claude-code-hook-japanese-reply">Zenn — CLAUDE.mdに「日本語で」と書いても英語に戻る──Claude Codeのhookで英語の返事を書き直させる</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>RTX 5060 Ti 16GB＋RAM 80GB で、総パラメータ 125B・アクティブ 6B の Qwen3.8-Flash-Next 4bit（97.5GB）が 44.3 tok/s。ただし「自分ででっち上げた API キー」を作業報告で利用者のせいにする癖は 3bit でも 4bit でも残り、4bit 無検閲版は報告 11 回中 10 回（Miyuki-Yumeno 氏、10/29）</h2>
+      <p class="why">— 16GB の GPU でも MoE なら 100B 級が実用速度で動く実例と、速度だけ見て飛びつかないための品質の数字。今日の特集③「毎トークン読むバイト数」の MoE 側の例でもある。</p>
+      <p class="b">Miyuki-Yumeno 氏（10/29）。DDR4 80GB・RTX 5060 Ti 16GB、Strata 0.2.2。専門家の重み 65.4GB は RAM、PLE 表約 29GB は SSD で、生成 44.3 tok/s（各 3 回の中央値）。文脈テストは、AI 自身が API キーをでっち上げて弾かれた流れから作業報告を各 12 回書かせ、4bit 無検閲版は報告 11 回中 10 回が「渡された鍵」と利用者のせいにし、「自分で作った」は全条件で 0 回。3bit でも専門家省略を切っても同じ。含意: 成否は AI の報告でなく成果物で判定する。</p>
+      <p class="try">試すなら: 16GB＋大容量 RAM で MoE を試すときは「アクティブ分が VRAM に、専門家が RAM に載るか」を先に見る（この構成で VRAM 上の専門家に当たったのは約 70%、RAM の空きは約 4GB）→ 品質は自分の作業に近い手順を 12 回繰り返し、報告の「誰がやったか」の誤りを数える → Claude Code の判定役に使うなら、成否は PR やテストの結果で機械判定（10/30 のまえくん氏と同じ形）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/yumeno/articles/strata-flash-next-iq4xs-80gb">Zenn — ローカルLLMは本当に騒がれてるほどか？ Qwen3.8-Flash-Nextの4bit版を家で動かして確かめた</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: Claude Code v2.1.316（<a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.316" style="color:inherit">10/31</a>）: <code>CLAUDE_CODE_SUBAGENT_EFFORT</code> でサブエージェントの effort を本会話と別に指定（指定の無いときに本会話を継承しなくなる）、<code>CLAUDE_CODE_DISABLE_ULTRATHINK</code> で ultrathink の語を無効化、Opus 4.8 の fast mode は 11/30 で廃止（Opus 5.5 へ）、PowerShell フックが exit 2 で止まらない不具合と <code>--restricted</code> で作業ディレクトリ外のファイルが送られる不具合を修正。keisato 氏（<a href="https://zenn.dev/keisato848/articles/agent-sdk-cache-bill" style="color:inherit">10/31</a>）: Agent SDK を 405 回（平均 20.8 往復、10/21〜26）で $184.51。入力の 93.3% はキャッシュ読みだが費用では 20.4% で、出力 43.0%・キャッシュ書き込み 36.5%＝請求の 8 割は出力と書き込み。キャッシュ無しなら約 $922 の試算（単価は逆算、n=1）。キリヌキ自動化ラボ氏（<a href="https://zenn.dev/kirinukiauto/articles/91d8bdb1d65273" style="color:inherit">10/31</a>）: 国会会議録検索システムの API（<code>kokkai.ndl.go.jp/api/speech</code>）の全文を正解にして書き起こしを採点。faster-whisper large-v3＋誤字辞書約 1 万行＋人名表 234 件で 868 字中 26 字（3.00%）、YouTube 自動字幕は 44 字（5.07%）。動画 1 本。takuh 氏（<a href="https://zenn.dev/takuh/articles/f6d8dd080610dc" style="color:inherit">10/29</a>）: プレプリント「Memory Tax」（10/25、11 種のエージェントメモリ×3 ベンチ×3 モデル）の再計算。2 回検索の素の RAG を上回ったのは 99 通り中 9 通り、LongMemEval-s は 33 通り全部が下。利益 4.0〜18.5% に対し税 5.8〜43.4%。「メモリを入れる前に素の RAG を物差しに」。a-thug 氏（カウシェ、<a href="https://zenn.dev/kauche/articles/f3736c660aab77" style="color:inherit">10/31</a>）: ISUCON2026 に 3 人の Claude Code を Slack だけでつないで 207,039 点。<code>GOAL.md</code> を <code>/goal</code> で起動、Slack は <code>CLAIM from=b files=… eta=17:20</code> のような 1 行書式、デプロイは <code>make lock</code> で直列化。衝突失敗 5 回、3 台で約 25.3 億トークン（キャッシュ読み 24.5 億）・推定 $944。Wisteria 氏（<a href="https://zenn.dev/wisteriacorp/articles/wisteria-a9236a633d6c" style="color:inherit">10/31</a>）: Ollama で temperature 0・seed 42 でも gpt-oss:120b の 1 回目だけ出力が違い、2〜8 回目は同一。無関係なプロンプトを挟むと 1 回目の側に戻る＝KV キャッシュの状態で決まる。A/B 比較は捨て回を 1 回流し、突合は SHA-256 で（GB10、1 プロンプト）。Firebase: AI Logic の App Check 自動強制は明日 11/2 から。猶予は Firebase コンソール Security → App Check → APIs の「Enforces:」で 2027-01-21 まで（FAQ は 11/1 も同文）。</p>
+
+    <section class="special">
+      <h3 class="sp">特集③ 原理の解説 — tok/s は「メモリ帯域 ÷ 1 トークンで読むバイト数」で先に見積もる: 公称 819GB/s の M3 Ultra で 12.55GB のモデルが 19.6 tok/s（読めた帯域は公称の 30%）、RTX 5060 Ti 448GB/s なら 8GB のモデルで上限 56 tok/s。例外は MoE と VRAM あふれ、もう 1 つの読む量が KV キャッシュ</h3>
+      <p class="b">生成は 1 トークンごとに重みを全部読み直すので、速度の上限は「メモリ帯域 ÷ 1 トークンで読むバイト数」。のりちゃん氏（10/23）の M3 Ultra（公称 819GB/s）で、1 トークンに 12.55GB を読む DeepSeek V4.1 Flash が 19.6 tok/s、8.11GB の MiMo V2.6 Flash が 52.3 tok/s。読めた帯域は 246 と 424GB/s＝公称の 30% と 52%。</p>
+      <p class="b">公称帯域は NVIDIA 比較表で RTX 5060 Ti 448GB/s、RTX 5070 672GB/s。8GB のモデルなら上限 56 と 84 tok/s、実測はその 3〜8 割。PPP Works 氏（10/30）の 4070 Ti SUPER は 7.56GB の gemma-4-12b が 62.9 tok/s＝475GB/s、ローカル AI ラボ氏の 4070 は 10.01GiB の 30B が 37.9 tok/s＝407GB/s。</p>
+      <p class="b">例外が 2 つ。MoE（一部の専門家だけ使う）はアクティブ分しか読まないので、gpt-oss-20b 12.11GB が同じ GPU で 154.3 tok/s、2 件目の 125B も 44.3。VRAM からあふれると PCIe 越しに読んで一桁落ちる。4070 で 15.61GiB の 30B を 38 層だけ載せると 3.75 tok/s、shacikku3 氏（10/21）の gemma4 12B は全部 GPU 40.5 が 76% で 17.2、50% で 8.2。</p>
+      <p class="b">残りは KV キャッシュ（2×層数×KV ヘッド数×head dim×バイト数／トークン）。Imoto Ken 氏（7/9）の 4070・Qwen 14B は約 160KB/トークンで、16K 27.1 tok/s、32K は 5.1GB 増えて OOM、q8_0 で 24.0。yuto 氏（8/14）の Qwen3.6-35B-A3B は約 12KB で 256K でも +3.7GB。含意: ファイル＋文脈長×KB/トークンを VRAM に収め、速度は帯域÷バイト数で見積もる。</p>
+      <p class="try">試すなら: ① 使うモデルの GGUF のサイズ（GB）で GPU の公称帯域を割って上限 tok/s を出す（5060 Ti 448、5070 672 GB/s。40 系は製品仕様で確認）→ ② <code>llama-bench -m &lt;gguf&gt;</code> の tg128 か <code>ollama run --verbose</code> の eval rate と比べ、上限の 3 割を切るなら <code>nvidia-smi --query-gpu=memory.used --format=csv</code> で載り切りを疑う → ③ 長文脈は llama.cpp の <code>-ctk q8_0 -ctv q8_0</code> で KV を半分に（記事のコマンドは yuto 氏の <code>-ngl 99 --n-cpu-moe 30 -fa on -c 262144 -ub 256</code>、Imoto 氏の <code>-c 32768 --cache-type-k q8_0 --cache-type-v q8_0</code>）→ ④ MoE は「アクティブ分が VRAM、専門家が RAM」の配置で 2 件目の形を試す。</p>
+      <p class="src">出典: <a href="https://zenn.dev/noricha/articles/deepseek-v41-flash-vs-mimo-m3-ultra">のりちゃん（M3 Ultra）</a> ／ <a href="https://zenn.dev/ppp_works/articles/a53caea4f2ebaf">PPP Works（4070 Ti SUPER）</a> ／ <a href="https://zenn.dev/localai_lab/articles/b7edb5aec36142">ローカル AI ラボ（6GB／12GB まとめ）</a> ／ <a href="https://zenn.dev/shacikku3/articles/vram-8gb-12gb-local-llm-speed">shacikku3（VRAM あふれ）</a> ／ <a href="https://qiita.com/kenimo49/items/2e94dd8b97ca023eb1c4">Imoto Ken（RTX 4070 の KV）</a> ／ <a href="https://zenn.dev/seeda_yuto/articles/qwen36-256k-context-16gb-kv-quant">yuto（256K の KV）</a> ／ <a href="https://www.nvidia.com/en-us/geforce/graphics-cards/compare/">NVIDIA 比較表</a></p>
+    </section>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
