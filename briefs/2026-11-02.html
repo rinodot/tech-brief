@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月2日（月）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-01.html">← 11/1（日）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">月曜日 · 2026年11月2日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>SKILL.md を 354 行から 79 行に削ったら、版を伏せた別セッションの採点が 82.8→92.6 点、出力トークンは 126k→102k。残す基準は「モデルが知り得ない業務固有の知識か」「事故の記録がある規則か」の 2 問で、35 行まで削ると業務ルールが 1 行落ちた（あかりんご氏 11/1、Opus 5.5・LP 5 件×2〜3 回）</h2>
+      <p class="why">— Skills は足す一方で太る。削る基準・削る作業の任せ方・効いたかの測り方が 1 本に揃った実例で、そのまま自分の SKILL.md に当てられる。</p>
+      <p class="b">あかりんご氏（11/1）。Figma のデザインから LP を組むスキルの SKILL.md 354 行・約 2 万字を 79 行・約 6 千字に、関連の md／yaml も 881→377 行に削った。公開済み LP 5 件を Opus 5.5 で作らせ、版を伏せた別の Claude セッションにデザイン画像と並べて 0〜100 点を付けさせると、354 行は 82.8 点・32.6 分・出力 126k トークン、79 行は 92.6 点・29.3 分・102k。35 行は 92.7 点だが「リンク先が無ければ # にする」の 1 行が消えて仮文字が残り、不採用。</p>
+      <p class="b">削り方は 2 段。各ルールを <code>git log -S</code> で足した経緯ごとに分類し、「モデルが知り得ない業務固有の知識か」「事故の記録がある規則か」に当たるものだけ残す（命名規則・色の完全一致は残り、自明な変換表や記録義務は消えた）。次に夜間エージェントへ「引き算して精度が最も高くなる点を見極めてフィックス版に」と任せ、業務ルール違反は採点とは別に機械で数えた。限界: 354 行に検証手順だけ足した版は未測定で、約 10 点のうち短縮の寄与は分けられない。その後の案件で 95 行に戻っている。</p>
+      <p class="try">試すなら: 自分の SKILL.md の各ルールを <code>git log -S "＜ルールの一文＞" --oneline</code> で「いつ・何のために足したか」に分け、「業務固有でモデルが知り得ないか」「事故の記録があるか」のどちらにも当たらない行を削る候補にする → 削った版と元の版で同じ依頼を 2〜3 回ずつ流し、版を伏せた別セッションに成果物だけ見せて 0〜100 点を付けさせる → 業務ルール違反（禁止語・仮文字など）は grep で機械的に数え、点が同じなら違反ゼロの方を採る。</p>
+      <p class="src">出典: <a href="https://zenn.dev/akaringo1109/articles/claude-code-skill-slimming">Zenn — Claude Code のスキルを削って 1 つにまとめたら、4 分の 1 の長さで精度はむしろ上がった</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>無人運転のパイプライン、日次ログ 63 回分は全部終了コード 0 なのに黙って壊れていたのが 8 件: バックアップ未登録 4 か月、評価失敗 9 件を最長 799 時間放置、Ollama のフィルタ用モデルが消えて 28 日素通し、Claude の定期タスクが許可確認で 5 回停止。90 日のエラー 19 件中 13 件は旧チェックで見えなかった（krbrr 氏 11/1、Windows 11・Claude Code 2.1.234〜280）</h2>
+      <p class="why">— 毎朝の自動実行を「落ちなければ動いている」で見ていると、この 8 件はどれも自分に起こる。終了コードでなく成果物の鮮度を見る型。</p>
+      <p class="b">krbrr 氏（11/1、Windows の個人環境）。8 件はどれも「エラーを出さない失敗」: 丸 1 日の欠落は 46.3 時間を「最後の成功から 48 時間以内」で PASS、品質ゲートの通知は変数名の typo と fail-open の catch で鳴らず、Claude の定期タスクは許可プロンプトで停止。直した型: 終了コードでなく成果物の鮮度で判定（閾値 48→30 時間）、収集 0 件は WARN、恒久エラーと一過性を分ける、新しい通知は失敗する入力で一度わざと鳴らしてから信じる。7 件は AI 固有でない落とし穴。</p>
+      <p class="try">試すなら: 無人の <code>claude -p</code> には <code>--permission-prompts none</code>（v2.1.259〜。答える人がいない許可プロンプトを拒否にして止まらない。公式 cli-reference）→ 監視は終了コードでなく「最後の成功ファイルの更新からの経過時間」で判定し、閾値は 1 回の取りこぼしで鳴る長さ（日次なら 30 時間）→ 新しい通知は存在しないモデル名を渡して FAIL を一度起こし、届くのを見てから信じる（記事の例: <code>XR_OLLAMA_PREFILTER_MODEL=qwen-nonexistent x-research doctor</code>）→ シェルの連結は <code>set -o pipefail</code>。</p>
+      <p class="src">出典: <a href="https://zenn.dev/zenn_content/articles/unattended-pipeline-silent-failures">Zenn — AIに無人運用させたパイプラインで、エラーを出さずに壊れていた8件と検知の作り方</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>ローカル RAG が「一度も効いていなかった」: 類似度しきい値 0.5 が正解資料（距離 0.737）まで切り捨て、資料ゼロで 8B モデルに渡って作り話に。埋め込みを文類似度用 stsb-xlm-r から検索用 multilingual-e5-small に替えると正解の距離 0.114、気づけたのは検索結果と距離を表示する機能を足してから（OH-GY 氏 11/1、RTX 4060 Ti 8GB）</h2>
+      <p class="why">— RAG は壊れていても答えが返るので気づけない。距離を出す・しきい値でなく比で見る・埋め込みが検索用かを確かめる、の 3 点検。</p>
+      <p class="b">OH-GY 氏（11/1）。Ollama の Llama-3-ELYZA-JP-8B＋ChromaDB。原因は 2 つ: しきい値 0.5 で全件が除外され資料ゼロのまま渡っていたこと、埋め込み stsb-xlm-r-multilingual が文同士の類似度用で検索向きでなかったこと。multilingual-e5-small に替えると正解の距離は 0.737→0.114、1 位と 2 位の距離比は 0.86→0.54 に開いた。上位 3 件に増やすと主語の曖昧な資料を取り違え、1 件に戻して解消。各条件 1 回で再現性は未確認。</p>
+      <p class="try">試すなら: ChromaDB の <code>query()</code> が返す <code>distances</code> を毎回ログに出し、しきい値で捨てる前に目で見る → 足切りは絶対値でなく 1 位÷2 位の距離比で決める → 埋め込みモデルは「文類似度（STS）用か検索（retrieval）用か」をモデルカードで確かめ、検索用に替える → 資料の文は主語を明記して書き直す（記事では次の予定）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/ohgy/articles/ede0bdff101d76">Zenn — RAGが一度も効いていなかった話</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: SONG 氏（<a href="https://qiita.com/songchong/items/ac9779bb8e8838b546b9" style="color:inherit">11/2</a>）: Sonnet 5.5・約 5.4 万トークン・10 ターンの試算で、毎ターン <code>/compact</code> は $0.672＝しない時 $0.244 の 2.75 倍、区切りで 1 回は 22% 増、65 分空けて再開するなら一段落時の compact で 57% 減。目安は「<code>/context</code> の used が 75% 以上で、あと 2 ターン以上続くなら compact」（回答の質は未測定）。いばらき氏／NCDC（<a href="https://zenn.dev/ncdc/articles/7d36d34031fb2d" style="color:inherit">11/1</a>）: Team の月次 API クレジット（Standard $20・Premium $100、組織上限 $500）で <code>claude -p</code> に PR レビューをさせる GitHub Actions。GitHub OIDC→WIF で API キーを secrets に置かず、<code>--tools "Read,Grep,Glob,Agent"</code>・<code>--json-schema</code>・<code>--max-budget-usd 4</code>、投稿は <code>gh</code> 側。Sonnet 1 回 $0.5〜3、品質比較は未実施。matsu 氏（<a href="https://zenn.dev/matsushima_a/articles/day-033-quantized-llm-cliff" style="color:inherit">11/1</a>）: Ollama 公式タグ 305 本を調べた論文の生ログ再集計。qwen2.5-coder:3b の q2_K〜q3_K_L は HumanEval+ 164 問が 0 問、q4_0 以上は正常で、壊れた 7 タグ（2.3%）は 4B 以下の低 bit に集中。小型モデルの q3 以下は使う前にタスクで 1 度確認。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/claude-cleanup-period-days-precedence-handson" style="color:inherit">11/1</a>）: <code>cleanupPeriodDays</code> を 4 か所に書くと <code>--settings</code> ＞ <code>settings.local.json</code> ＞ <code>.claude/settings.json</code> ＞ ユーザー settings の順で勝ち、キーの綴り間違いは警告なしで既定の 30 日に戻る（2.1.305、各 2 回）。ホムホム氏（<a href="https://qiita.com/homhom44/items/e9916dd9ff6753f2eecd" style="color:inherit">11/1</a>）: 使用率が低いのに「Usage credits required for 1M context」で止まるなら <code>/model</code> で <code>[1m]</code> 無しに替えるか <code>CLAUDE_CODE_DISABLE_1M_CONTEXT=1</code>（公式 env-vars: 1M 版をモデル選択から外す）。yorusuzu 氏（<a href="https://zenn.dev/yorusuzu/articles/claude-code-invalid-api-key-env-priority" style="color:inherit">11/2</a>）: ログイン済みでも環境に <code>ANTHROPIC_API_KEY</code> が残っていると <code>claude -p</code> は約 3 秒で「Invalid API key」（26 ケース、2.1.305・Windows）。<code>compgen -e | grep ANTHROPIC_</code> で確認。たぬきの教祖氏（<a href="https://zenn.dev/tanukikyo/articles/d498b5f9f8ffed" style="color:inherit">11/1</a>）: Firebase Auth の確認メールが <code>INVALID_SENDER : Missing sender</code> で送れない原因は、メールテンプレートの送信者名「Co., Ltd.」のカンマ。Google Play: ターゲット API 36 の延長申請は締切（11/1）を過ぎた。未申請なら Play Console の警告を確認（公式ページは今朝も「November 1, 2026 まで」の記述のまま）。Firebase AI Logic の App Check 自動強制は今日 11/2 から（FAQ は今朝も同じ記述。猶予は Firebase コンソール Security → App Check → APIs の「Enforces:」で 2027-01-21 まで）。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
