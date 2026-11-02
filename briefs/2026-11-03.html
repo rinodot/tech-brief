@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月3日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-02.html">← 11/2（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年11月3日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Max 5x の定額で <code>claude -p</code> を 1 日 14 回、41 日回した台帳: 10 日分 76 回のうちモデルを呼んだ 65 回・失敗 5 回で従量換算 $14.09、通常日 $2.67〜3.14・節約モードの日 $0.32〜0.56。止まった所は 6 つ（節約モードの誤発動、許可で 13 回止まっても成功扱い、<code>error_max_turns</code> 5 回、週枠 90%、未公開を「公開」と誤報告、メール読取失敗）（crossclub 氏 11/2、Windows）</h2>
+      <p class="why">— 定期実行の「1 回いくら・どこで止まるか」を台帳で出した実例。止まり方 6 つは自分の自動化にも全部当てはまる。</p>
+      <p class="b">crossclub 氏（11/2）。Windows のタスクスケジューラで <code>claude -p</code> を 1 日 14 回、41 日。10/22〜10/31 の台帳は 76 回中モデル呼び出し 65 回・失敗 5 回・合計 $14.09（<code>total_cost_usd</code> の従量換算、契約は Max 5x）。平均は daily $0.46（9 回）、bid $0.08（33 回、11 回は呼ばず $0）、fix $0.24、review $0.41。上限は daily＝sonnet・40 ターン・$4、bid＝haiku・15 ターン・$1。</p>
+      <p class="b">止まった所 6 つ: ①節約モード FRUGAL が週使用 36% で誤発動 ②13 回で操作が許可で拒否（計 22 件）、しかも成功扱い ③<code>error_max_turns</code> 5 回 ④木曜午後に週枠 90% 超で 3 回が未実行 ⑤未公開の記事を「公開」と誤報告 ⑥メール読取が接続切れと <code>Resource exhausted</code> で失敗。直し: <code>--model</code> を毎回渡す（渡さないと Opus）、拒否された操作は手順書に書いて blocked に、成功した回だけ日付つきの完了印。台帳は 10 日分、収益は 1 円。</p>
+      <p class="try">試すなら: 定期実行の各回を <code>claude -p … --output-format json</code> にして <code>total_cost_usd</code>・<code>subtype</code>・<code>permission_denials</code> を 1 行 JSON で台帳に追記し、「成功扱いの拒否」を数える → 公式 docs/en/headless（11/3 確認）: 答える人がいない実行は <code>--permission-prompts none</code>（v2.1.259〜。拒否は stream-json の <code>permission_denials</code> に出る）、<code>-p</code> は v2.1.302〜何も指定しないと Manual モードで始まり承認が要る呼び出しは拒否、<code>--bare</code> は「スクリプト向けの推奨で将来 <code>-p</code> の既定になる」が購読ログインを使わない（API キーが要る）→ 週枠の区切り時刻（記事は木曜 22 時）の直前に重い回を寄せない。</p>
+      <p class="src">出典: <a href="https://zenn.dev/crossclub_lab/articles/zero-yen-41-days-claude-code-rounds">Zenn — 収益0円の41日を Claude Code の定期実行でどう回したか — 回ごとの費用・止まった所・直した仕組み</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>v2.1.314 の <code>blockWritesOutsideWorkingDirectories</code> は Write／Edit／NotebookEdit だけに効き、Bash の <code>echo ＞</code>・<code>cp</code> と PowerShell の <code>Set-Content</code>・<code>＞</code> は作業フォルダの外へ書けた（Windows 11・2.1.316 の実測。設定なしは Write 8/8 成功→設定ありで 7/7 拒否）。21 行の PreToolUse フックで 3 件止めたが <code>~</code>・<code>/tmp</code>・<code>$HOME</code>・UNC の 6 パターンは素通り（tamao 氏 11/2）</h2>
+      <p class="why">— 10/31 に載せた新設定の「効く範囲」。公式 changelog どおり Bash は対象外なので、設定だけで安心しない。</p>
+      <p class="b">tamao 氏（11/2、Windows 11・2.1.316）。設定なしでは外への Write 8 通りが成功、設定ありで 7 通り全部拒否。一方 Bash の <code>echo ＞</code>・<code>cp</code> と PowerShell の <code>Set-Content</code>・<code>＞</code> は外へ書けた。公式 changelog も「Write, Edit and NotebookEdit refuse paths outside」で Bash は対象外。補いの 21 行 PreToolUse フックは外 3 件を止めたが <code>~</code>・<code>$HOME</code>・<code>/tmp</code>・UNC など 6 パターンは素通り。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> に <code>"permissions": {"blockWritesOutsideWorkingDirectories": true}</code> を入れ、まず Write で外へ書かせて拒否されるのを確認 → Bash 側は設定では止まらないので、macOS／Linux／WSL2 ならサンドボックス、Windows なら PreToolUse（matcher <code>Bash|PowerShell</code>、<code>exit 2</code> で拒否）を「書き先の間違いを手前で止める保険」として置く → 文字列判定は <code>~</code>・<code>$HOME</code>・<code>/tmp</code>・UNC を通すので、守りたいものは別フォルダにバックアップしておく。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tamao825/articles/claude-code-block-writes-outside-bash-powershell">Zenn — Claude Code の作業ディレクトリ外の書き込み禁止は Bash・PowerShell に効かない：Windows の実測と止め方</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>12GB の RTX 3080 Ti（中古 82,000 円）で gpt-oss-20b MXFP4（11.27GiB）が pp512 4,705・tg128 177.5 tok/s、Ryzen AI Max+ 395 の内蔵 GPU の約 2.4 倍／2.2 倍。ただし軽い負荷では GPU が P3・780MHz に留まって生成が約半分の 87.8 tok/s になり、<code>nvidia-smi -lgc</code> でクロックを固定して解消（MASAYUKI KOBAYASHI 氏 11/2、llama.cpp Vulkan）</h2>
+      <p class="why">— 12GB でも 20B の MoE は全層載って 170 tok/s 台。速度が半分しか出ないときは、まず <code>nvidia-smi</code> で pstate とクロックを見る。</p>
+      <p class="b">MASAYUKI KOBAYASHI 氏（11/2）。外付けの 3080 Ti 12GB、llama.cpp（Vulkan）。gpt-oss-20b MXFP4 11.27GiB は全層が載り、内蔵 GPU の pp512 1,929／tg128 79.0 に対し 4,705／177.5。63GB の 120b は分担しても 56.0→55.3。落とし穴は省電力: 生成だけの軽い負荷では P3・780MHz に留まり 87.8 tok/s と半分、<code>nvidia-smi -lgc</code>／<code>-lmc</code> でクロックを固定すると戻る（再起動で解除）。</p>
+      <p class="try">試すなら: <code>nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem --format=csv -l 1</code> で生成中の pstate を見る → P3 に張り付くなら <code>sudo nvidia-smi -lgc 1500,2100</code> と <code>sudo nvidia-smi -lmc 9501,9501</code>（数値は自分のカードの上限に合わせる。戻すのは <code>-rgc</code>／<code>-rmc</code>、再起動でも戻る）→ 測り直しは <code>llama-bench -m ＜gguf＞ -ngl 99 -p 512 -n 128 -r 3</code>（記事は Vulkan、CUDA は未確認）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/masayukikoba/articles/4f3e4c9839fc21">Zenn — EVO-X2 に RTX 3080 Ti を足すと LLM は何倍速くなるか</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: 公式（<a href="https://platform.claude.com/docs/en/build-with-claude/message-threads" style="color:inherit">11/2</a>）: Messages API に message threads が public beta。初回に全会話を送り、2 回目以降は新しいメッセージと直前のレスポンス ID だけ（<code>thread={"type":"continue","previous_message_id":…}</code>、ベータヘッダー <code>message-threads-2026-08-12</code>）。500k〜1M トークンの要求で TTFT の中央値が約 35% 短縮、料金・レート制限は変わらず、最後の要求から 5 分で失効。公式記事は「大半の Claude Code 利用者では既定で有効」、ZDR・HIPAA・Batches は対象外。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/claude-apology-vs-task-success-handson" style="color:inherit">11/2</a>）: <code>claude -p</code> に成功する依頼・前提の無い依頼・届かない依頼を各 10 回。謝罪語は 55 応答中 0、失敗 19 件も終了コードは全部 0・<code>is_error</code> false。差が出たのは応答の長さ（中央値 62.5／185.5／429 字）と時間（2,876／6,008／13,696 ms）。成否はファイルの有無と中身で判定、0 バイトの残骸に 2 回だまされた（2.1.307・Sonnet 5.5）。tekuteku 氏（<a href="https://zenn.dev/norman6464/articles/claude-code-no-push-permission-instead-of-hook" style="color:inherit">11/2</a>）: 無人の <code>claude -p</code> には push の権限を渡さず（<code>--allowedTools</code> は Read／Grep／<code>Edit(articles/**)</code>／<code>Bash(git log:*)</code> など）、<code>git add</code>→<code>commit</code>→<code>push</code> は終わった後の外側のシェルで実行。hook で止めるより「解釈する層が無い」置き方。maximus 氏（<a href="https://zenn.dev/maximus/articles/0df875d14e7ea0" style="color:inherit">11/2</a>）: 4 ファイルの読み取り説明を単独 vs 4 サブエージェント分割で各 3 回、合計トークン約 106,000 vs 約 383,000（約 3.6 倍）、費用 $0.14 vs $0.41（約 2.9 倍。2.1.303・Sonnet 5.5）。向くのは検索結果やログで本会話があふれる時・権限を絞りたい時・独立作業の並列。集計は <code>--output-format json</code> の <code>modelUsage</code> 4 種と <code>subagent_stats</code>。せいぱん氏／DIGITALIO（<a href="https://zenn.dev/digitalio/articles/0c46ba42bd9bde" style="color:inherit">11/2</a>）: Android アプリの ANR 率を約 1%→0.2%（Play Console の推奨閾値 0.47%）。過去 4 週の ANR の 20〜30% が <code>EncryptedSharedPreferences</code> の初期化で、シングルトン初回アクセスの <code>＜clinit＞</code> がメインスレッドで同期実行されていた。生成を <code>suspend</code>＋<code>Dispatchers.IO</code> にして <code>Application.onCreate</code> で先に走らせる。数字に出るまで約 1 か月（Kotlin、n=1）。Claude Code のクラウドセッション向けクレジット（9/29 既報）は明日 11/4 に失効。使い切るなら今日中。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>

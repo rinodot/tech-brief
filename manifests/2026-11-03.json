@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-03",
+ "weekday": "火",
+ "file": "2026-11-03.html",
+ "titles": [
+  "Max 5x の定額で claude -p を 1 日 14 回、41 日回した台帳: 10 日分 76 回のうちモデルを呼んだ 65 回・失敗 5 回で従量換算 $14.09、通常日 $2.67〜3.14・節約モードの日 $0.32〜0.56。止まった所は 6 つ（節約モードの誤発動、許可で 13 回止まっても成功扱い、error_max_turns 5 回、週枠 90%、未公開を「公開」と誤報告、メール読取失敗）（crossclub 氏 11/2、Windows）",
+  "v2.1.314 の blockWritesOutsideWorkingDirectories は Write／Edit／NotebookEdit だけに効き、Bash の echo ＞・cp と PowerShell の Set-Content・＞ は作業フォルダの外へ書けた（Windows 11・2.1.316 の実測。設定なしは Write 8/8 成功→設定ありで 7/7 拒否）。21 行の PreToolUse フックで 3 件止めたが ~・/tmp・$HOME・UNC の 6 パターンは素通り（tamao 氏 11/2）",
+  "12GB の RTX 3080 Ti（中古 82,000 円）で gpt-oss-20b MXFP4（11.27GiB）が pp512 4,705・tg128 177.5 tok/s、Ryzen AI Max+ 395 の内蔵 GPU の約 2.4 倍／2.2 倍。ただし軽い負荷では GPU が P3・780MHz に留まって生成が約半分の 87.8 tok/s になり、nvidia-smi -lgc でクロックを固定して解消（MASAYUKI KOBAYASHI 氏 11/2、llama.cpp Vulkan）"
+ ]
+}
