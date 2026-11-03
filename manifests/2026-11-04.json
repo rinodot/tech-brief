@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-04",
+ "weekday": "水",
+ "file": "2026-11-04.html",
+ "titles": [
+  "Claude Code の 22 課題で 3 モデル×5 エフォートを総当たり: 仕様が固まった実装は Haiku medium で 100%・$0.10、Opus max も 100% だが $5.07・856 秒。差が出たのは上流で、1.3 万行への機能追加の仕様書は Sonnet high 96%・Opus medium 91%・Haiku medium 83%。max は xhigh より時間 2.5〜2.9 倍・費用 1.9〜2.5 倍で満点率はむしろ下がった（OKZAQ 氏 11/3、2.1.308・Max 5x）",
+  "PreToolUse フックで操作を止めるのは終了コード 2 だけ: exit 1・exit 3・例外は 3 回とも素通り、\"onFailure\": \"block\" を付けると 4 種の失敗すべてで 0/3（AI Jarvis 氏 11/3、11 条件×3 回）。別件で IT アライグマ氏（11/3）は、判定スクリプトの「該当なし」と「落ちた」が同じ exit 1 で || exit 0 が通していた穴と、matcher が旧ツール名のままで新しい書き込みツールに効かなかった穴を発見",
+  "Firebase 公式の Claude Code プラグイン「Firebase agent skills」: claude plugin install firebase@firebase で 14 スキル。Firestore／Storage のルールを 6 項目で赤チーム監査し 1〜5 点と JSON で返す auditor、Crashlytics・Remote Config・Emulator の導入手順。11/2 に Analytics（画面計測・DebugView 確認）が追加（公式 release notes 11/3）"
+ ]
+}
