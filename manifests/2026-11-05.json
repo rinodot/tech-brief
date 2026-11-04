@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-05",
+ "weekday": "木",
+ "file": "2026-11-05.html",
+ "titles": [
+  "v2.1.318（11/4）で claude auth status にログインの失効日時 loginExpiresAt、claude -p の JSON 結果に credential_expires_at が付いた。Clopy 氏（11/5）の実測: auth status は 183 ms・exit 0・課金なし、-p --output-format json は同じ値を返すが $0.078・1,930 ms、素の -p には失効の手掛かりが出ない（stderr 0 文字）。cron の前に「残り 3 日で止める」1 行チェックに",
+  "メインを Sonnet にして難所だけ Opus に相談させる advisorModel（公式の advisor tool）と、下働きを Haiku にする CLAUDE_CODE_SUBAGENT_MODEL の 3 行設定を実測: Sonnet 単独 $0.29・29 秒・テスト 18 件 OK、advisor あり $0.98・85 秒・18 件、Opus 単独 $1.01・83 秒・21 件。Explore は model: inherit なので Sonnet のまま（wfukatsu 氏 11/5、2.1.317・各 1 回）",
+  "Flutter＋Firebase のアプリでテスト 1,100 本が通っていても、実機で 6 分触ったら 5 件: キーボードが出るたび authStateChanges() を build 内で作り直してサインイン画面が再読込、リリースビルドの縮小で Google サインインの server client id が消えて失敗、日曜だけ出るダイアログが 320dp で 96px はみ出し、15 言語の翻訳漏れ 8 件（Orestis Stylianidis 氏 11/4、dev.to）"
+ ]
+}
