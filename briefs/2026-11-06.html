@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月6日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-05.html">← 11/5（木）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年11月6日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Claude Code の費用は「文脈の長さ×リクエスト数」。62 セッション・6,343 リクエストの実測で入力の 98.2% はキャッシュの読み直し、13 日続けたセッションの 1 往復は約 84 万トークン＝新規セッションの 31 倍。ツール呼び出しは 84.2% が 1 メッセージ 1 回、サブエージェント定義は 21,095 リクエストで 0 回→CLAUDE.md に常時指示を書いたら 27 セッションで 11 回（r.iguchi 氏 11/5）</h2>
+      <p class="why">— 週次上限を削るのは出力でなく毎往復の読み直し。CLAUDE.md の 2 行と <code>/compact</code> の残し方で、往復の数と 1 往復の重さを両方減らせる。</p>
+      <p class="b">r.iguchi 氏（ムクイル技術ブログ、11/5）が 62 セッション・6,343 リクエストの会話ログ（<code>~/.claude/projects/</code> の jsonl）を集計すると、入力トークンの 98.2% はキャッシュ読み込みだった。13 日使い続けたセッションの後半は 1 リクエストあたり約 84 万トークン（約 $0.42）、新規セッションは約 2.7 万（約 $0.013）で 31 倍。費用は「文脈長×リクエスト数」で決まる。</p>
+      <p class="b">対策は 3 つ。ツール呼び出しは 84.2% が 1 メッセージ 1 回（平均 1.17）で、平均 2 にできればリクエストは約 41% 減る試算。サブエージェント定義は 97 セッション・21,095 リクエストで一度も使われず、CLAUDE.md に「常時使う」と書いたら次の 27 セッションで 11 回使われた。含意: 定義ファイルを置くだけでは呼ばれない。CLAUDE.md の常時指示と <code>/compact</code> の残し方で文脈を細く保つのが、上限対策の本丸。</p>
+      <p class="try">試すなら: CLAUDE.md に「依存のないツール呼び出しは 1 メッセージにまとめる」「巨大ファイルは code-explorer サブエージェント経由で読む（常時有効な指示）」の 2 行 → <code>.claude/agents/code-explorer.md</code> に <code>tools: Read, Grep, Glob</code>・<code>model: sonnet</code> と「結論と file:行、最小限の引用だけ返す」 → 区切りごとに <code>/compact 判定結果・変更対象の file:行・残作業だけ残す</code>（記事の文言）→ 効き目は <code>~/.claude/projects/</code> の jsonl の <code>message.usage</code> を <code>(message.id, requestId)</code> で重複除去して数える。単価は記事の仮定（cache read $0.50／100 万）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/mukuil_blog/articles/8b5c4f3844dedc">Zenn — Claude Code のコストは「コンテキスト長 × リクエスト数」で決まる ― 実測で1リクエスト31倍の差</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>手書き Provider 261 件を <code>@riverpod</code> へ全面移行。改名だけの PR（86 宣言・2,193 箇所・276 ファイル）を先に 1 本出すと並行する子 PR のファイル衝突がゼロになり、統合 PR 744 ファイル・約 3 万行でもテスト 4,414 件が全部通った。落とし穴は autoDispose の既定・<code>overrideWith</code>・riverpod_lint の無言 exit 0（シンタク氏／日本トレカセンター 11/5）</h2>
+      <p class="why">— Riverpod 3 への移行で詰まるのは書き換えより PR の切り方と「通ったように見える」lint。個人アプリの規模でも段取りは同じ。</p>
+      <p class="b">シンタク氏（日本トレカセンター、11/5）は手書き Provider 261 件を <code>@riverpod</code> へ移した。先に改名だけの PR（86 宣言・2,193 箇所・276 ファイル）を出すと以後の子 PR はファイルが重ならず、統合 PR 744 ファイル・約 3 万行でもテスト 4,414 件が全部通った。落とし穴は <code>@riverpod</code> の既定が autoDispose、<code>overrideWith</code> が <code>build()</code> を実行、riverpod_lint は読み込み失敗でも exit 0。件数は棚卸しスクリプトを唯一の基準にした。</p>
+      <p class="try">試すなら: 保持したい Provider は <code>@Riverpod(keepAlive: true)</code>（riverpod.dev: 生成版は「購読が無くなると state を破棄」が既定）→ 手書きのまま変数名だけ生成名に揃える PR を先に 1 本 → 棚卸しスクリプト（手書き宣言・<code>extends StateNotifier</code>・legacy import が 1 件でもあれば失敗）に <code>--check</code> を付けて CI へ → <code>dart analyze</code> の「診断 0 件・exit 0」は riverpod_lint が動いた証拠にならないので、わざと違反を 1 つ書いて検知されるか確かめる。riverpod_generator 4.0.8／riverpod_annotation 4.0.6、Flutter 3.47.1。</p>
+      <p class="src">出典: <a href="https://zenn.dev/jtcc/articles/riverpod-generator-migration">Zenn — 手書き Provider 261 件を @riverpod へ全面移行した進め方</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>エラー監視（Sentry）のアラートで Claude Code の Routine を API から起動し、Read・Glob・Grep だけで調べて Slack に 1 通報告させる構成。中継は署名を検証して決まった項目だけ渡し、起動 API は冪等でないので再試行は 429・5xx・通信失敗のときだけ（栗田基成氏／DeLT 11/5）</h2>
+      <p class="why">— Crashlytics の新規致命的問題を Cloud Functions の alerts トリガーで受ければ同じ型が組める。Routines の「起動の実例」にようやく 1 つ出た。</p>
+      <p class="b">栗田基成氏（DeLT、11/5）の構成は、Sentry のアラート→Cloudflare Workers の中継→Routine の起動 API→Slack に 1 通。中継は <code>Sentry-Hook-Signature</code> を検証して不一致は 401、決まった項目だけを渡す。Routine の権限は Read・Glob・Grep の 3 つ、Slack は <code>slack_send_message</code> だけ。起動 API は冪等でないので再試行は 429・5xx・通信失敗だけ。ログは外部が書けるので注入前提の設計。効果・費用の数字はない。</p>
+      <p class="try">試すなら: 中継から <code>POST https://api.anthropic.com/v1/claude_code/routines/{id}/fire</code>（<code>Authorization: Bearer</code>。docs/en/routines、10/19 既報）→ Routine のツールは Read・Glob・Grep と Slack の送信 1 本に絞り、シェル・git・編集は渡さない → Crashlytics なら <code>firebase-functions/v2/alerts</code> の <code>onNewFatalIssuePublished</code>（公式 docs/functions/alert-events）で受け、<code>event.data.payload.issue</code> の id・title・appVersion だけを渡す → 同じ issue id は一定時間起動しない。</p>
+      <p class="src">出典: <a href="https://zenn.dev/delt/articles/ca85da1a79cb86">Zenn — SentryのアラートをClaude Codeのルーティンに調べさせてSlackに報告する</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: ぬまーん氏（<a href="https://zenn.dev/numarn/articles/claude-auto-mode-default-rules-handson" style="color:inherit">11/5</a>）: auto mode の既定ルールは 111 件（allow 17・soft_deny 72・hard_deny 1・environment 21、2.1.310）。自作ルールを 1 件書くとそのカテゴリの既定は置き換わる（allow 17→1、soft_deny 72→1）、空リスト <code>[]</code> は未設定扱いで既定に戻る、効くのは user の <code>settings.json</code> と <code>--settings</code> だけでプロジェクトの <code>.claude/settings.json</code> は無効、書式ミス 7 種はすべて exit 0 で無言。確認は <code>claude auto-mode config</code> の件数を数えるしかない。実際に止まるかは未検証。シャチラボ氏（<a href="https://zenn.dev/shacikku3/articles/vram-cline-model-cheatsheet" style="color:inherit">11/5</a>）: RTX 4080 16GB の VRAM を絞った早見表。gemma4:12b q8（13〜14GB）は全層 GPU で約 42 tok/s、GPU 76% で 17.2、50% で 8.2、CPU のみ 4.6。MoE の qwen3.6:35b-a3b-coding（約 22GB）は 64k 文脈で生成約 88 tok/s（VRAM 15.6GB・GPU 58%）と、はみ出しても落ちにくい。12GB・8GB の値は疑似計測。神谷啓成氏（<a href="https://zenn.dev/gsun/articles/62acf01b6b3238" style="color:inherit">11/5</a>）: RTX 3060 12GB＋WSL2 48GB で Strata の Qwen3.8-Flash-Next IQ3_XXS（約 76GB）が約 38 token/s・32K。ダウンロード 77GB、品質は著者も「要検証」。ながたく氏（<a href="https://zenn.dev/takna/articles/claude-code-cloud-sessions-intro" style="color:inherit">11/5</a>）: クラウドセッション入門。手元の <code>~/.claude</code> は届かず、リポジトリの CLAUDE.md と <code>.claude/</code> だけが読まれる（ルールは setup script で VM に書く）。<code>--teleport</code> で約 100k の会話を開くと入力 102.7k、1 質問で累計 197.4k と手元の枠を食う。VM は Ubuntu 24.04・4 vCPU・16GB・30GB。YK Studio 氏（<a href="https://zenn.dev/yk_studio/articles/revenuecat-silent-failure" style="color:inherit">11/4</a>）: 課金が 11 日間壊れていた。<code>defineSecret</code> で参照する <code>REVENUECAT_SECRET_KEY</code> が Secret Manager に無くデプロイが毎回失敗、古い未検証の関数が何も加算せず正常終了を返し続けた（purchases_flutter＋Functions v2）。<code>firebase functions:secrets:describe</code> と <code>functions:log</code> で動いている版を突き合わせ、課金は実機・RevenueCat・Firestore の 3 箇所で確認。マッキー氏（<a href="https://zenn.dev/macky_ur/articles/16ba43a08eb099" style="color:inherit">11/6</a>）: サブエージェント 5〜6 並列（各 3〜5 ページ担当）で 140 ページの学習サイト、20 ページ前後が約 30 分。ガイド文書＋承認済み見本 2 ページ＋Pyodide での自動検証を先に作ってから並列化。Cloudflare の自動設定で元ファイルのフォルダが一時公開されかけ、公開物だけ別フォルダに書き出す手順を追加。費用の記載なし。公式: Claude Code は v2.1.318 のまま（11/6 朝）、whats-new Week 38 なし、Flutter 3.48 なし、firebase_core 5.1.0・firebase_messaging 17.0.1 が最新。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
