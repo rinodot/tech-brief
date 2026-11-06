@@ -1,0 +1,11 @@
+{
+ "date": "2026-11-07",
+ "weekday": "土",
+ "file": "2026-11-07.html",
+ "titles": [
+  "Claude Code v2.1.319（11/7 02:04 JST）: 承認待ちになるツール呼び出しを拒否してターンを続ける permissions.denyInsteadOfPrompting（ターミナル・サブエージェント・teammate に効く）、MCP の task は即バックグラウンド、/tasks の「Earlier in this session」で終わったサブエージェントに再度話しかけられる、claude.ai ログインが切れて ant auth login の資格情報で続くと Console 組織に課金される警告",
+  "RTX 5070 Ti 16GB で Ollama を常駐させる知見: モデルが退避される原因は VRAM でなく OLLAMA_MAX_LOADED_MODELS（著者環境で 1）。3 に固定し、4 にすると gemma4:12b が 76→16 tok/s。再起動後に残った llama-server.exe 7 個で 80→6 tok/s になっても ollama ps は「100% GPU」のまま（Ace 氏 11/7）",
+  "1 コミット 100 行以内を守らせるなら CLAUDE.md より git の pre-commit: 指示なしは 298／426 行が 1 コミット、CLAUDE.md の 1 行で 6 コミット（最大 59／66 行）、pre-commit で拒否しても 6 コミット（76／80 行）。「まとめて 1 つに」と頼むと CLAUDE.md は 139 行で破れ、フックは止まって判断を仰いだ（アセロラ氏 11/6、各 2 回）",
+  "今週のまとめ — 今週使えるようになったこと"
+ ]
+}
