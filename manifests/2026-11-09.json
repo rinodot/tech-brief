@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-09",
+ "weekday": "月",
+ "file": "2026-11-09.html",
+ "titles": [
+  "VRAM 8GB の GTX 1080 で 7 モデルのツール選択を 24 問×道具 27 個で採点: ツールの説明を渡さないとローカル平均 8%、渡すと 40%（簡単な問題は 7%→76%）だが、罠つきの問題は 17%→6% に落ちた。Claude Sonnet 5.5 は説明なしで 65%。速度は Qwen3.5 4B 46.0 tok/s、Gemma 4 E4B 29.1 tok/s（kohei 氏、11/9）",
+  "auto mode の分類器（許可・拒否を判定するモデル）を CLAUDE_CODE_AUTO_MODE_MODEL で選べる: 既定は Sonnet 5、v2.1.302 以降でフル ID を指定。ただし /status の Auto mode server が Enabled ならサーバー側検査が主で、手元の分類器だけにするには CLAUDE_CODE_AUTO_MODE_SERVER=0（公式 docs/en/permission-modes、11/9 確認）",
+  "Claude Code 12 セッションで Mac が重い原因は statusLine の npx -y ccstatusline@latest を 10 秒ごとに起動していたこと: 10 秒で約 190 プロセス、npx 1 回は約 23 秒・CPU 1.75 秒で、12 並列÷10 秒＝常時約 2 コア。インストール済みを node で直接呼べば 1.2 秒（もんすん氏、11/9）"
+ ]
+}
