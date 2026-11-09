@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-10",
+ "weekday": "火",
+ "file": "2026-11-10.html",
+ "titles": [
+  "並列で走らせた Claude Code は何回ぶつかっていたか: 2 週間分のログ（7.0GB・シェルコマンド約 10 万件）を hook に再生すると、同時最大 13 セッションで「止めるべきだった」コマンドが 507 件、うち 25 件は別セッションが編集中のツリーでの git add -A コミット。判定は 1 回約 50ms（dooly6276 氏、11/9）",
+  "Claude Code v2.1.321（11/10 04:22 JST）: fable の指す先が Fable 5.2（1M 文脈、$8／$40 per MTok、キャッシュ読み $0.20）に切り替わり、Pro／Max は保存済みの Fable 5.1 指定も自動で移る。claude remote-control --settings ＜file＞ で常駐 Remote Control の全セッションに設定を適用、mod の $.tool.call／$.mcp.call は許可確認なし、1,000 字超の背景コマンド出力は先頭と末尾だけ渡して文脈を節約",
+  "公式 Playbook「どの Claude モデルで作るか」: まず Opus 5.5 の effort medium で始め、足りなければ ①自己検証（テスト・ビルド）を足す ②effort を 1 段上げる ③上のモデルへ低い effort から、の順。SWE-bench Pro の部分集合では Opus 5.5 を low で回して失敗分だけ high で再実行すると約 97% を 1 タスク約 $0.17 で通し、全部 high の 95.3%・$0.29 を上回った（Addy Osmani、claude.dev 11/9）"
+ ]
+}

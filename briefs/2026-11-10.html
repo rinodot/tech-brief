@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月10日（火）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-09.html">← 11/9（月）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">火曜日 · 2026年11月10日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>並列で走らせた Claude Code は何回ぶつかっていたか: 2 週間分のログ（7.0GB・シェルコマンド約 10 万件）を hook に再生すると、同時最大 13 セッションで「止めるべきだった」コマンドが 507 件、うち 25 件は別セッションが編集中のツリーでの <code>git add -A</code> コミット。判定は 1 回約 50ms（dooly6276 氏、11/9）</h2>
+      <p class="why">— 並列セッションの事故は起きてから気づく。過去ログに再生して数えられるなら、守りを入れる前に「自分の環境で何件起きていたか」が分かる。</p>
+      <p class="b">dooly6276 氏（11/9）。自作プラグイン claude-bulkhead の <code>/bulkhead:scan</code> は、<code>~/.claude/projects</code> に残る過去セッションのシェルコマンドを 7 つのガードに通し、当時止められていたはずの件数を数える（外部送信なし）。著者の Mac の 2 週間分（7.0GB・約 10 万件）は 39 秒で読め、同時に動いていたセッションは最大 13 本、止められていたはずのコマンドは 507 件、うち 25 件は別セッションが編集中のツリーでの <code>git add -A</code> コミットだった。</p>
+      <p class="b">ガードは PreToolUse hook で動く Node スクリプト 7 本。kill-guard は他 worktree のサーバーまで巻き込む <code>pkill node</code>、port-guard は使用中ポートへの二重起動、checkout-guard は他セッション作業中のツリーでの <code>git checkout</code>／<code>git add -A</code> を止め、orphan-reaper は終わったセッションの残留プロセスを数秒で片づける。常駐なし、1 回の判定は約 50ms。含意: 文字列を読む判定でサンドボックスではないが、並列運用の衝突は「数えてから守る」ができる。</p>
+      <p class="try">試すなら: <code>/plugin marketplace add dooly6276/claude-bulkhead</code> → <code>/plugin install bulkhead@bulkhead</code> → <code>/bulkhead:scan 30d</code> で過去 30 日分をガードに再生し、どのガードが何件鳴ったかを見る（Node 18 以上。リポジトリの hooks.json は PreToolUse の matcher <code>Bash|PowerShell</code> に 7 本、SessionStart に orphan-reaper。ポートとメモリの状態はログに残らないので scan では再生されない）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/dooly6276/articles/9863fac3b3e3c2">Zenn — 並列 Claude Code セッションは何回ぶつかったか：2週間のログを hook に再生して数えた</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Claude Code v2.1.321（11/10 04:22 JST）: <code>fable</code> の指す先が Fable 5.2（1M 文脈、$8／$40 per MTok、キャッシュ読み $0.20）に切り替わり、Pro／Max は保存済みの Fable 5.1 指定も自動で移る。<code>claude remote-control --settings ＜file＞</code> で常駐 Remote Control の全セッションに設定を適用、mod の <code>$.tool.call</code>／<code>$.mcp.call</code> は許可確認なし、1,000 字超の背景コマンド出力は先頭と末尾だけ渡して文脈を節約</h2>
+      <p class="why">— <code>fable</code> を選んでいる Max の人は今日からモデルが変わる（戻すなら <code>/model claude-fable-5-1</code>）。常駐 Remote Control は設定ファイル 1 枚で全セッションを縛れる。</p>
+      <p class="b">公式 GitHub Releases（11/10 04:22 JST）。Fable 5.2 が既定の Fable になり、保存済みの Fable 5.1 指定も Pro／Max では <code>fable</code> へ移る。<code>claude remote-control --settings &lt;file&gt;</code> は起動する全セッションに設定を適用。mod 自身のツール呼び出し <code>$.tool.call</code>／<code>$.mcp.call</code> は ask ルールや <code>-p</code> でも確認なし、deny は有効。1,000 字超の背景コマンド通知は先頭と末尾だけ。含意: 無人運用の設定を 1 枚で配れる。</p>
+      <p class="try">試すなら: <code>claude --version</code> で 2.1.321 を確認し <code>/model</code> で現在のモデルを見る（Fable 5.1 に留めるなら <code>/model claude-fable-5-1</code>）→ Remote Control を常駐させているなら permissions と hooks を書いた JSON を <code>claude remote-control --settings ~/.claude/rc-settings.json</code> で渡す（ファイルを変えたら再起動。変えたままだと新規セッションが開かない）→ ヘッドレスで mod を直している人は <code>.claude/skills</code> の変更が自動で再読込される（止めるなら <code>CLAUDE_CODE_PLUGIN_DIR_WATCH=0</code>）。</p>
+      <p class="src">出典: <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.321">GitHub — anthropics/claude-code v2.1.321</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>公式 Playbook「どの Claude モデルで作るか」: まず Opus 5.5 の effort <code>medium</code> で始め、足りなければ ①自己検証（テスト・ビルド）を足す ②effort を 1 段上げる ③上のモデルへ低い effort から、の順。SWE-bench Pro の部分集合では Opus 5.5 を <code>low</code> で回して失敗分だけ <code>high</code> で再実行すると約 97% を 1 タスク約 $0.17 で通し、全部 <code>high</code> の 95.3%・$0.29 を上回った（Addy Osmani、claude.dev 11/9）</h2>
+      <p class="why">— 週の枠が尽きる人ほど「上げる前に検証を足す」「失敗分だけ上げる」の順番が効く。サブエージェントの <code>model: haiku</code> と <code>/compact</code> してからの切替も公式の勧め。</p>
+      <p class="b">Addy Osmani（claude.dev、11/9）。価格（入／出 $ per MTok）は Sonnet 5.5 2／10、Opus 5.5 4／20、Fable 5.2 8／40。Claude Code では、ログ読みなど間違いが安く見つかる仕事をサブエージェントの <code>model: haiku</code> に回し（既定は <code>CLAUDE_CODE_SUBAGENT_MODEL</code>）、モデルを切り替える前に <code>/compact</code> する（キャッシュはモデルごと）。含意: 同じタスクを <code>/model</code> で 2 モデルに回し <code>/usage</code> で比べる。</p>
+      <p class="try">試すなら: <code>.claude/agents/log-reader.md</code> の frontmatter に <code>tools: Read, Grep, Glob, Bash</code> と <code>model: haiku</code>、本文に「Don't edit any files.」と書く → 普段は Opus 5.5・<code>/effort</code> medium で回し、失敗したタスクだけ <code>/effort high</code> で再実行 → モデルを変える前に <code>/compact</code>、同じタスクを 2 モデルで回して <code>/usage</code> を比べる（いずれも Playbook 原文の手順。<code>/effort status</code> で現在の水準を確認）。</p>
+      <p class="src">出典: <a href="https://claude.dev/blog/which-claude-model-should-you-build-with/">claude.dev — Which Claude model should you build with? Fable, Opus, Sonnet, or Haiku</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: syarihu 氏（<a href="https://zenn.dev/syarihu/articles/ae9ac46b6b85b4" style="color:inherit">11/9</a>）: worktree のセッションは v2.1.211 以降 main 側の <code>.claude/settings.local.json</code> を読むので、worktree ごとの <code>env</code> で Gradle デーモンの名簿を分けられず、<code>./gradlew --stop</code> が他の worktree のビルドを落とした（公式 docs/en/settings に「In a worktree, it uses the file at the main checkout's root」）。回避は SessionStart フックで <code>$CLAUDE_ENV_FILE</code> に <code>export GRADLE_OPTS='-Dorg.gradle.daemon.registry.base=…'</code> を追記（Bash ツールにだけ効く、再起動が要る）。25h 氏（Qiita <a href="https://qiita.com/25h/items/3747844156f116237086" style="color:inherit">11/9</a>）: 計画を会話に居なかったサブエージェント 2 体（adversarial-reviewer＝sonnet high、best-path-reviewer＝opus high、tools は Read／Grep／Glob／Bash／WebFetch）に読ませ、指摘ごとに adopt／rebut／defer／escalate を付ける plan-review プラグイン。仕込んだ欠陥 3 件を 2 回とも全部名指し、1 計画 3 ラウンドまで。効果は未測定。NaCl_5alt 氏（<a href="https://zenn.dev/5alt_nacl/articles/isucon2026-solo-ai-agent" style="color:inherit">11/8</a>）: ISUCON2026 をソロで <code>claude --chrome --remote-control --permission-mode auto</code>＋<code>/loop</code>（待機 20〜30 分・競技中 1 分）でほぼ無人運転。PermissionRequest フック（timeout 60・onFailure block）で git push／aws／curl／ssh／rm を拒否、StopFailure→ntfy、healthchecks.io で 30 分無音を通知。最終 208,983 点・38 位／579、ベンチ 70 回、Windows 版 2.1.310、Max 20x の枠内、AWS $10.72。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/spec-upfront-vs-fix-in-chat-handson" style="color:inherit">11/9</a>）: 6 条件を一括で頼む A と 1 行で頼んで会話で直す B は各 5 回とも 6/6、呼び出しは B が 2 倍でも料金は 0.429→0.384 USD の 0.893 倍・時間 0.845 倍。<code>--resume</code> 時の料金欄は累計なので足すと 1.692 倍に見える罠、<code>--permission-mode acceptEdits</code> なしでは 0/6。Asutin 氏（Sun*、<a href="https://zenn.dev/sun_asterisk/articles/1d1c65b1fe409a" style="color:inherit">11/9</a>）: 設計・調査は Opus medium、実装は Sonnet high、レビューは Opus xhigh に分けたら週間制限の到達が約 3 日→約 5 日（Team、体感）。Daisuke Sawada 氏（<a href="https://zenn.dev/daisuke7/articles/41940336b06cc7" style="color:inherit">11/10</a>）: コードを 1 行も読まずに Claude Code で Flutter の麻雀アプリを 4 か月、47,000 行（lib/ 約 28,000・テスト約 13,000＝517 件）。テストを唯一の仕様書にし、節目の監査エージェントで重複実装 10 種→11 種を検出、失敗記録 22 件。費用なし。flutter_riverpod <a href="https://pub.dev/packages/flutter_riverpod/changelog" style="color:inherit">3.5.0</a>（11/6）: <code>Ref.exist</code> を非推奨にして listen できる <code>provider.exist</code> を追加、DevTools は既定で現在のスナップショットだけ（履歴は <code>debugTrackProviderHistory = true</code>）、Material の import を material_ui へ。mappy 氏（<a href="https://zenn.dev/mappy55/articles/rulebook-rag-01" style="color:inherit">11/10</a>）: 会則 RAG 32 問×3 回で、固定長 400 文字→条文単位の分割だけで正答 16.7→23.0（52%→72%）、BM25 ハイブリッドは 20.0 で逆効果。埋め込みを bge-m3 にすると 20.3、回答も qwen3:4b／gemma3:4b（RTX 3050 6GB）にすると 7.7／6.7 で実用外。白米元気氏（<a href="https://zenn.dev/hakumaigenki/articles/claudecode-subagent-cost-1109" style="color:inherit">11/9</a>）: 監査スクリプトが claude-opus-5 を 1 日 68 回呼んで API 残高を使い切り、同じ残高の自動処理 4 本が同日に停止。1 セッションでサブエージェント 6 本・約 80 万トークン。対策は判定を haiku、文章は sonnet、サブエージェントは haiku で同時 1 本。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
