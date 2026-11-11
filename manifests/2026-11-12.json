@@ -1,0 +1,10 @@
+{
+ "date": "2026-11-12",
+ "weekday": "木",
+ "file": "2026-11-12.html",
+ "titles": [
+  "Flutter 3.50（Dart 3.14）。新規プロジェクトは material_ui／cupertino_ui が既定になり、package:flutter/material.dart と flutter_localizations のデリゲートは正式に非推奨（dart fix --apply --code=migrate_design_widgets で移行）。Android は AGP 9.3.1・Gradle 9.5.0・minSdk 24・target 36、FFIgen／JNIgen が安定版、iOS は入力遅延 1 フレーム短縮。pub パッケージに skills/ を同梱して dart run skills@ get で配れる（Flutter 公式ブログ 11/11）",
+  "RTX 3060 12GB で VRAM に載らない Nemotron 3.5 を本体 RAM に逃がして実測。Lightning 30B-A3B（IQ4_XS 17.6GiB）は VRAM 約 9.7GiB で 32〜34 tok/s・128k まで実用、Bolt 74B-A9B（IQ2_XXS 20.5GiB）は 14〜15 tok/s。全部 VRAM に載る Qwen3.8-27B は 20〜21 tok/s・32k まで、Bonsai 2 27B は 31〜33 tok/s・64k まで。11.8 万トークンの読み込みは Lightning 約 4 分（BpF 氏 11/11）",
+  "GitHub CLI v2.99.0 の --attach で、Claude Code が作る PR に変更前後のスクリーンショットを貼らせる。gh pr create --body-file pr-body.md --attach ./before.png --attach ./after.png の 1 コマンドで最大 50 ファイル、本文中の相対パスはアップロード後の URL に書き換わる。CLAUDE.md は「UI 変更はスクショを撮って添付」「画像はリポジトリ外に保存」「本文は一時ファイル」の 3 行（つけ麺テキーラ氏 11/11）"
+ ]
+}

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月12日（木）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-11.html">← 11/11（水）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">木曜日 · 2026年11月12日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2>Flutter 3.50（Dart 3.14）。新規プロジェクトは material_ui／cupertino_ui が既定になり、<code>package:flutter/material.dart</code> と flutter_localizations のデリゲートは正式に非推奨（<code>dart fix --apply --code=migrate_design_widgets</code> で移行）。Android は AGP 9.3.1・Gradle 9.5.0・minSdk 24・target 36、FFIgen／JNIgen が安定版、iOS は入力遅延 1 フレーム短縮。pub パッケージに <code>skills/</code> を同梱して <code>dart run skills@ get</code> で配れる（Flutter 公式ブログ 11/11）</h2>
+      <p class="why">— 次の <code>flutter upgrade</code> で import の非推奨警告と Gradle の前提が変わる。エージェント向けの skills と MCP 設定が公式の配布経路に乗った。</p>
+      <p class="b">公式ブログ（11/11）。Flutter 3.50 は Dart 3.14 と同時。新規プロジェクトは <code>package:material_ui</code> が既定で、<code>package:flutter/material.dart</code>・<code>cupertino.dart</code> と flutter_localizations のデリゲートは正式に非推奨。Android は AGP 9.3.1・Gradle 9.5.0・KGP 2.4.20・Java 17 以上、minSdk 24・compile／target 36。HCPP は API 34 以上＋Vulkan 端末だけ。</p>
+      <p class="b">Direct native interop（FFIgen・JNIgen）が安定版。iOS はタッチ入力の遅延が 1 フレーム短縮（60Hz で 16ms）、CocoaPods は縮小して SPM へ。Wasm は JS の 2 倍超、CanvasKit 5.46→3.75MB。公式エージェントプラグインは skills・MCP 設定・<code>flutter-hot-reload</code> ルール同梱、パッケージの <code>skills/</code> を pub.dev から配れる。含意: import は fix 1 コマンド、Gradle は手動。</p>
+      <p class="try">試すなら: <code>flutter upgrade</code>（docs の release notes 一覧は 11/12 朝も「3.50.0 (Tentative)」表記なので、stable に来たかは upgrade の結果で確認）→ <code>dart fix --apply --code=migrate_design_widgets</code>（import とローカライズのデリゲートを置換）→ <code>android/</code> の AGP・Gradle・KGP を新規プロジェクトの既定（9.3.1／9.5.0／2.4.20、Java 17）と見比べる → platform view を使う画面があれば <code>flutter config --enable-hcpp</code>（API 34 未満や Vulkan 以外の端末は従来の platform view に自動で戻る）→ 依存パッケージの skills は <code>dart run skills@ get</code>、自作パッケージは <code>package:skills_lint</code> を CI で → Web なら <code>flutter build web --wasm</code>。release ビルドは外部 Intent の <code>route</code>・<code>dart_entrypoint</code>・<code>cached_engine_id</code> を無視するようになった点も確認。</p>
+      <p class="src">出典: <a href="https://flutter.dev/blog/whats-new-in-flutter-3-50">Flutter Blog — What's new in Flutter 3.50</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>RTX 3060 12GB で VRAM に載らない Nemotron 3.5 を本体 RAM に逃がして実測。Lightning 30B-A3B（IQ4_XS 17.6GiB）は VRAM 約 9.7GiB で 32〜34 tok/s・128k まで実用、Bolt 74B-A9B（IQ2_XXS 20.5GiB）は 14〜15 tok/s。全部 VRAM に載る Qwen3.8-27B は 20〜21 tok/s・32k まで、Bonsai 2 27B は 31〜33 tok/s・64k まで。11.8 万トークンの読み込みは Lightning 約 4 分（BpF 氏 11/11）</h2>
+      <p class="why">— 自分の 12GB でも MoE なら VRAM 超えのモデルが実用速度で動く。基準モデルを毎回測り直す「物差し」の作りも真似できる。</p>
+      <p class="b">BpF 氏（11/11）。RTX 3060 12GB・WSL2（RAM 25GB）。生成は短い／約 4k／約 16k 入力の範囲で Lightning 32〜34 tok/s、Bolt 14〜15、Qwen3.8 20〜21、Bonsai 2 31〜33。11.8 万トークンの読み込みは Lightning 約 4 分（以後 28.2 tok/s）、Bolt 約 6 分半。日本語 500 字の返事までは Bonsai 2 が 33.7 秒で最短、Lightning は 93.0 秒。著者の既定は Bonsai 2、長文読みは Lightning。各問 1 回。</p>
+      <p class="try">試すなら: WSL2 の RAM 割り当てを先に増やす（記事は CPU 4 コア・25GB）→ <code>./llama-server -m NVIDIA-Nemotron-3.5-Lightning-30B-A3B-IQ4_XS.gguf --jinja --host 127.0.0.1 -c 131072 --parallel 1</code>（記事のコマンド。VRAM に載らない専門家の重みは <code>--fit</code> で本体 RAM に置く前提、本家 llama.cpp e14a779）→ 基準は <code>./llama-server -m Qwen3.8-27B-UD-Q2_K_XL.gguf --jinja --chat-template-kwargs '{"reasoning_effort":"medium"}' -ngl 99 -c 32768 --parallel 1</code> → 物差しは「基準モデルを毎回測り直す」「日本語 500 字の返事が出終わるまでの秒数」「生成 10 tok/s を実用の下限」の 3 つを自分の問題で固定 → Bonsai 2 だけは PrismML 版 llama.cpp。</p>
+      <p class="src">出典: <a href="https://zenn.dev/bpf/articles/552bfc3a16c784">Zenn — RTX 3060 12GB で VRAM に載らない Nemotron 3.5 の 30B と 74B を動かす：自作の物差しで実測</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>GitHub CLI v2.99.0 の <code>--attach</code> で、Claude Code が作る PR に変更前後のスクリーンショットを貼らせる。<code>gh pr create --body-file pr-body.md --attach ./before.png --attach ./after.png</code> の 1 コマンドで最大 50 ファイル、本文中の相対パスはアップロード後の URL に書き換わる。CLAUDE.md は「UI 変更はスクショを撮って添付」「画像はリポジトリ外に保存」「本文は一時ファイル」の 3 行（つけ麺テキーラ氏 11/11）</h2>
+      <p class="why">— Flutter の UI 変更 PR を自分で動かして確かめる手間が減る。<code>gh</code> の新機能を Claude Code の約束事に落とす例。</p>
+      <p class="b">つけ麺テキーラ氏（11/11）。GitHub CLI v2.99.0 の <code>--attach</code> は画像・動画を上げ、本文中の同じパスを URL に置換する（公式リリースノート）。<code>pr create</code>／<code>pr edit</code>／<code>pr comment</code> で使え、1 回 50 ファイルまで、Enterprise Server は不可。CLAUDE.md には「UI 変更は前後のスクリーンショットを PR に添付」「画像はリポジトリ外に保存」「本文は一時ファイルに書き <code>--body-file</code> と <code>--attach</code> で作る」の 3 行。一部の失敗でも PR は作られる。</p>
+      <p class="try">試すなら: <code>gh --version</code> で 2.99.0 以上（2026-09-01 公開）→ CLAUDE.md に上の 3 行 → Flutter なら撮影手段を <code>flutter screenshot --out=/tmp/shots/after.png</code>（接続中の端末を撮る公式コマンド）と指示 → <code>gh pr create --title … --body-file /tmp/pr-body.md --attach /tmp/shots/before.png --attach '/tmp/shots/after.png#修正後'</code>（<code>#</code> の後ろが alt テキスト、公式例）→ 一部失敗でも PR は作られるので「失敗したら <code>gh pr edit ＜番号＞ --attach</code> で追加、<code>gh pr create</code> は繰り返さない」と書く。v2.99.0 はコーディングエージェントから呼ばれるとスピナーを文字だけにする変更も入った。</p>
+      <p class="src">出典: <a href="https://zenn.dev/tatsuyan/articles/gh-attach-claude-code-pr-screenshot">Zenn — gh の --attach で Claude Code が作る PR にスクショを貼らせる</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: アセロラ氏（<a href="https://zenn.dev/acerola_jp/articles/claude-code-subagent-parallel" style="color:inherit">11/10</a>）: 独立した 4 課題を直列（自分で順に）と並列（Task で 4 サブエージェント）で 32 回。軽い組（直列中央値 33.2 秒）は並列で 42.8 秒と遅くなり費用 $0.107→$0.254、重い組（61.1 秒）は 45.1 秒に縮み $0.188→$0.289。隠しテストは 32 回全部合格。分かれ目は直列 40〜60 秒、費用は約 5 割増。Sonnet 5.5・2.1.303、各 6〜10 回。shoma46 氏（<a href="https://zenn.dev/shoma46/articles/claude-code-subagent-spec-consistency-review" style="color:inherit">11/10</a>、11/11 既報の続編）: Codex 無しでサブエージェントだけの越境整合レビュー。8/10〜10/28 の 97 回で block 相当 49 回（約 51%）、Codex と同一 HEAD の 11 件で判定一致は 2 件。抽出 4 体（Sonnet）＋検証 1 体＋再検証 3 体の最大 8 体、「2 体以上が支持なら採用」をやめ「1 体でも反証したら要確認に降格」。指示は「このdiffを書いたセッションは判定しない」「不整合が存在する前提で根拠の file と行番号付きで列挙」。おじさんAIラボ（<a href="https://zenn.dev/ojisan_ai_lab/articles/claude-fable-5-1-vs-5-2-20261110" style="color:inherit">11/10</a>）: <code>claude -p</code> 33 回で Fable 5.1 と 5.2 の表示額（定価換算）を比較。キャッシュ書込が無い 1 回目どうしは $0.3907→$0.3053（78.1%）、単価は入出力・キャッシュ読出とも 5.1 の 8 割。同じ依頼でもキャッシュ書込の有無で約 30 倍（24〜37 倍）開く。「考えずに」は 5.2 では効かず effort を下げる。2.1.321、各条件 3 回。matsu 氏（<a href="https://zenn.dev/matsushima_a/articles/day-042-billion-context-compression-proxy" style="color:inherit">11/10</a>）: Claude Code CLI を文脈圧縮プロキシ bili（<code>bili claude</code>）でラップ。6 ターンで 17,242→299 トークンに圧縮されたが、圧縮したターンで cache_creation が 17,957→36,642 に増え、累計 $0.5516（直）vs $0.6813（経由）で高くなった。圧縮は履歴を書き換えるのでプロンプトキャッシュの前置きが崩れる。Sonnet 5.5、合成ログ 137KB、1 回。小林慎吾氏（モバイルアプリシステムズ、<a href="https://zenn.dev/mobile_app_tec/articles/flutter-riverpod-mvvm-gradual-migration" style="color:inherit">11/11</a>）: MobX→Riverpod×MVVM を 6 段階で移行（下準備→データ層→手本 1 機能→複雑な機能→横展開→仕上げ）、約 550 件のテストを CI で。Riverpod 3 の落とし穴は Provider 初期化失敗の自動リトライ（テストでは <code>retry: (_, __) => null</code>）と autoDispose（<code>container.listen(provider, (_, __) {})</code> で購読を保つ）。ViewModel は <code>AsyncNotifier</code>、読み込み中・エラーは <code>AsyncValue</code> に任せる。コード例は抜粋。Takuya 氏（<a href="https://qiita.com/Takuya__/items/36173c0a76955fba4f57" style="color:inherit">11/11</a>、論文 SkillsBench arXiv:2602.12670 の紹介）: 8 分野 87 課題・18 構成（Claude Code／Codex／Gemini CLI／OpenHands）で、人が磨いた Skill は平均合格率 33.9%→50.5%、AI 自作の Skill は 3 構成とも無しより 8.1〜11.5pt 低い。個数は 1 個 +18.0・2〜3 個 +19.0・4 個以上 +10.1、SKILL.md は standard +21.5・comprehensive +0.7、13 課題は足すと悪化。効く条件は動くスクリプト同梱・データ源の癖・出力形式・検算条件・具体的な description。筆者の再現なし。全自動AIテックラボ（<a href="https://qiita.com/auto_ai_techlab/items/f4c376d10dd75106b5f0" style="color:inherit">11/10</a>、AI 執筆）: RTX 5070 Ti 16GB・WSL2 で日本語 ASR Haas-ja-v1.0 vs openai-whisper large-v3。VOICEVOX 合成 234 発話・1,513 秒の CER は strict 11.60% vs 10.83%、kana 4.79% vs 5.31%。597 秒の音声を Haas は batch 64 で 0.587 秒（RTFx 1017、VRAM 7,540MiB）、Whisper 既定は 57.1 秒（RTFx 10.5、9,568MiB）。<code>haas_asr.transcribe_longform(m, a, batch_size=64)</code>。人の声・faster-whisper は未比較。公式: Ollama v0.40.17-rc0（11/10、prerelease）は <code>ollama launch</code> が OpenCode 設定に thinking メタデータを使う・MLX の同時生成・llama.cpp b12257。llama.cpp nightly は b12292（11/11）まで。Claude Code は v2.1.322 のまま、whats-new は Week 37 のまま、firebase_core 5.1.0・firebase_messaging 17.0.1 が最新。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
