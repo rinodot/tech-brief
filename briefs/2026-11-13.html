@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テックブリーフ · 2026年11月13日（金）</title>
+<style>
+  :root{
+    --bg:#FCFCFB; --wash:#F9F9F7; --ink:#2E2C27; --body:#514F47;
+    --soft:#6B6A63; --grey:#B4B3A8; --hair:#E4E3DC; --clay:#C6613F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--bg); color:var(--body);
+    font-family:-apple-system,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size:15.5px; line-height:2.0;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px;}
+  header{background:var(--wash); border-bottom:1px solid #E1E1DF; padding:34px 0 24px;}
+  .daydate{font-size:12.5px; color:var(--soft); letter-spacing:.06em;}
+  h1{
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-weight:600; font-size:30px; color:var(--ink); letter-spacing:.05em; margin:6px 0 4px;
+  }
+  .meta{font-size:12.5px; color:var(--grey); letter-spacing:.04em;}
+  main{padding:2px 0 44px;}
+  article{position:relative; padding:30px 0 26px 54px; border-bottom:1px solid var(--hair);}
+  article:last-of-type{border-bottom:none;}
+  .num{
+    position:absolute; left:0; top:31px;
+    font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"Noto Serif JP",serif;
+    font-size:34px; line-height:1; color:var(--grey); font-weight:600;
+  }
+  h2{font-size:18.5px; line-height:1.6; color:var(--ink); font-weight:700;}
+  .why{font-size:13.5px; line-height:1.8; color:var(--soft); margin:7px 0 15px;}
+  p.b{margin:0 0 14px; text-align:justify;}
+  figure{background:var(--wash); padding:20px 12px 12px; margin:6px 0 16px;}
+  figure svg{display:block; width:100%; max-width:430px; height:auto; margin:0 auto;}
+  figcaption{font-size:12px; line-height:1.7; color:var(--grey); margin-top:10px; padding:0 6px; text-align:center;}
+  .try{font-size:13.5px; line-height:1.8; color:var(--ink); background:var(--wash); padding:8px 12px; margin:2px 0 12px; border-left:2px solid var(--clay);}
+  .src{font-size:12.5px; color:var(--soft); margin-top:2px;}
+  .src a{color:var(--soft); text-decoration:underline; text-underline-offset:3px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.86em; background:#F4F3EE; padding:1px 5px; border:1px solid var(--hair); word-break:break-all;}
+  section.special{padding:30px 0 26px;}
+  h3.sp{font-size:16px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+  .foot{margin-top:28px; font-size:13.5px; color:var(--soft);}
+  @media (max-width:640px){
+    .wrap{padding:0 18px;}
+    h1{font-size:25px;}
+    body{font-size:15px;}
+    article{padding-left:40px;}
+    .num{font-size:26px; top:35px;}
+    h2{font-size:16.5px;}
+  }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-12.html">← 11/12（木）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<header>
+  <div class="wrap">
+    <div class="daydate">金曜日 · 2026年11月13日</div>
+    <h1>テックブリーフ</h1>
+    <div class="meta">3件 · 読了目安 約3分</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <article id="item1">
+      <div class="num">1</div>
+      <h2><code>autoCompactWindow</code> を 50 万に下げて、Claude Code の 1 回の送信トークンを 43.2 万→26.3 万（39% 減）、1 日の API 換算額を $483→$336（30% 減）にした記録。サブエージェント単位でも frontmatter の <code>autoCompactWindow</code> で同じことができる（sae_eng 氏 11/12・公式 docs）</h2>
+      <p class="why">— 1M 文脈のモデルは 97 万トークンまで compact が動かない。設定 1 行で早めた記事と、サブエージェント定義で同じことをする公式 docs の項目を合わせて読む。</p>
+      <p class="b">筆者 1 人の記録で設定前 15 日と設定後 11 日を比較。<code>~/.claude/settings.json</code> に <code>"autoCompactWindow": 500000</code> を書き、97 万トークンまで育ってから動いていた自動 compact を 50 万で動かす。1 回の送信トークン平均は 43.2 万→26.3 万（39% 減）、1 日分の API 定価換算は $483→$336（30% 減）。代わりに compact は 1 日 3.7 回→15.3 回。離席対策（50 分空いて 20 万以上なら compact、60 分で新しい会話）も同時に入れ、1 時間以上空けて戻った回の書き直しは 1 日 $43.6→$17.3。</p>
+      <p class="b">公式 docs でも <code>autoCompactWindow</code> は settings の正式なキーで、環境変数 <code>CLAUDE_CODE_AUTO_COMPACT_WINDOW</code> が優先。サブエージェント単位なら定義の frontmatter に <code>autoCompactWindow: 200000</code>（v2.1.296 以降。<code>200k</code> は 200 と読まれて無効）。限界は n=1 で期間も仕事も違うこと、金額が定価換算の概算なこと、離席対策と同時に入れたので効果を分けられないこと。</p>
+      <p class="try">試すなら: <code>~/.claude/settings.json</code> に <code>"autoCompactWindow": 500000</code> を足す（環境変数 <code>CLAUDE_CODE_AUTO_COMPACT_WINDOW</code> を設定していると無視されるので先に外す）→ 1 週間、1 回あたりの送信トークンと compact の回数を前後で比べる → 長いログを読む専用サブエージェントだけ早めるなら <code>.claude/agents/log-reader.md</code> の frontmatter に <code>autoCompactWindow: 200000</code>（整数で。<code>claude --debug</code> のログに <code>invalid autoCompactWindow</code> が出たら値が無効）。</p>
+      <p class="src">出典: <a href="https://zenn.dev/sae_eng/articles/0e9ed7205ebc41">Zenn — Claude Code に忘れさせたら、トークン使用量が4割減った</a></p>
+    </article>
+
+    <article id="item2">
+      <div class="num">2</div>
+      <h2>Flutter 公式プラグイン dart-flutter を Claude Code に入れる 2 コマンド。skills 25 本と Dart MCP サーバーは自動で付くが、<code>hot_reload</code> を呼ばせる flutter-hot-reload ルールは CLAUDE.md に手で写す（docs.flutter.dev・flutter/agent-plugins）</h2>
+      <p class="why">— 11/12 既報の Flutter 3.50 で触れた公式エージェントプラグインの中身。docs ページ（9/14 更新）とリポジトリの plugin.json・rules で確認した。</p>
+      <p class="b">Claude Code 向けは <code>claude plugin marketplace add flutter/agent-plugins</code> → <code>claude plugin install dart-flutter@dart-flutter</code> の 2 行。v1.0.7 は skills 25 本（flutter-* 10、dart-* 15）と <code>dart mcp-server</code> を同梱。ただし rules は自動では読まれず、lib/ の .dart 編集後に <code>hot_reload</code> を呼ぶ flutter-hot-reload.md は CLAUDE.md に自分で写す。</p>
+      <p class="try">試すなら: <code>claude plugin marketplace add flutter/agent-plugins</code> → <code>claude plugin install dart-flutter@dart-flutter</code> → <code>claude plugin marketplace list</code> で表示を確認 → リポジトリの <code>rules/flutter-hot-reload.md</code>（lib/ 配下の .dart を編集したら <code>dtd</code> ツールで起動中のアプリを見つけて <code>hot_reload</code>、<code>initState</code> や <code>main()</code> を触ったら <code>hot_restart</code>。コメントだけの変更と test/ 配下は対象外）の本文を CLAUDE.md に貼る → <code>flutter run</code> 中に widget を 1 行変えて、Claude Code が hot_reload を呼ぶか見る。skills は flutter-add-widget-test・flutter-fix-layout-issues・flutter-setup-localization・flutter-add-integration-test など。</p>
+      <p class="src">出典: <a href="https://docs.flutter.dev/ai/get-started">docs.flutter.dev — Get started developing with AI</a></p>
+    </article>
+
+    <article id="item3">
+      <div class="num">3</div>
+      <h2>LM Studio の 10.21 tok/s が、同梱の llama-server を直接起動して <code>--n-cpu-moe 32</code> にすると 30.66 tok/s。RTX 3060 Ti 8GB・Qwen3.6-35B-A3B Q4_K_M（mukai3 氏 11/11）</h2>
+      <p class="why">— MoE のエキスパートを CPU に置く層数で 3 倍の差。12〜16GB なら層数をさらに減らせるので、同じ手順で自分の最適値を探す価値がある。</p>
+      <p class="b">RTX 3060 Ti 8GB で、LM Studio 同梱の llama-server.exe を直接起動し、Qwen3.6-35B-A3B-UD-Q4_K_M で測定。LM Studio 既定（エキスパート全部 CPU）10.21 tok/s、<code>--cpu-moe</code> 25.87、<code>--n-cpu-moe 32</code> 30.66（VRAM 増分 6,565MiB）、Ollama 0.34.3 は 27.71。<code>--n-cpu-moe 30</code> は共有 GPU メモリに溢れて 17〜18 に落ちた。各設定 4 回・512 トークン。31・33 と長文脈は未測定。</p>
+      <p class="try">試すなら: <code>./llama-server -m ＜Qwen3.6-35B-A3B-UD-Q4_K_M.gguf＞ -c 32768 -np 1 -ngl 99 --n-cpu-moe 32 --host 127.0.0.1 --port 8091</code>（記事は <code>~/.lmstudio/extensions/backends/</code> 配下の LM Studio 同梱 llama-server.exe を使用）→ 12〜16GB なら <code>--n-cpu-moe</code> を 32 から 2 ずつ下げ、tok/s と共有 GPU メモリを毎回記録 → 共有メモリが増えた段階の 1 つ手前が自分の最適値。各設定は初回を捨てて 3 回平均。</p>
+      <p class="src">出典: <a href="https://qiita.com/mukai3/items/6fac7701e57360cc9c94">Qiita — LM Studio 10 tok/s → 同梱のllama-serverを直接起動したら26 tok/s。--n-cpu-moe 32で30 tok/sまで伸びた（VRAM 8GB）</a></p>
+    </article>
+
+    <p class="why" style="margin-top:18px">短報: shogaku 氏（<a href="https://zenn.dev/shogaku/articles/claude-code-hook-10k-cap" style="color:inherit">11/12</a>）: SessionStart hook で渡していた 305,295 字は会話に入っていなかった。公式 docs の上限は 10,000 字（超過分はファイルに保存され先頭 2,000 字のプレビューだけ）。UTF-16 で 9,500 字以内に要約し、<code>find -printf</code>＋gawk・jq 各 1 回で 8.5 秒→0.46 秒（2.1.322、Windows）。murooka_az 氏（<a href="https://zenn.dev/murooka_az/articles/claude-reply-switches-to-english" style="color:inherit">11/12</a>）: 返事が英語になる場面を 100 回再生。CLAUDE.md の元の書き方 15/100、「英語でよいのは、利用者以外が読むもの（担当への指示・コード・識別子・commit・保存物）と原文の引用だけ」の 1 文に置き換えて 1/100、同じ文を hook の <code>additionalContext</code> で渡すと 0/100（2.1.318・Opus 5.5、1 場面）。ぬまーん氏（<a href="https://zenn.dev/numarn/articles/skill-subagent-memory-conflict-handson" style="color:inherit">11/12</a>）: 同じ指示を Skill・CLAUDE.md・サブエージェントの 3 か所に置いて <code>claude -p</code> を 5 回、Skill 5/5・CLAUDE.md 5/5・サブエージェント起動 0 件。名指しすれば 5/5（2.1.314、6 条件 24 回）。shinsei99 氏（<a href="https://zenn.dev/shinsei99/articles/allowlist-is-not-a-denylist" style="color:inherit">11/12</a>）: <code>--allowedTools</code> の外の道具を頼んだら「拒否もされず、警告も出ず、ログにも何も残りません」。allowedTools は自動承認の指定で禁止ではなく、禁止は <code>--disallowedTools</code>（版・回数の記載なし）。stranglehello 氏（<a href="https://zenn.dev/stranglehello/articles/e1d344a7563e3a" style="color:inherit">11/12</a>）: 日本語の業務タスク 24 問で 7 構成が 173〜179/180、費用は Haiku 5.5 $0.035 と Fable 5.2（high）$2.18 で 63 倍（各 1 回、採点も Claude、自社製品の PR あり）。kenimo49 氏（<a href="https://qiita.com/kenimo49/items/f015c6b8a9bab77a6ff4" style="color:inherit">11/12</a>）: RAGTruth 320 件で LLM-as-a-Judge の節約を実測（RTX 4070 12GB・Ollama・qwen3.5:9b）。もっともらしさ＞0.7 で絞ると検出率 35.6% で無作為 40% の 34.2% と同じ、段階的ふるいは呼び出し 58% で 93.1%。tzp 氏（<a href="https://zenn.dev/tzp/articles/705d1d29c2dc79" style="color:inherit">11/10</a>）: 親リポ 1 つで 7 リポジトリを指揮。skills を親の plugins/aj に集約して共有スキル 2,500 行→1,117 行、ガード 9 規則・回帰テスト 102 件。<code>additionalDirectories</code> はフォルダを一度信頼するまで無視される。civras 氏（<a href="https://zenn.dev/civras/articles/c26be045765b24" style="color:inherit">11/11</a>）: 週の上限の内訳 37 日分は VS Code 47%・ターミナル 39%・<code>claude -p</code> 自動実行 14%（料金比率の概算、AI 下書き明記）。crossclub_lab 氏（<a href="https://zenn.dev/crossclub_lab/articles/agent-skills-13-scheduled-rounds" style="color:inherit">11/11</a>）: スラッシュコマンドで回す定期実行 13 本。<code>claude -p "/company-fix"</code> の形で、runs.jsonl 147 件中 41 件に権限停止、STOP／FRUGAL ファイル 1 枚で全停止（有料本の PR あり）。yorusuzu 氏（<a href="https://zenn.dev/yorusuzu/articles/claude-code-selected-model-issue" style="color:inherit">11/11</a>、AI 執筆）: モデル指定の優先順位は <code>/model</code>→<code>--model</code>→<code>ANTHROPIC_MODEL</code>→settings、サブエージェントは呼び出しの model→定義の <code>model:</code>→<code>CLAUDE_CODE_SUBAGENT_MODEL</code>→メイン（<code>claude -p</code> 40 回、合計 $0.0208）。first 氏（<a href="https://zenn.dev/first/articles/201519107f93de" style="color:inherit">11/12</a>）: Anthropic 10/22 ブログ「When to fold subagents into your main agent loop」の紹介。「Even a set of 10 golden examples is enough to start」、折り畳んで点が下がるものだけサブエージェントに残す。SKILL.md への読み替えは筆者の解釈。yuyamigi 氏（<a href="https://zenn.dev/yuyamigi/articles/bbb60ed00ed5fe" style="color:inherit">11/12</a>）: Play Console の「残り約 14 分」は審査前の自動チェック。「変更を確認」→10〜15 分待つ→「N 件の変更を審査に送信」。審査中に「変更を削除」を押すと送信が取り消される。4 回の審査は 5〜26 時間（1 アプリ）。公式: Firebase release notes 11/12 で AI Logic が gemini-3.8-flash-tts／-lite-tts に対応（gemini-3.1-flash-tts-preview は 11/17 停止）、11/11 に Android BoM 35.2.0・google-services 4.6.0。docs.flutter.dev の release notes 一覧から 3.50.0 の「Tentative」表記が消えた（11/11 更新）。docs/en/sub-agents: フォークは v2.1.302 から既定オン、<code>/subtask</code> で手動起動、止めるなら permissions.deny に <code>"Agent(fork)"</code>。llama.cpp nightly は b12327（11/12）。Claude Code v2.1.322・Ollama v0.40.17-rc0 は 11/13 朝も新版なし。</p>
+
+    <p class="foot">気になる番号があれば「N番詳しく」と返信してください。この場で深掘りします。</p>
+
+  </div>
+</main>
+
+</body>
+</html>
