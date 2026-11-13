@@ -3,8 +3,8 @@
  "weekday": "金",
  "file": "2026-11-13.html",
  "titles": [
-  "autoCompactWindow を 50 万に下げて、Claude Code の 1 回の送信トークンを 43.2 万→26.3 万（39% 減）、1 日の API 換算額を $483→$336（30% 減）にした記録。サブエージェント単位でも frontmatter の autoCompactWindow で同じことができる（sae_eng 氏 11/12・公式 docs）",
-  "Flutter 公式プラグイン dart-flutter を Claude Code に入れる 2 コマンド。skills 25 本と Dart MCP サーバーは自動で付くが、hot_reload を呼ばせる flutter-hot-reload ルールは CLAUDE.md に手で写す（docs.flutter.dev・flutter/agent-plugins）",
-  "LM Studio の 10.21 tok/s が、同梱の llama-server を直接起動して --n-cpu-moe 32 にすると 30.66 tok/s。RTX 3060 Ti 8GB・Qwen3.6-35B-A3B Q4_K_M（mukai3 氏 11/11）"
+  "アプリの AI が、文章ではなく自分の Flutter の部品で画面を出して答える",
+  "Mac の中に AI 専用のパソコンをもう 1 台。Web の雑用を、自分の画面を貸さずに頼める",
+  "ブラウザで一度見せた検索が、次から 1 行で呼べる部品になる"
  ]
 }
