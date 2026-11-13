@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テックブリーフ · 2026年11月14日（土）</title>
+<style>
+/* layout: 左に号の目次、右に 1 件ずつ。主役は絵本のようなコマ（ロボットの Claude が登場する場面の絵）。文字はコマの下の 1 行だけ。コマは広い画面で横に並べ、狭い画面で縦に積む */
+:root{
+  --bg:#0F1115; --panel:#151922; --panel2:#1B202B; --line:#2A303A; --line2:#3A4250;
+  --text:#E6E9EF; --muted:#9AA3B2; --dim:#5E6778;
+  --good:#36C2A8; --flow:#4F8CFF; --ai:#B48CFF; --bad:#FF6B6B; --tool:#FFB454;
+  --good-bg:#12302B; --bad-bg:#3A1A1D; --tool-bg:#3A2A12; --ai-bg:#271F3A; --flow-bg:#16233D; --code-bg:#0B0D11;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",monospace;
+  --wash:#151922; --hair:#2A303A; --soft:#9AA3B2; --grey:#5E6778;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0; color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.8;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg);}
+a{color:var(--flow)}
+code{font-family:var(--mono); font-size:.88em; background:var(--panel2); border:1px solid var(--line); padding:0 6px; border-radius:5px; color:var(--text); word-break:break-word;}
+:focus-visible{outline:2px solid var(--flow); outline-offset:2px; border-radius:6px;}
+
+.shell{display:grid; grid-template-columns:250px minmax(0,1fr);}
+.side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; border-right:1px solid var(--line); background:var(--panel); padding-block:22px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:18px;}
+.side h1{font-size:16px; margin:0; letter-spacing:.02em;}
+.side .d{font-size:12px; color:var(--muted); margin:2px 0 18px;}
+.side .grp{font-size:11.5px; color:var(--dim); letter-spacing:.06em; margin:14px 0 6px;}
+.side a{display:grid; grid-template-columns:20px minmax(0,1fr); gap:6px; padding:7px 8px; border-radius:7px; color:var(--text); text-decoration:none; font-size:13px; line-height:1.55;}
+.side a:hover{background:var(--panel2);}
+.side a b{color:var(--flow); font-weight:700;}
+.side a.skip b{color:var(--dim);}
+.main{min-width:0; padding-block:28px 80px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.inner{max-width:900px; margin:0 auto; display:grid; gap:18px; min-width:0;}
+.lede{font-size:13px; color:var(--muted); border:1px dashed var(--line2); border-radius:10px; padding:10px 14px;}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); padding-right:max(16px,env(safe-area-inset-right,0px));}
+}
+
+.item{display:grid; gap:14px; padding-top:26px; scroll-margin-top:16px; min-width:0;}
+.item + .item{border-top:1px solid var(--line); margin-top:22px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px;}
+.tag{font-size:12px; font-weight:700; border-radius:999px; padding:1px 10px; border:1px solid;}
+.tag.tried{color:var(--good); border-color:var(--good); background:var(--good-bg);}
+.tag.tonight{color:var(--ai); border-color:var(--ai); background:var(--ai-bg);}
+.tag.plain{color:var(--muted); border-color:var(--line2);}
+.item h2{font-size:clamp(20px,2.6vw,26px); line-height:1.45; margin:0; text-wrap:balance;}
+.item .sub{color:var(--muted); font-size:14px; margin:-6px 0 0;}
+.sec{display:grid; gap:10px; margin-top:12px; min-width:0;}
+.sec h3{font-size:15.5px; margin:0; text-wrap:balance;}
+.notes{margin:0; padding-left:1.1em; font-size:13px; line-height:1.75; color:var(--muted); display:grid; gap:2px;}
+.notes b{color:var(--text); font-weight:600;}
+
+/* 絵本のコマ */
+.story{display:grid; gap:14px 12px; grid-template-columns:repeat(2,minmax(0,1fr));}
+.story.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:820px){ .story.three{grid-template-columns:1fr;} }
+@media (max-width:640px){ .story{grid-template-columns:1fr;} }
+.rowlab{grid-column:1/-1; font-size:13px; font-weight:800; letter-spacing:.06em; display:flex; align-items:center; gap:10px; margin-top:4px;}
+.rowlab::after{content:""; flex:1; height:1px; background:var(--line2);}
+.rowlab.now{color:var(--bad);} .rowlab.after{color:var(--good);}
+.pnl{display:grid; gap:8px; align-content:start; min-width:0;}
+.scene{border-radius:14px; overflow:hidden; line-height:0; border:1px solid var(--line);}
+.scene svg{display:block; width:100%; height:auto;}
+.cap{display:grid; grid-template-columns:24px minmax(0,1fr); gap:8px; align-items:start; font-size:14.5px; font-weight:700; line-height:1.55;}
+.cap .no{width:24px; height:24px; border-radius:50%; background:var(--text); color:var(--bg); display:grid; place-items:center; font-size:12.5px; font-weight:800;}
+.cap small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+/* ポスター（2 枚の絵を並べ、間に一言） */
+.vs{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center;}
+.vs .scene{background:var(--panel);}
+.vs .mid{display:grid; justify-items:center; gap:2px; font-weight:800; color:var(--good); font-size:20px; line-height:1.3; text-align:center;}
+.vs .mid i{display:block; width:46px; height:4px; border-radius:2px; background:var(--good); position:relative;}
+.vs .mid i::after{content:""; position:absolute; right:-2px; top:-6px; width:12px; height:12px; border-top:4px solid var(--good); border-right:4px solid var(--good); transform:rotate(45deg);}
+.vs .mid small{font-size:12px; color:var(--muted); font-weight:500;}
+.vs .mid.plain{color:var(--muted); font-size:26px;}
+@media (max-width:640px){ .vs{grid-template-columns:1fr;} .vs .mid i{transform:rotate(90deg); margin:10px 0;} }
+
+/* 画面の絵 */
+.split{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:12px;}
+@media (max-width:720px){ .split{grid-template-columns:1fr;} }
+.win{min-width:0; background:var(--code-bg); border:1px solid var(--line2); border-radius:12px; overflow:hidden;}
+.wbar{display:flex; align-items:center; gap:10px; padding:6px 10px; background:var(--panel2); font-size:12px; color:var(--muted);}
+.wbar .dots{display:flex; gap:5px;}
+.wbar .dots i{width:9px; height:9px; border-radius:50%; display:block;}
+.wbar .dots i:nth-child(1){background:var(--bad);} .wbar .dots i:nth-child(2){background:var(--tool);} .wbar .dots i:nth-child(3){background:var(--good);}
+.code{padding:6px 0;}
+.ln{display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:8px; align-items:start; padding:2px 10px; font-family:var(--mono); font-size:12px; line-height:1.65;}
+.ln .no{color:var(--dim); text-align:right;}
+.ln .tx{white-space:pre-wrap; word-break:break-word;}
+.ln.hb{background:var(--bad-bg);} .ln.ht{background:var(--tool-bg);}
+.pill{font-family:var(--sans); font-size:11.5px; font-weight:700; border-radius:999px; padding:0 9px; color:var(--bg);}
+.pill.bad{background:var(--bad);} .pill.tool{background:var(--tool);}
+.ans{min-width:0; background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 14px; display:grid; gap:8px; align-content:start;}
+.ans .t{font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em;}
+.ans .who{display:flex; align-items:center; gap:10px; font-size:14px;}
+.ans .big{font-size:22px; font-weight:800; color:var(--bad);}
+.ans .why{border-top:1px solid var(--line2); padding-top:8px; display:grid; gap:4px; font-size:13.5px;}
+.ans .why b{color:var(--tool);}
+.ans .why span.f{color:var(--bad); font-weight:700;}
+.mono{font-family:var(--mono); font-size:12px;}
+.ans .f2{font-size:11.5px; color:var(--muted);}
+
+/* 絵文字の代わりの小さな絵 */
+.ico{width:34px; height:34px; flex:0 0 34px; display:block;}
+.warns{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:760px){ .warns{grid-template-columns:1fr;} }
+.warn{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.55; min-width:0;}
+.warn b{display:block;}
+.warn span{color:var(--muted); font-size:12.5px;}
+
+.steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+.st{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.6; min-width:0;}
+.st > div{min-width:0;}
+.st i{display:block; font-style:normal; font-weight:800; color:var(--flow); font-size:12px; letter-spacing:.06em;}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.ask{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--flow-bg); border:1px solid var(--flow); border-radius:12px; padding:10px 12px;}
+.ask .q{font-size:13.5px; line-height:1.65; min-width:0; word-break:break-word;}
+.ask .q small{display:block; color:var(--muted); font-size:11.5px; letter-spacing:.06em;}
+.ask button{font:inherit; font-size:12.5px; font-weight:700; color:var(--bg); background:var(--flow); border:none; border-radius:7px; padding:5px 14px; cursor:pointer; white-space:nowrap;}
+@media (max-width:520px){ .ask{grid-template-columns:1fr;} .ask button{justify-self:start;} }
+.src{font-size:12.5px; color:var(--muted); margin:0;}
+.src a{color:var(--muted);}
+
+.skipl{display:grid; gap:8px;}
+.skipl div{display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:12px; font-size:13.5px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--panel);}
+.skipl b{font-weight:600;}
+.skipl span{color:var(--muted);}
+@media (max-width:560px){ .skipl div{grid-template-columns:1fr; gap:2px;} }
+.bnav .wrap{max-width:1150px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.go{display:grid; gap:10px;}
+.gobtn{display:grid; gap:2px; text-decoration:none; background:var(--good); color:var(--bg); border-radius:12px; padding:12px 14px; font-weight:800; font-size:15px;}
+.gobtn small{font-weight:600; font-size:12.5px; opacity:.85;}
+form.dig{display:grid; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px;}
+form.dig label{font-size:12.5px; font-weight:800; letter-spacing:.04em; color:var(--muted);}
+form.dig textarea{width:100%; min-height:70px; border-radius:10px; border:1px solid var(--line2); background:var(--panel2); color:var(--text); font:inherit; font-size:14px; padding:8px 10px;}
+form.dig button{justify-self:end; font:inherit; font-weight:800; font-size:14px; border:none; border-radius:10px; padding:8px 16px; background:var(--flow); color:var(--bg); cursor:pointer;}
+form.dig small{color:var(--muted); font-size:12px;}
+
+/* 実際に描けた画面の模型（スマホ 3 台。狭い画面では縦に積む） */
+.phones{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 12px;}
+@media (max-width:760px){ .phones{grid-template-columns:1fr;} }
+.ph{display:grid; gap:8px; align-content:start; min-width:0;}
+.phone{width:100%; max-width:260px; margin:0 auto; border:7px solid #2A3346; border-radius:28px; background:#F4FAF7; padding:14px 8px 18px; color:#1F2422; font-size:11.5px; line-height:1.45; display:grid; gap:6px; align-content:start; min-width:0;}
+.phone .pcard{background:#E6EEEA; border-radius:12px; padding:8px 9px; display:grid; gap:5px; min-width:0;}
+.phone .t1{font-size:13px;}
+.phone .t2{font-size:10.5px; color:#3F4744;}
+.phone .tf2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px;}
+.phone .tf{display:grid; border-bottom:1px solid #6F7A75; padding-bottom:1px; min-width:0;}
+.phone .tf small{font-size:10px; color:#3F4744;}
+.phone .tf span{font-size:12px;}
+.phone .pbtn{background:#076B5B; color:#fff; border-radius:999px; text-align:center; padding:5px 0; font-size:11.5px; font-weight:600;}
+.phone .cb{display:flex; gap:9px; align-items:center; padding:2px 0 2px 6px;}
+.phone .cb i{width:12px; height:12px; border:1.6px solid #3F4744; border-radius:2px; display:block; flex:none;}
+.phone .plans{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; outline:2px dashed var(--bad); outline-offset:3px; border-radius:6px; min-width:0;}
+.phone .plan{background:#E6EEEA; border-radius:9px; padding:5px 4px; display:grid; gap:3px; font-size:9px; align-content:start; min-width:0;}
+.phone .obtn{border:1px solid #6F7A75; border-radius:999px; text-align:center; color:#076B5B; font-size:9px; padding:1px 0; line-height:1.3;}
+.vs .mid{gap:8px;}
+@media (max-width:640px){ .vs .mid i{margin:24px 0;} }
+.ph .lab{font-size:13.5px; font-weight:700; text-align:center; line-height:1.5;}
+.ph .lab small{display:block; font-weight:400; color:var(--muted); font-size:12px;}
+.ph .lab .ng{color:var(--bad); font-weight:700;}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+@media (max-width:720px){ .split.even{grid-template-columns:1fr;} }
+.ln.hg{background:var(--good-bg);}
+.pill.good{background:var(--good);}
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-13.html">← 11/13（金）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<!-- 絵の部品（ロボットの Claude 3 つの顔・矢じり） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="robot" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <circle cx="31" cy="36" r="4.2" fill="#F4F1FF"/>
+      <circle cx="49" cy="36" r="4.2" fill="#F4F1FF"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-sleepy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#5E6778"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 37h9M45 37h9" stroke="#F4F1FF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#5E6778"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#36C2A8"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#F4F1FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="44" width="9" height="22" rx="4.5" fill="#8E6CD9" transform="rotate(-30 66 55)"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <marker id="ahRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B6B"/></marker>
+    <symbol id="person" viewBox="0 0 80 110">
+      <circle cx="40" cy="27" r="18" fill="#F2C9A0"/>
+      <path d="M22 25 a18 18 0 0 1 36 0 q-9 -7 -18 -6 q-10 0 -18 6z" fill="#3A2E2A"/>
+      <circle cx="33" cy="30" r="2.3" fill="#3A2E2A"/><circle cx="47" cy="30" r="2.3" fill="#3A2E2A"/>
+      <path d="M35 38 h10" stroke="#3A2E2A" stroke-width="2" stroke-linecap="round"/>
+      <rect x="17" y="48" width="46" height="48" rx="15" fill="#4F8CFF"/>
+      <rect x="23" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+      <rect x="45" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+    </symbol>
+    <symbol id="person-happy" viewBox="0 0 80 110">
+      <circle cx="40" cy="27" r="18" fill="#F2C9A0"/>
+      <path d="M22 25 a18 18 0 0 1 36 0 q-9 -7 -18 -6 q-10 0 -18 6z" fill="#3A2E2A"/>
+      <path d="M30 31 q3 -4 6 0M44 31 q3 -4 6 0" stroke="#3A2E2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M34 37 q6 6 12 0" stroke="#3A2E2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="17" y="48" width="46" height="48" rx="15" fill="#4F8CFF"/>
+      <rect x="23" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+      <rect x="45" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+    </symbol>
+    <symbol id="person-tired" viewBox="0 0 80 110">
+      <circle cx="40" cy="27" r="18" fill="#F2C9A0"/>
+      <path d="M22 25 a18 18 0 0 1 36 0 q-9 -7 -18 -6 q-10 0 -18 6z" fill="#3A2E2A"/>
+      <path d="M30 30 h6M44 30 h6" stroke="#3A2E2A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M34 39 q3 -3 6 0 q3 3 6 0" stroke="#3A2E2A" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <rect x="17" y="48" width="46" height="48" rx="15" fill="#4F8CFF"/>
+      <rect x="23" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+      <rect x="45" y="94" width="12" height="16" rx="4" fill="#2A3346"/>
+    </symbol>
+    <marker id="ahYel" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FFB454"/></marker>
+    <marker id="ahGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#36C2A8"/></marker>
+    <marker id="ahBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4F8CFF"/></marker>
+    <symbol id="robot-codex" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#3FB59E" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#E6E9EF"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#3FB59E"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#0F2A25"/>
+      <rect x="27" y="32" width="8" height="8" rx="2" fill="#E6FFF8"/>
+      <rect x="45" y="32" width="8" height="8" rx="2" fill="#E6FFF8"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#2E8F7C"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#2E8F7C"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#2E8F7C"/>
+      <circle cx="40" cy="73" r="4.5" fill="#E6E9EF"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#24715F"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#24715F"/>
+    </symbol>
+    <symbol id="robot-codex-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#3FB59E" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#3FB59E"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#0F2A25"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#E6FFF8" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="44" width="9" height="22" rx="4.5" fill="#2E8F7C" transform="rotate(30 14 55)"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#2E8F7C"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#2E8F7C"/>
+      <circle cx="40" cy="73" r="4.5" fill="#E6E9EF"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#24715F"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#24715F"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="side">
+    <h1>テックブリーフ</h1>
+    <div class="d">2026-11-14（土） · 3 件</div>
+    <div class="grp">今日の 3 件</div>
+    <a href="#i1" data-jump="i1"><b>1</b><span>設計書を、話を知らない Claude に読ませる</span></a>
+    <a href="#i2" data-jump="i2"><b>2</b><span>Claude Code にスマホを渡して、アプリを触らせる</span></a>
+    <a href="#i3" data-jump="i3"><b>3</b><span>行き詰まった会話を、経緯ごと Codex へ</span></a>
+    <div class="grp">見送り</div>
+    <a href="#skip" data-jump="skip" class="skip"><b>–</b><span>調べて見送ったもの 4 件</span></a>
+  </aside>
+
+  <main class="main">
+    <div class="inner">
+      <div class="lede">今日は「Claude にやらせたことを、別の目で確かめる」3 件。1 件目は手元で試した（Google のプラグインそのものは安全審査で止まったので、同じ考え方を素の claude -p で）。2・3 件目は配布物を審査できない形なので、まだ試していない。3 件目は 10/27 の発表を 11/11 の Hacker News で拾った。</div>
+
+      <!-- ================= 1 ================= -->
+      <article class="item" id="i1">
+        <div class="tags"><span class="tag tried">手元で試した（考え方を素の claude -p で）</span><span class="tag plain">入れる手間 0 分</span><span class="tag plain">対象: audit-pipeline</span></div>
+        <h2>設計書を、話し合いを知らない Claude に読ませる。実装に入る前に「書いていないこと」が付箋で返ってくる</h2>
+        <p class="sub">Google の Elephant-Goldfish Model（10/22 発表、今週の GitHub トレンド 5 位）の考え方。プラグインは安全審査で Codex が止めたので入れず、同じやり方を素の claude -p 3 つで audit-pipeline の v1 設計に当てた。3 分で、推測で埋めた所 8・弱点 8・「Stage 2 はまだ作り始められない」が出た</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="話し合いの記憶でいっぱいの吹き出しを持ったロボットが、設計書を読んで「分かる、分かる」とうなずいている。設計書には空白がある">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <path d="M150 18 h226 a14 14 0 0 1 14 14 v62 a14 14 0 0 1 -14 14 h-150 l-26 22 4 -22 h-54 a14 14 0 0 1 -14 -14 v-62 a14 14 0 0 1 14 -14z" fill="#271F3A" stroke="#B48CFF" stroke-width="2"/>
+                  <text x="263" y="44" text-anchor="middle" font-size="15" font-weight="800" fill="#C9B6FF">話し合いの記憶</text>
+                  <g fill="#8E6CD9"><rect x="152" y="56" width="66" height="14" rx="7"/><rect x="226" y="56" width="74" height="14" rx="7"/><rect x="308" y="56" width="70" height="14" rx="7"/><rect x="152" y="78" width="90" height="14" rx="7"/><rect x="250" y="78" width="56" height="14" rx="7"/><rect x="314" y="78" width="64" height="14" rx="7"/></g>
+                  <use href="#robot" x="186" y="122" width="80" height="100"/>
+                  <rect x="22" y="40" width="112" height="150" rx="6" fill="#F3EEE2"/>
+                  <text x="78" y="64" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">設計書</text>
+                  <g fill="#B8B1A1"><rect x="34" y="78" width="88" height="6" rx="3"/><rect x="34" y="92" width="70" height="6" rx="3"/><rect x="34" y="150" width="84" height="6" rx="3"/><rect x="34" y="164" width="60" height="6" rx="3"/></g>
+                  <rect x="34" y="108" width="88" height="30" rx="4" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="5 4"/>
+                  <text x="78" y="128" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">空白</text>
+                  <text x="320" y="170" font-size="17" font-weight="800" fill="#E6E9EF">分かる</text>
+                  <text x="226" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">一緒に詰めた Claude</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>一緒に詰めた Claude は、書いていない所も記憶で補って読めてしまう</span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ボードに Issue のカードがたくさん貼られたあとで、一枚に赤い「?」が付き、人が頭を抱えている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="150" y="18" width="232" height="160" rx="8" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <g fill="#E6E9EF">
+                    <rect x="164" y="32" width="46" height="30" rx="4"/><rect x="218" y="32" width="46" height="30" rx="4"/><rect x="272" y="32" width="46" height="30" rx="4"/><rect x="326" y="32" width="46" height="30" rx="4"/>
+                    <rect x="164" y="72" width="46" height="30" rx="4"/><rect x="272" y="72" width="46" height="30" rx="4"/><rect x="326" y="72" width="46" height="30" rx="4"/>
+                    <rect x="164" y="112" width="46" height="30" rx="4"/><rect x="218" y="112" width="46" height="30" rx="4"/><rect x="272" y="112" width="46" height="30" rx="4"/>
+                  </g>
+                  <rect x="218" y="72" width="46" height="30" rx="4" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/>
+                  <text x="241" y="94" text-anchor="middle" font-size="20" font-weight="800" fill="#FF6B6B">?</text>
+                  <text x="266" y="166" text-anchor="middle" font-size="15" font-weight="800" fill="#9AA3B2">Issue 13 件</text>
+                  <use href="#person-tired" x="40" y="112" width="80" height="110"/>
+                  <path d="M52 140 q-14 -24 6 -36 M108 140 q14 -24 -6 -36" fill="none" stroke="#4F8CFF" stroke-width="8" stroke-linecap="round"/>
+                  <text x="200" y="248" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">「そこ決めてなかった」</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>作り始めてから「そこ決めてなかった」が出る<small>パワログの Phase 10b（5/12）は、Issue を親 1・子 13 件出したあとで判断 2 つを見直した</small></span></div>
+            </div>
+
+            <div class="rowlab after">金魚にレビューさせると</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="金魚鉢の中の 3 匹の金魚が、設計書とリンク先のコードだけを渡されて読んでいる。金魚たちは話し合いを知らない">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <ellipse cx="250" cy="212" rx="118" ry="12" fill="#151922"/>
+                  <path d="M150 64 h200 q34 62 0 150 h-200 q-34 -88 0 -150z" fill="#16233D" stroke="#9FD3FF" stroke-width="3" stroke-opacity=".7"/>
+                  <path d="M136 104 h228" stroke="#4F8CFF" stroke-width="2" stroke-opacity=".6"/>
+                  <g>
+                    <path d="M176 140 q16 -14 32 0 q-16 14 -32 0z" fill="#FF8A3D"/><path d="M176 140 l-12 -9 v18z" fill="#FF8A3D"/><circle cx="200" cy="138" r="2.4" fill="#0F1115"/>
+                    <path d="M238 176 q16 -14 32 0 q-16 14 -32 0z" fill="#FF8A3D"/><path d="M238 176 l-12 -9 v18z" fill="#FF8A3D"/><circle cx="262" cy="174" r="2.4" fill="#0F1115"/>
+                    <path d="M298 132 q16 -14 32 0 q-16 14 -32 0z" fill="#FF8A3D"/><path d="M298 132 l-12 -9 v18z" fill="#FF8A3D"/><circle cx="322" cy="130" r="2.4" fill="#0F1115"/>
+                  </g>
+                  <g font-size="15" font-weight="800" fill="#E6E9EF" text-anchor="middle">
+                    <text x="192" y="120">説明</text>
+                    <text x="254" y="204">弱点</text>
+                    <text x="314" y="160">作れる?</text>
+                  </g>
+                  <rect x="22" y="40" width="96" height="124" rx="6" fill="#F3EEE2"/>
+                  <text x="70" y="64" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">設計書</text>
+                  <g fill="#B8B1A1"><rect x="32" y="78" width="76" height="6" rx="3"/><rect x="32" y="92" width="60" height="6" rx="3"/><rect x="32" y="106" width="70" height="6" rx="3"/></g>
+                  <rect x="32" y="122" width="76" height="28" rx="4" fill="#E6EEEA" stroke="#6F7A75"/>
+                  <text x="70" y="141" text-anchor="middle" font-size="15" font-weight="700" fill="#3A2A12">＋コード</text>
+                  <path d="M120 100 L156 112" stroke="#FFB454" stroke-width="3" marker-end="url(#ahYel)"/>
+                  <text x="250" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="#9FD3FF">話し合いの記憶なし</text>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">渡すのはこれだけ</text>
+                  <text x="250" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#FF8A3D">新しい claude -p × 3</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>話を知らない Claude を 3 つ立て、設計書とリンク先のコードだけを読ませる<small>①自分の言葉で説明し直す ②弱点を探す ③別の人がすぐ作り始められるかを判定する</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="設計書に付箋がたくさん貼られて戻ってくる。人とロボットが付箋を見ながら設計書を直している">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="130" y="20" width="140" height="184" rx="6" fill="#F3EEE2"/>
+                  <text x="200" y="46" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">設計書</text>
+                  <g fill="#B8B1A1"><rect x="144" y="60" width="96" height="6" rx="3"/><rect x="144" y="74" width="80" height="6" rx="3"/><rect x="144" y="88" width="104" height="6" rx="3"/><rect x="144" y="102" width="70" height="6" rx="3"/><rect x="144" y="116" width="96" height="6" rx="3"/><rect x="144" y="130" width="84" height="6" rx="3"/><rect x="144" y="144" width="100" height="6" rx="3"/><rect x="144" y="158" width="66" height="6" rx="3"/><rect x="144" y="172" width="90" height="6" rx="3"/></g>
+                  <g>
+                    <rect x="236" y="54" width="44" height="34" rx="2" fill="#FFD84D" transform="rotate(6 258 71)"/>
+                    <rect x="240" y="104" width="44" height="34" rx="2" fill="#FF8A80" transform="rotate(-5 262 121)"/>
+                    <rect x="118" y="92" width="44" height="34" rx="2" fill="#FFD84D" transform="rotate(-7 140 109)"/>
+                    <rect x="236" y="152" width="44" height="34" rx="2" fill="#FFD84D" transform="rotate(4 258 169)"/>
+                    <rect x="114" y="150" width="44" height="34" rx="2" fill="#FF8A80" transform="rotate(5 136 167)"/>
+                  </g>
+                  <g font-size="15" font-weight="800" fill="#3A2A12" text-anchor="middle">
+                    <text x="258" y="77" transform="rotate(6 258 71)">？</text>
+                    <text x="262" y="127" transform="rotate(-5 262 121)">！</text>
+                    <text x="140" y="115" transform="rotate(-7 140 109)">？</text>
+                  </g>
+                  <use href="#person-happy" x="20" y="112" width="80" height="110"/>
+                  <use href="#robot-happy" x="300" y="122" width="80" height="100"/>
+                  <text x="60" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                  <text x="200" y="248" text-anchor="middle" font-size="15" font-weight="800" fill="#36C2A8">直してから作る</text>
+                  <text x="340" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>書いていないことが付箋で返ってくる。直してから Issue に分ける</span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>名前の由来: 文脈を全部覚えている「象」が設計書を書き、記憶を持たない「金魚」がレビューする。Google 社内では数千人が毎日使っていると発表にある</li>
+            <li>本物のプラグインは 5 段（全体を見る → 理解の確認 → 設計の批評 → もう一度全体 → 作り始められるか）と、設計書と今のコードのずれの一覧（drift report）を持つ。今回はそのうち 3 つの役を自分の頼み方で再現した</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>実際にやった: audit-pipeline の「v1 採掘設計」に金魚 3 つ</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="3 つ同時に投げて、返ってくるまで 127 秒から 182 秒">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="24" font-weight="800" fill="#FF8A3D">金魚 3 つを同時に</text>
+                <rect x="172" y="52" width="16" height="8" rx="2" fill="#FF8A3D"/>
+                <rect x="166" y="58" width="28" height="14" rx="4" fill="#FF8A3D"/>
+                <circle cx="180" cy="164" r="86" fill="#2A1A10" stroke="#FF8A3D" stroke-width="10"/>
+                <g stroke="#5A3A22" stroke-width="3" stroke-linecap="round"><line x1="180" y1="90" x2="180" y2="100"/><line x1="254" y1="164" x2="244" y2="164"/><line x1="180" y1="238" x2="180" y2="228"/><line x1="106" y1="164" x2="116" y2="164"/></g>
+                <text x="180" y="180" text-anchor="middle" font-size="46" font-weight="800" fill="#E6E9EF">3 分</text>
+                <text x="180" y="212" text-anchor="middle" font-size="17" fill="#9AA3B2">127〜182 秒</text>
+                <text x="180" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#9AA3B2">Opus 5.5・読むだけの道具</text>
+              </svg>
+            </div>
+            <div class="mid"><span>返ってきた</span><i></i></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="推測で埋めた所 8 か所、弱点 8 件、作り始められるかの判定は no-go">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="24" font-weight="800" fill="#FFD84D">付箋の山</text>
+                <g>
+                  <rect x="40" y="150" width="76" height="70" rx="3" fill="#FFD84D"/><rect x="44" y="142" width="76" height="70" rx="3" fill="#FFE27A"/><rect x="38" y="134" width="76" height="70" rx="3" fill="#FFD84D"/>
+                  <text x="76" y="182" text-anchor="middle" font-size="36" font-weight="800" fill="#3A2A12">8</text>
+                  <rect x="142" y="150" width="76" height="70" rx="3" fill="#FF8A80"/><rect x="146" y="142" width="76" height="70" rx="3" fill="#FFA59D"/><rect x="140" y="134" width="76" height="70" rx="3" fill="#FF8A80"/>
+                  <text x="178" y="182" text-anchor="middle" font-size="36" font-weight="800" fill="#3A1A1D">8</text>
+                  <rect x="232" y="134" width="104" height="86" rx="6" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="3"/>
+                  <text x="284" y="172" text-anchor="middle" font-size="24" font-weight="800" fill="#FF6B6B">no-go</text>
+                  <text x="284" y="202" text-anchor="middle" font-size="15" font-weight="700" fill="#FF6B6B">止まる所 10</text>
+                </g>
+                <g font-size="17" font-weight="700" fill="#9AA3B2" text-anchor="middle">
+                  <text x="76" y="250">推測した所</text>
+                  <text x="178" y="250">弱点</text>
+                  <text x="284" y="250">作れる?</text>
+                </g>
+                <text x="180" y="286" text-anchor="middle" font-size="16" fill="#9AA3B2">①説明し直す ②弱点 ③作り始められるか</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>やったこと: 設計書（176 行）と周りのファイル 18 個（Dart 13・README・ROADMAP・CLAUDE.md・pubspec・config）を一時フォルダに写し、<code>claude -p … --safe-mode --tools "Read,Glob,Grep"</code> を 3 つ同時に。CLAUDE.md・スキル・フックが効かない、まっさらな状態で読ませた</li>
+            <li>①は 5 行の説明は当たっていたが、そのために「ゲートとは何か」「対象のアプリ名とリポジトリ名の関係」など 8 か所を推測で埋めていた。③は「Stage 2 の入力と出力の形・使うモデル・失敗したときの扱いが無い」で no-go</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>当たっていたか、元のファイルで確かめた</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>docs/design/v1-mining.md（抜粋）</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">4</span><span class="tx">ローカル LLM で分類・要約して根拠 diff リンク付きのルール候補を出す」の具体化。</span><span></span></div>
+                <div class="ln ht"><span class="no">17</span><span class="tx">| 2. 分類・要約 | ローカル LLM | 各ペアの diff を「規約関連か / 既存ルールのどれに関係するか / 新ルール候補か」に分類し要約 | ゲート通過後 |</span><span class="pill tool">形が無い</span></div>
+                <div class="ln hb"><span class="no">141</span><span class="tx">- 常駐なし・HTTP なし・ファイル状態のみ</span><span class="pill bad">ぶつかる</span></div>
+                <div class="ln hb"><span class="no">143</span><span class="tx">- config スキーマは変更しない（…除外パターンはプロトタイプ内定数 → Stage 2 実装時に config 化を検討）</span><span class="pill bad">もうずれた</span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">確かめた指摘 3 つ</div>
+              <div class="why">
+                <div><b>除外がずれている</b> config は <span class="mono">lib/dataconnect_generated/</span> を外すが、採掘の除外の定数（lib/src/mining.dart 7〜9 行）には無い</div>
+                <div><b>日付が逆の組も残る</b> 見ているのは「30 日より古いか」だけ（bin/mine_corrections.dart 99〜100 行）</div>
+                <div><b>決まりとぶつかる</b> 「常駐なし・HTTP なし」（設計書 141 行・CLAUDE.md）なのに、Stage 2 は「ローカル LLM」。Ollama などは常駐の HTTP サーバー</div>
+              </div>
+              <div class="f2"><span class="f">外れ 1 件</span> CLAUDE.md の「analyzer チェッカは fail-closed」を、全体の方針と読み広げていた</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l12 5v9c0 7-5 12-12 14C11 30 6 25 6 18V9z" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5" stroke-linejoin="round"/><path d="M13 13l10 10M23 13L13 23" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>プラグインは安全審査で止まった</b><span>Codex が「URL から取った中身を、信用しない扱いにする指示が無い」「bootstrap が npx prettier を動かし得る」で ng（Claude は ok）。入れるなら本人の判断で</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>金魚も外す</b><span>8 件の弱点のうち 1 件は決まりの読み広げだった。付箋は「元を開いて当てる」までが 1 セット</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M13 15h10M13 20h10M13 25h6" stroke="#8A5A3C" stroke-width="2" stroke-linecap="round"/></svg><div><b>自分の言葉も「書いてない」と言われる</b><span>アプリの呼び名とリポジトリ名の関係、ゲートの意味など。設計書の冒頭に数行足せば消える</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M13 15h10M13 20h10M13 25h6" stroke="#8A5A3C" stroke-width="2" stroke-linecap="round"/></svg><div><i>1</i>次に作る機能の設計書を書いたら、Issue に分ける前に金魚にかける（例: パワログの「途中のワークアウトの復帰」）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 18 q8 -10 16 0 q-8 10 -16 0z" fill="#FF8A3D"/><path d="M8 18 l-6 -5 v10z" fill="#FF8A3D"/><circle cx="19" cy="17" r="1.6" fill="#0F1115"/></svg><div><i>2</i>設計書のフォルダで <code>claude -p "&lt;頼み方&gt;" --safe-mode --tools "Read,Glob,Grep"</code> を 3 つ同時に。頼み方は今回の 3 本をそのまま使える</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 7h20v24l-10-6-10 6z" fill="#FFD84D"/><path d="M13 14h10M13 19h7" stroke="#3A2A12" stroke-width="2" stroke-linecap="round"/></svg><div><i>3</i>返ってきた付箋を元のファイルで当て、設計書に足す 1 文を決めてから作る</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-14&amp;i=1&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>audit-pipeline で、Orca に新しいセッション（金魚の付箋を v1 設計書に反映する）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-14"><input type="hidden" name="i" value="1"><input type="hidden" name="m" value="dig">
+              <label for="q1">この記事を深掘りする</label>
+              <textarea id="q1" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://opensource.googleblog.com/2026/10/introducing-elephant-goldfish-model-plugin.html">Google Open Source Blog（EGM チーム、2026-10-22）</a>・<a href="https://github.com/google/elephant-goldfish-model">GitHub google/elephant-goldfish-model（Apache-2.0・Star 18,504、v0.1.1 は 11/6）</a>・<a href="https://github.com/trending?since=weekly">GitHub Trending 週間 5 位（今週 +5,555、11/14 3:20 時点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 2 ================= -->
+      <article class="item" id="i2">
+        <div class="tags"><span class="tag plain">まだ試していない</span><span class="tag plain">入れる手間 30 分ほど（Mac アプリ＋エミュレータ）</span><span class="tag plain">対象: パワログ</span></div>
+        <h2>Claude Code にスマホを 1 台渡して、自分のアプリを触って確かめさせる。支払いや送信の手前では止まって聞く</h2>
+        <p class="sub">Pinky（DIYgod 氏、11/7 に初版の無料 OSS）。エミュレータでも実機でも動く。配布物が Mac アプリ（中身を読めない形）なので、今夜は入れていない</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットの Claude が「直しました」と言い、人がスマホを持ってライト・ダーク・横向き・英語の確認表を一つずつ見て回っている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="10" y="22" width="128" height="44" rx="14" fill="#E6E9EF"/>
+                  <path d="M50 65 L66 65 L56 80 Z" fill="#E6E9EF"/>
+                  <text x="74" y="50" text-anchor="middle" font-size="17" font-weight="800" fill="#231A3D">直しました</text>
+                  <use href="#robot" x="18" y="122" width="80" height="100"/>
+                  <use href="#person-tired" x="150" y="112" width="80" height="110"/>
+                  <rect x="222" y="150" width="28" height="48" rx="5" fill="#0F1115" stroke="#9AA3B2" stroke-width="2"/>
+                  <rect x="226" y="156" width="20" height="34" rx="2" fill="#F4FAF7"/>
+                  <path d="M228 128 q6 9 0 13 q-6 -4 0 -13z" fill="#4F8CFF"/>
+                  <rect x="270" y="16" width="118" height="150" rx="6" fill="#F3EEE2"/>
+                  <text x="329" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">確認表</text>
+                  <g font-size="15" font-weight="700" fill="#3A2A12">
+                    <text x="306" y="66">ライト</text>
+                    <text x="306" y="92">ダーク</text>
+                    <text x="306" y="118">横向き</text>
+                    <text x="306" y="144">英語</text>
+                  </g>
+                  <g fill="none" stroke="#8A5A3C" stroke-width="2"><rect x="284" y="53" width="15" height="15"/><rect x="284" y="79" width="15" height="15"/><rect x="284" y="105" width="15" height="15"/><rect x="284" y="131" width="15" height="15"/></g>
+                  <path d="M286 61l4 4 8-9" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round"/>
+                  <text x="58" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="190" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>Claude が直したあと、画面を見て回るのは人の仕事</span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ライトモードにした画面なのに、グラフの部分だけが暗いまま残っていて、人が驚いている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="128" y="10" width="146" height="212" rx="18" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <rect x="137" y="24" width="128" height="186" rx="9" fill="#F4FAF7"/>
+                  <rect x="145" y="32" width="112" height="34" rx="7" fill="#E6EEEA"/>
+                  <text x="201" y="55" text-anchor="middle" font-size="15" font-weight="800" fill="#1F2422">ライト</text>
+                  <rect x="145" y="74" width="112" height="70" rx="7" fill="#1C2333"/>
+                  <path d="M153 128 L175 112 L196 120 L218 96 L248 104" fill="none" stroke="#36C2A8" stroke-width="3"/>
+                  <circle cx="218" cy="96" r="5" fill="#0F1115" stroke="#9AA3B2" stroke-width="2"/>
+                  <ellipse cx="201" cy="109" rx="68" ry="46" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="7 6"/>
+                  <rect x="145" y="152" width="112" height="16" rx="5" fill="#E6EEEA"/>
+                  <rect x="145" y="174" width="112" height="16" rx="5" fill="#E6EEEA"/>
+                  <use href="#person" x="22" y="112" width="80" height="110"/>
+                  <text x="110" y="120" font-size="30" font-weight="800" fill="#FF6B6B">!</text>
+                  <use href="#robot-sleepy" x="300" y="122" width="80" height="100"/>
+                  <text x="201" y="248" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">見て初めて、暗いままの所に気づく</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>動かして見るまで、直ったかは分からない<small>パワログの Phase 13（ライトモード）で実際にあった: 最初の実装のあと、実機で部位フィルタなどが暗いままだった</small></span></div>
+            </div>
+
+            <div class="rowlab after">Pinky を入れると</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットの Claude がスマホを手に持ち、デバッグ版の箱を入れ、ライトとダーク・回転・言語のスイッチを切り替えて見て回っている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <use href="#robot-happy" x="22" y="122" width="80" height="100"/>
+                  <rect x="104" y="108" width="54" height="94" rx="10" fill="#2A3346" stroke="#5E6778" stroke-width="2.5"/>
+                  <rect x="110" y="118" width="42" height="72" rx="4" fill="#F4FAF7"/>
+                  <rect x="114" y="124" width="34" height="12" rx="3" fill="#E6EEEA"/>
+                  <rect x="114" y="142" width="34" height="22" rx="3" fill="#E6EEEA"/>
+                  <rect x="114" y="170" width="34" height="12" rx="6" fill="#076B5B"/>
+                  <rect x="22" y="22" width="96" height="62" rx="6" fill="#FFB454"/>
+                  <path d="M50 22 v-8 h40 v8" fill="none" stroke="#FFB454" stroke-width="5"/>
+                  <text x="70" y="50" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">デバッグ版</text>
+                  <text x="70" y="72" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">.apk</text>
+                  <path d="M96 88 Q110 98 124 104" fill="none" stroke="#FFB454" stroke-width="3" stroke-dasharray="5 5" marker-end="url(#ahYel)"/>
+                  <g>
+                    <rect x="196" y="22" width="190" height="52" rx="12" fill="#151922" stroke="#3A4250" stroke-width="2"/>
+                    <circle cx="222" cy="48" r="11" fill="#FFB454"/>
+                    <path d="M244 38 a11 11 0 1 0 0 20 a8 8 0 1 1 0 -20z" fill="#C9B6FF"/>
+                    <text x="270" y="54" font-size="15" font-weight="800" fill="#E6E9EF">ライト↔ダーク</text>
+                    <rect x="196" y="84" width="190" height="52" rx="12" fill="#151922" stroke="#3A4250" stroke-width="2"/>
+                    <path d="M222 98 a12 12 0 1 1 -11 8" fill="none" stroke="#4F8CFF" stroke-width="3.5" stroke-linecap="round"/>
+                    <path d="M206 100 l5 7 7 -4" fill="none" stroke="#4F8CFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="248" y="116" font-size="15" font-weight="800" fill="#E6E9EF">画面を回す</text>
+                    <rect x="196" y="146" width="190" height="52" rx="12" fill="#151922" stroke="#3A4250" stroke-width="2"/>
+                    <text x="212" y="178" font-size="15" font-weight="800" fill="#36C2A8">A/あ</text>
+                    <text x="258" y="178" font-size="15" font-weight="800" fill="#E6E9EF">言語・位置</text>
+                  </g>
+                  <path d="M162 150 L190 48 M162 152 L190 110 M162 156 L190 172" stroke="#36C2A8" stroke-width="2.5" stroke-dasharray="4 5"/>
+                  <text x="62" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="290" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">終わると元に戻る</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>Claude がスマホを持ち、入れて・切り替えて・見て回る<small>アプリのログとクラッシュ記録も Claude が自分で読める</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットが「送信」のボタンを押そうとすると、Pinky の遮断機が下りて止める。人がパソコンの「許可」を押すまで待っている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <use href="#robot" x="14" y="122" width="80" height="100"/>
+                  <rect x="70" y="90" width="80" height="34" rx="17" fill="#076B5B"/>
+                  <text x="110" y="113" text-anchor="middle" font-size="16" font-weight="800" fill="#FFFFFF">送信</text>
+                  <rect x="168" y="104" width="12" height="118" fill="#5A6378"/>
+                  <rect x="164" y="98" width="20" height="12" rx="3" fill="#5A6378"/>
+                  <g transform="rotate(-4 174 112)">
+                    <rect x="92" y="130" width="96" height="14" rx="4" fill="#E6E9EF"/>
+                    <rect x="104" y="130" width="14" height="14" fill="#FF6B6B"/><rect x="132" y="130" width="14" height="14" fill="#FF6B6B"/><rect x="160" y="130" width="14" height="14" fill="#FF6B6B"/>
+                  </g>
+                  <text x="186" y="214" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">Pinky の門</text>
+                  <rect x="212" y="40" width="176" height="110" rx="9" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <rect x="220" y="48" width="160" height="94" rx="4" fill="#E6E9EF"/>
+                  <text x="300" y="72" text-anchor="middle" font-size="15" font-weight="800" fill="#231A3D">送信していい？</text>
+                  <rect x="230" y="96" width="66" height="30" rx="8" fill="#36C2A8"/>
+                  <text x="263" y="117" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1115">許可</text>
+                  <rect x="304" y="96" width="66" height="30" rx="8" fill="#FFFFFF" stroke="#9AA3B2" stroke-width="2"/>
+                  <text x="337" y="117" text-anchor="middle" font-size="15" font-weight="800" fill="#5E6778">拒否</text>
+                  <rect x="290" y="150" width="20" height="12" fill="#5A6378"/>
+                  <use href="#person" x="262" y="148" width="62" height="85"/>
+                  <circle cx="274" cy="126" r="9" fill="#F2C9A0" stroke="#C99B74" stroke-width="2"/>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="300" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>危ない操作は Pinky の門で止まり、あなたのクリックを待つ<small>止める決まりは Pinky 側にあり、Claude が自分で通すことはできない</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>Claude Code・Codex・Cursor など MCP が使えるエージェントなら何でもつなげる（<code>claude mcp add --scope user pinky -- pinkyctl mcp</code>）</li>
+            <li>Android 10〜17 の実機と Android Studio のエミュレータ、iOS 17.4 以降の iPhone と iOS シミュレータ。手元の Mac には Pixel 8 などのエミュレータがすでにある</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>Claude が使える道具（Pinky の説明書から一部）</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>MCP の道具</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">1</span><span class="tx">phone_app      .apk を入れる・止める・消す</span><span></span></div>
+                <div class="ln"><span class="no">2</span><span class="tx">phone_launch   アプリを開く（言語・地域を変えて開ける）</span><span></span></div>
+                <div class="ln ht"><span class="no">3</span><span class="tx">phone_device   回転・ライト/ダーク・位置・言語を切り替える</span><span class="pill tool">終わると戻す</span></div>
+                <div class="ln"><span class="no">4</span><span class="tx">phone_observe  画面を読む（部品の一覧。読めない所は文字認識）</span><span></span></div>
+                <div class="ln ht"><span class="no">5</span><span class="tx">phone_logs     そのアプリのログとクラッシュ記録を読む</span><span class="pill tool">原因が分かる</span></div>
+                <div class="ln"><span class="no">6</span><span class="tx">phone_release  終える。手順と画面の報告を HTML で残せる</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">止まる操作（Settings › Safety）</div>
+              <div class="why">
+                <div><b>既定で止まる</b> 支払い・取引・送金</div>
+                <div><b>足せる</b> 送信・注文・削除・通話・インストール・アプリの外へのリンク・設定の変更・全部</div>
+                <div><span class="f">見せない</span> 銀行・財布・パスワード管理のアプリ。パスワード欄には打たせない</div>
+              </div>
+              <div class="f2">エミュレータでは、回転などの切り替えは聞かずに通る（支払い以外も聞く設定にしていなければ）</div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>説明書（docs/mcp.md と README）の記述を短くしたもの。動かしてはいない</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>出て 1 週間の pre-alpha</b><span>11/7 の初版から 11/13 までに 142 版。作者も「一部は人が試すのを待っている」と書いている</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="5" y="7" width="26" height="22" rx="4" fill="#16233D" stroke="#4F8CFF" stroke-width="2.5"/><path d="M11 15h14M11 21h9" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>Flutter は読み方に注意</b><span>部品に Semantics のラベルが無い所は、画面の文字認識で埋める（設計メモに明記）。ボタンの押し間違いが出るかは未確認</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="10" y="4" width="16" height="28" rx="4" fill="#271F3A" stroke="#B48CFF" stroke-width="2.5"/><path d="M15 27h6" stroke="#B48CFF" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>iPhone の実機は手間が増える</b><span>iOS 17.4〜26 は Xcode で専用アプリを入れる。無料の Apple ID だと 7 日ごとに入れ直し</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><i>1</i>Releases の <code>pinky-…-arm64.dmg</code> を入れる（Homebrew なら <code>brew install --cask diygod/tap/pinky</code>）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="10" y="4" width="16" height="28" rx="4" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="13" y="8" width="10" height="17" rx="1" fill="#F4FAF7"/></svg><div><i>2</i>Add phone › Virtual phone で手元のエミュレータ（Pixel_8_API36 など）を起動し、<code>claude mcp add --scope user pinky -- pinkyctl mcp</code></div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="8" y="10" width="20" height="18" rx="5" fill="#B48CFF"/><rect x="12" y="14" width="12" height="9" rx="3" fill="#231A3D"/><circle cx="15.5" cy="18.5" r="1.6" fill="#F4F1FF"/><circle cx="20.5" cy="18.5" r="1.6" fill="#F4F1FF"/><path d="M18 5v5" stroke="#B48CFF" stroke-width="2"/><circle cx="18" cy="4.5" r="2" fill="#FFB454"/></svg><div><i>3</i>「パワログのデバッグ版を入れて、ライトとダークで全画面を見て、暗いままの所を報告して」と頼む</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-14&amp;i=2&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>パワログで、Orca に新しいセッション（エミュレータでライト/ダークの見回りを 1 回）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-14"><input type="hidden" name="i" value="2"><input type="hidden" name="m" value="dig">
+              <label for="q2">この記事を深掘りする</label>
+              <textarea id="q2" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://github.com/DIYgod/pinky">GitHub DIYgod/pinky（Apache-2.0・Star 2,075、11/14 時点）</a>・<a href="https://github.com/DIYgod/pinky/blob/main/docs/mcp.md">MCP の説明書</a>・<a href="https://github.com/DIYgod/pinky/releases">リリース（初版 v2026.1107.1 は 11/7、最新 v2026.1113.18 は 11/13）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 3 ================= -->
+      <article class="item" id="i3">
+        <div class="tags"><span class="tag plain">まだ試していない</span><span class="tag plain">入れる手間 15 分ほど</span></div>
+        <h2>Claude Code で行き詰まった会話を、経緯ごと Codex に渡して続きから再開できる</h2>
+        <p class="sub">Atuin Threads（シェル履歴の道具 Atuin の 18.24 以降。10/27 の発表、11/11 に Hacker News で 235 点）。Homebrew で入れる道具なので、今夜は入れていない</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットの Claude が同じ所をぐるぐる回って、同じ失敗を繰り返している">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <ellipse cx="200" cy="200" rx="150" ry="24" fill="none" stroke="#5E6778" stroke-width="3" stroke-dasharray="8 8"/>
+                  <path d="M318 186 l14 2 -6 12" fill="none" stroke="#5E6778" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <use href="#robot-sleepy" x="160" y="104" width="80" height="100"/>
+                  <g>
+                    <rect x="22" y="30" width="110" height="40" rx="8" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2"/>
+                    <text x="77" y="56" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">テスト失敗</text>
+                    <rect x="268" y="30" width="110" height="40" rx="8" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2"/>
+                    <text x="323" y="56" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">テスト失敗</text>
+                    <rect x="145" y="12" width="110" height="40" rx="8" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2"/>
+                    <text x="200" y="38" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">テスト失敗</text>
+                  </g>
+                  <text x="200" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>Claude が同じところで行き詰まる</span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="人が長い引き継ぎメモを手で書いて、別のロボットの Codex に渡している。メモには書き漏れがある">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <use href="#person-tired" x="30" y="112" width="80" height="110"/>
+                  <rect x="122" y="40" width="130" height="150" rx="6" fill="#F3EEE2" transform="rotate(4 187 115)"/>
+                  <text x="190" y="68" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12" transform="rotate(4 187 115)">引き継ぎメモ</text>
+                  <g fill="#B8B1A1" transform="rotate(4 187 115)"><rect x="136" y="82" width="100" height="6" rx="3"/><rect x="136" y="96" width="84" height="6" rx="3"/><rect x="136" y="110" width="96" height="6" rx="3"/><rect x="136" y="124" width="60" height="6" rx="3"/><rect x="136" y="152" width="90" height="6" rx="3"/></g>
+                  <text x="208" y="146" font-size="15" font-weight="800" fill="#FF6B6B" transform="rotate(4 187 115)">？</text>
+                  <path d="M104 150 q8 -12 22 -10" fill="none" stroke="#F2C9A0" stroke-width="7" stroke-linecap="round"/>
+                  <use href="#robot-codex" x="296" y="122" width="80" height="100"/>
+                  <path d="M262 150 L290 160" stroke="#FFB454" stroke-width="3" marker-end="url(#ahYel)"/>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                  <text x="336" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9FE3D6">Codex</text>
+                  <text x="190" y="248" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">試したことが抜ける</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>Codex に頼み直すには、経緯を人が書き直して渡す</span></div>
+            </div>
+
+            <div class="rowlab after">Atuin Threads を入れると</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude が会話とツールの記録を束ねた包みを、そのまま Codex に手渡している。考えごとの雲だけは置いていく">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <use href="#robot" x="20" y="122" width="80" height="100"/>
+                  <use href="#robot-codex-happy" x="300" y="122" width="80" height="100"/>
+                  <g>
+                    <rect x="140" y="104" width="120" height="80" rx="10" fill="#FFB454"/>
+                    <path d="M140 132 h120 M200 104 v80" stroke="#C47F22" stroke-width="5"/>
+                    <rect x="152" y="116" width="40" height="12" rx="3" fill="#F3EEE2"/>
+                    <rect x="208" y="146" width="40" height="12" rx="3" fill="#F3EEE2"/>
+                    <rect x="152" y="146" width="40" height="12" rx="3" fill="#F3EEE2"/>
+                  </g>
+                  <text x="200" y="208" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">会話＋ツールの記録</text>
+                  <path d="M104 160 L134 150" stroke="#B48CFF" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M266 150 L296 160" stroke="#3FB59E" stroke-width="7" stroke-linecap="round"/>
+                  <g opacity=".75">
+                    <path d="M40 54 a14 14 0 0 1 22 -12 a16 16 0 0 1 28 4 a12 12 0 0 1 4 24 h-48 a12 12 0 0 1 -6 -16z" fill="#3A4250"/>
+                    <text x="66" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">思考</text>
+                  </g>
+                  <path d="M60 86 l6 18" stroke="#3A4250" stroke-width="3" stroke-dasharray="3 4"/>
+                  <rect x="134" y="24" width="254" height="40" rx="8" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                  <text x="261" y="50" text-anchor="middle" font-size="15" font-family="ui-monospace,Menlo,monospace" fill="#36C2A8">resume &lt;id&gt; --in codex</text>
+                  <text x="60" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="340" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9FE3D6">Codex</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>会話とツールの記録を、そのまま Codex の新しいセッションにする<small>相手に同じ働きの道具があればその道具の呼び出しに変わる。思考の中身は渡らない</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude が虫めがねを持って、エージェントごと・マシンごとに並んだセッションの棚から昔の会話を探している">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="150" y="20" width="236" height="202" rx="6" fill="#6B4F3A"/>
+                  <rect x="160" y="30" width="216" height="56" fill="#4A372A"/>
+                  <rect x="160" y="96" width="216" height="56" fill="#4A372A"/>
+                  <rect x="160" y="162" width="216" height="52" fill="#4A372A"/>
+                  <g>
+                    <rect x="168" y="36" width="22" height="50" fill="#B48CFF"/><rect x="194" y="40" width="22" height="46" fill="#B48CFF"/><rect x="220" y="36" width="22" height="50" fill="#8E6CD9"/>
+                    <rect x="250" y="40" width="22" height="46" fill="#3FB59E"/><rect x="276" y="36" width="22" height="50" fill="#3FB59E"/>
+                    <rect x="306" y="40" width="22" height="46" fill="#4F8CFF"/><rect x="332" y="36" width="22" height="50" fill="#4F8CFF"/>
+                    <rect x="168" y="102" width="22" height="50" fill="#3FB59E"/><rect x="194" y="106" width="22" height="46" fill="#B48CFF"/><rect x="220" y="102" width="22" height="50" fill="#B48CFF"/>
+                    <rect x="250" y="106" width="22" height="46" fill="#FFB454"/><rect x="276" y="102" width="22" height="50" fill="#B48CFF"/><rect x="306" y="106" width="22" height="46" fill="#3FB59E"/>
+                    <rect x="168" y="168" width="22" height="46" fill="#B48CFF"/><rect x="194" y="172" width="22" height="42" fill="#4F8CFF"/>
+                  </g>
+                  <rect x="246" y="98" width="30" height="56" fill="none" stroke="#FFB454" stroke-width="4" rx="3"/>
+                  <use href="#robot-happy" x="22" y="122" width="80" height="100"/>
+                  <circle cx="130" cy="104" r="22" fill="#9FD3FF" fill-opacity=".25" stroke="#E6E9EF" stroke-width="5"/>
+                  <path d="M114 120 L98 140" stroke="#E6E9EF" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M152 104 Q200 70 246 112" fill="none" stroke="#FFB454" stroke-width="3" stroke-dasharray="5 5" marker-end="url(#ahYel)"/>
+                  <text x="62" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="268" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">過去のセッション（全マシン分）</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>Claude が、昔のセッションを自分で探して読める<small>MCP（<code>atuin mcp</code>）を入れると、途中でやめた案まで引ける</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>対応: Claude Code・Codex・Copilot・Grok Build・Hermes Agent・Kiro・opencode・Pi・Amp（Amp には続きを書き込めない）</li>
+            <li><code>atuin resume &lt;id&gt; --fork</code> は同じエージェントの別セッションとして分岐させる（元はそのまま）。<code>--print</code> は実行せずにコマンドだけ出す</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 16 a8 8 0 0 1 12 -7 a9 9 0 0 1 14 6 a6 6 0 0 1 -2 12 H9 a6 6 0 0 1 -1 -11z" fill="#3A4250" stroke="#9AA3B2" stroke-width="2"/><path d="M12 32l12-12" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>思考は渡らない</b><span>入力が記録されていない呼び出しは、文章のメモとして渡る</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="9" y="16" width="18" height="15" rx="3" fill="#16233D" stroke="#4F8CFF" stroke-width="2.5"/><path d="M13 16v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#4F8CFF" stroke-width="2.5"/></svg><div><b>どこに置くかを先に決める</b><span>同期は公式のサーバー（端から端まで暗号化）・自前のサーバー・ローカルだけ、から選ぶ。HN でも「全セッションを外に置きたくない」の声</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="13" fill="#3A2A12" stroke="#FFB454" stroke-width="2.5"/><path d="M18 10v8l5 4" fill="none" stroke="#FFB454" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>常駐するプロセスが 1 つ増える</b><span>セッションを記録するのは Atuin のデーモン。<code>atuin threads enable</code> で起動する</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><i>1</i><code>brew install atuin</code>（18.24.8）→ <code>atuin threads enable</code>。同期はまず「ローカルだけ」</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="15" cy="15" r="9" fill="none" stroke="#4F8CFF" stroke-width="3"/><path d="M22 22l8 8" stroke="#4F8CFF" stroke-width="3.5" stroke-linecap="round"/></svg><div><i>2</i>いつもどおり Claude Code で作業してから <code>atuin threads search "&lt;語&gt;"</code> で見つかるか確かめる</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 18h20" stroke="#36C2A8" stroke-width="3.5" stroke-linecap="round"/><path d="M20 11l7 7-7 7" fill="none" stroke="#36C2A8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><i>3</i>行き詰まったら <code>atuin resume &lt;id&gt; --in codex --print</code> でまず中身を見てから、<code>--print</code> を外して渡す</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-14&amp;i=3&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション（ローカルだけで入れて、1 件を Codex へ引き継ぐ）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-14"><input type="hidden" name="i" value="3"><input type="hidden" name="m" value="dig">
+              <label for="q3">この記事を深掘りする</label>
+              <textarea id="q3" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://blog.atuin.sh/threads-agent-sessions/">Atuin ブログ（Ellie Huxtable 氏、2026-10-27）</a>・<a href="https://docs.atuin.sh/latest/ai/threads/">Threads の説明書</a>・<a href="https://github.com/atuinsh/atuin/releases">リリース（最新 v18.24.8 は 11/13）</a>・<a href="https://news.ycombinator.com/">Hacker News（11/11、235 点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 見送り ================= -->
+      <article class="item" id="skip">
+        <div class="tags"><span class="tag plain">見送り</span></div>
+        <h2 class="skiph">調べて見送ったもの</h2>
+        <div class="skipl">
+          <div><b>Claude Meetings（11/12 ベータ）</b><span>Claude が Google Meet に参加し、会議中に資料やホワイトボードを作る。始まったのは Team と Enterprise のプランだけで（Pro・Max の記載なし）、会議ツールも Meet のみ</span></div>
+          <div><b>Modern Web Guidance 1.0（11/10）</b><span>Chrome・Edge・Firefox・MDN が共同で持つ「今の Web の書き方」スキル。中の legacy-scan.mjs が 5MB の 1 ファイルで安全審査に読ませきれないので試さなかった。良くなるのも「書き方が正確になる」寄り</span></div>
+          <div><b>Craft Anything（v0.6.1、11/12）</b><span>手本のサイトと見比べながら近づけて作る。2 週間で Star 3.1 万。Mac 版は配布物がアプリ（中身を読めない形）、ソースは Rust で、手元に作る道具が無い</span></div>
+          <div><b>Claude Code の Code Mode（2.1.323）</b><span>説明のページは開けるようになった（11/13 は 404）。ただし対話の claude 専用で -p では動かず、良くなるのは主に速さ</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('data-jump')); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var src=b.parentNode.querySelector('[data-copy-src]'); var text=src.textContent.trim();
+      function done(){ b.textContent='コピーした'; setTimeout(function(){ b.textContent='コピー'; },1600); }
+      function fallback(){ var r=document.createRange(); r.selectNodeContents(src); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='選択した'; }
+      try{ navigator.clipboard.writeText(text).then(done,fallback); }catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
