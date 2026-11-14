@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テックブリーフ · 2026年11月15日（日）</title>
+<style>
+/* layout: 左に号の目次、右に 1 件ずつ。主役は絵本のようなコマ（ロボットの Claude が登場する場面の絵）。文字はコマの下の 1 行だけ。コマは広い画面で横に並べ、狭い画面で縦に積む */
+:root{
+  --bg:#0F1115; --panel:#151922; --panel2:#1B202B; --line:#2A303A; --line2:#3A4250;
+  --text:#E6E9EF; --muted:#9AA3B2; --dim:#5E6778;
+  --good:#36C2A8; --flow:#4F8CFF; --ai:#B48CFF; --bad:#FF6B6B; --tool:#FFB454;
+  --good-bg:#12302B; --bad-bg:#3A1A1D; --tool-bg:#3A2A12; --ai-bg:#271F3A; --flow-bg:#16233D; --code-bg:#0B0D11;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",monospace;
+  --wash:#151922; --hair:#2A303A; --soft:#9AA3B2; --grey:#5E6778;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0; color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.8;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg);}
+a{color:var(--flow)}
+code{font-family:var(--mono); font-size:.88em; background:var(--panel2); border:1px solid var(--line); padding:0 6px; border-radius:5px; color:var(--text); word-break:break-word;}
+:focus-visible{outline:2px solid var(--flow); outline-offset:2px; border-radius:6px;}
+
+.shell{display:grid; grid-template-columns:250px minmax(0,1fr);}
+.side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; border-right:1px solid var(--line); background:var(--panel); padding-block:22px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:18px;}
+.side h1{font-size:16px; margin:0; letter-spacing:.02em;}
+.side .d{font-size:12px; color:var(--muted); margin:2px 0 18px;}
+.side .grp{font-size:11.5px; color:var(--dim); letter-spacing:.06em; margin:14px 0 6px;}
+.side a{display:grid; grid-template-columns:20px minmax(0,1fr); gap:6px; padding:7px 8px; border-radius:7px; color:var(--text); text-decoration:none; font-size:13px; line-height:1.55;}
+.side a:hover{background:var(--panel2);}
+.side a b{color:var(--flow); font-weight:700;}
+.side a.skip b{color:var(--dim);}
+.main{min-width:0; padding-block:28px 80px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.inner{max-width:900px; margin:0 auto; display:grid; gap:18px; min-width:0;}
+.lede{font-size:13px; color:var(--muted); border:1px dashed var(--line2); border-radius:10px; padding:10px 14px;}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); padding-right:max(16px,env(safe-area-inset-right,0px));}
+}
+
+.item{display:grid; gap:14px; padding-top:26px; scroll-margin-top:16px; min-width:0;}
+.item + .item{border-top:1px solid var(--line); margin-top:22px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px;}
+.tag{font-size:12px; font-weight:700; border-radius:999px; padding:1px 10px; border:1px solid;}
+.tag.tried{color:var(--good); border-color:var(--good); background:var(--good-bg);}
+.tag.tonight{color:var(--ai); border-color:var(--ai); background:var(--ai-bg);}
+.tag.plain{color:var(--muted); border-color:var(--line2);}
+.item h2{font-size:clamp(20px,2.6vw,26px); line-height:1.45; margin:0; text-wrap:balance;}
+.item .sub{color:var(--muted); font-size:14px; margin:-6px 0 0;}
+.sec{display:grid; gap:10px; margin-top:12px; min-width:0;}
+.sec h3{font-size:15.5px; margin:0; text-wrap:balance;}
+.notes{margin:0; padding-left:1.1em; font-size:13px; line-height:1.75; color:var(--muted); display:grid; gap:2px;}
+.notes b{color:var(--text); font-weight:600;}
+
+/* 絵本のコマ */
+.story{display:grid; gap:14px 12px; grid-template-columns:repeat(2,minmax(0,1fr));}
+.story.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:820px){ .story.three{grid-template-columns:1fr;} }
+@media (max-width:640px){ .story{grid-template-columns:1fr;} }
+.rowlab{grid-column:1/-1; font-size:13px; font-weight:800; letter-spacing:.06em; display:flex; align-items:center; gap:10px; margin-top:4px;}
+.rowlab::after{content:""; flex:1; height:1px; background:var(--line2);}
+.rowlab.now{color:var(--bad);} .rowlab.after{color:var(--good);}
+.pnl{display:grid; gap:8px; align-content:start; min-width:0;}
+.scene{border-radius:14px; overflow:hidden; line-height:0; border:1px solid var(--line);}
+.scene svg{display:block; width:100%; height:auto;}
+.cap{display:grid; grid-template-columns:24px minmax(0,1fr); gap:8px; align-items:start; font-size:14.5px; font-weight:700; line-height:1.55;}
+.cap .no{width:24px; height:24px; border-radius:50%; background:var(--text); color:var(--bg); display:grid; place-items:center; font-size:12.5px; font-weight:800;}
+.cap small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+/* ポスター（2 枚の絵を並べ、間に一言） */
+.vs{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center;}
+.vs .scene{background:var(--panel);}
+.vs .mid{display:grid; justify-items:center; gap:2px; font-weight:800; color:var(--good); font-size:20px; line-height:1.3; text-align:center;}
+.vs .mid i{display:block; width:46px; height:4px; border-radius:2px; background:var(--good); position:relative;}
+.vs .mid i::after{content:""; position:absolute; right:-2px; top:-6px; width:12px; height:12px; border-top:4px solid var(--good); border-right:4px solid var(--good); transform:rotate(45deg);}
+.vs .mid small{font-size:12px; color:var(--muted); font-weight:500;}
+.vs .mid.plain{color:var(--muted); font-size:26px;}
+@media (max-width:640px){ .vs{grid-template-columns:1fr;} .vs .mid i{transform:rotate(90deg); margin:10px 0;} }
+
+/* 画面の絵 */
+.split{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:12px;}
+@media (max-width:720px){ .split{grid-template-columns:1fr;} }
+.win{min-width:0; background:var(--code-bg); border:1px solid var(--line2); border-radius:12px; overflow:hidden;}
+.wbar{display:flex; align-items:center; gap:10px; padding:6px 10px; background:var(--panel2); font-size:12px; color:var(--muted);}
+.wbar .dots{display:flex; gap:5px;}
+.wbar .dots i{width:9px; height:9px; border-radius:50%; display:block;}
+.wbar .dots i:nth-child(1){background:var(--bad);} .wbar .dots i:nth-child(2){background:var(--tool);} .wbar .dots i:nth-child(3){background:var(--good);}
+.code{padding:6px 0;}
+.ln{display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:8px; align-items:start; padding:2px 10px; font-family:var(--mono); font-size:12px; line-height:1.65;}
+.ln .no{color:var(--dim); text-align:right;}
+.ln .tx{white-space:pre-wrap; word-break:break-word;}
+.ln.hb{background:var(--bad-bg);} .ln.ht{background:var(--tool-bg);}
+.pill{font-family:var(--sans); font-size:11.5px; font-weight:700; border-radius:999px; padding:0 9px; color:var(--bg);}
+.pill.bad{background:var(--bad);} .pill.tool{background:var(--tool);}
+.ans{min-width:0; background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 14px; display:grid; gap:8px; align-content:start;}
+.ans .t{font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em;}
+.ans .who{display:flex; align-items:center; gap:10px; font-size:14px;}
+.ans .big{font-size:22px; font-weight:800; color:var(--bad);}
+.ans .why{border-top:1px solid var(--line2); padding-top:8px; display:grid; gap:4px; font-size:13.5px;}
+.ans .why b{color:var(--tool);}
+.ans .why span.f{color:var(--bad); font-weight:700;}
+.mono{font-family:var(--mono); font-size:12px;}
+.ans .f2{font-size:11.5px; color:var(--muted);}
+
+/* 絵文字の代わりの小さな絵 */
+.ico{width:34px; height:34px; flex:0 0 34px; display:block;}
+.warns{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:760px){ .warns{grid-template-columns:1fr;} }
+.warn{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.55; min-width:0;}
+.warn b{display:block;}
+.warn span{color:var(--muted); font-size:12.5px;}
+
+.steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+.st{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.6; min-width:0;}
+.st > div{min-width:0;}
+.st i{display:block; font-style:normal; font-weight:800; color:var(--flow); font-size:12px; letter-spacing:.06em;}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.ask{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--flow-bg); border:1px solid var(--flow); border-radius:12px; padding:10px 12px;}
+.ask .q{font-size:13.5px; line-height:1.65; min-width:0; word-break:break-word;}
+.ask .q small{display:block; color:var(--muted); font-size:11.5px; letter-spacing:.06em;}
+.ask button{font:inherit; font-size:12.5px; font-weight:700; color:var(--bg); background:var(--flow); border:none; border-radius:7px; padding:5px 14px; cursor:pointer; white-space:nowrap;}
+@media (max-width:520px){ .ask{grid-template-columns:1fr;} .ask button{justify-self:start;} }
+.src{font-size:12.5px; color:var(--muted); margin:0;}
+.src a{color:var(--muted);}
+
+.skipl{display:grid; gap:8px;}
+.skipl div{display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:12px; font-size:13.5px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--panel);}
+.skipl b{font-weight:600;}
+.skipl span{color:var(--muted);}
+@media (max-width:560px){ .skipl div{grid-template-columns:1fr; gap:2px;} }
+.bnav .wrap{max-width:1150px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.go{display:grid; gap:10px;}
+.gobtn{display:grid; gap:2px; text-decoration:none; background:var(--good); color:var(--bg); border-radius:12px; padding:12px 14px; font-weight:800; font-size:15px;}
+.gobtn small{font-weight:600; font-size:12.5px; opacity:.85;}
+form.dig{display:grid; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px;}
+form.dig label{font-size:12.5px; font-weight:800; letter-spacing:.04em; color:var(--muted);}
+form.dig textarea{width:100%; min-height:70px; border-radius:10px; border:1px solid var(--line2); background:var(--panel2); color:var(--text); font:inherit; font-size:14px; padding:8px 10px;}
+form.dig button{justify-self:end; font:inherit; font-weight:800; font-size:14px; border:none; border-radius:10px; padding:8px 16px; background:var(--flow); color:var(--bg); cursor:pointer;}
+form.dig small{color:var(--muted); font-size:12px;}
+
+.scene img{display:block; width:100%; height:auto;}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+@media (max-width:720px){ .split.even{grid-template-columns:1fr;} }
+.pill.good{background:var(--good);}
+.vs .pnl .cap{grid-template-columns:24px minmax(0,1fr);}
+.vs .mid{gap:8px;}
+@media (max-width:640px){ .vs .mid i{margin:24px 0;} }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-14.html">← 11/14（土）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<!-- 絵の部品（ロボットの Claude 3 つの顔・矢じり） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="robot" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <circle cx="31" cy="36" r="4.2" fill="#F4F1FF"/>
+      <circle cx="49" cy="36" r="4.2" fill="#F4F1FF"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-sleepy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#5E6778"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 37h9M45 37h9" stroke="#F4F1FF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#5E6778"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#36C2A8"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#F4F1FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="44" width="9" height="22" rx="4.5" fill="#8E6CD9" transform="rotate(-30 66 55)"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <marker id="ahRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B6B"/></marker>
+    <marker id="ahOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FFB454"/></marker>
+    <marker id="ahGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#36C2A8"/></marker>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="side">
+    <h1>テックブリーフ</h1>
+    <div class="d">2026-11-15（日） · 3 件</div>
+    <div class="grp">今日の 3 件</div>
+    <a href="#i1" data-jump="i1"><b>1</b><span>クラウド頼みの家電を、AI に解かせて家の中で</span></a>
+    <a href="#i2" data-jump="i2"><b>2</b><span>Mac の Chrome なしで、Claude がページを開く</span></a>
+    <a href="#i3" data-jump="i3"><b>3</b><span>Claude が本物の筆で描き、一筆ずつ直せる</span></a>
+    <div class="grp">見送り</div>
+    <a href="#skip" data-jump="skip" class="skip"><b>–</b><span>調べて見送ったもの 6 件</span></a>
+  </aside>
+
+  <main class="main">
+    <div class="inner">
+      <div class="lede">今日は「AI に任せられる所が、画面の外へ広がる」3 件。家の機器、ブラウザの置き場所、絵筆。2 件目は手元で試した（Cloudflare の公開の試用口で、このテックブリーフを開いた）。1・3 件目は実機や Rust のビルドが要るので、まだ試していない。</div>
+
+      <!-- ================= 1 ================= -->
+      <article class="item" id="i1">
+        <div class="tags"><span class="tag plain">まだ試していない</span><span class="tag plain">手間 機器ごとに数時間〜（実機が要る）</span></div>
+        <h2>クラウド頼みの家電を、AI に通信を解かせて、家の中だけで動かす</h2>
+        <p class="sub">空気清浄機と刺繍ミシンで、AI が公式アプリの通信を読み解いた 2 本が、今週の Hacker News で 776 点と 734 点。手で数日かかる所が約 20 分だった。実機が要るので、まだ試していない</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="家の中で人がスマホのボタンを押すと、命令は遠くのメーカーのクラウドを回ってから空気清浄機に届く。スマホは読み込み中">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <g fill="#3A4250"><ellipse cx="316" cy="64" rx="80" ry="24"/><circle cx="276" cy="50" r="24"/><circle cx="326" cy="38" r="28"/><circle cx="364" cy="54" r="20"/></g>
+                  <text x="316" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#E6E9EF">メーカーのクラウド</text>
+                  <path d="M20 118 L118 62 L216 118" fill="none" stroke="#5A6378" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+                  <rect x="34" y="116" width="168" height="106" fill="none" stroke="#5A6378" stroke-width="4"/>
+                  <rect x="150" y="142" width="40" height="80" rx="10" fill="#E6E9EF"/>
+                  <circle cx="170" cy="162" r="10" fill="#C9CED8"/>
+                  <g fill="#C9CED8"><rect x="158" y="184" width="24" height="4" rx="2"/><rect x="158" y="194" width="24" height="4" rx="2"/><rect x="158" y="204" width="24" height="4" rx="2"/></g>
+                  <circle cx="78" cy="160" r="13" fill="#F2C9A0"/>
+                  <path d="M65 158 a13 13 0 0 1 26 0 z" fill="#3A2E2A"/>
+                  <rect x="62" y="174" width="34" height="48" rx="10" fill="#4F8CFF"/>
+                  <line x1="92" y1="186" x2="106" y2="182" stroke="#4F8CFF" stroke-width="8" stroke-linecap="round"/>
+                  <rect x="104" y="164" width="18" height="30" rx="4" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/>
+                  <circle cx="113" cy="179" r="6" fill="none" stroke="#FFB454" stroke-width="2.5" stroke-dasharray="6 4"/>
+                  <rect x="40" y="122" width="70" height="28" rx="10" fill="#E6E9EF"/>
+                  <path d="M66 149 L78 149 L72 156 Z" fill="#E6E9EF"/>
+                  <text x="75" y="142" text-anchor="middle" font-size="16" font-weight="800" fill="#231A3D">まだ？</text>
+                  <path d="M114 160 Q140 30 238 56" fill="none" stroke="#FFB454" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#ahOrange)"/>
+                  <path d="M318 92 Q300 160 198 172" fill="none" stroke="#FFB454" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#ahOrange)"/>
+                  <text x="79" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                  <text x="170" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">空気清浄機</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>家の中の機器なのに、操作は毎回メーカーのクラウドを回ってくる<small>Coway のアプリは起動が遅く、開くたびにパスワードの変更を求めてきた（記事より）</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="机の上に刺繍ミシン。値札は約 300 ドル。隣のノートパソコンの図案ソフトには鍵がかかっていて、月額プランと書いてある">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="20" y="200" width="360" height="10" rx="2" fill="#6B4F3A"/>
+                  <rect x="34" y="210" width="8" height="12" fill="#6B4F3A"/><rect x="358" y="210" width="8" height="12" fill="#6B4F3A"/>
+                  <path d="M42 200 V130 a16 16 0 0 1 16 -16 H150 a16 16 0 0 1 16 16 V152 H128 V200 Z" fill="#E6E9EF"/>
+                  <rect x="56" y="178" width="100" height="22" rx="6" fill="#C9CED8"/>
+                  <rect x="134" y="152" width="4" height="18" fill="#9AA3B2"/>
+                  <ellipse cx="100" cy="176" rx="36" ry="10" fill="#F3EEE2" stroke="#8A5A3C" stroke-width="3"/>
+                  <path d="M92 176 q-8 -8 0 -10 q4 -1 8 4 q4 -5 8 -4 q8 2 0 10 l-8 5 z" fill="none" stroke="#FF6B6B" stroke-width="2" stroke-dasharray="3 2"/>
+                  <line x1="70" y1="114" x2="70" y2="90" stroke="#9AA3B2" stroke-width="2"/>
+                  <path d="M40 60 h56 l12 14 l-12 14 h-56 z" fill="#FFB454"/>
+                  <circle cx="98" cy="74" r="3" fill="#3A2A12"/>
+                  <text x="66" y="80" text-anchor="middle" font-size="16" font-weight="800" fill="#3A2A12">$300</text>
+                  <rect x="222" y="92" width="152" height="100" rx="6" fill="#0F1115" stroke="#5E6778" stroke-width="4"/>
+                  <path d="M206 192 h184 l-10 10 h-164 z" fill="#5E6778"/>
+                  <path d="M286 130 v-12 a12 12 0 0 1 24 0 v12" fill="none" stroke="#FFB454" stroke-width="5"/>
+                  <rect x="278" y="128" width="40" height="30" rx="5" fill="#FFB454"/>
+                  <circle cx="298" cy="141" r="4" fill="#3A2A12"/><rect x="296" y="142" width="4" height="9" rx="1" fill="#3A2A12"/>
+                  <text x="298" y="182" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">月額プラン</text>
+                  <text x="104" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">刺繍ミシン</text>
+                  <text x="298" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">図案ソフト</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>機械は手元にあるのに、図案ソフトは月額でしか使えない<small>Brother の Skitch PP1。無料版は色や道具が限られる（作者のコメント）</small></span></div>
+            </div>
+
+            <div class="rowlab after">AI に解かせると</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットの Claude がケーブルでスマホを操作し、虫めがねで Bluetooth の記録と公式アプリの中身を見比べている。同じ FFA0 の行が両方で光っている。約 20 分">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="14" y="14" width="104" height="36" rx="18" fill="#36C2A8"/>
+                  <text x="66" y="38" text-anchor="middle" font-size="17" font-weight="800" fill="#0F1115">約 20 分</text>
+                  <rect x="38" y="112" width="46" height="84" rx="9" fill="#2A3346" stroke="#9AA3B2" stroke-width="3"/>
+                  <rect x="44" y="122" width="34" height="60" rx="3" fill="#0F1115"/>
+                  <g fill="none" stroke="#4F8CFF" stroke-width="3" stroke-linecap="round"><path d="M90 122 q8 8 0 16"/><path d="M98 116 q13 14 0 28"/></g>
+                  <g fill="#4A5366"><rect x="48" y="130" width="26" height="4" rx="2"/><rect x="48" y="140" width="20" height="4" rx="2"/><rect x="48" y="150" width="24" height="4" rx="2"/></g>
+                  <path d="M61 196 Q60 230 110 224 T158 196" fill="none" stroke="#9AA3B2" stroke-width="4"/>
+                  <text x="104" y="216" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">adb</text>
+                  <use href="#robot" x="132" y="112" width="80" height="100"/>
+                  <line x1="204" y1="150" x2="226" y2="128" stroke="#8E6CD9" stroke-width="7" stroke-linecap="round"/>
+                  <circle cx="234" cy="116" r="15" fill="#FFFFFF" fill-opacity=".2" stroke="#36C2A8" stroke-width="5"/>
+                  <rect x="246" y="28" width="144" height="86" rx="8" fill="#F3EEE2"/>
+                  <text x="318" y="50" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2E2A">Bluetooth の記録</text>
+                  <rect x="254" y="60" width="128" height="24" rx="4" fill="#FF6B6B" fill-opacity=".3"/>
+                  <text x="262" y="78" font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700" fill="#B42A33">FFA0 01 3C 9A</text>
+                  <rect x="262" y="94" width="96" height="5" rx="2" fill="#B8B1A1"/>
+                  <rect x="246" y="128" width="144" height="86" rx="8" fill="#E8E1D1"/>
+                  <text x="318" y="150" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2E2A">アプリの中身</text>
+                  <rect x="254" y="160" width="128" height="24" rx="4" fill="#4F8CFF" fill-opacity=".3"/>
+                  <text x="262" y="178" font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700" fill="#1F4E9A">read(FFA0)</text>
+                  <rect x="262" y="194" width="80" height="5" rx="2" fill="#B8B1A1"/>
+                  <path d="M384 72 h10 v100 h-10" fill="none" stroke="#36C2A8" stroke-width="4" stroke-linejoin="round"/>
+                  <text x="61" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">スマホ</text>
+                  <text x="172" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">AI</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>AI がスマホを adb で動かし、Bluetooth の記録と、取り出したアプリの中身を突き合わせる<small>記事の筆者いわく、手でやれば少なくとも数時間（たぶん数日）。AI は約 20 分</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="夜の家。壁のおやすみボタンを押すと、家の中の司令塔から照明と空気清浄機に直接命令が届く。上のクラウドにはバツ印">
+                  <rect width="400" height="260" fill="#141B2E"/>
+                  <g fill="#E6E9EF" fill-opacity=".7"><circle cx="40" cy="22" r="1.6"/><circle cx="150" cy="16" r="1.4"/><circle cx="214" cy="34" r="1.8"/><circle cx="110" cy="44" r="1.3"/></g>
+                  <rect y="222" width="400" height="38" fill="#1E2638"/>
+                  <g fill="#2A3346"><ellipse cx="324" cy="44" rx="58" ry="18"/><circle cx="300" cy="34" r="18"/><circle cx="338" cy="26" r="20"/></g>
+                  <text x="324" y="50" text-anchor="middle" font-size="15" font-weight="700" fill="#5E6778">クラウド</text>
+                  <path d="M282 16 L366 72 M366 16 L282 72" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round"/>
+                  <rect x="22" y="84" width="104" height="42" rx="12" fill="#E6E9EF"/>
+                  <text x="74" y="111" text-anchor="middle" font-size="17" font-weight="800" fill="#231A3D">おやすみ</text>
+                  <circle cx="122" cy="122" r="10" fill="#F2C9A0"/>
+                  <rect x="164" y="160" width="64" height="34" rx="8" fill="#36C2A8"/>
+                  <g fill="#0F1115"><circle cx="180" cy="177" r="3"/><circle cx="196" cy="177" r="3"/><circle cx="212" cy="177" r="3"/></g>
+                  <text x="196" y="214" text-anchor="middle" font-size="15" font-weight="700" fill="#36C2A8">家の司令塔</text>
+                  <path d="M126 112 Q170 118 186 158" fill="none" stroke="#36C2A8" stroke-width="3" marker-end="url(#ahGreen)"/>
+                  <path d="M164 176 H96" fill="none" stroke="#36C2A8" stroke-width="3" marker-end="url(#ahGreen)"/>
+                  <path d="M228 176 H272" fill="none" stroke="#36C2A8" stroke-width="3" marker-end="url(#ahGreen)"/>
+                  <path d="M58 150 h36 l-8 -22 h-20 z" fill="#3A4250"/>
+                  <rect x="74" y="150" width="4" height="58" fill="#5E6778"/>
+                  <rect x="60" y="206" width="32" height="8" rx="2" fill="#5E6778"/>
+                  <rect x="282" y="140" width="40" height="82" rx="10" fill="#E6E9EF"/>
+                  <circle cx="302" cy="160" r="10" fill="#C9CED8"/>
+                  <g fill="none" stroke="#4F8CFF" stroke-width="3" stroke-linecap="round" stroke-opacity=".8"><path d="M330 150 q14 10 28 0"/><path d="M330 168 q16 10 34 0"/><path d="M330 186 q14 10 28 0"/></g>
+                  <text x="76" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">照明</text>
+                  <text x="302" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">空気清浄機</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>家の中だけで動く。寝る前の「おやすみ」で、照明と一緒に空気清浄機も<small>Coway は自作の Home Assistant 連携で家の Wi-Fi に直結し、Apple Home にもつないだ</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>記事の筆者（Scott J. Goldman 氏）は「AI」とだけ書いている。通信の間に入る仕掛けの設定は Claude が断り、そこから先は ChatGPT で進めた</li>
+            <li>Bluetooth の初期設定は暗号化されていた。AI はスマホからアプリを取り出して逆コンパイルし、記録と照合して手順を Python に書き直した。Wi-Fi 側も、ボタンごとの通信を表にする作業が数分で済み、自前のサーバーを作れるだけの材料がそろった。筆者のまとめは「1 日仕事」</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>手でやると数日、AI に任せると約 20 分（Coway の初期設定の手順を書き直すまで）</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="手でやると、カレンダーが何枚もめくれる。少なくとも数時間、たぶん数日">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="26" font-weight="800" fill="#9AA3B2">手でやると</text>
+                <g transform="rotate(-8 150 160)"><rect x="96" y="92" width="120" height="130" rx="10" fill="#3A4250"/></g>
+                <g transform="rotate(5 190 160)"><rect x="128" y="88" width="120" height="130" rx="10" fill="#5E6778"/></g>
+                <rect x="116" y="96" width="128" height="138" rx="10" fill="#E6E9EF"/>
+                <rect x="116" y="96" width="128" height="32" rx="10" fill="#FF6B6B"/>
+                <rect x="116" y="116" width="128" height="12" fill="#FF6B6B"/>
+                <g fill="#5E6778"><rect x="140" y="86" width="8" height="20" rx="3"/><rect x="212" y="86" width="8" height="20" rx="3"/></g>
+                <text x="180" y="196" text-anchor="middle" font-size="44" font-weight="800" fill="#231A3D">数日</text>
+                <text x="180" y="282" text-anchor="middle" font-size="18" font-weight="700" fill="#9AA3B2">少なくとも数時間（筆者の見立て）</text>
+              </svg>
+            </div>
+            <div class="mid"><span>AI に</span><i></i><small>Coway の記事</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="AI に任せると、ストップウォッチで約 20 分">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="26" font-weight="800" fill="#36C2A8">AI だと</text>
+                <rect x="172" y="52" width="16" height="8" rx="2" fill="#36C2A8"/>
+                <rect x="166" y="58" width="28" height="14" rx="4" fill="#36C2A8"/>
+                <circle cx="180" cy="164" r="86" fill="#12302B" stroke="#36C2A8" stroke-width="10"/>
+                <path d="M180 164 L180 92 A72 72 0 0 1 242 128 Z" fill="#36C2A8" fill-opacity=".35"/>
+                <text x="180" y="184" text-anchor="middle" font-size="58" font-weight="800" fill="#36C2A8">20</text>
+                <text x="180" y="216" text-anchor="middle" font-size="20" fill="#9AA3B2">分ほど</text>
+                <text x="180" y="282" text-anchor="middle" font-size="18" font-weight="700" fill="#36C2A8">アプリの逆コンパイル → Python</text>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>今週の 2 本</h3>
+          <div class="split even">
+            <div class="ans">
+              <div class="t">空気清浄機（Coway Airmega IconS）</div>
+              <div class="who"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="10" y="4" width="16" height="28" rx="5" fill="#E6E9EF"/><circle cx="18" cy="12" r="4" fill="#9AA3B2"/><path d="M14 20h8M14 24h8" stroke="#9AA3B2" stroke-width="2"/></svg><span>操作は Wi-Fi、初期設定は Bluetooth</span></div>
+              <div class="why">
+                <div><b>AI がやった</b>　スマホを adb で動かし、アプリを取り出して逆コンパイルし、Bluetooth の記録と照合</div>
+                <div><b>結果</b>　Home Assistant に直結する連携（coway-local、MIT）。初期設定はノートパソコンの Web Bluetooth で済ませる</div>
+              </div>
+              <div class="f2">11/11 の記事・Hacker News 776 点（11/13）</div>
+            </div>
+            <div class="ans">
+              <div class="t">刺繍ミシン（Brother Skitch PP1、約 $300）</div>
+              <div class="who"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M4 30V12a5 5 0 0 1 5-5h20a5 5 0 0 1 5 5v6h-8v12z" fill="#E6E9EF"/><rect x="25" y="18" width="2" height="7" fill="#9AA3B2"/></svg><span>図案ソフトが月額制だった</span></div>
+              <div class="why">
+                <div><b>作った</b>　図案づくりのアプリ ZigZag を丸ごと AI で（作者は ChatGPT と書いている）。通信は PacketLogger で解いた</div>
+                <div><b>できること</b>　SVG を刺繍に変えて PES・DST など 5 形式で書き出すか、Bluetooth でミシンへ直接送る。MCP でエージェントが図案を描ける</div>
+              </div>
+              <div class="f2">Show HN 734 点（11/13）・Apache-2.0・v0.1.3（11/14）</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 12l12 12M24 12L12 24" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>Claude は途中で断る</b><span>通信の間に入る仕掛けの設定は、Claude が断った。記事の筆者は ChatGPT に切り替えた</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 18L18 7l12 11v13H6z" fill="#12302B" stroke="#36C2A8" stroke-width="2.5" stroke-linejoin="round"/><rect x="15" y="22" width="6" height="9" fill="#36C2A8"/></svg><div><b>自分の機器と、家の中だけ</b><span>メーカーのサーバーには手を出さない。見るのは自分の機器と家の中の通信（私の決め方）</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>実機と手間が要る</b><span>記事でも、Raspberry Pi のアンテナが弱くて届かず、中継の組み方からやり直した</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M12 15h12M12 20h12M12 25h8" stroke="#5E6778" stroke-width="2" stroke-linecap="round"/></svg><div><i>1</i>家の機器のうち、アプリとクラウドが無いと動かないものを書き出す。Home Assistant の連携がもう無いかも探す</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="9" y="4" width="18" height="28" rx="4" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><path d="M30 10q4 4 0 8M33 7q7 7 0 14" fill="none" stroke="#4F8CFF" stroke-width="2" stroke-linecap="round"/></svg><div><i>2</i>Bluetooth の機器なら、Android の Bluetooth の記録を取りながらアプリを操作し、<code>jadx</code> で開いたアプリの中身と一緒に Claude に渡す（<code>adb</code> と <code>jadx</code> はこの Mac にもう入っている）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 18L18 7l12 11v13H6z" fill="#12302B" stroke="#36C2A8" stroke-width="2.5" stroke-linejoin="round"/><circle cx="18" cy="22" r="4" fill="#36C2A8"/></svg><div><i>3</i>解けた手順を Python に書き直させ、家の中の仕組みから呼ぶ</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-15&amp;i=1&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション（家の機器から、クラウド頼みの 1 台を選んで進め方を決める）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-15"><input type="hidden" name="i" value="1"><input type="hidden" name="m" value="dig">
+              <label for="q1">この記事を深掘りする</label>
+              <textarea id="q1" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://scottjg.com/posts/2026-11-11-reverse-engineering-my-coway-air-purifier-to-ditch-the-cloud/">Scott J. Goldman 氏の記事（2026-11-11）</a>・<a href="https://github.com/scottjg/coway-local">coway-local</a>・<a href="https://news.ycombinator.com/item?id=50474959">Hacker News（776 点）</a>・<a href="https://github.com/simpsoka/zigzag">ZigZag（GitHub）</a>・<a href="https://news.ycombinator.com/item?id=50470488">Show HN（734 点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 2 ================= -->
+      <article class="item" id="i2">
+        <div class="tags"><span class="tag tried">手元で試した（公開の試用口で）</span><span class="tag plain">入れる手間 0 分（試用口）</span></div>
+        <h2>Mac の Chrome を使わずに、Claude がページを開ける。ブラウザは Cloudflare の上</h2>
+        <p class="sub">Cloudflare の Kitesurf（8 月に発表、11/13 にソースを公開。Browser Run では無料のベータ）。公開の試用口に CDP でつなぎ、このテックブリーフを開いた。文も一覧も読めたが、絵の中の日本語は □ になった</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="人が机で文字を打っていると、Claude が開いたブラウザの窓が画面の前に飛び出し、打った文字がそちらに吸い込まれていく">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="20" y="196" width="300" height="10" rx="2" fill="#6B4F3A"/>
+                  <rect x="30" y="206" width="8" height="16" fill="#6B4F3A"/><rect x="302" y="206" width="8" height="16" fill="#6B4F3A"/>
+                  <rect x="96" y="30" width="200" height="128" rx="8" fill="#2A3346" stroke="#5E6778" stroke-width="4"/>
+                  <rect x="186" y="158" width="20" height="22" fill="#5E6778"/><rect x="166" y="178" width="60" height="8" rx="2" fill="#5E6778"/>
+                  <rect x="108" y="42" width="124" height="80" rx="4" fill="#0F1115"/>
+                  <g fill="#4A5366"><rect x="116" y="52" width="80" height="5" rx="2"/><rect x="116" y="64" width="96" height="5" rx="2"/><rect x="116" y="76" width="60" height="5" rx="2"/><rect x="116" y="88" width="88" height="5" rx="2"/></g>
+                  <rect x="170" y="64" width="116" height="84" rx="5" fill="#E6E9EF" stroke="#FFB454" stroke-width="3"/>
+                  <rect x="170" y="64" width="116" height="16" rx="5" fill="#C9CED8"/>
+                  <g fill="#9AA3B2"><circle cx="180" cy="72" r="3"/><circle cx="190" cy="72" r="3"/><circle cx="200" cy="72" r="3"/></g>
+                  <g fill="#B8B1A1"><rect x="180" y="90" width="90" height="6" rx="2"/><rect x="180" y="104" width="70" height="6" rx="2"/><rect x="180" y="118" width="84" height="6" rx="2"/></g>
+                  <g stroke="#FFB454" stroke-width="3" stroke-linecap="round"><line x1="296" y1="60" x2="308" y2="50"/><line x1="300" y1="78" x2="314" y2="76"/><line x1="160" y1="58" x2="150" y2="48"/></g>
+                  <rect x="226" y="186" width="80" height="10" rx="3" fill="#9AA3B2"/>
+                  <circle cx="352" cy="132" r="14" fill="#F2C9A0"/>
+                  <path d="M338 130 a14 14 0 0 1 28 0 z" fill="#3A2E2A"/>
+                  <rect x="336" y="146" width="34" height="76" rx="10" fill="#4F8CFF"/>
+                  <line x1="340" y1="168" x2="300" y2="186" stroke="#4F8CFF" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M292 182 Q300 156 270 150" fill="none" stroke="#FF6B6B" stroke-width="2.5" stroke-dasharray="5 5" marker-end="url(#ahRed)"/>
+                  <g font-size="17" font-weight="800" fill="#FF6B6B"><text x="300" y="172">あ</text><text x="314" y="154">い</text></g>
+                  <use href="#robot" x="20" y="96" width="64" height="80"/>
+                  <text x="52" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="353" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>Claude がページを開くたび、Mac の上でブラウザが立ち上がる<small>窓が前に出ると、打っていたキーがそちらに吸われることがある</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="雲の上に座った Claude。遠くに Web のページが浮かんでいるが、ブラウザが無いので開けず、首をかしげている">
+                  <rect width="400" height="260" fill="#22314F"/>
+                  <g fill="#3A4A6B"><ellipse cx="200" cy="214" rx="170" ry="40"/><circle cx="110" cy="196" r="44"/><circle cx="200" cy="180" r="56"/><circle cx="292" cy="196" r="44"/></g>
+                  <use href="#robot-sleepy" x="160" y="92" width="80" height="100"/>
+                  <circle cx="126" cy="80" r="22" fill="#E6E9EF"/>
+                  <circle cx="146" cy="104" r="5" fill="#E6E9EF"/>
+                  <text x="126" y="90" text-anchor="middle" font-size="28" font-weight="800" fill="#231A3D">?</text>
+                  <rect x="290" y="22" width="88" height="66" rx="6" fill="#E6E9EF"/>
+                  <rect x="290" y="22" width="88" height="14" rx="6" fill="#C9CED8"/>
+                  <g fill="#B8B1A1"><rect x="300" y="46" width="66" height="6" rx="2"/><rect x="300" y="58" width="50" height="6" rx="2"/><rect x="300" y="70" width="60" height="6" rx="2"/></g>
+                  <path d="M240 120 Q280 110 300 96" fill="none" stroke="#9AA3B2" stroke-width="2.5" stroke-dasharray="4 7"/>
+                  <text x="200" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">クラウドで動く Claude</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>クラウドで動く Claude や Workers には、ふつうブラウザが無い<small>Cloudflare の Browser Run も、既定のブラウザは Chromium</small></span></div>
+            </div>
+
+            <div class="rowlab after">Kitesurf だと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Cloudflare の雲の上に、ページを載せた凧が上がっている。地上の Claude は糸を引くだけで、Mac の画面は静かなまま">
+                  <rect width="400" height="260" fill="#22314F"/>
+                  <g fill="#3A4A6B"><ellipse cx="308" cy="176" rx="80" ry="22"/><circle cx="282" cy="162" r="24"/><circle cx="324" cy="154" r="28"/></g>
+                  <text x="308" y="184" text-anchor="middle" font-size="15" font-weight="700" fill="#E6E9EF">Cloudflare の上</text>
+                  <path d="M300 22 L352 70 L300 128 L248 70 Z" fill="#FFB454"/>
+                  <path d="M300 22 V128 M248 70 H352" stroke="#8A5A3C" stroke-width="2"/>
+                  <rect x="278" y="52" width="44" height="34" rx="3" fill="#E6E9EF"/>
+                  <g fill="#B8B1A1"><rect x="284" y="60" width="32" height="4" rx="2"/><rect x="284" y="69" width="24" height="4" rx="2"/><rect x="284" y="78" width="28" height="4" rx="2"/></g>
+                  <path d="M300 128 q-8 14 4 22 q12 8 2 22" fill="none" stroke="#FFB454" stroke-width="2"/>
+                  <text x="214" y="34" text-anchor="middle" font-size="17" font-weight="800" fill="#FFB454">Kitesurf</text>
+                  <rect y="222" width="400" height="38" fill="#1A263E"/>
+                  <use href="#robot-happy" x="104" y="122" width="80" height="100"/>
+                  <path d="M176 160 Q236 160 300 128" fill="none" stroke="#E6E9EF" stroke-width="2"/>
+                  <text x="232" y="146" text-anchor="middle" font-size="15" font-weight="800" fill="#4F8CFF">CDP</text>
+                  <rect x="14" y="186" width="70" height="36" rx="4" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <rect x="20" y="192" width="58" height="24" rx="2" fill="#0F1115"/>
+                  <g fill="#4A5366"><rect x="24" y="197" width="40" height="4" rx="2"/><rect x="24" y="206" width="30" height="4" rx="2"/></g>
+                  <text x="49" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Mac は静か</text>
+                  <text x="144" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>ブラウザは Cloudflare の上。Claude は糸（CDP）を引くだけ<small>Puppeteer や Chrome DevTools MCP など、Chrome 向けの道具がそのままつながる</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="天びん。凧を載せた Kitesurf の皿は軽くて上がり、57.8 MiB。重い箱を載せた Chromium の皿は下がり、271.0 MiB">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <text x="200" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">スクリーンショット 1 回のメモリ</text>
+                  <rect x="196" y="92" width="8" height="122" fill="#5A6378"/>
+                  <rect x="160" y="212" width="80" height="10" rx="2" fill="#5A6378"/>
+                  <line x1="90" y1="78" x2="310" y2="118" stroke="#9AA3B2" stroke-width="6" stroke-linecap="round"/>
+                  <circle cx="200" cy="98" r="7" fill="#E6E9EF"/>
+                  <g stroke="#9AA3B2" stroke-width="2"><line x1="90" y1="78" x2="62" y2="122"/><line x1="90" y1="78" x2="118" y2="122"/><line x1="310" y1="118" x2="282" y2="162"/><line x1="310" y1="118" x2="338" y2="162"/></g>
+                  <path d="M56 122 h68 a34 12 0 0 1 -68 0 z" fill="#36C2A8"/>
+                  <path d="M90 92 l12 14 -12 14 -12 -14 z" fill="#FFB454"/>
+                  <path d="M276 162 h68 a34 12 0 0 1 -68 0 z" fill="#5E6778"/>
+                  <rect x="286" y="124" width="48" height="38" rx="4" fill="#3A4250" stroke="#5E6778" stroke-width="2"/>
+                  <text x="310" y="149" text-anchor="middle" font-size="15" font-weight="800" fill="#9AA3B2">重い</text>
+                  <text x="90" y="166" text-anchor="middle" font-size="20" font-weight="800" fill="#36C2A8">57.8 MiB</text>
+                  <text x="90" y="188" text-anchor="middle" font-size="15" font-weight="700" fill="#36C2A8">Kitesurf</text>
+                  <text x="310" y="200" text-anchor="middle" font-size="20" font-weight="800" fill="#E6E9EF">271.0 MiB</text>
+                  <text x="310" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Chromium</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>メモリは Chromium の約 1/5。その代わり時間は 1.8 倍かかる<small>Cloudflare の説明書の表（14 の URL・5 回の中央値）。時間は 1,148 ms 対 637 ms</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>中身は Rust の部品（HTML と配置の Blitz、CSS の Stylo、JavaScript の Boa）を WebAssembly にしたもの。Chromium の入れ物は使わない</li>
+            <li>使い方は 2 つ。Cloudflare の Browser Run で <code>browser=kitesurf</code> を付ける（無料のベータ、アカウントごとの上限あり）か、ソースから自分の Workers に置く（Workers の有料プランが要る）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>実際に試した: このテックブリーフの 11/14 号を、Kitesurf で撮った</h3>
+          <div class="vs">
+            <div class="pnl">
+              <div class="scene"><img src="data:image/png;base64,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" alt="手元の Chrome で撮った 11/14 号の 1 コマ。絵の中の「設計書」「話し合いの記憶」「一緒に詰めた Claude」が日本語で読める" width="458" height="300"></div>
+              <div class="cap"><span class="no">C</span><span>手元の Chrome</span></div>
+            </div>
+            <div class="mid plain"><span style="font-size:15px; line-height:1.5">絵の中の<br>日本語だけ<br>□ に</span></div>
+            <div class="pnl">
+              <div class="scene"><img src="data:image/png;base64,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" alt="Kitesurf の試用口で撮った同じコマ。絵の中の日本語が四角い豆腐になり、Claude という英字だけが読める" width="458" height="300"></div>
+              <div class="cap"><span class="no">K</span><span>Kitesurf（公開の試用口）</span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>実際の画像の一部を切り出したもの。段組み・ふつうの文の日本語・ロボットの絵は Chrome と同じに出た。SVG の中の日本語の文字だけが □ になった（見出しの太字も細め）</li>
+            <li>撮るのにかかった時間: 試用口 1.43〜2.18 秒（4 回、ネット越し）、手元の Chrome（headless）0.52〜0.67 秒（3 回）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>一覧のページは、すぐ撮ると空。CDP でつないで待つと全部読めた</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="すぐ撮ると、見出しだけの空のページ。本文 51 字、リンク 0">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="36" text-anchor="middle" font-size="24" font-weight="800" fill="#9AA3B2">すぐ撮る</text>
+                <rect x="70" y="54" width="220" height="170" rx="8" fill="#FAF9F6"/>
+                <rect x="88" y="70" width="110" height="12" rx="3" fill="#3A3A3A"/>
+                <rect x="88" y="90" width="150" height="6" rx="2" fill="#B8B1A1"/>
+                <line x1="70" y1="106" x2="290" y2="106" stroke="#D9D3C7" stroke-width="2"/>
+                <text x="180" y="170" text-anchor="middle" font-size="18" font-weight="700" fill="#B8B1A1">（空）</text>
+                <text x="180" y="262" text-anchor="middle" font-size="22" font-weight="800" fill="#FF6B6B">本文 51 字・リンク 0</text>
+                <text x="180" y="288" text-anchor="middle" font-size="15" fill="#9AA3B2">開いた直後。試用口の撮影も空だった</text>
+              </svg>
+            </div>
+            <div class="mid"><span>6 秒<br>待つ</span><i></i><small>CDP で</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="6 秒待って読むと、号の一覧が全部出た。本文 40,804 字、リンク 92 は Chrome と同じ">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="36" text-anchor="middle" font-size="24" font-weight="800" fill="#36C2A8">待って読む</text>
+                <rect x="70" y="54" width="220" height="170" rx="8" fill="#FAF9F6"/>
+                <rect x="88" y="70" width="110" height="12" rx="3" fill="#3A3A3A"/>
+                <rect x="88" y="90" width="150" height="6" rx="2" fill="#B8B1A1"/>
+                <line x1="70" y1="106" x2="290" y2="106" stroke="#D9D3C7" stroke-width="2"/>
+                <rect x="88" y="116" width="4" height="40" fill="#C2410C"/>
+                <g fill="#5E6778"><rect x="100" y="120" width="150" height="6" rx="2"/><rect x="100" y="132" width="170" height="6" rx="2"/><rect x="100" y="144" width="130" height="6" rx="2"/></g>
+                <g fill="#3A3A3A"><rect x="88" y="168" width="28" height="9" rx="2"/><rect x="88" y="196" width="28" height="9" rx="2"/></g>
+                <g fill="#7A7F87"><rect x="126" y="168" width="140" height="5" rx="2"/><rect x="126" y="178" width="120" height="5" rx="2"/><rect x="126" y="196" width="146" height="5" rx="2"/><rect x="126" y="206" width="110" height="5" rx="2"/></g>
+                <text x="180" y="262" text-anchor="middle" font-size="22" font-weight="800" fill="#36C2A8">40,804 字・リンク 92</text>
+                <text x="180" y="288" text-anchor="middle" font-size="15" fill="#9AA3B2">手元の Chrome もリンク 92</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>一覧は、開いたあとに JavaScript で号のデータを読みに行って並べる作り。試用口の撮影はそれを待たずに撮っていた</li>
+            <li>つないだのは Node の標準の WebSocket だけ（何も入れていない）。相手は「Chrome/145.0.0.0 @kitesurf」と名乗った。待ったあとの撮影でも、一覧はちゃんと描けていた</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="7" width="22" height="22" rx="3" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/></svg><div><b>絵の中の日本語が □</b><span>SVG の文字だけ。ふつうの文の日本語は出る。日本語の図を撮る用途にはまだ早い</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="13" fill="#3A2A12" stroke="#FFB454" stroke-width="2.5"/><path d="M18 10v8l6 4" stroke="#FFB454" stroke-width="3" stroke-linecap="round" fill="none"/></svg><div><b>すぐ撮ると空のことがある</b><span>あとから読み込む画面は、CDP でつないで待つ</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>苦手がまだある</b><span>動画・WebGL・ボットの確認・ログインを続けるサイトは向かない（説明書）</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="12" cy="18" r="7" fill="none" stroke="#FFB454" stroke-width="3"/><path d="M19 18h13M27 18v6M31 18v4" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><i>1</i>Cloudflare で、Browser Run だけを使える API トークンを作る</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="5" y="7" width="26" height="22" rx="3" fill="#0B0D11" stroke="#4F8CFF" stroke-width="2"/><path d="M10 14l4 4-4 4M17 22h8" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><div><i>2</i>1 つの作業フォルダの <code>.mcp.json</code> に <code>chrome-devtools-mcp</code> を、つなぎ先を Kitesurf（<code>browser=kitesurf</code>）にして書く</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l12 14-12 14L6 18z" fill="#FFB454"/><path d="M18 4v28M6 18h24" stroke="#8A5A3C" stroke-width="1.5"/></svg><div><i>3</i>英語の資料を読ませる・公開ページを確かめさせる、で何日か使い、手元の Chrome と比べる</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-15&amp;i=2&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション（Claude Code の DevTools MCP を、1 つの作業フォルダだけ Kitesurf につなぐ）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-15"><input type="hidden" name="i" value="2"><input type="hidden" name="m" value="dig">
+              <label for="q2">この記事を深掘りする</label>
+              <textarea id="q2" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://blog.cloudflare.com/kitesurf-open-source/">Cloudflare ブログ（2026-11-13）</a>・<a href="https://developers.cloudflare.com/browser-run/kitesurf/">Browser Run の Kitesurf の説明書（11/13 更新）</a>・<a href="https://kitesurf.dev/">公開の試用口 kitesurf.dev</a>・<a href="https://github.com/cloudflare/kitesurf">GitHub（Apache-2.0）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 3 ================= -->
+      <article class="item" id="i3">
+        <div class="tags"><span class="tag plain">まだ試していない</span><span class="tag plain">入れる手間 10 分ほど（Rust を入れてビルド）</span></div>
+        <h2>Claude が本物の筆で絵を描き、気に入らない一筆だけを自分で直せる</h2>
+        <p class="sub">Klad（11/12 に Show HN、v0.2.0）。画像生成ではなく、一筆ずつがデータで残る描画アプリ。Rust でビルドする形なので、まだ試していない</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="左の絵の葉っぱ 1 枚だけが気に入らない。サイコロを振って描き直すと、右の絵は全部が変わってしまった">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <text x="112" y="38" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">ここだけ直したい</text>
+                  <rect x="22" y="50" width="130" height="122" rx="6" fill="#F3EEE2" stroke="#8A5A3C" stroke-width="6"/>
+                  <path d="M87 158 V104" stroke="#3E8E5A" stroke-width="5" stroke-linecap="round"/>
+                  <ellipse cx="68" cy="110" rx="19" ry="9" transform="rotate(-30 68 110)" fill="#36C2A8"/>
+                  <ellipse cx="106" cy="98" rx="19" ry="9" transform="rotate(30 106 98)" fill="#36C2A8"/>
+                  <circle cx="106" cy="98" r="24" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="6 4"/>
+                  <rect x="72" y="150" width="30" height="16" rx="3" fill="#C98A3A"/>
+                  <g transform="rotate(14 196 104)"><rect x="176" y="84" width="40" height="40" rx="8" fill="#E6E9EF"/><g fill="#231A3D"><circle cx="186" cy="94" r="4"/><circle cx="196" cy="104" r="4"/><circle cx="206" cy="114" r="4"/></g></g>
+                  <path d="M168 146 Q196 170 226 146" fill="none" stroke="#FFB454" stroke-width="3" marker-end="url(#ahOrange)"/>
+                  <text x="198" y="198" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">もう一回</text>
+                  <text x="314" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">全部変わった</text>
+                  <rect x="248" y="50" width="130" height="122" rx="6" fill="#F3EEE2" stroke="#8A5A3C" stroke-width="6"/>
+                  <path d="M313 158 V92" stroke="#5E6778" stroke-width="5" stroke-linecap="round"/>
+                  <circle cx="313" cy="84" r="16" fill="#B48CFF"/><circle cx="313" cy="84" r="6" fill="#FFB454"/>
+                  <ellipse cx="292" cy="124" rx="16" ry="7" transform="rotate(-20 292 124)" fill="#8E6CD9"/>
+                  <ellipse cx="334" cy="116" rx="16" ry="7" transform="rotate(20 334 116)" fill="#8E6CD9"/>
+                  <rect x="294" y="150" width="38" height="16" rx="3" fill="#4F8CFF"/>
+                  <text x="200" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">画像生成</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>画像生成だと、葉っぱ 1 枚が気に入らなくても、描き直しは全体のくじ引き</span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude が画面に座標の並んだコードを書いている。直すには、このコードを読むしかない">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="20" y="200" width="360" height="10" rx="2" fill="#6B4F3A"/>
+                  <rect x="128" y="30" width="250" height="138" rx="8" fill="#0F1115" stroke="#5E6778" stroke-width="4"/>
+                  <rect x="240" y="168" width="24" height="22" fill="#5E6778"/><rect x="218" y="188" width="68" height="8" rx="2" fill="#5E6778"/>
+                  <g font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700">
+                    <text x="142" y="62" fill="#4F8CFF">&lt;path d="M26 37</text>
+                    <text x="142" y="86" fill="#4F8CFF">  h9M45 37h9"/&gt;</text>
+                    <text x="142" y="114" fill="#B48CFF">&lt;circle cx="31"</text>
+                    <text x="142" y="138" fill="#B48CFF">  cy="36" r="4.2"/&gt;</text>
+                  </g>
+                  <use href="#robot" x="30" y="100" width="80" height="100"/>
+                  <circle cx="360" cy="24" r="16" fill="#E6E9EF"/>
+                  <text x="360" y="32" text-anchor="middle" font-size="22" font-weight="800" fill="#231A3D">?</text>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="253" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">この号の絵もこの形</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>座標を書かせる方式は、一部を直すにもコードを読むことになる<small>このテックブリーフの絵も、Claude が SVG の座標を書いている</small></span></div>
+            </div>
+
+            <div class="rowlab after">Klad だと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="真ん中の画板に、Claude はコマンドで、人はペンで、同じ生き物の絵を描いている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <path d="M150 222 L170 186 M250 222 L230 186" stroke="#6B4F3A" stroke-width="6" stroke-linecap="round"/>
+                  <rect x="120" y="30" width="160" height="156" rx="4" fill="#F3EEE2" stroke="#8A5A3C" stroke-width="6"/>
+                  <circle cx="200" cy="130" r="32" fill="#7FC8A0"/>
+                  <circle cx="190" cy="124" r="4" fill="#231A3D"/><circle cx="212" cy="124" r="4" fill="#231A3D"/>
+                  <path d="M192 140 q9 7 18 0" fill="none" stroke="#231A3D" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M200 98 q-26 -30 -40 -16 q14 18 40 16" fill="#36C2A8"/>
+                  <path d="M200 98 q22 -34 40 -22 q-12 22 -40 22" fill="#36C2A8"/>
+                  <path d="M134 62 q20 -8 34 4" fill="none" stroke="#B48CFF" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M248 162 q12 -10 22 -2" fill="none" stroke="#4F8CFF" stroke-width="7" stroke-linecap="round"/>
+                  <rect x="10" y="34" width="100" height="48" rx="6" fill="#0F1115" stroke="#4F8CFF" stroke-width="2"/>
+                  <text x="20" y="54" font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700" fill="#36C2A8">klad</text>
+                  <text x="20" y="74" font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700" fill="#E6E9EF">stroke</text>
+                  <use href="#robot" x="22" y="112" width="80" height="100"/>
+                  <path d="M96 140 Q114 100 132 66" fill="none" stroke="#B48CFF" stroke-width="2.5" stroke-dasharray="5 5"/>
+                  <circle cx="340" cy="120" r="13" fill="#F2C9A0"/>
+                  <path d="M327 118 a13 13 0 0 1 26 0 z" fill="#3A2E2A"/>
+                  <rect x="324" y="134" width="32" height="88" rx="10" fill="#4F8CFF"/>
+                  <line x1="328" y1="156" x2="286" y2="164" stroke="#4F8CFF" stroke-width="8" stroke-linecap="round"/>
+                  <line x1="290" y1="164" x2="270" y2="160" stroke="#FFB454" stroke-width="4" stroke-linecap="round"/>
+                  <text x="62" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="340" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>Claude はコマンドで、あなたはペンで、同じ絵に描く<small>相手の一筆はすぐ見える。筆・レイヤー・タイムラインはどちらも同じものを使う</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="葉っぱ 1 枚だけを選んで、色を緑からだいだい色に変えている。画板には付箋が貼られ、もう少し右へ、と書いてある">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="30" y="24" width="236" height="196" rx="4" fill="#F3EEE2" stroke="#8A5A3C" stroke-width="6"/>
+                  <circle cx="146" cy="160" r="40" fill="#7FC8A0"/>
+                  <circle cx="134" cy="152" r="5" fill="#231A3D"/><circle cx="160" cy="152" r="5" fill="#231A3D"/>
+                  <path d="M136 172 q11 8 22 0" fill="none" stroke="#231A3D" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M146 120 q-32 -36 -50 -20 q18 22 50 20" fill="#36C2A8"/>
+                  <path d="M146 120 q28 -42 50 -28 q-15 28 -50 28" fill="#36C2A8" fill-opacity=".3"/>
+                  <path d="M150 118 q28 -42 50 -28 q-15 28 -50 28" fill="#FFB454"/>
+                  <rect x="144" y="82" width="64" height="44" fill="none" stroke="#4F8CFF" stroke-width="2.5" stroke-dasharray="5 4"/>
+                  <g fill="#4F8CFF"><rect x="140" y="78" width="8" height="8"/><rect x="204" y="78" width="8" height="8"/><rect x="140" y="122" width="8" height="8"/><rect x="204" y="122" width="8" height="8"/></g>
+                  <rect x="280" y="28" width="108" height="92" rx="10" fill="#2A3346"/>
+                  <text x="334" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#E6E9EF">この一筆</text>
+                  <circle cx="306" cy="80" r="11" fill="#36C2A8"/>
+                  <circle cx="334" cy="80" r="11" fill="#FFB454" stroke="#E6E9EF" stroke-width="3"/>
+                  <circle cx="362" cy="80" r="11" fill="#FF6B6B"/>
+                  <text x="334" y="110" text-anchor="middle" font-size="15" fill="#9AA3B2">色・太さ</text>
+                  <g transform="rotate(4 334 172)"><rect x="284" y="140" width="100" height="64" rx="3" fill="#FFE58F"/><text x="334" y="168" text-anchor="middle" font-size="15" font-weight="700" fill="#3A2A12">もう少し</text><text x="334" y="190" text-anchor="middle" font-size="15" font-weight="700" fill="#3A2A12">右へ</text></g>
+                  <circle cx="334" cy="142" r="5" fill="#FF6B6B"/>
+                  <text x="148" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">一筆だけ選ぶ</text>
+                  <text x="334" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">付箋で頼む</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>気に入らない一筆だけ選んで、色・太さ・形を直す。付箋で Claude に頼むこともできる<small>Claude の一筆には印が付き、どの変更も共通の履歴の 1 歩なので戻せる</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>Klad の中に画像のモデルは無い。何を描くかは Claude（や Codex）が決め、Klad は筆・レイヤー・タイムラインを渡す</li>
+            <li>README の作例（生き物・夜の場面・道具 12 個）は Claude Fable 5.2 が一筆ずつ描いたもの。描く順に再生して見られる</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>Claude が使うコマンド（README から抜き出したもの）</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>ターミナル</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">1</span><span class="tx">klad stroke art.klad l4 --brush oil --path 'M100 400 C 300 200 500 600 700 400'</span><span class="pill good">描く</span></div>
+                <div class="ln"><span class="no">2</span><span class="tx">klad set art.klad c4:s12 size=3.5 color=#3355aa</span><span class="pill tool">一筆を直す</span></div>
+                <div class="ln"><span class="no">3</span><span class="tx">klad notes art.klad</span><span class="pill tool">付箋を読む</span></div>
+                <div class="ln"><span class="no">4</span><span class="tx">klad inbetween art.klad --layers lines,colour --from 0 --to 6</span><span class="pill good">間の絵</span></div>
+                <div class="ln"><span class="no">5</span><span class="tx">klad export sprite.klad --gif --scale 8</span><span class="pill good">GIF に</span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">何に使えそうか</div>
+              <div class="why">
+                <div><b>この号の絵</b>　ロボットや場面を Claude に描かせ、気になる所だけ手で直す</div>
+                <div><b>動く絵</b>　かぎになる絵を描けば間の絵を作り、歩く・動くを GIF にできる</div>
+                <div><b>アプリの素材</b>　PNG・スプライトシートで書き出せる。ピクセル絵も描ける</div>
+              </div>
+              <div class="f2">絵はふつうのファイルの集まりで、git に入れられる（README）</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>ソースは公開、でも OSS ではない</b><span>個人と、年の売上 50 万ユーロ未満の会社は無料で使える</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><b>まだ自分でビルドする</b><span>Rust と just が要る（初回 10 分ほど）。作り済みのアプリは klad.studio で受付中</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 28c4-1 6-4 7-8l9-12 4 3-9 12c-3 3-6 5-11 5z" fill="#B48CFF"/></svg><div><b>出来は頼み方しだい</b><span>README も「何を描くかはエージェントと、どれだけ導くかで変わる」</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><i>1</i>Rust（rustup）と <code>just</code> を入れ、一時フォルダで Klad をビルドする</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M12 15h12M12 20h12M12 25h8" stroke="#5E6778" stroke-width="2" stroke-linecap="round"/></svg><div><i>2</i>Claude に <code>klad skill</code> と <code>klad skill drawing</code> を読ませ、この号のロボットを 1 枚描かせる</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 28c4-1 6-4 7-8l9-12 4 3-9 12c-3 3-6 5-11 5z" fill="#4F8CFF"/></svg><div><i>3</i>気に入らない一筆を自分で直し、GIF に書き出す</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-15&amp;i=3&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション（安全審査のあと、Klad でこの号のロボットを描かせてみる）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-15"><input type="hidden" name="i" value="3"><input type="hidden" name="m" value="dig">
+              <label for="q3">この記事を深掘りする</label>
+              <textarea id="q3" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://github.com/klad-app/klad">Klad（GitHub、v0.2.0 は 11/13）</a>・<a href="https://news.ycombinator.com/item?id=50454951">Show HN（11/12、83 点）</a>・<a href="https://klad.studio">klad.studio</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 見送り ================= -->
+      <article class="item" id="skip">
+        <div class="tags"><span class="tag plain">見送り</span></div>
+        <h2 class="skiph">調べて見送ったもの</h2>
+        <div class="skipl">
+          <div><b>OpenMausBot（Star 2.2 万）</b><span>Claude や Codex を「ボットの一団」にしてチャットで使い、ボットごとに専用の PC を持たせる。試すには本人の Claude／Codex のログインを使わせることになる。Orca と 11/13 号の nod に重なる</span></div>
+          <div><b>Plannotator（v0.28.64、11/13）</b><span>計画や HTML に直接赤を入れて Claude に返す。2025 年 12 月からある道具で、最近の更新は Inbox（エージェントの管理画面）が中心。Orca と重なり、入れ方も curl | bash</span></div>
+          <div><b>Gemini Decisions API（11/11）</b><span>はい／いいえや選択肢に、確率つきで 0.15〜0.25 秒で答える。当てはまりそうな meeting-scout は qwen3:30b で 0.3 秒・確率つきの判定がもう動いていて、会議の中身を外に出さない方針</span></div>
+          <div><b>Codex Security の CLI（v0.10.0、11/12）</b><span>リポジトリ全体の脆弱性を探し、本当に突けるか確かめて直す。7 月からある道具の版上げで、試すには本人の ChatGPT のログインが要る</span></div>
+          <div><b>NVIDIA SkillEvaluator（0.9.0、11/13）</b><span>スキルあり・なしでエージェントを走らせて効き目を測る。同じことは Claude Code の <code>claude plugin eval</code>（9 月の 2.1.269 から）でできる</span></div>
+          <div><b>Claude Duet（10/21）</b><span>自分から知らせてくる常駐の Claude。米国の Pro・Max・Ultra だけで、順番待ち</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('data-jump')); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var src=b.parentNode.querySelector('[data-copy-src]'); var text=src.textContent.trim();
+      function done(){ b.textContent='コピーした'; setTimeout(function(){ b.textContent='コピー'; },1600); }
+      function fallback(){ var r=document.createRange(); r.selectNodeContents(src); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='選択した'; }
+      try{ navigator.clipboard.writeText(text).then(done,fallback); }catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
