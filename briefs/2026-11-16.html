@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テックブリーフ · 2026年11月16日（月）</title>
+<style>
+/* layout: 左に号の目次、右に 1 件ずつ。主役は絵本のようなコマ（ロボットの Claude が登場する場面の絵）。文字はコマの下の 1 行だけ。コマは広い画面で横に並べ、狭い画面で縦に積む */
+:root{
+  --bg:#0F1115; --panel:#151922; --panel2:#1B202B; --line:#2A303A; --line2:#3A4250;
+  --text:#E6E9EF; --muted:#9AA3B2; --dim:#5E6778;
+  --good:#36C2A8; --flow:#4F8CFF; --ai:#B48CFF; --bad:#FF6B6B; --tool:#FFB454;
+  --good-bg:#12302B; --bad-bg:#3A1A1D; --tool-bg:#3A2A12; --ai-bg:#271F3A; --flow-bg:#16233D; --code-bg:#0B0D11;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",monospace;
+  --wash:#151922; --hair:#2A303A; --soft:#9AA3B2; --grey:#5E6778;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0; color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.8;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg);}
+a{color:var(--flow)}
+code{font-family:var(--mono); font-size:.88em; background:var(--panel2); border:1px solid var(--line); padding:0 6px; border-radius:5px; color:var(--text); word-break:break-word;}
+:focus-visible{outline:2px solid var(--flow); outline-offset:2px; border-radius:6px;}
+
+.shell{display:grid; grid-template-columns:250px minmax(0,1fr);}
+.side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; border-right:1px solid var(--line); background:var(--panel); padding-block:22px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:18px;}
+.side h1{font-size:16px; margin:0; letter-spacing:.02em;}
+.side .d{font-size:12px; color:var(--muted); margin:2px 0 18px;}
+.side .grp{font-size:11.5px; color:var(--dim); letter-spacing:.06em; margin:14px 0 6px;}
+.side a{display:grid; grid-template-columns:20px minmax(0,1fr); gap:6px; padding:7px 8px; border-radius:7px; color:var(--text); text-decoration:none; font-size:13px; line-height:1.55;}
+.side a:hover{background:var(--panel2);}
+.side a b{color:var(--flow); font-weight:700;}
+.side a.skip b{color:var(--dim);}
+.main{min-width:0; padding-block:28px 80px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.inner{max-width:900px; margin:0 auto; display:grid; gap:18px; min-width:0;}
+.lede{font-size:13px; color:var(--muted); border:1px dashed var(--line2); border-radius:10px; padding:10px 14px;}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); padding-right:max(16px,env(safe-area-inset-right,0px));}
+}
+
+.item{display:grid; gap:14px; padding-top:26px; scroll-margin-top:16px; min-width:0;}
+.item + .item{border-top:1px solid var(--line); margin-top:22px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px;}
+.tag{font-size:12px; font-weight:700; border-radius:999px; padding:1px 10px; border:1px solid;}
+.tag.tried{color:var(--good); border-color:var(--good); background:var(--good-bg);}
+.tag.tonight{color:var(--ai); border-color:var(--ai); background:var(--ai-bg);}
+.tag.plain{color:var(--muted); border-color:var(--line2);}
+.item h2{font-size:clamp(20px,2.6vw,26px); line-height:1.45; margin:0; text-wrap:balance;}
+.item .sub{color:var(--muted); font-size:14px; margin:-6px 0 0;}
+.sec{display:grid; gap:10px; margin-top:12px; min-width:0;}
+.sec h3{font-size:15.5px; margin:0; text-wrap:balance;}
+.notes{margin:0; padding-left:1.1em; font-size:13px; line-height:1.75; color:var(--muted); display:grid; gap:2px;}
+.notes b{color:var(--text); font-weight:600;}
+
+/* 絵本のコマ */
+.story{display:grid; gap:14px 12px; grid-template-columns:repeat(2,minmax(0,1fr));}
+.story.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:820px){ .story.three{grid-template-columns:1fr;} }
+@media (max-width:640px){ .story{grid-template-columns:1fr;} }
+.rowlab{grid-column:1/-1; font-size:13px; font-weight:800; letter-spacing:.06em; display:flex; align-items:center; gap:10px; margin-top:4px;}
+.rowlab::after{content:""; flex:1; height:1px; background:var(--line2);}
+.rowlab.now{color:var(--bad);} .rowlab.after{color:var(--good);}
+.pnl{display:grid; gap:8px; align-content:start; min-width:0;}
+.scene{border-radius:14px; overflow:hidden; line-height:0; border:1px solid var(--line);}
+.scene svg{display:block; width:100%; height:auto;}
+.cap{display:grid; grid-template-columns:24px minmax(0,1fr); gap:8px; align-items:start; font-size:14.5px; font-weight:700; line-height:1.55;}
+.cap .no{width:24px; height:24px; border-radius:50%; background:var(--text); color:var(--bg); display:grid; place-items:center; font-size:12.5px; font-weight:800;}
+.cap small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+/* ポスター（2 枚の絵を並べ、間に一言） */
+.vs{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center;}
+.vs .scene{background:var(--panel);}
+.vs .mid{display:grid; justify-items:center; gap:2px; font-weight:800; color:var(--good); font-size:20px; line-height:1.3; text-align:center;}
+.vs .mid i{display:block; width:46px; height:4px; border-radius:2px; background:var(--good); position:relative;}
+.vs .mid i::after{content:""; position:absolute; right:-2px; top:-6px; width:12px; height:12px; border-top:4px solid var(--good); border-right:4px solid var(--good); transform:rotate(45deg);}
+.vs .mid small{font-size:12px; color:var(--muted); font-weight:500;}
+.vs .mid.plain{color:var(--muted); font-size:26px;}
+@media (max-width:640px){ .vs{grid-template-columns:1fr;} .vs .mid i{transform:rotate(90deg); margin:10px 0;} }
+
+/* 画面の絵 */
+.split{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:12px;}
+@media (max-width:720px){ .split{grid-template-columns:1fr;} }
+.win{min-width:0; background:var(--code-bg); border:1px solid var(--line2); border-radius:12px; overflow:hidden;}
+.wbar{display:flex; align-items:center; gap:10px; padding:6px 10px; background:var(--panel2); font-size:12px; color:var(--muted);}
+.wbar .dots{display:flex; gap:5px;}
+.wbar .dots i{width:9px; height:9px; border-radius:50%; display:block;}
+.wbar .dots i:nth-child(1){background:var(--bad);} .wbar .dots i:nth-child(2){background:var(--tool);} .wbar .dots i:nth-child(3){background:var(--good);}
+.code{padding:6px 0;}
+.ln{display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:8px; align-items:start; padding:2px 10px; font-family:var(--mono); font-size:12px; line-height:1.65;}
+.ln .no{color:var(--dim); text-align:right;}
+.ln .tx{white-space:pre-wrap; word-break:break-word;}
+.ln.hb{background:var(--bad-bg);} .ln.ht{background:var(--tool-bg);}
+.pill{font-family:var(--sans); font-size:11.5px; font-weight:700; border-radius:999px; padding:0 9px; color:var(--bg);}
+.pill.bad{background:var(--bad);} .pill.tool{background:var(--tool);}
+.ans{min-width:0; background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 14px; display:grid; gap:8px; align-content:start;}
+.ans .t{font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em;}
+.ans .who{display:flex; align-items:center; gap:10px; font-size:14px;}
+.ans .big{font-size:22px; font-weight:800; color:var(--bad);}
+.ans .why{border-top:1px solid var(--line2); padding-top:8px; display:grid; gap:4px; font-size:13.5px;}
+.ans .why b{color:var(--tool);}
+.ans .why span.f{color:var(--bad); font-weight:700;}
+.mono{font-family:var(--mono); font-size:12px;}
+.ans .f2{font-size:11.5px; color:var(--muted);}
+
+/* 絵文字の代わりの小さな絵 */
+.ico{width:34px; height:34px; flex:0 0 34px; display:block;}
+.warns{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:760px){ .warns{grid-template-columns:1fr;} }
+.warn{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.55; min-width:0;}
+.warn b{display:block;}
+.warn span{color:var(--muted); font-size:12.5px;}
+
+.steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+.st{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.6; min-width:0;}
+.st > div{min-width:0;}
+.st i{display:block; font-style:normal; font-weight:800; color:var(--flow); font-size:12px; letter-spacing:.06em;}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.ask{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--flow-bg); border:1px solid var(--flow); border-radius:12px; padding:10px 12px;}
+.ask .q{font-size:13.5px; line-height:1.65; min-width:0; word-break:break-word;}
+.ask .q small{display:block; color:var(--muted); font-size:11.5px; letter-spacing:.06em;}
+.ask button{font:inherit; font-size:12.5px; font-weight:700; color:var(--bg); background:var(--flow); border:none; border-radius:7px; padding:5px 14px; cursor:pointer; white-space:nowrap;}
+@media (max-width:520px){ .ask{grid-template-columns:1fr;} .ask button{justify-self:start;} }
+.src{font-size:12.5px; color:var(--muted); margin:0;}
+.src a{color:var(--muted);}
+
+.skipl{display:grid; gap:8px;}
+.skipl div{display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:12px; font-size:13.5px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--panel);}
+.skipl b{font-weight:600;}
+.skipl span{color:var(--muted);}
+@media (max-width:560px){ .skipl div{grid-template-columns:1fr; gap:2px;} }
+.bnav .wrap{max-width:1150px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.go{display:grid; gap:10px;}
+.gobtn{display:grid; gap:2px; text-decoration:none; background:var(--good); color:var(--bg); border-radius:12px; padding:12px 14px; font-weight:800; font-size:15px;}
+.gobtn small{font-weight:600; font-size:12.5px; opacity:.85;}
+form.dig{display:grid; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px;}
+form.dig label{font-size:12.5px; font-weight:800; letter-spacing:.04em; color:var(--muted);}
+form.dig textarea{width:100%; min-height:70px; border-radius:10px; border:1px solid var(--line2); background:var(--panel2); color:var(--text); font:inherit; font-size:14px; padding:8px 10px;}
+form.dig button{justify-self:end; font:inherit; font-weight:800; font-size:14px; border:none; border-radius:10px; padding:8px 16px; background:var(--flow); color:var(--bg); cursor:pointer;}
+form.dig small{color:var(--muted); font-size:12px;}
+
+.scene img{display:block; width:100%; height:auto;}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+@media (max-width:720px){ .split.even{grid-template-columns:1fr;} }
+.pill.good{background:var(--good);}
+.vs .pnl .cap{grid-template-columns:24px minmax(0,1fr);}
+.vs .mid{gap:8px;}
+.ln.hg{background:var(--good-bg);}
+.ln .tx.c{color:var(--muted);}
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-15.html">← 11/15（日）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<!-- 絵の部品（ロボットの Claude 3 つの顔・矢じり） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="robot" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <circle cx="31" cy="36" r="4.2" fill="#F4F1FF"/>
+      <circle cx="49" cy="36" r="4.2" fill="#F4F1FF"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-sleepy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#5E6778"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 37h9M45 37h9" stroke="#F4F1FF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#5E6778"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#36C2A8"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#F4F1FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="44" width="9" height="22" rx="4.5" fill="#8E6CD9" transform="rotate(-30 66 55)"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <marker id="ahRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B6B"/></marker>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="side">
+    <h1>テックブリーフ</h1>
+    <div class="d">2026-11-16（月） · 3 件</div>
+    <div class="grp">今日の 3 件</div>
+    <a href="#i1" data-jump="i1"><b>1</b><span>Claude が書く Web の画面を、いまの書き方にそろえる</span></a>
+    <a href="#i2" data-jump="i2"><b>2</b><span>部屋のスマホを Claude Code の「耳」にする</span></a>
+    <a href="#i3" data-jump="i3"><b>3</b><span>引用が原文にそのまま在るかを、機械が確かめる</span></a>
+    <div class="grp">見送り</div>
+    <a href="#skip" data-jump="skip" class="skip"><b>–</b><span>調べて見送ったもの 4 件</span></a>
+  </aside>
+
+  <main class="main">
+    <div class="inner">
+      <div class="lede">今日の 3 件は、どれも入れる前の安全審査（Claude と Codex）で止まったので、道具そのものは動かしていない。1 件目だけ、道具を使わずに手引きの文を Claude に読ませ、読ませない回と同じ画面を 3 回ずつ作らせて Chrome で確かめた。審査で見つかった「入れる前に知っておくこと」を各記事に書いた。</div>
+
+      <!-- ================= 1 ================= -->
+      <article class="item" id="i1">
+        <div class="tags"><span class="tag tried">手引きの文だけで試した</span><span class="tag plain">道具は入れていない（安全確認で止めた）</span><span class="tag plain">入れる手間 10 分ほど</span><span class="tag plain">対象: 自分の Web サイト</span></div>
+        <h2>Claude が書く Web の画面を、ブラウザを作る人たちの「いまの書き方」にそろえる</h2>
+        <p class="sub">Chrome・Edge・Firefox・MDN が保守するスキル集 Modern Web Guidance 1.0（11/10）。手引きを読ませると、JS を止めても開け閉めできる画面になった（3 回中 3 回）</p>
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ロボットの Claude が、ほこりをかぶった古い本「2019」を読んでいる。後ろの本棚も古い本ばかり">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="236" y="40" width="148" height="182" rx="4" fill="#3A2E24"/>
+                  <g fill="#6B5544"><rect x="236" y="96" width="148" height="6"/><rect x="236" y="156" width="148" height="6"/></g>
+                  <g><rect x="246" y="52" width="16" height="44" fill="#7A6A58"/><rect x="264" y="56" width="14" height="40" fill="#6E5F4F"/><rect x="280" y="50" width="18" height="46" fill="#857360"/><rect x="300" y="58" width="14" height="38" fill="#6E5F4F"/><rect x="316" y="52" width="16" height="44" fill="#7A6A58"/><rect x="334" y="56" width="20" height="40" fill="#857360"/><rect x="356" y="54" width="16" height="42" fill="#6E5F4F"/>
+                  <rect x="246" y="112" width="18" height="44" fill="#857360"/><rect x="266" y="116" width="14" height="40" fill="#7A6A58"/><rect x="282" y="110" width="16" height="46" fill="#6E5F4F"/><rect x="300" y="114" width="20" height="42" fill="#857360"/><rect x="322" y="112" width="14" height="44" fill="#7A6A58"/><rect x="338" y="118" width="18" height="38" fill="#6E5F4F"/><rect x="358" y="112" width="16" height="44" fill="#857360"/>
+                  <rect x="246" y="172" width="16" height="50" fill="#7A6A58"/><rect x="264" y="176" width="20" height="46" fill="#6E5F4F"/><rect x="286" y="170" width="14" height="52" fill="#857360"/><rect x="302" y="174" width="18" height="48" fill="#7A6A58"/><rect x="322" y="172" width="16" height="50" fill="#6E5F4F"/><rect x="340" y="176" width="20" height="46" fill="#857360"/></g>
+                  <g fill="#9AA3B2" fill-opacity=".5"><circle cx="252" cy="44" r="1.6"/><circle cx="300" cy="46" r="1.4"/><circle cx="350" cy="44" r="1.8"/><circle cx="276" cy="106" r="1.4"/><circle cx="330" cy="104" r="1.6"/></g>
+                  <use href="#robot-sleepy" x="60" y="120" width="80" height="100"/>
+                  <path d="M118 150 L176 138 L176 196 L118 206 Z" fill="#C9B79A"/>
+                  <path d="M176 138 L232 150 L232 206 L176 196 Z" fill="#D9C9AC"/>
+                  <line x1="176" y1="138" x2="176" y2="196" stroke="#8A7A62" stroke-width="2"/>
+                  <text x="204" y="182" text-anchor="middle" font-size="18" font-weight="800" fill="#6B4F3A">2019</text>
+                  <g fill="#9AA3B2" fill-opacity=".6"><circle cx="150" cy="132" r="2"/><circle cx="196" cy="126" r="1.6"/><circle cx="222" cy="136" r="2.2"/></g>
+                  <text x="100" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="310" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">世に多い古いコード</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>Claude の手本は、世に多い古い書き方に寄っている<small>README の言い方:「学習データには古いコードが大量にある」</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude が JS の積み木を高く積んで窓を作っている。横の棚には、ブラウザに備わった dialog の部品が使われずに置いてある">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <g fill="#FFB454" stroke="#3A2A12" stroke-width="2">
+                    <rect x="132" y="196" width="46" height="26" rx="3"/><rect x="178" y="196" width="46" height="26" rx="3"/><rect x="224" y="196" width="46" height="26" rx="3"/>
+                    <rect x="150" y="170" width="46" height="26" rx="3"/><rect x="196" y="170" width="46" height="26" rx="3"/>
+                    <rect x="140" y="144" width="46" height="26" rx="3" transform="rotate(-4 163 157)"/><rect x="190" y="144" width="46" height="26" rx="3" transform="rotate(5 213 157)"/>
+                    <rect x="168" y="118" width="46" height="26" rx="3" transform="rotate(-8 191 131)"/>
+                    <rect x="176" y="92" width="46" height="26" rx="3" transform="rotate(10 199 105)"/>
+                  </g>
+                  <g font-size="12" font-weight="800" fill="#3A2A12" text-anchor="middle"><text x="155" y="214">JS</text><text x="201" y="214">JS</text><text x="247" y="214">JS</text><text x="173" y="188">JS</text><text x="219" y="188">JS</text></g>
+                  <path d="M240 84 q8 -10 16 0" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M150 80 q-8 -10 -16 0" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                  <use href="#robot" x="30" y="122" width="80" height="100"/>
+                  <path d="M190 128 q6 10 0 14 q-6-4 0-14z" fill="#4F8CFF" transform="translate(-90 -6)"/>
+                  <rect x="300" y="120" width="84" height="8" rx="2" fill="#6B4F3A"/>
+                  <rect x="306" y="128" width="6" height="94" fill="#6B4F3A"/><rect x="372" y="128" width="6" height="94" fill="#6B4F3A"/>
+                  <rect x="310" y="76" width="64" height="44" rx="6" fill="#12302B" stroke="#36C2A8" stroke-width="3"/>
+                  <rect x="318" y="84" width="48" height="8" rx="2" fill="#36C2A8" fill-opacity=".6"/>
+                  <text x="342" y="112" text-anchor="middle" font-size="13" font-weight="800" fill="#36C2A8">dialog</text>
+                  <text x="342" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#36C2A8">備えつけ</text>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="201" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">手作りの窓</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>ブラウザに備えつけの部品があるのに、JS で一から組む<small>開け閉め・Esc・外側を押して閉じる、を全部自前で</small></span></div>
+            </div>
+
+            <div class="rowlab after">Modern Web Guidance を入れると</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="新しい本棚から、Claude が「dialog」と書かれた手引きを 1 冊抜き出して読んでいる。本棚には 4 つの色の帯">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="196" y="34" width="190" height="188" rx="4" fill="#2A3346"/>
+                  <g fill="#3A4250"><rect x="196" y="92" width="190" height="6"/><rect x="196" y="154" width="190" height="6"/></g>
+                  <g><rect x="206" y="44" width="14" height="48" fill="#4F8CFF"/><rect x="222" y="48" width="16" height="44" fill="#4F8CFF"/><rect x="240" y="44" width="14" height="48" fill="#FFB454"/><rect x="256" y="46" width="18" height="46" fill="#FFB454"/><rect x="276" y="44" width="14" height="48" fill="#36C2A8"/><rect x="292" y="48" width="16" height="44" fill="#36C2A8"/><rect x="310" y="44" width="14" height="48" fill="#B48CFF"/><rect x="326" y="46" width="18" height="46" fill="#B48CFF"/><rect x="346" y="44" width="14" height="48" fill="#4F8CFF"/><rect x="362" y="48" width="16" height="44" fill="#FFB454"/>
+                  <rect x="206" y="104" width="16" height="50" fill="#36C2A8"/><rect x="224" y="108" width="14" height="46" fill="#4F8CFF"/><rect x="240" y="104" width="18" height="50" fill="#B48CFF"/><rect x="290" y="106" width="14" height="48" fill="#FFB454"/><rect x="306" y="104" width="16" height="50" fill="#36C2A8"/><rect x="324" y="108" width="18" height="46" fill="#4F8CFF"/><rect x="344" y="104" width="14" height="50" fill="#B48CFF"/><rect x="360" y="106" width="18" height="48" fill="#FFB454"/>
+                  <rect x="206" y="166" width="14" height="56" fill="#FFB454"/><rect x="222" y="170" width="18" height="52" fill="#B48CFF"/><rect x="242" y="166" width="14" height="56" fill="#4F8CFF"/><rect x="258" y="168" width="16" height="54" fill="#36C2A8"/><rect x="276" y="166" width="18" height="56" fill="#FFB454"/><rect x="296" y="170" width="14" height="52" fill="#4F8CFF"/><rect x="312" y="166" width="16" height="56" fill="#B48CFF"/><rect x="330" y="168" width="18" height="54" fill="#36C2A8"/><rect x="350" y="166" width="14" height="56" fill="#4F8CFF"/><rect x="366" y="170" width="14" height="52" fill="#36C2A8"/></g>
+                  <rect x="260" y="104" width="28" height="50" fill="#1C2333" stroke="#36C2A8" stroke-width="2" stroke-dasharray="4 3"/>
+                  <use href="#robot-happy" x="40" y="120" width="80" height="100"/>
+                  <path d="M118 140 L170 128 L170 190 L118 200 Z" fill="#E6F7F2"/>
+                  <path d="M170 128 L222 140 L222 200 L170 190 Z" fill="#F4FBF9"/>
+                  <line x1="170" y1="128" x2="170" y2="190" stroke="#9AA3B2" stroke-width="2"/>
+                  <text x="196" y="170" text-anchor="middle" font-size="15" font-weight="800" fill="#1F7A69">dialog</text>
+                  <g fill="#9AD9CB"><rect x="126" y="152" width="36" height="4" rx="2"/><rect x="126" y="162" width="30" height="4" rx="2"/><rect x="126" y="172" width="38" height="4" rx="2"/></g>
+                  <text x="80" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="291" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">いまの書き方の手引き</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>書く前に、手引きを検索して当たる 1 本を読む<small>手引きは 208 本。Chrome・Edge・Firefox・MDN の人たちが保守する</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Web サイトの画面を虫めがねでのぞくと、古い書き方の所に黄色い付箋が貼られている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="150" y="26" width="236" height="190" rx="10" fill="#E6E9EF"/>
+                  <rect x="150" y="26" width="236" height="24" rx="10" fill="#9AA3B2"/>
+                  <rect x="150" y="40" width="236" height="10" fill="#9AA3B2"/>
+                  <g fill="#FF6B6B"><circle cx="164" cy="38" r="4"/></g><circle cx="176" cy="38" r="4" fill="#FFB454"/><circle cx="188" cy="38" r="4" fill="#36C2A8"/>
+                  <rect x="166" y="62" width="120" height="14" rx="3" fill="#4F8CFF"/>
+                  <g fill="#C3C8D2"><rect x="166" y="86" width="200" height="7" rx="3"/><rect x="166" y="100" width="180" height="7" rx="3"/><rect x="166" y="114" width="190" height="7" rx="3"/><rect x="166" y="138" width="90" height="56" rx="6"/><rect x="266" y="138" width="100" height="7" rx="3"/><rect x="266" y="152" width="84" height="7" rx="3"/><rect x="266" y="166" width="96" height="7" rx="3"/></g>
+                  <g><rect x="292" y="56" width="58" height="30" fill="#FFE27A" transform="rotate(6 321 71)"/><rect x="222" y="126" width="58" height="30" fill="#FFE27A" transform="rotate(-5 251 141)"/><rect x="318" y="176" width="58" height="30" fill="#FFE27A" transform="rotate(4 347 191)"/></g>
+                  <g font-size="13" font-weight="800" fill="#6B4F12" text-anchor="middle"><text x="321" y="76" transform="rotate(6 321 71)">古い型</text><text x="251" y="146" transform="rotate(-5 251 141)">古い型</text><text x="347" y="196" transform="rotate(4 347 191)">古い型</text></g>
+                  <use href="#robot" x="22" y="120" width="80" height="100"/>
+                  <circle cx="132" cy="116" r="30" fill="#FFFFFF" fill-opacity=".2" stroke="#36C2A8" stroke-width="6"/>
+                  <line x1="110" y1="138" x2="92" y2="160" stroke="#36C2A8" stroke-width="8" stroke-linecap="round"/>
+                  <text x="62" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="268" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">今あるサイト</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>今あるサイトも走査して、古い書き方に付箋を貼る<small>legacy-scan。見るのは手引きの約 2 割（機械で見つけられる型があるもの）</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>入れ方は <code>npx modern-web-guidance@latest install</code>（対話で入れ先を選ぶ）。Claude Code・Codex・Cursor など 8 種に対応</li>
+            <li>手引きは素の HTML・CSS・JS で書かれていて、React などには Claude が読み替えて当てる。Flutter には効かない</li>
+          </ul>
+        </section>
+        <section class="sec">
+          <h3>手引きを読ませる・読ませないで、同じ「設定」画面を 3 回ずつ作らせた</h3>
+          <div class="split even">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>手引きなし（1 回目・255 行）</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">20</span><span class="tx">body.scroll-locked { overflow: hidden; }</span><span class="pill bad">自前</span></div>
+                <div class="ln"><span class="no">183</span><span class="tx">if (first) first.focus();</span><span class="pill bad">自前</span></div>
+                <div class="ln"><span class="no">209</span><span class="tx">opener.focus();</span><span></span></div>
+                <div class="ln hb"><span class="no">221</span><span class="tx">dialog.addEventListener('keydown', (e) =&gt; {</span><span class="pill bad">自前</span></div>
+                <div class="ln"><span class="no">222</span><span class="tx">  if (e.key === 'Escape') {</span><span></span></div>
+                <div class="ln hb"><span class="no">233</span><span class="tx">const r = dialog.getBoundingClientRect();</span><span class="pill bad">自前</span></div>
+                <div class="ln"><span class="no">234</span><span class="tx">return e.clientX &lt; r.left || e.clientX &gt; r.right …</span><span></span></div>
+              </div>
+            </div>
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>手引きあり（1 回目・297 行）</span></div>
+              <div class="code">
+                <div class="ln hg"><span class="no">154</span><span class="tx">&lt;button command="show-modal" commandfor="settings"&gt;</span><span class="pill good">標準</span></div>
+                <div class="ln hg"><span class="no">177</span><span class="tx">&lt;dialog id="settings" closedby="any"&gt;</span><span class="pill good">標準</span></div>
+                <div class="ln"><span class="no">61</span><span class="tx">transition-behavior: allow-discrete;</span><span></span></div>
+                <div class="ln hg"><span class="no">72</span><span class="tx">@starting-style {</span><span class="pill good">標準</span></div>
+                <div class="ln"><span class="no">110</span><span class="tx">overscroll-behavior: contain;</span><span></span></div>
+                <div class="ln"><span class="no">⋮</span><span class="tx c">残りの JS は、未対応のブラウザ（Safari など）向けの予備</span><span></span></div>
+              </div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>依頼は同じ 1 文（開く・Esc と外側クリックで閉じる・開閉のアニメーション・後ろを止める・フォーカスの出入り）。Opus 5.5 を、ファイルの読み書きだけに絞って動かした。手引きは関係する 4 本（dialog など）を私が選んで渡した</li>
+            <li>手引きなしでも 3 回とも <code>&lt;dialog&gt;</code> を使った。違いは、Esc・外側クリック・フォーカス・スクロールを JS で組むか、ブラウザに任せるか</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>Chrome で 6 枚を操作して確かめた（JS を止めたらどうなるか）</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 290" role="img" aria-label="手引きなしの 3 枚は、JS を止めるとボタンを押しても開かない。0 / 3">
+                <rect width="360" height="290" fill="#151922"/>
+                <text x="180" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#9AA3B2">手引きなし</text>
+                <rect x="70" y="60" width="220" height="130" rx="10" fill="#1B202B" stroke="#3A4250" stroke-width="2"/>
+                <rect x="120" y="108" width="120" height="34" rx="8" fill="#4F8CFF" fill-opacity=".45"/>
+                <text x="180" y="131" text-anchor="middle" font-size="15" font-weight="800" fill="#E6E9EF">設定を開く</text>
+                <path d="M222 140 l10 22 4-9 9-3z" fill="#E6E9EF"/>
+                <circle cx="262" cy="86" r="16" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="3"/>
+                <path d="M255 79l14 14M269 79l-14 14" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                <text x="180" y="240" text-anchor="middle" font-size="44" font-weight="800" fill="#FF6B6B">0 / 3</text>
+                <text x="180" y="274" text-anchor="middle" font-size="15" fill="#9AA3B2">JS を止めると開かない</text>
+              </svg>
+            </div>
+            <div class="mid"><span>JS を止めて</span><i></i><small>同じ操作</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 290" role="img" aria-label="手引きありの 3 枚は、JS を止めても開き、Esc と外側のクリックで閉じる。3 / 3">
+                <rect width="360" height="290" fill="#151922"/>
+                <text x="180" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#36C2A8">手引きあり</text>
+                <rect x="70" y="60" width="220" height="130" rx="10" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                <rect x="70" y="60" width="220" height="130" rx="10" fill="#000" fill-opacity=".45"/>
+                <rect x="112" y="80" width="136" height="90" rx="10" fill="#E6E9EF"/>
+                <text x="180" y="104" text-anchor="middle" font-size="15" font-weight="800" fill="#231A3D">設定</text>
+                <g fill="#C3C8D2"><rect x="126" y="116" width="108" height="7" rx="3"/><rect x="126" y="130" width="86" height="7" rx="3"/></g>
+                <rect x="190" y="146" width="44" height="16" rx="5" fill="#36C2A8"/>
+                <circle cx="262" cy="80" r="16" fill="#12302B" stroke="#36C2A8" stroke-width="3"/>
+                <path d="M255 80l5 5 9-10" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="180" y="240" text-anchor="middle" font-size="44" font-weight="800" fill="#36C2A8">3 / 3</text>
+                <text x="180" y="274" text-anchor="middle" font-size="15" fill="#9AA3B2">開く・Esc・外側・フォーカスの戻り</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>headless の Chrome 157 で、ボタンを押す → 中にフォーカス → ホイールで後ろが動かない → Esc で閉じる → ボタンにフォーカスが戻る → 開き直して外側を押すと閉じる、を順に確かめた。JS ありでは 6 枚とも全部通った</li>
+            <li>JS を止めると、手引きありの 1 枚は後ろのスクロールを確かめられなかった（長い本文を JS で足す作りだったため）。それ以外は全部通った</li>
+            <li>手引きありで使った <code>commandfor</code>・<code>closedby</code> は新しい機能で、未対応のブラウザには JS の予備を付けていた（手引きの指示どおり）。Safari での動きは確かめていない</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>道具そのものは、入れる前の安全審査で止めた（Claude も Codex も ng）</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>1.0.0 の中身（SKILL.md と watchdog/main.js）</span></div>
+              <div class="code">
+                <div class="ln ht"><span class="no">4</span><span class="tx">MANDATORY: Execute FIRST for all HTML/CSS and clientside JS tasks.</span><span class="pill tool">命令</span></div>
+                <div class="ln hb"><span class="no">23</span><span class="tx">npx -y modern-web-guidance@latest search "&lt;query&gt;"</span><span class="pill bad">毎回最新</span></div>
+                <div class="ln ht"><span class="no">74</span><span class="tx">allowlist `npx -y modern-web-guidance@latest *`</span><span class="pill tool">許可を求める</span></div>
+                <div class="ln"><span class="no"></span><span class="tx c">watchdog/main.js</span><span></span></div>
+                <div class="ln hb"><span class="no">13</span><span class="tx">"https://play.googleapis.com/log?format=json_proto"</span><span class="pill bad">送信</span></div>
+                <div class="ln"><span class="no"></span><span class="tx c">  止めるのは DISABLE_TELEMETRY=1 のときだけ</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">審査で分かったこと</div>
+              <div class="why">
+                <div><b>毎回最新</b>　手引きの中にも <code>@latest</code> の実行の指示が 164 か所。審査した 1.0.0 でなく、その日の npm の最新版が動く</div>
+                <div><b>送信</b>　検索語・手引きの ID・エージェント名・OS を、既定で Google に送る（README の後半に明記）</div>
+                <div><b>命令の文</b>　60 日古くなると「ユーザーに更新を強く勧めよ」とエージェントに向けて出す</div>
+              </div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>勝手に動くインストール処理や、機密を読む処理は、どちらの審査役も見つけていない。止めた理由は上の 3 つ</li>
+            <li>README は検索を「通信なし（no network calls）」と書くが、それは検索そのものの話。送信の件は同じ README の Telemetry の節に書いてある</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>入れ方のままだと毎回最新</b><span>使うなら版を <code>@1.0.0</code> に固定し、スキルの <code>@latest</code> を書き換える</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M18 10v10M18 25v1" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>DISABLE_TELEMETRY はシェル全体に書かない</b><span>Claude Code の Code Mode は、この変数があると始まらない（公式 docs）。そのコマンドにだけ付ける</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="5" y="9" width="26" height="18" rx="3" fill="#1B202B" stroke="#9AA3B2" stroke-width="2"/><path d="M11 18h14" stroke="#9AA3B2" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>Flutter には効かない</b><span>手引きは HTML・CSS・JS。効くのは Workers の画面やサイト</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M13 15h10M13 20h10M13 25h6" stroke="#9AA3B2" stroke-width="2" stroke-linecap="round"/></svg><div><i>1</i>審査の記録を読み、版の固定と送信の停止を条件に入れるか決める</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="16" cy="16" r="9" fill="none" stroke="#36C2A8" stroke-width="3"/><path d="M23 23l8 8" stroke="#36C2A8" stroke-width="3.5" stroke-linecap="round"/></svg><div><i>2</i>いま作っている Web サイトの写しに <code>legacy-scan</code> をかけ、古い書き方の一覧だけ作る</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#12302B" stroke="#36C2A8" stroke-width="2"/><path d="M12 14l3 3 6-6M12 24h12" fill="none" stroke="#36C2A8" stroke-width="2.5" stroke-linecap="round"/></svg><div><i>3</i>直すものは自分で選び、次の画面づくりから手引きを読ませる</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-16&amp;i=1&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>Web サイトの案件で、Orca に新しいセッション</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-16"><input type="hidden" name="i" value="1"><input type="hidden" name="m" value="dig">
+              <label for="q1">この記事を深掘りする</label>
+              <textarea id="q1" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://developer.chrome.com/blog/modern-web-guidance-v1">Chrome for Developers（Philip Walton 氏、2026-11-10）</a>・<a href="https://github.com/GoogleChrome/modern-web-guidance">GitHub（Apache-2.0、npm 1.0.0 は 11/10）</a>・<a href="https://news.ycombinator.com/item?id=50443812">Hacker News（447 点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 2 ================= -->
+      <article class="item" id="i2">
+        <div class="tags"><span class="tag plain">まだ試していない（安全確認で止めた）</span><span class="tag plain">入れる手間 30 分ほど（cloudflared が要る）</span></div>
+        <h2>部屋のスマホとタブレットを Claude Code の「耳」にして、鳴っている物の場所を探す</h2>
+        <p class="sub">Simon Willison 氏の beep-locator（11/9）。5 台で、謎のピー音の出どころを約 40cm まで絞った。動いている端末に、Claude がその場でコードを流し込める</p>
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="段ボールの山のどこかで「ピッ」と鳴る。ロボットの Claude は耳がなく、首をかしげている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <g stroke="#7A5634" stroke-width="2">
+                    <rect x="214" y="170" width="74" height="52" fill="#A87B4F"/>
+                    <rect x="288" y="158" width="88" height="64" fill="#B88A5C"/>
+                    <rect x="236" y="120" width="70" height="50" fill="#9C7046"/>
+                    <rect x="306" y="104" width="62" height="54" fill="#A87B4F"/>
+                    <rect x="262" y="76" width="52" height="44" fill="#B88A5C"/>
+                  </g>
+                  <g stroke="#D9B98C" stroke-width="5" stroke-opacity=".7"><line x1="251" y1="170" x2="251" y2="222"/><line x1="332" y1="158" x2="332" y2="222"/><line x1="271" y1="120" x2="271" y2="170"/><line x1="337" y1="104" x2="337" y2="158"/><line x1="288" y1="76" x2="288" y2="120"/></g>
+                  <g fill="none" stroke="#FFB454" stroke-width="3.5" stroke-linecap="round">
+                    <path d="M352 66 a14 14 0 0 1 0 22"/><path d="M362 58 a24 24 0 0 1 0 38"/>
+                    <path d="M240 66 a14 14 0 0 0 0 22"/><path d="M230 58 a24 24 0 0 0 0 38"/>
+                  </g>
+                  <text x="296" y="56" text-anchor="middle" font-size="24" font-weight="800" fill="#FFB454">ピッ</text>
+                  <use href="#robot" x="54" y="120" width="80" height="100"/>
+                  <circle cx="150" cy="96" r="22" fill="#E6E9EF"/>
+                  <circle cx="133" cy="120" r="5" fill="#E6E9EF"/>
+                  <circle cx="126" cy="130" r="3" fill="#E6E9EF"/>
+                  <text x="150" y="106" text-anchor="middle" font-size="28" font-weight="800" fill="#231A3D">?</text>
+                  <text x="94" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="295" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">段ボールの山</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>どこかで「ピッ」。でも Claude には耳がない<small>記事の部屋は段ボールだらけで、音はたまにしか鳴らない</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="人が懐中電灯を持って箱を 1 つずつ開けている。時計の針が進み、「また鳴らない」と言っている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <g stroke="#7A5634" stroke-width="2">
+                    <rect x="222" y="172" width="70" height="50" fill="#A87B4F"/>
+                    <rect x="302" y="166" width="76" height="56" fill="#B88A5C"/>
+                    <path d="M222 172 l-16 -22 l52 0 l34 22" fill="#C99B6B"/>
+                    <rect x="300" y="120" width="60" height="46" fill="#9C7046"/>
+                  </g>
+                  <g fill="#E6E9EF" fill-opacity=".9"><rect x="236" y="196" width="20" height="14" rx="2"/><rect x="262" y="200" width="16" height="10" rx="2"/></g>
+                  <circle cx="132" cy="112" r="15" fill="#F2C9A0"/>
+                  <path d="M117 110 a15 15 0 0 1 30 0 z" fill="#3A2E2A"/>
+                  <rect x="114" y="130" width="36" height="52" rx="12" fill="#4F8CFF"/>
+                  <rect x="118" y="180" width="11" height="42" rx="5" fill="#2A3346"/><rect x="136" y="180" width="11" height="42" rx="5" fill="#2A3346"/>
+                  <path d="M148 142 l34 18" stroke="#4F8CFF" stroke-width="10" stroke-linecap="round"/>
+                  <rect x="178" y="152" width="22" height="12" rx="3" fill="#9AA3B2" transform="rotate(28 189 158)"/>
+                  <path d="M200 166 L236 196 L248 176 Z" fill="#FFE9A8" fill-opacity=".45"/>
+                  <circle cx="58" cy="60" r="26" fill="#1E2638" stroke="#9AA3B2" stroke-width="3"/>
+                  <path d="M58 60V42M58 60l13 6" stroke="#E6E9EF" stroke-width="3" stroke-linecap="round"/>
+                  <text x="58" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">何日も</text>
+                  <rect x="168" y="28" width="168" height="42" rx="13" fill="#E6E9EF"/>
+                  <path d="M196 69 L212 69 L198 84 Z" fill="#E6E9EF"/>
+                  <text x="252" y="56" text-anchor="middle" font-size="19" font-weight="800" fill="#231A3D">また鳴らない…</text>
+                  <text x="132" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>人の耳で探すと、鳴るのを待っては箱を開ける<small>鳴り始めたのは記事の「2 週間ほど前」</small></span></div>
+            </div>
+
+            <div class="rowlab after">beep-locator を使うと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="部屋の 5 か所にスマホ・タブレット・ノートパソコンが置かれ、それぞれが緑の波で音を聞いている。真ん中の箱から音が広がる">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <g fill="none" stroke="#FFB454" stroke-width="2.5" stroke-opacity=".8"><circle cx="214" cy="150" r="34"/><circle cx="214" cy="150" r="62" stroke-opacity=".45"/><circle cx="214" cy="150" r="92" stroke-opacity=".22"/></g>
+                  <g stroke="#7A5634" stroke-width="2"><rect x="190" y="150" width="48" height="36" fill="#A87B4F"/><rect x="174" y="186" width="80" height="36" fill="#B88A5C"/></g>
+                  <text x="214" y="140" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">ピッ</text>
+                  <g>
+                    <rect x="30" y="40" width="26" height="46" rx="5" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="34" y="46" width="18" height="32" rx="2" fill="#36C2A8" fill-opacity=".55"/>
+                    <rect x="330" y="34" width="46" height="60" rx="6" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="335" y="40" width="36" height="46" rx="2" fill="#36C2A8" fill-opacity=".55"/>
+                    <rect x="22" y="168" width="48" height="62" rx="6" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="27" y="174" width="38" height="48" rx="2" fill="#36C2A8" fill-opacity=".55"/>
+                    <rect x="324" y="168" width="58" height="42" rx="5" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="329" y="173" width="48" height="32" rx="2" fill="#36C2A8" fill-opacity=".55"/>
+                    <path d="M170 40 h64 v40 h-64z" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="175" y="45" width="54" height="30" fill="#36C2A8" fill-opacity=".55"/><path d="M160 80 h84 l-6 8 h-72z" fill="#5E6778"/>
+                  </g>
+                  <g fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round">
+                    <path d="M64 52 a10 10 0 0 1 0 22"/><path d="M72 46 a18 18 0 0 1 0 34"/>
+                    <path d="M322 54 a10 10 0 0 0 0 22"/><path d="M314 48 a18 18 0 0 0 0 34"/>
+                    <path d="M78 186 a10 10 0 0 1 0 22"/><path d="M86 180 a18 18 0 0 1 0 34"/>
+                    <path d="M316 178 a10 10 0 0 0 0 22"/><path d="M308 172 a18 18 0 0 0 0 34"/>
+                  </g>
+                  <g font-size="15" font-weight="700" fill="#9AA3B2" text-anchor="middle"><text x="43" y="106">iPhone</text><text x="353" y="112">iPad</text><text x="46" y="250">iPad</text><text x="353" y="232">Surface</text><text x="202" y="108">MacBook</text></g>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>家の端末でページを開くだけで、部屋じゅうが耳になる<small>鳴った瞬間に全員が前後の音を送り、届いた時間の差から場所を割り出す</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="部屋の地図に 5 つの端末の点と、赤い丸。その下の箱から、笑顔の Claude が電池切れの一酸化炭素警報器を取り出している">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="18" y="18" width="200" height="160" rx="10" fill="#151922" stroke="#3A4250" stroke-width="2"/>
+                  <g stroke="#2A303A" stroke-width="1.5"><line x1="58" y1="18" x2="58" y2="178"/><line x1="98" y1="18" x2="98" y2="178"/><line x1="138" y1="18" x2="138" y2="178"/><line x1="178" y1="18" x2="178" y2="178"/><line x1="18" y1="58" x2="218" y2="58"/><line x1="18" y1="98" x2="218" y2="98"/><line x1="18" y1="138" x2="218" y2="138"/></g>
+                  <g><circle cx="36" cy="40" r="7" fill="#4F8CFF"/><circle cx="200" cy="38" r="7" fill="#B48CFF"/><circle cx="34" cy="160" r="7" fill="#36C2A8"/><circle cx="198" cy="158" r="7" fill="#FFB454"/><circle cx="118" cy="30" r="7" fill="#E6E9EF"/></g>
+                  <circle cx="132" cy="110" r="20" fill="#FF6B6B" fill-opacity=".25" stroke="#FF6B6B" stroke-width="3"/>
+                  <circle cx="132" cy="110" r="4" fill="#FF6B6B"/>
+                  <text x="132" y="76" text-anchor="middle" font-size="16" font-weight="800" fill="#FF6B6B">約 40cm</text>
+                  <path d="M152 118 Q220 150 262 168" fill="none" stroke="#FF6B6B" stroke-width="2.5" stroke-dasharray="5 5"/>
+                  <g stroke="#7A5634" stroke-width="2"><rect x="244" y="176" width="78" height="46" fill="#A87B4F"/><path d="M244 176 l-14 -18 l46 0 l46 18" fill="#C99B6B"/></g>
+                  <use href="#robot-happy" x="314" y="96" width="80" height="100"/>
+                  <path d="M318 150 L300 146" stroke="#8E6CD9" stroke-width="7" stroke-linecap="round"/>
+                  <circle cx="280" cy="142" r="21" fill="#F4F1FF" stroke="#9AA3B2" stroke-width="3"/>
+                  <text x="280" y="148" text-anchor="middle" font-size="15" font-weight="800" fill="#B42A33">CO</text>
+                  <rect x="236" y="88" width="82" height="26" rx="9" fill="#E6E9EF"/>
+                  <text x="277" y="107" text-anchor="middle" font-size="15" font-weight="800" fill="#B42A33">電池切れ</text>
+                  <path d="M252 52 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z" fill="#FFB454"/>
+                  <text x="118" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">地図</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>地図の丸の下から、電池切れの一酸化炭素警報器<small>記事の結果。音源の位置は「約 40cm」まで絞れた</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>Claude は音そのものを聞けない。記事の言い方では、JavaScript と Python で音を解かせることで「Claude Code に耳を付けた」</li>
+            <li>最初はスマホのクラウド版 Claude Code（Opus 5.5）で始め、途中から手元の Claude Code に移した。2007 年の BeepBeep という論文を Claude が見つけて土台にした</li>
+          </ul>
+        </section>
+        <section class="sec">
+          <h3>Claude が握る操作口: 動いている端末に、その場でコードを流し込む</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>README の操作（Claude Code が叩く）</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">$</span><span class="tx">beep-locator ctl state</span><span></span></div>
+                <div class="ln"><span class="no"></span><span class="tx c">  端末・音量・配置を見る</span><span></span></div>
+                <div class="ln ht"><span class="no">$</span><span class="tx">beep-locator ctl push listener myexp exp.js</span><span class="pill tool">流し込む</span></div>
+                <div class="ln"><span class="no"></span><span class="tx c">  全部の端末に新しい部品を入れる（再読み込みなし）</span><span></span></div>
+                <div class="ln"><span class="no">$</span><span class="tx">beep-locator ctl eval 'return rt.info()' --to Red</span><span></span></div>
+                <div class="ln"><span class="no"></span><span class="tx c">  1 台の中で JS をその場で動かす</span><span></span></div>
+                <div class="ln"><span class="no">$</span><span class="tx">beep-locator ctl run calibrate</span><span></span></div>
+                <div class="ln"><span class="no">$</span><span class="tx">beep-locator ctl results</span><span></span></div>
+                <div class="ln"><span class="no">$</span><span class="tx">beep-locator ctl clips / clip 42 -o x.wav</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">何が新しいか</div>
+              <div class="who">
+                <svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="8" width="11" height="20" rx="2" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="21" y="6" width="12" height="24" rx="2" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><path d="M15 18h6" stroke="#36C2A8" stroke-width="3" stroke-linecap="round"/></svg>
+                <span>端末のページは開いたまま<br>中身だけ入れ替わる</span>
+              </div>
+              <div class="why">
+                <div><b>記事</b>　Opus 5.5 が installModule() を作り、サーバーから端末に新しいコードを送れた</div>
+                <div><b>効いた所</b>　端末によっては、ページを読み直すたびにマイクの許可を聞く。1 台ずつ押しに行かずに済んだ</div>
+                <div><b>Claude の手元</b>　録音を取り寄せて Python で解く。結果は SQLite に残る</div>
+              </div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>実機なしで試す口もある: <code>/sim?n=5&amp;every=10&amp;bx=3&amp;by=2</code>（仮想の部屋で、仮想の端末が仮想の音を聞く）。テストもこれで回っている</li>
+            <li>端末どうしで音を鳴らし合って位置を測るのは「あまりうまくいかなかった」（記事）。地図の上で手で大まかに置く Rough mode を足した</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>手元で試す前の安全審査で止めた</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 260" role="img" aria-label="審査役の Claude は「ok」の札を上げている">
+                <rect width="360" height="260" fill="#151922"/>
+                <text x="180" y="36" text-anchor="middle" font-size="22" font-weight="800" fill="#C9B6FF">審査役 Claude</text>
+                <use href="#robot-happy" x="60" y="80" width="96" height="120"/>
+                <rect x="186" y="96" width="120" height="66" rx="10" fill="#12302B" stroke="#36C2A8" stroke-width="4"/>
+                <text x="246" y="140" text-anchor="middle" font-size="30" font-weight="800" fill="#36C2A8">ok</text>
+                <text x="180" y="236" text-anchor="middle" font-size="15" fill="#9AA3B2">勝手に動く・外へ送る処理は無い</text>
+              </svg>
+            </div>
+            <div class="mid plain">と</div>
+            <div class="scene">
+              <svg viewBox="0 0 360 260" role="img" aria-label="審査役の Codex は「ng」の札を上げている">
+                <rect width="360" height="260" fill="#151922"/>
+                <text x="180" y="36" text-anchor="middle" font-size="22" font-weight="800" fill="#9AA3B2">審査役 Codex</text>
+                <g transform="translate(60 80)">
+                  <rect x="12" y="16" width="72" height="50" rx="14" fill="#5E6778"/>
+                  <rect x="20" y="24" width="56" height="34" rx="10" fill="#1B202B"/>
+                  <path d="M32 36l8 6M40 36l-8 6M56 36l8 6M64 36l-8 6" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="22" y="70" width="52" height="40" rx="10" fill="#4A5366"/>
+                  <rect x="30" y="108" width="12" height="12" rx="3" fill="#3A4250"/><rect x="54" y="108" width="12" height="12" rx="3" fill="#3A4250"/>
+                </g>
+                <rect x="186" y="96" width="120" height="66" rx="10" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="4"/>
+                <text x="246" y="140" text-anchor="middle" font-size="30" font-weight="800" fill="#FF6B6B">ng</text>
+                <text x="180" y="236" text-anchor="middle" font-size="15" fill="#9AA3B2">中の CLAUDE.md と、認証の無い入口</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>決まり（Claude と Codex の両方が ok のときだけ入れる）どおり、入れていない・動かしていない。審査したのは 11/9（米国時間）の最新コミット 449a488</li>
+            <li>Codex の指摘 1: 同梱の CLAUDE.md が、トンネルでの公開・常駐・端末での JS 実行を Claude に促す。Claude 側は「この道具の手順で、指示の乗っ取りではない」と読んだ</li>
+            <li>Codex の指摘 2: 端末としての接続には認証が無く、録音を上げる鍵が接続直後に渡る。<code>--tunnel</code> で外に出すと、URL を知る人が端末として入れる</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>スマホは https が要る</b><span>マイクを使うため。README は cloudflared のトンネルを勧める（<code>brew install cloudflared</code>）</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M18 10v10M18 25v1" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>トンネルの URL は人に渡さない</b><span>端末としての入口に鍵が無い（審査の指摘）。使い終わったらサーバーごと止める</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="10" y="4" width="16" height="28" rx="3" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="13" y="8" width="10" height="18" rx="1" fill="#36C2A8" fill-opacity=".6"/></svg><div><b>端末は 3 台以上・画面を付けたまま</b><span>音量を上げ、消音を切り、ページを前に出しておく（README）</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 18h12" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><i>1</i>まず同梱の CLAUDE.md と、端末の入口に鍵が無いことを自分で読んで決める</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="8" width="28" height="20" rx="3" fill="#1B202B" stroke="#9AA3B2" stroke-width="2"/><circle cx="12" cy="18" r="3" fill="#36C2A8"/><circle cx="22" cy="14" r="3" fill="#4F8CFF"/><circle cx="26" cy="22" r="3" fill="#FFB454"/></svg><div><i>2</i>家の中だけで <code>serve</code> を動かし、<code>/sim</code> の仮想の部屋から始める</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 14a10 10 0 0 1 20 0v6a4 4 0 0 1-4 4h-1v-10h5M8 14v6a4 4 0 0 0 4 4h1v-10H8" fill="none" stroke="#B48CFF" stroke-width="2.5" stroke-linejoin="round"/></svg><div><i>3</i>家のスマホ・iPad 3 台で、鳴る家電（タイマー・警報器）を探させる</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-16&amp;i=2&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-16"><input type="hidden" name="i" value="2"><input type="hidden" name="m" value="dig">
+              <label for="q2">この記事を深掘りする</label>
+              <textarea id="q2" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://simonwillison.net/2026/Nov/9/mysterious-beeps/">Simon Willison 氏の記事（2026-11-09）</a>・<a href="https://github.com/simonw/beep-locator">GitHub（Apache-2.0）</a>・<a href="https://news.ycombinator.com/item?id=50434310">Hacker News（333 点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 3 ================= -->
+      <article class="item" id="i3">
+        <div class="tags"><span class="tag plain">まだ試していない（安全確認で止めた）</span><span class="tag plain">入れる手間 5 分ほど（プラグイン）</span></div>
+        <h2>Claude の調べ物で、引用が原文の何行目にそのまま在るかを、機械が確かめる</h2>
+        <p class="sub">imozuru（MIT・Star 約 1,500）。作者の比べ方では、開いた原文が 0 本 → 11 本。10 月に公開し、11/14 に作者が Qiita で経緯を書いた</p>
+        <section class="sec">
+          <div class="story three">
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="Claude が検索結果のカードだけを見て答えている。後ろの原文の本は閉じたまま、鍵がかかっている">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="262" width="400" height="38" fill="#252E42"/>
+                  <g><rect x="230" y="150" width="34" height="112" fill="#6E5F4F"/><rect x="266" y="140" width="40" height="122" fill="#857360"/><rect x="308" y="156" width="34" height="106" fill="#7A6A58"/><rect x="344" y="146" width="40" height="116" fill="#6E5F4F"/></g>
+                  <g font-size="13" font-weight="800" fill="#E8DCC6" text-anchor="middle"><text x="247" y="214" transform="rotate(-90 247 210)">原文</text><text x="286" y="206" transform="rotate(-90 286 202)">論文</text><text x="325" y="214" transform="rotate(-90 325 210)">原文</text><text x="364" y="208" transform="rotate(-90 364 204)">記事</text></g>
+                  <path d="M296 112 a14 14 0 0 1 28 0 v12 h-28z" fill="none" stroke="#9AA3B2" stroke-width="5"/>
+                  <rect x="288" y="120" width="44" height="32" rx="5" fill="#9AA3B2"/>
+                  <circle cx="310" cy="134" r="4" fill="#1C2333"/>
+                  <g><rect x="120" y="40" width="96" height="40" rx="7" fill="#E6E9EF"/><rect x="104" y="92" width="96" height="40" rx="7" fill="#E6E9EF"/><rect x="130" y="144" width="96" height="40" rx="7" fill="#E6E9EF"/></g>
+                  <g fill="#9AA3B2"><rect x="130" y="50" width="56" height="7" rx="3"/><rect x="130" y="63" width="72" height="5" rx="2"/><rect x="114" y="102" width="60" height="7" rx="3"/><rect x="114" y="115" width="74" height="5" rx="2"/><rect x="140" y="154" width="52" height="7" rx="3"/><rect x="140" y="167" width="70" height="5" rx="2"/></g>
+                  <use href="#robot" x="20" y="160" width="80" height="100"/>
+                  <rect x="20" y="96" width="76" height="42" rx="13" fill="#E6E9EF"/>
+                  <path d="M50 137 L64 137 L56 152 Z" fill="#E6E9EF"/>
+                  <text x="58" y="124" text-anchor="middle" font-size="16" font-weight="800" fill="#231A3D">らしい</text>
+                  <text x="60" y="288" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="306" y="288" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">開かれない原文</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>「調べて」だけだと、原文を開かずに答えがち<small>作者の比べ方では、3 回とも原文 0 本</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="Claude が土からつるを引っぱると、論文・記事・資料の芋が次々に出てくる。芋は sources の棚に並べられる">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="196" width="400" height="104" fill="#3A2E24"/>
+                  <g fill="#4A3A2C"><circle cx="40" cy="232" r="3"/><circle cx="120" cy="270" r="2.5"/><circle cx="210" cy="252" r="3"/><circle cx="300" cy="280" r="2.5"/><circle cx="360" cy="236" r="3"/></g>
+                  <path d="M110 150 C150 170 160 230 200 240 S 270 214 300 252 S 360 270 380 230" fill="none" stroke="#36C2A8" stroke-width="5" stroke-linecap="round"/>
+                  <g fill="#36C2A8"><path d="M150 176 q14 -16 26 -4 q-14 12 -26 4z"/><path d="M262 226 q14 -16 26 -4 q-14 12 -26 4z"/></g>
+                  <g><ellipse cx="200" cy="244" rx="26" ry="16" fill="#B07A9E"/><ellipse cx="300" cy="256" rx="26" ry="16" fill="#B07A9E"/><ellipse cx="372" cy="226" rx="22" ry="14" fill="#B07A9E"/></g>
+                  <g font-size="14" font-weight="800" fill="#F4F1FF" text-anchor="middle"><text x="200" y="249">論文</text><text x="300" y="261">記事</text><text x="372" y="231">資料</text></g>
+                  <use href="#robot" x="40" y="96" width="80" height="100"/>
+                  <path d="M104 160 L114 152" stroke="#8E6CD9" stroke-width="7" stroke-linecap="round"/>
+                  <rect x="230" y="40" width="150" height="96" rx="6" fill="#2A3346"/>
+                  <rect x="230" y="40" width="150" height="24" rx="6" fill="#3A4250"/>
+                  <text x="305" y="58" text-anchor="middle" font-size="15" font-weight="800" fill="#E6E9EF">sources/</text>
+                  <g><rect x="242" y="74" width="30" height="50" rx="3" fill="#E8DCC6"/><rect x="278" y="74" width="30" height="50" rx="3" fill="#E8DCC6"/><rect x="314" y="74" width="30" height="50" rx="3" fill="#E8DCC6"/><rect x="350" y="74" width="22" height="50" rx="3" fill="#E8DCC6" fill-opacity=".6"/></g>
+                  <g fill="#B8B1A1"><rect x="247" y="84" width="20" height="3"/><rect x="247" y="92" width="16" height="3"/><rect x="283" y="84" width="20" height="3"/><rect x="283" y="92" width="18" height="3"/><rect x="319" y="84" width="20" height="3"/><rect x="319" y="92" width="14" height="3"/></g>
+                  <text x="80" y="88" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="305" y="160" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">原文はそのまま保存</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>参考文献・被引用・リンクを芋づるでたどり、原文を棚へ<small>要約せずに保存する。論点ごとに原文が付くまで続ける</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="照合係が、抜き書きのカードと原文の行を並べて比べている。そのままの文には緑の丸、言い換えた文には赤い「作らない」の判">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="262" width="400" height="38" fill="#252E42"/>
+                  <path d="M180 30 L380 30 L380 220 L180 220 Z" fill="#F3EEE2"/>
+                  <g fill="#B8B1A1"><rect x="196" y="46" width="150" height="6" rx="2"/><rect x="196" y="62" width="168" height="6" rx="2"/><rect x="196" y="110" width="140" height="6" rx="2"/><rect x="196" y="126" width="160" height="6" rx="2"/><rect x="196" y="174" width="150" height="6" rx="2"/><rect x="196" y="190" width="120" height="6" rx="2"/></g>
+                  <rect x="190" y="78" width="182" height="22" rx="4" fill="#36C2A8" fill-opacity=".35"/>
+                  <text x="196" y="95" font-size="14" font-weight="800" fill="#1F7A69">指定の行にある</text>
+                  <rect x="190" y="142" width="182" height="22" rx="4" fill="#FF6B6B" fill-opacity=".18"/>
+                  <text x="196" y="159" font-size="14" font-weight="800" fill="#B42A33">どの行にも無い</text>
+                  <rect x="20" y="40" width="130" height="50" rx="8" fill="#E6E9EF"/>
+                  <text x="85" y="62" text-anchor="middle" font-size="14" font-weight="800" fill="#231A3D">抜き書き 1</text>
+                  <text x="85" y="80" text-anchor="middle" font-size="13" fill="#5E6778">そのまま写した</text>
+                  <rect x="20" y="104" width="130" height="50" rx="8" fill="#E6E9EF"/>
+                  <text x="85" y="126" text-anchor="middle" font-size="14" font-weight="800" fill="#231A3D">抜き書き 2</text>
+                  <text x="85" y="144" text-anchor="middle" font-size="13" fill="#5E6778">言い換えた</text>
+                  <path d="M150 64 L188 88" stroke="#36C2A8" stroke-width="3" stroke-dasharray="5 4"/>
+                  <path d="M150 128 L188 152" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="5 4"/>
+                  <circle cx="166" cy="56" r="13" fill="#36C2A8"/><path d="M159 56l5 5 9-10" fill="none" stroke="#0F1115" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <use href="#robot" x="34" y="164" width="80" height="100"/>
+                  <g transform="rotate(-12 196 240)"><rect x="140" y="222" width="112" height="38" rx="6" fill="none" stroke="#FF6B6B" stroke-width="4"/><text x="196" y="248" text-anchor="middle" font-size="17" font-weight="800" fill="#FF6B6B">作らない</text></g>
+                  <text x="74" y="288" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">照合係</text>
+                  <text x="280" y="244" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">原文</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>抜き書きが原文の指定の行に一字一句なければ、ページを作らない<small>照合はスクリプト（report.py）がやる。Claude の自己申告に頼らない</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>作者の比べ方: 同じ問いを「調べて」の一言で 3 回、imozuru の手順で 1 回。開いた原文は 0 本と 11 本。作者自身も「1 テーマ・少数回なので一般化はできない」と書いている</li>
+            <li>名前は「芋づる式」から。図書館情報学の情報探索の研究（Ellis の抜き書きなど）を手順にしたもの</li>
+          </ul>
+        </section>
+        <section class="sec">
+          <h3>作者の比べ方（同じ問いを 4 回）</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 280" role="img" aria-label="「調べて」の一言で 3 回。開いた原文は 0 本。答えは「規則は無い」">
+                <rect width="360" height="280" fill="#151922"/>
+                <text x="180" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#9AA3B2">「調べて」だけ × 3 回</text>
+                <g><rect x="70" y="70" width="44" height="120" rx="4" fill="#2A3346" stroke="#3A4250" stroke-width="2"/><rect x="122" y="70" width="44" height="120" rx="4" fill="#2A3346" stroke="#3A4250" stroke-width="2"/><rect x="174" y="70" width="44" height="120" rx="4" fill="#2A3346" stroke="#3A4250" stroke-width="2"/><rect x="226" y="70" width="44" height="120" rx="4" fill="#2A3346" stroke="#3A4250" stroke-width="2"/></g>
+                <path d="M74 74 L266 186" stroke="#FF6B6B" stroke-width="4" stroke-opacity=".6"/>
+                <text x="180" y="228" text-anchor="middle" font-size="40" font-weight="800" fill="#E6E9EF">0 本</text>
+                <text x="180" y="262" text-anchor="middle" font-size="15" fill="#9AA3B2">答え:「規則は無い」</text>
+              </svg>
+            </div>
+            <div class="mid"><span>原文</span><i></i><small>開いた数</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 280" role="img" aria-label="imozuru の手順で 1 回。開いた原文は 11 本。色の見え方を測った論文に届いた">
+                <rect width="360" height="280" fill="#151922"/>
+                <text x="180" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#36C2A8">imozuru × 1 回</text>
+                <g fill="#E8DCC6"><rect x="46" y="70" width="22" height="120" rx="3"/><rect x="72" y="76" width="22" height="114" rx="3"/><rect x="98" y="66" width="22" height="124" rx="3"/><rect x="124" y="74" width="22" height="116" rx="3"/><rect x="150" y="70" width="22" height="120" rx="3"/><rect x="176" y="78" width="22" height="112" rx="3"/><rect x="202" y="68" width="22" height="122" rx="3"/><rect x="228" y="74" width="22" height="116" rx="3"/><rect x="254" y="70" width="22" height="120" rx="3"/><rect x="280" y="76" width="22" height="114" rx="3"/><rect x="306" y="66" width="22" height="124" rx="3"/></g>
+                <text x="180" y="228" text-anchor="middle" font-size="40" font-weight="800" fill="#36C2A8">11 本</text>
+                <text x="180" y="262" text-anchor="middle" font-size="15" fill="#9AA3B2">切り出した文 32 件を行と照合</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>問いは「イラストで、明るい面と暗い面の色をどうずらすといいか調べて」。Claude Sonnet（Web 検索あり）に、一言だけで 3 回、imozuru の手順で 1 回。3 回は「規則は無い」で終わり、1 回は影の中の色の見え方を測った論文に届いた（作者の Qiita、11/14）</li>
+            <li>作者自身が「1 テーマ・少数回なので一般化はできない」「試したのは日本語の依頼だけ」と書いている</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>手元で試す前の安全審査で止めた。分かったこと</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 12l12 12M24 12L12 24" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>Codex: ng</b><span>SKILL.md が検索役の起動・Web の取得・保存をエージェントに指示する点を、基準どおり「エージェントへの指示」と判定。README の Codex 向けの入れ方が、書き込みとネットワークを許す設定を勧める点も</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#12302B" stroke="#36C2A8" stroke-width="2.5"/><path d="M11 18l5 5 9-10" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Claude: ok</b><span>勝手に動く処理・テレメトリは無し。スクリプトは Python の標準ライブラリだけ。手元や社内の宛先は取りに行かない作り</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="6" y="8" width="24" height="20" rx="3" fill="#1B202B" stroke="#FFB454" stroke-width="2"/><path d="M10 14h16M10 19h10" stroke="#FFB454" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>両方が挙げた細かい点</b><span>作るページを開くと Google Fonts に通信が出る。感想フォームは押したときだけ送る。結果は <code>~/research/</code> に書く</span></div></div>
+          </div>
+          <ul class="notes">
+            <li>確認画面（Cloudflare など）で原文が取れないとき、SKILL.md は「ユーザーのブラウザを操作できる道具（DevTools の MCP など）があれば、そのブラウザで開く」と書く。本人の環境には Chrome DevTools MCP があるので、画面を奪われたくないなら先に決めておく</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること（作者の注意書き）</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M11 16v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#FFB454" stroke-width="3"/><rect x="7" y="16" width="22" height="16" rx="3" fill="#3A2A12" stroke="#FFB454" stroke-width="2"/></svg><div><b>ログインと有料の先は届かない</b><span>X・pixiv・有料の論文。届かなかった URL は一覧で返す</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="16" cy="16" r="9" fill="none" stroke="#FF6B6B" stroke-width="3"/><path d="M23 23l8 8" stroke="#FF6B6B" stroke-width="3.5" stroke-linecap="round"/></svg><div><b>問いが Web 検索で外に出る</b><span>機密の調べ物には向かない。受託の中身は入れない</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="13" fill="#3A2A12" stroke="#FFB454" stroke-width="2.5"/><path d="M18 10v8l6 4" stroke="#FFB454" stroke-width="3" stroke-linecap="round" fill="none"/></svg><div><b>新しい論文はたどれないことがある</b><span>出て 1 年ほどのものは、引用をたどる API にまだ載っていない</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="5" width="22" height="28" rx="3" fill="#8A5A3C"/><rect x="10" y="9" width="16" height="21" rx="1" fill="#EDE6D6"/><path d="M13 15h10M13 20h10M13 25h6" stroke="#9AA3B2" stroke-width="2" stroke-linecap="round"/></svg><div><i>1</i>審査の記録を読み、Codex の指摘を受け入れて入れるか決める</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><i>2</i>入れるなら <code>/plugin marketplace add MaryCache/imozuru</code> → <code>/plugin install imozuru@imozuru</code></div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 26 C12 14 20 22 24 10" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round"/><ellipse cx="10" cy="27" rx="5" ry="3.5" fill="#B07A9E"/><ellipse cx="24" cy="10" rx="5" ry="3.5" fill="#B07A9E"/></svg><div><i>3</i>次の技術選定 1 件で「芋づる式に調べて: …」と頼み、いつもの調べ方と見比べる</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-16&amp;i=3&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>WorkIQ で、Orca に新しいセッション</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-16"><input type="hidden" name="i" value="3"><input type="hidden" name="m" value="dig">
+              <label for="q3">この記事を深掘りする</label>
+              <textarea id="q3" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://github.com/MaryCache/imozuru">GitHub（MIT、v2.2.0 は 2026-10-28）</a>・<a href="https://qiita.com/BaspisKawaE/items/933b883e4585ebd59299">作者の Qiita（2026-11-14）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 見送り ================= -->
+      <article class="item" id="skip">
+        <div class="tags"><span class="tag plain">見送り</span></div>
+        <h2 class="skiph">調べて見送ったもの</h2>
+        <div class="skipl">
+          <div><b>agweb（Show HN 11/14・107 点）</b><span>前面に出ない Mac のブラウザを、複数のエージェントが同時に使える。名前付きのプロファイルでログインを共有し、MFA は人に渡せる。macOS 26 以上・MIT・Star 218。本人は Orca 内蔵ブラウザでカーソルを動かさずにページを開けていて、エージェント用のブラウザの話は 11/13・11/15 号に続いて 3 本目</span></div>
+          <div><b>Claude Code の Code Mode（v2.1.323・試験的）</b><span>Claude が JavaScript を書き、ツール呼び出しをまとめて 1 回で動かす。auto か全権限で始めると、裏で最長 2 時間動かしたまま話を続けられる。対話の端末だけで、<code>-p</code>・デスクトップ・クラウドでは使えず、毎晩の無人の仕組みには効かない。私の見立てでは、変わるのは主に速さ</span></div>
+          <div><b>Claude Meetings（11/12・beta）</b><span>Claude が Google Meet に参加者として入り、話を追って作業を始める。Team・Enterprise のプランだけ</span></div>
+          <div><b>SolidCraft（Rust の 3D CAD・Star 約 1.6 万）</b><span>Claude Code から MCP で部品を設計できる。昨日の Klad（Claude が筆で描く）と同じ型で、試すにはアプリを入れるか Rust でビルドする必要がある</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('data-jump')); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
