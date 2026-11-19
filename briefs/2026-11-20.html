@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テックブリーフ · 2026年11月20日（金）</title>
+<style>
+/* layout: 左に号の目次、右に 1 件ずつ。主役は絵本のようなコマ（ロボットの Claude が登場する場面の絵）。文字はコマの下の 1 行だけ。コマは広い画面で横に並べ、狭い画面で縦に積む */
+:root{
+  --bg:#0F1115; --panel:#151922; --panel2:#1B202B; --line:#2A303A; --line2:#3A4250;
+  --text:#E6E9EF; --muted:#9AA3B2; --dim:#5E6778;
+  --good:#36C2A8; --flow:#4F8CFF; --ai:#B48CFF; --bad:#FF6B6B; --tool:#FFB454;
+  --good-bg:#12302B; --bad-bg:#3A1A1D; --tool-bg:#3A2A12; --ai-bg:#271F3A; --flow-bg:#16233D; --code-bg:#0B0D11;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",monospace;
+  --wash:#151922; --hair:#2A303A; --soft:#9AA3B2; --grey:#5E6778;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0; color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.8;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg);}
+a{color:var(--flow)}
+code{font-family:var(--mono); font-size:.88em; background:var(--panel2); border:1px solid var(--line); padding:0 6px; border-radius:5px; color:var(--text); word-break:break-word;}
+:focus-visible{outline:2px solid var(--flow); outline-offset:2px; border-radius:6px;}
+
+.shell{display:grid; grid-template-columns:250px minmax(0,1fr);}
+.side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; border-right:1px solid var(--line); background:var(--panel); padding-block:22px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:18px;}
+.side h1{font-size:16px; margin:0; letter-spacing:.02em;}
+.side .d{font-size:12px; color:var(--muted); margin:2px 0 18px;}
+.side .grp{font-size:11.5px; color:var(--dim); letter-spacing:.06em; margin:14px 0 6px;}
+.side a{display:grid; grid-template-columns:20px minmax(0,1fr); gap:6px; padding:7px 8px; border-radius:7px; color:var(--text); text-decoration:none; font-size:13px; line-height:1.55;}
+.side a:hover{background:var(--panel2);}
+.side a b{color:var(--flow); font-weight:700;}
+.side a.skip b{color:var(--dim);}
+.main{min-width:0; padding-block:28px 80px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.inner{max-width:900px; margin:0 auto; display:grid; gap:18px; min-width:0;}
+.lede{font-size:13px; color:var(--muted); border:1px dashed var(--line2); border-radius:10px; padding:10px 14px;}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); padding-right:max(16px,env(safe-area-inset-right,0px));}
+}
+
+.item{display:grid; gap:14px; padding-top:26px; scroll-margin-top:16px; min-width:0;}
+.item + .item{border-top:1px solid var(--line); margin-top:22px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px;}
+.tag{font-size:12px; font-weight:700; border-radius:999px; padding:1px 10px; border:1px solid;}
+.tag.tried{color:var(--good); border-color:var(--good); background:var(--good-bg);}
+.tag.tonight{color:var(--ai); border-color:var(--ai); background:var(--ai-bg);}
+.tag.plain{color:var(--muted); border-color:var(--line2);}
+.item h2{font-size:clamp(20px,2.6vw,26px); line-height:1.45; margin:0; text-wrap:balance;}
+.item .sub{color:var(--muted); font-size:14px; margin:-6px 0 0;}
+.sec{display:grid; gap:10px; margin-top:12px; min-width:0;}
+.sec h3{font-size:15.5px; margin:0; text-wrap:balance;}
+.notes{margin:0; padding-left:1.1em; font-size:13px; line-height:1.75; color:var(--muted); display:grid; gap:2px;}
+.notes b{color:var(--text); font-weight:600;}
+
+/* 絵本のコマ */
+.story{display:grid; gap:14px 12px; grid-template-columns:repeat(2,minmax(0,1fr));}
+.story.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:820px){ .story.three{grid-template-columns:1fr;} }
+@media (max-width:640px){ .story{grid-template-columns:1fr;} }
+.rowlab{grid-column:1/-1; font-size:13px; font-weight:800; letter-spacing:.06em; display:flex; align-items:center; gap:10px; margin-top:4px;}
+.rowlab::after{content:""; flex:1; height:1px; background:var(--line2);}
+.rowlab.now{color:var(--bad);} .rowlab.after{color:var(--good);}
+.pnl{display:grid; gap:8px; align-content:start; min-width:0;}
+.scene{border-radius:14px; overflow:hidden; line-height:0; border:1px solid var(--line);}
+.scene svg{display:block; width:100%; height:auto;}
+.cap{display:grid; grid-template-columns:24px minmax(0,1fr); gap:8px; align-items:start; font-size:14.5px; font-weight:700; line-height:1.55;}
+.cap .no{width:24px; height:24px; border-radius:50%; background:var(--text); color:var(--bg); display:grid; place-items:center; font-size:12.5px; font-weight:800;}
+.cap small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+/* ポスター（2 枚の絵を並べ、間に一言） */
+.vs{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center;}
+.vs .scene{background:var(--panel);}
+.vs .mid{display:grid; justify-items:center; gap:2px; font-weight:800; color:var(--good); font-size:20px; line-height:1.3; text-align:center;}
+.vs .mid i{display:block; width:46px; height:4px; border-radius:2px; background:var(--good); position:relative;}
+.vs .mid i::after{content:""; position:absolute; right:-2px; top:-6px; width:12px; height:12px; border-top:4px solid var(--good); border-right:4px solid var(--good); transform:rotate(45deg);}
+.vs .mid small{font-size:12px; color:var(--muted); font-weight:500;}
+.vs .mid.plain{color:var(--muted); font-size:26px;}
+@media (max-width:640px){ .vs{grid-template-columns:1fr;} .vs .mid i{transform:rotate(90deg); margin:10px 0;} }
+
+/* 画面の絵 */
+.split{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:12px;}
+@media (max-width:720px){ .split{grid-template-columns:1fr;} }
+.win{min-width:0; background:var(--code-bg); border:1px solid var(--line2); border-radius:12px; overflow:hidden;}
+.wbar{display:flex; align-items:center; gap:10px; padding:6px 10px; background:var(--panel2); font-size:12px; color:var(--muted);}
+.wbar .dots{display:flex; gap:5px;}
+.wbar .dots i{width:9px; height:9px; border-radius:50%; display:block;}
+.wbar .dots i:nth-child(1){background:var(--bad);} .wbar .dots i:nth-child(2){background:var(--tool);} .wbar .dots i:nth-child(3){background:var(--good);}
+.code{padding:6px 0;}
+.ln{display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:8px; align-items:start; padding:2px 10px; font-family:var(--mono); font-size:12px; line-height:1.65;}
+.ln .no{color:var(--dim); text-align:right;}
+.ln .tx{white-space:pre-wrap; word-break:break-word;}
+.ln.hb{background:var(--bad-bg);} .ln.ht{background:var(--tool-bg);}
+.pill{font-family:var(--sans); font-size:11.5px; font-weight:700; border-radius:999px; padding:0 9px; color:var(--bg);}
+.pill.bad{background:var(--bad);} .pill.tool{background:var(--tool);}
+.ans{min-width:0; background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 14px; display:grid; gap:8px; align-content:start;}
+.ans .t{font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em;}
+.ans .who{display:flex; align-items:center; gap:10px; font-size:14px;}
+.ans .big{font-size:22px; font-weight:800; color:var(--bad);}
+.ans .why{border-top:1px solid var(--line2); padding-top:8px; display:grid; gap:4px; font-size:13.5px;}
+.ans .why b{color:var(--tool);}
+.ans .why span.f{color:var(--bad); font-weight:700;}
+.mono{font-family:var(--mono); font-size:12px;}
+.ans .f2{font-size:11.5px; color:var(--muted);}
+
+/* 絵文字の代わりの小さな絵 */
+.ico{width:34px; height:34px; flex:0 0 34px; display:block;}
+.warns{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:760px){ .warns{grid-template-columns:1fr;} }
+.warn{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.55; min-width:0;}
+.warn b{display:block;}
+.warn span{color:var(--muted); font-size:12.5px;}
+
+.steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+.st{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.6; min-width:0;}
+.st > div{min-width:0;}
+.st i{display:block; font-style:normal; font-weight:800; color:var(--flow); font-size:12px; letter-spacing:.06em;}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.ask{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--flow-bg); border:1px solid var(--flow); border-radius:12px; padding:10px 12px;}
+.ask .q{font-size:13.5px; line-height:1.65; min-width:0; word-break:break-word;}
+.ask .q small{display:block; color:var(--muted); font-size:11.5px; letter-spacing:.06em;}
+.ask button{font:inherit; font-size:12.5px; font-weight:700; color:var(--bg); background:var(--flow); border:none; border-radius:7px; padding:5px 14px; cursor:pointer; white-space:nowrap;}
+@media (max-width:520px){ .ask{grid-template-columns:1fr;} .ask button{justify-self:start;} }
+.src{font-size:12.5px; color:var(--muted); margin:0;}
+.src a{color:var(--muted);}
+
+.skipl{display:grid; gap:8px;}
+.skipl div{display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:12px; font-size:13.5px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--panel);}
+.skipl b{font-weight:600;}
+.skipl span{color:var(--muted);}
+@media (max-width:560px){ .skipl div{grid-template-columns:1fr; gap:2px;} }
+.bnav .wrap{max-width:1150px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.go{display:grid; gap:10px;}
+.gobtn{display:grid; gap:2px; text-decoration:none; background:var(--good); color:var(--bg); border-radius:12px; padding:12px 14px; font-weight:800; font-size:15px;}
+.gobtn small{font-weight:600; font-size:12.5px; opacity:.85;}
+form.dig{display:grid; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px;}
+form.dig label{font-size:12.5px; font-weight:800; letter-spacing:.04em; color:var(--muted);}
+form.dig textarea{width:100%; min-height:70px; border-radius:10px; border:1px solid var(--line2); background:var(--panel2); color:var(--text); font:inherit; font-size:14px; padding:8px 10px;}
+form.dig button{justify-self:end; font:inherit; font-weight:800; font-size:14px; border:none; border-radius:10px; padding:8px 16px; background:var(--flow); color:var(--bg); cursor:pointer;}
+form.dig small{color:var(--muted); font-size:12px;}
+
+.scene img{display:block; width:100%; height:auto;}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+@media (max-width:720px){ .split.even{grid-template-columns:1fr;} }
+.pill.good{background:var(--good);}
+.vs .pnl .cap{grid-template-columns:24px minmax(0,1fr);}
+.vs .mid{gap:8px;}
+.ln.hg{background:var(--good-bg);}
+.ln .tx.c{color:var(--muted);}
+@media (max-width:640px){ .vs .mid{gap:6px;} .vs .mid i{margin:22px 0;} }
+.scene.shot{line-height:normal; background:#0B0D11; max-width:520px;}
+.split.top{align-items:start;}
+
+.vs .mid.bad{color:var(--bad);}
+.vs .mid.bad i{background:var(--bad);}
+.vs .mid.bad i::after{border-top-color:var(--bad); border-right-color:var(--bad);}
+.rl{display:grid;}
+.rl > div{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:8px; align-items:center; font-size:13.5px; line-height:1.5; border-top:1px solid var(--line2); padding:6px 0;}
+.rl .tool{font-family:var(--mono); font-size:11.5px; color:var(--muted); border:1px solid var(--line2); border-radius:6px; padding:0 6px; white-space:nowrap;}
+.rl .pill{white-space:nowrap;}
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-19.html">← 11/19（木）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<!-- 絵の部品（ロボットの Claude 3 つの顔・矢じり） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="robot" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <circle cx="31" cy="36" r="4.2" fill="#F4F1FF"/>
+      <circle cx="49" cy="36" r="4.2" fill="#F4F1FF"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-sleepy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#5E6778"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 37h9M45 37h9" stroke="#F4F1FF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#5E6778"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#36C2A8"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#F4F1FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="44" width="9" height="22" rx="4.5" fill="#8E6CD9" transform="rotate(-30 66 55)"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <marker id="ahRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B6B"/></marker>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="side">
+    <h1>テックブリーフ</h1>
+    <div class="d">2026-11-20（金） · 3 件</div>
+    <div class="grp">今日の 3 件</div>
+    <a href="#i1" data-jump="i1"><b>1</b><span>Claude のコマンドを、小さな Linux の箱に閉じ込める</span></a>
+    <a href="#i2" data-jump="i2"><b>2</b><span>録音なしで楽器を計算し、子どもの動画に BGM</span></a>
+    <a href="#i3" data-jump="i3"><b>3</b><span>Pages・Numbers・Keynote を Claude が直接編集</span></a>
+    <div class="grp">見送り</div>
+    <a href="#skip" data-jump="skip" class="skip"><b>–</b><span>調べて見送ったもの 5 件</span></a>
+  </aside>
+
+  <main class="main">
+    <div class="inner">
+      <div class="lede">1・2 件目は手元で試した。1 件目は Claude のコマンドだけを小さな Linux の箱で動かす道具で、入れる前の安全審査（Claude・Codex）を通してから、このサイトの写しで Claude Code をつないだ。2 件目は Fable 5.2 に、録音を使わずに楽器と BGM を作らせた（私は音を聞けないので、数字で確かめた）。3 件目は Apple の公式対応で、App Store の更新が要るのでまだ試していない。</div>
+
+      <!-- ================= 1 ================= -->
+      <article class="item" id="i1">
+        <div class="tags"><span class="tag tried">手元で試した</span><span class="tag plain">入れる手間 15 分ほど</span><span class="tag plain">対象: 夜に無人で動く Claude</span></div>
+        <h2>全権限で走らせた Claude のコマンドを、小さな Linux の箱の中だけで動かす。鍵は箱の外に置いたまま</h2>
+        <p class="sub">Simon Willison 氏と Prime Radiant の external sandbox（11/16 米国時間）。このサイトの写しで Claude Code をつないだら、Bash には箱しか見えず、外へは許した先にしか出られなかった。ただし Read と Edit は箱の外で動く</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="夜の Mac の中。全権限の札を下げた Claude の手が、プロジェクトのフォルダにも、鍵束にも、~/.ssh の帳面にも届いている">
+                  <rect width="400" height="260" fill="#141B2E"/>
+                  <g fill="#E6E9EF" fill-opacity=".7"><circle cx="200" cy="22" r="1.6"/><circle cx="262" cy="34" r="1.4"/><circle cx="150" cy="28" r="1.5"/></g>
+                  <circle cx="356" cy="28" r="15" fill="#F5E6A8"/><circle cx="363" cy="23" r="13" fill="#141B2E"/>
+                  <rect x="14" y="52" width="372" height="186" rx="14" fill="#1C2333" stroke="#3A4250" stroke-width="3"/>
+                  <text x="28" y="40" font-size="15" font-weight="700" fill="#9AA3B2">あなたの Mac</text>
+                  <path d="M34 162 h24 l7 9 h37 v44 h-68 z" fill="#4F8CFF"/>
+                  <rect x="34" y="174" width="68" height="41" rx="3" fill="#6FA0FF"/>
+                  <text x="68" y="232" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">プロジェクト</text>
+                  <rect x="146" y="62" width="88" height="28" rx="14" fill="#FFB454"/>
+                  <text x="190" y="82" text-anchor="middle" font-size="16" font-weight="800" fill="#3A2A12">全権限</text>
+                  <use href="#robot" x="150" y="96" width="80" height="100"/>
+                  <text x="190" y="226" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <circle cx="300" cy="92" r="12" fill="none" stroke="#FFB454" stroke-width="4"/>
+                  <g fill="#FFB454">
+                    <g transform="rotate(20 300 92)"><rect x="310" y="89" width="30" height="6" rx="3"/><rect x="332" y="94" width="5" height="9" rx="1"/><rect x="323" y="94" width="4" height="6" rx="1"/></g>
+                    <g transform="rotate(75 300 92)"><rect x="310" y="89" width="26" height="6" rx="3"/><rect x="328" y="94" width="5" height="8" rx="1"/></g>
+                  </g>
+                  <text x="334" y="148" text-anchor="middle" font-size="15" font-weight="700" fill="#FFB454">鍵・トークン</text>
+                  <rect x="294" y="160" width="56" height="50" rx="5" fill="#8A5A3C"/>
+                  <rect x="300" y="166" width="44" height="38" rx="2" fill="#EDE6D6"/>
+                  <g fill="#B8B1A1"><rect x="306" y="174" width="32" height="4" rx="2"/><rect x="306" y="184" width="26" height="4" rx="2"/><rect x="306" y="194" width="30" height="4" rx="2"/></g>
+                  <text x="322" y="230" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2" font-family="ui-monospace,Menlo,monospace">~/.ssh</text>
+                  <g fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="6 6" marker-end="url(#ahRed)">
+                    <path d="M232 138 Q258 108 280 98"/>
+                    <path d="M232 168 Q260 180 286 184"/>
+                    <path d="M148 168 Q126 178 108 186"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>全権限の Claude は、Mac の中のどこへでも手が届く<small>記事:「多くの人はエージェントに PC と外の世界への全権限を渡し、うまくいくよう祈っている」</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude から「許可しますか？」の札が次々に届き、人は眠そうな目で、中身を読まずに許可のボタンを押し続けている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <use href="#robot" x="18" y="118" width="76" height="96"/>
+                  <text x="56" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <rect x="100" y="20" width="156" height="40" rx="10" fill="#7C8596"/>
+                  <rect x="110" y="40" width="156" height="40" rx="10" fill="#B4BBC7"/>
+                  <rect x="120" y="60" width="156" height="42" rx="10" fill="#E6E9EF"/>
+                  <text x="198" y="88" text-anchor="middle" font-size="16" font-weight="800" fill="#231A3D">許可しますか？</text>
+                  <path d="M84 132 Q98 112 118 100" fill="none" stroke="#9AA3B2" stroke-width="3" stroke-dasharray="5 5"/>
+                  <rect x="196" y="200" width="190" height="10" rx="2" fill="#6B4F3A"/>
+                  <rect x="206" y="210" width="8" height="12" fill="#6B4F3A"/><rect x="370" y="210" width="8" height="12" fill="#6B4F3A"/>
+                  <rect x="212" y="170" width="66" height="30" rx="8" fill="#36C2A8"/>
+                  <text x="245" y="191" text-anchor="middle" font-size="16" font-weight="800" fill="#0F1115">許可</text>
+                  <g stroke="#FFB454" stroke-width="3" stroke-linecap="round"><path d="M222 160 l-6 -8"/><path d="M245 156 v-11"/><path d="M268 160 l6 -8"/></g>
+                  <rect x="300" y="140" width="60" height="60" rx="20" fill="#4F8CFF"/>
+                  <circle cx="330" cy="116" r="22" fill="#F2C9A0"/>
+                  <path d="M308 114 a22 22 0 0 1 44 0 z" fill="#3A2E2A"/>
+                  <path d="M318 122 h8 M335 122 h8" stroke="#3A2E2A" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M323 132 q7 -3 14 0" stroke="#3A2E2A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <path d="M306 162 L276 180" stroke="#4F8CFF" stroke-width="11" stroke-linecap="round"/>
+                  <g fill="#9AA3B2" font-weight="800"><text x="356" y="86" font-size="16">z</text><text x="368" y="66" font-size="21">z</text></g>
+                  <text x="330" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>1 回ずつ許可を押す守り方は、遅いうえに、そのうち読まずに押すようになる<small>記事:「ひどい働き方だ。遅くていらいらし、すぐに判断疲れになる」</small></span></div>
+            </div>
+
+            <div class="rowlab after">external sandbox を使うと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="Claude は箱の外に立ち、コマンドの紙だけを箱の差し入れ口に入れている。箱の中には渡したフォルダだけがあり、鍵束は箱の外の壁に掛かっている。箱から外へのネットは切れている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="206" y="58" width="178" height="164" rx="12" fill="#12302B" fill-opacity=".6" stroke="#36C2A8" stroke-width="4"/>
+                  <text x="295" y="86" text-anchor="middle" font-size="16" font-weight="800" fill="#36C2A8">Linux の箱</text>
+                  <path d="M264 112 h22 l7 9 h33 v42 h-62 z" fill="#4F8CFF"/>
+                  <rect x="264" y="124" width="62" height="39" rx="3" fill="#6FA0FF"/>
+                  <text x="295" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="#E6E9EF">渡したフォルダ</text>
+                  <rect x="200" y="128" width="12" height="36" rx="3" fill="#0F1115"/>
+                  <use href="#robot" x="34" y="118" width="80" height="100"/>
+                  <text x="74" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <path d="M104 182 L124 160" stroke="#8E6CD9" stroke-width="8" stroke-linecap="round"/>
+                  <g transform="rotate(-6 162 146)"><rect x="120" y="132" width="82" height="28" rx="4" fill="#EDE6D6"/><text x="161" y="152" text-anchor="middle" font-size="15" font-weight="800" fill="#231A3D">コマンド</text></g>
+                  <path d="M36 36 h46" stroke="#5E6778" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M58 36 v10" stroke="#5E6778" stroke-width="3"/>
+                  <circle cx="58" cy="56" r="10" fill="none" stroke="#FFB454" stroke-width="4"/>
+                  <g fill="#FFB454"><g transform="rotate(70 58 56)"><rect x="66" y="53" width="26" height="6" rx="3"/><rect x="84" y="58" width="5" height="8" rx="1"/></g></g>
+                  <text x="84" y="64" font-size="15" font-weight="700" fill="#FFB454">鍵は外</text>
+                  <path d="M354 58 V36" stroke="#5E6778" stroke-width="3" stroke-dasharray="4 5"/>
+                  <circle cx="354" cy="24" r="13" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="3"/>
+                  <path d="M348 18l12 12M360 18l-12 12" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/>
+                  <text x="334" y="30" text-anchor="end" font-size="15" font-weight="700" fill="#FF6B6B">ネットなし</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>Claude は Mac にいたまま、コマンドだけを箱に渡す<small>箱に見えるのは渡したフォルダだけ。ネットは最初から切れている</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="箱から出る道に門番の小屋がある。札を付けた頼みは、門番の所で本物の鍵に付け替えられて、許した行き先へ進む。ほかの行き先への道はバツで止まっている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="12" y="98" width="84" height="104" rx="10" fill="#12302B" fill-opacity=".6" stroke="#36C2A8" stroke-width="4"/>
+                  <text x="54" y="130" text-anchor="middle" font-size="16" font-weight="800" fill="#36C2A8">箱</text>
+                  <rect x="96" y="152" width="74" height="14" fill="#3A4250"/>
+                  <rect x="104" y="112" width="42" height="28" rx="4" fill="#EDE6D6"/>
+                  <circle cx="112" cy="126" r="3" fill="#5E6778"/>
+                  <text x="130" y="132" text-anchor="middle" font-size="15" font-weight="800" fill="#231A3D">札</text>
+                  <rect x="168" y="114" width="62" height="94" rx="6" fill="#5A6378"/>
+                  <path d="M160 118 L199 88 L238 118 Z" fill="#8A5A3C"/>
+                  <rect x="180" y="130" width="38" height="26" rx="3" fill="#F5E6A8"/>
+                  <circle cx="199" cy="143" r="7" fill="#F2C9A0"/>
+                  <text x="199" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">門番（プロキシ）</text>
+                  <path d="M230 150 Q268 148 290 92" fill="none" stroke="#36C2A8" stroke-width="6" stroke-linecap="round"/>
+                  <path d="M230 172 Q264 176 288 196" fill="none" stroke="#FF6B6B" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 10"/>
+                  <rect x="284" y="62" width="108" height="40" rx="10" fill="#12302B" stroke="#36C2A8" stroke-width="3"/>
+                  <text x="338" y="88" text-anchor="middle" font-size="15" font-weight="800" fill="#36C2A8">許した先 ✓</text>
+                  <rect x="284" y="178" width="108" height="40" rx="10" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="3"/>
+                  <text x="338" y="204" text-anchor="middle" font-size="15" font-weight="800" fill="#FF6B6B">ほか ✕</text>
+                  <circle cx="250" cy="124" r="8" fill="none" stroke="#FFB454" stroke-width="4"/>
+                  <g fill="#FFB454"><rect x="256" y="121" width="20" height="6" rx="3"/><rect x="270" y="126" width="5" height="8" rx="1"/></g>
+                  <text x="160" y="40" font-size="15" font-weight="700" fill="#FFB454">札を本物の鍵に付け替え</text>
+                  <path d="M236 48 Q248 80 250 110" fill="none" stroke="#FFB454" stroke-width="2.5" stroke-dasharray="4 4"/>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>外へは許した行き先だけ。本物の鍵は門番が箱の外で付ける<small>箱の中にあるのは使い捨ての札だけ。返事に鍵が混ざって戻ってきても、伏せ字になって箱へ届いた（試して確かめた）</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>記事:「箱は、どのモデルの判断にも頼らない守り」。Claude Code の auto mode のような AI の見張りとは別の層、という位置づけ</li>
+            <li>箱は 3 種類（Node と WebAssembly の v86 版・Apple Containers 版・QEMU の Quicksand 版）で窓口の決まりは共通。Claude Code・Codex・Pi のつなぎ方が書いてある</li>
+            <li>今回試したのは v86 版（npm の 1 パッケージ・約 36MB で、Linux の中身ごと入っている）。npx で取ってきて動かすだけで、sudo も Mac への設定の追加も要らない</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>試した: このサイトの写しで、Claude Code（Opus 5.5）を箱につないだ</h3>
+          <div class="split top">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>ターミナル 2 つ</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">1</span><span class="tx c"># 1 つ目: 箱を立てる（6.1 秒で起動）</span><span></span></div>
+                <div class="ln"><span class="no">2</span><span class="tx">npx external-sandbox-v86@0.4.0 \</span><span></span></div>
+                <div class="ln"><span class="no">3</span><span class="tx">  --preserve-paths --mount-rw "project=$PWD"</span><span></span></div>
+                <div class="ln"><span class="no">4</span><span class="tx c"># 2 つ目: Claude の Bash を箱へ回す</span><span></span></div>
+                <div class="ln ht"><span class="no">5</span><span class="tx">CLAUDE_CODE_SHELL_PREFIX=…/claude-shell-prefix-http.sh \</span><span></span></div>
+                <div class="ln"><span class="no">6</span><span class="tx">CLAUDE_CODE_TMPDIR="$PWD/.external-sandbox-claude-tmp" \</span><span></span></div>
+                <div class="ln"><span class="no">7</span><span class="tx">CLAUDE_CODE_SHELL=/bin/bash \</span><span></span></div>
+                <div class="ln"><span class="no">8</span><span class="tx">EXTERNAL_SANDBOX_API_URL=http://127.0.0.1:8686 \</span><span></span></div>
+                <div class="ln"><span class="no">9</span><span class="tx">claude</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">Claude に 4 つ頼んだ結果（6 手・18.5 秒）</div>
+              <div class="rl">
+                <div><span class="tool">Bash</span><span>uname を見る</span><span class="pill good">Alpine Linux</span></div>
+                <div><span class="tool">Bash</span><span>写しの外のファイルを cat</span><span class="pill good">見えない</span></div>
+                <div><span class="tool">Read</span><span>同じファイルを読む</span><span class="pill bad">読めた</span></div>
+                <div><span class="tool">Bash</span><span>example.com を開く</span><span class="pill good">403 で拒否</span></div>
+              </div>
+              <div class="f2">Claude 自身の報告:「Bash は別の隔離された環境で動いているようです」</div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>箱の中から見ると、ユーザーは agent、HOME は空、<code>/Users/rinodot</code> も <code>~/.ssh</code> も「No such file」。環境変数は 10 個で、token・key・secret を含む名前は 0 個</li>
+            <li>Claude は Bash で一覧を作り直す Python も動かせた（箱に Python 3.12・git・ripgrep がある。Node は無い）</li>
+            <li>私の設定（hooks・MCP）を読ませないよう <code>--setting-sources project --strict-mcp-config</code> で動かした。ふだんの設定のままだと、hooks・ステータス行・MCP の起動コマンドも箱の中で動く（README の注意）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>門番も試した: 許した行き先は 2 つだけ</h3>
+          <div class="split top">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>proxy.json の中身（要約）</span></div>
+              <div class="code">
+                <div class="ln hg"><span class="no">1</span><span class="tx">GET https://api.github.com /zen</span><span class="pill good">許可</span></div>
+                <div class="ln hg"><span class="no">2</span><span class="tx">GET https://httpbin.org /headers</span><span class="pill good">許可</span></div>
+                <div class="ln"><span class="no">3</span><span class="tx c">  札 "Bearer &lt;使い捨ての番号&gt;" を</span><span></span></div>
+                <div class="ln"><span class="no">4</span><span class="tx c">  Mac 側の DEMO_SECRET に付け替える</span><span></span></div>
+                <div class="ln"><span class="no">5</span><span class="tx c">箱に渡す環境変数: DEMO_TOKEN=&lt;使い捨ての番号&gt;</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">箱の中の Python から試した</div>
+              <div class="rl">
+                <div><span class="tool">GET</span><span>api.github.com/zen</span><span class="pill good">通った</span></div>
+                <div><span class="tool">GET</span><span>example.com</span><span class="pill bad">403</span></div>
+                <div><span class="tool">POST</span><span>許した先へ</span><span class="pill bad">403</span></div>
+                <div><span class="tool">GET</span><span>札を付けずに httpbin</span><span class="pill bad">403</span></div>
+                <div><span class="tool">GET</span><span>札を付けて httpbin</span><span class="pill good">通った</span></div>
+              </div>
+              <div class="f2">最後の返事に載った鍵: <span class="mono">Authorization: Bearer [REDACTED]</span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>鍵は偽物で試した。httpbin は受け取った見出しをそのまま返すので、返事に鍵が入るが、門番がその文字列を <code>[REDACTED]</code> に替えて箱へ渡した（v86 版の <code>managed-proxy.js</code> にその処理がある）</li>
+            <li>門番を通さずに IP へ直接つなぐと、つながったように見えるが受け取れるのは 0 バイトだった</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>速さ: このサイトの一覧を作り直す Python で比べた</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="Mac で直接動かすと 0.06 秒">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="26" font-weight="800" fill="#9AA3B2">Mac で直接</text>
+                <rect x="172" y="52" width="16" height="8" rx="2" fill="#5E6778"/>
+                <rect x="166" y="58" width="28" height="14" rx="4" fill="#5E6778"/>
+                <circle cx="180" cy="164" r="86" fill="#1C2333" stroke="#5E6778" stroke-width="10"/>
+                <g stroke="#3A4250" stroke-width="3" stroke-linecap="round"><line x1="180" y1="90" x2="180" y2="100"/><line x1="254" y1="164" x2="244" y2="164"/><line x1="180" y1="238" x2="180" y2="228"/><line x1="106" y1="164" x2="116" y2="164"/></g>
+                <text x="180" y="178" text-anchor="middle" font-size="56" font-weight="800" fill="#E6E9EF">0.06</text>
+                <text x="180" y="212" text-anchor="middle" font-size="20" fill="#9AA3B2">秒</text>
+                <text x="180" y="286" text-anchor="middle" font-size="19" font-weight="800" fill="#9AA3B2">箱なし</text>
+              </svg>
+            </div>
+            <div class="mid bad"><span>約 30 倍</span><i></i><small>遅い</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="箱の中（v86 版）で動かすと 2.0 秒">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="38" text-anchor="middle" font-size="26" font-weight="800" fill="#FF6B6B">箱の中（v86 版）</text>
+                <rect x="172" y="52" width="16" height="8" rx="2" fill="#FF6B6B"/>
+                <rect x="166" y="58" width="28" height="14" rx="4" fill="#FF6B6B"/>
+                <circle cx="180" cy="164" r="86" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="10"/>
+                <g stroke="#6A2A30" stroke-width="3" stroke-linecap="round"><line x1="180" y1="90" x2="180" y2="100"/><line x1="254" y1="164" x2="244" y2="164"/><line x1="180" y1="238" x2="180" y2="228"/><line x1="106" y1="164" x2="116" y2="164"/></g>
+                <text x="180" y="178" text-anchor="middle" font-size="56" font-weight="800" fill="#FF6B6B">2.0</text>
+                <text x="180" y="212" text-anchor="middle" font-size="20" fill="#9AA3B2">秒</text>
+                <text x="180" y="286" text-anchor="middle" font-size="19" font-weight="800" fill="#9AA3B2">1 回の往復は約 0.2 秒</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li><code>scripts/site_tools.py rebuild</code> を 3 回ずつ。Mac 0.07・0.06・0.06 秒、箱 2.74・2.00・1.79 秒（真ん中の値の比で約 33 倍）</li>
+            <li>v86 は x86 の機械を WebAssembly でまねて動かす方式で、重い計算ほど差が出る。速いはずの Apple Containers 版は Mac に <code>container</code> の CLI が要り、手元に無いので試していない</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>箱に入るのは Bash だけ</b><span>Claude Code の Read・Edit は Mac のファイルに届く（試しでも読めた）。Pi は全部の道具が箱に入る</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M18 9v10l6 4" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>v86 版は遅い</b><span>Python の処理で約 30 倍。テストを大量に回す使い方には向かない</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="15" width="22" height="16" rx="3" fill="#3A2A12" stroke="#FFB454" stroke-width="2"/><path d="M12 15v-4a6 6 0 0 1 12 0" fill="none" stroke="#FFB454" stroke-width="2.5"/></svg><div><b>試作品・窓口に鍵なし</b><span>作者も「試作品」と書く。同じ Mac のほかのプログラムも箱にコマンドを送れる（README・審査役の指摘）</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="6" y="8" width="24" height="22" rx="4" fill="#12302B" stroke="#36C2A8" stroke-width="2"/><path d="M12 16h12M12 22h8" stroke="#36C2A8" stroke-width="2.5" stroke-linecap="round"/></svg><div><i>1</i>試させたいフォルダで <code>npx external-sandbox-v86@0.4.0</code> を、上の 2〜3 行目のとおりフォルダを渡して起動（Node 22 以上）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 12h22l-5-5M30 24H8l5 5" fill="none" stroke="#4F8CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><i>2</i><code>external-sandbox</code> の <code>claude-code</code> フォルダを置き、上の 4 つの環境変数を付けて <code>claude</code> を起動</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l12 5v9c0 7-5 12-12 14C11 30 6 25 6 18V9z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M13 18l4 4 7-8" fill="none" stroke="#FFB454" stroke-width="2.5" stroke-linecap="round"/></svg><div><i>3</i>出てよい先と鍵の札を <code>proxy.json</code> に書き、<code>--proxy-config</code> を付けて立て直す</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-20&amp;i=1&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>夜の無人の試しを箱の中で動かす案を、WorkIQ で Orca に新しいセッション</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-20"><input type="hidden" name="i" value="1"><input type="hidden" name="m" value="dig">
+              <label for="q1">この記事を深掘りする</label>
+              <textarea id="q1" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://blog.primeradiant.com/external-sandboxes-for-coding-agents/">External sandboxes for coding agents（Simon Willison 氏、Prime Radiant のブログ、2026-11-16 米国時間）</a>・<a href="https://simonwillison.net/2026/Nov/17/external-sandboxes-for-coding-agents/">同氏のブログでの紹介（11/17）</a>・<a href="https://github.com/prime-radiant-inc/external-sandbox-v86">external-sandbox-v86</a>・<a href="https://github.com/prime-radiant-inc/external-sandbox/tree/main/claude-code">external-sandbox の claude-code</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 2 ================= -->
+      <article class="item" id="i2">
+        <div class="tags"><span class="tag tried">手元で試した</span><span class="tag plain">入れる手間 10 分ほど（入れるものなし）</span><span class="tag plain">対象: 子どもの声の動画（kid-voice-video）</span></div>
+        <h2>Claude が、録音した音を 1 つも使わずに楽器を「計算」で鳴らし、曲まで作る。子どもの動画に自前の BGM</h2>
+        <p class="sub">きしだ氏の記事（11/13、はてブ 205）を、Fable 5.2 で本人の動画づくりに当てた。標準ライブラリだけの 557 行で、30 秒のピアノとオルゴールの曲ができた（私は音を聞けないので、数字で確かめた）</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="スマホの縦長の絵本動画。子どもの声の波だけが流れていて、音楽の印にはバツが付いている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="128" y="14" width="144" height="232" rx="20" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <rect x="138" y="32" width="124" height="196" rx="10" fill="#F3EEE2"/>
+                  <circle cx="232" cy="58" r="14" fill="#FFB454"/>
+                  <path d="M138 150 Q170 128 200 146 T262 140 V228 H138 Z" fill="#9BD3A8"/>
+                  <rect x="160" y="112" width="8" height="36" fill="#8A5A3C"/>
+                  <circle cx="164" cy="104" r="18" fill="#5DAA6E"/>
+                  <circle cx="214" cy="140" r="11" fill="#F2C9A0"/>
+                  <path d="M203 138 a11 11 0 0 1 22 0 z" fill="#3A2E2A"/>
+                  <rect x="204" y="152" width="20" height="26" rx="8" fill="#FF6B6B"/>
+                  <rect x="146" y="192" width="108" height="26" rx="8" fill="#FFFFFF" fill-opacity=".85"/>
+                  <path d="M154 205 h6 l4 -8 4 16 4 -12 4 8 4 -6 4 4 h6 l4 -9 4 14 4 -10 4 6 h12" fill="none" stroke="#4F8CFF" stroke-width="2.5" stroke-linejoin="round"/>
+                  <text x="60" y="78" text-anchor="middle" font-size="16" font-weight="800" fill="#4F8CFF">声</text>
+                  <path d="M76 74 Q110 100 146 196" fill="none" stroke="#4F8CFF" stroke-width="2.5" stroke-dasharray="5 5"/>
+                  <g transform="translate(330 120)">
+                    <circle r="30" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="3"/>
+                    <path d="M-6 10 v-26 l16 -4 v24" fill="none" stroke="#9AA3B2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="-10" cy="11" r="6" fill="#9AA3B2"/><circle cx="6" cy="7" r="6" fill="#9AA3B2"/>
+                    <path d="M-21 -21 L21 21" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>
+                  </g>
+                  <text x="330" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#FF6B6B">BGM なし</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>いま: 祖父母に送る絵本動画は、子どもの声だけ<small>kid-voice-video の手順と道具に、BGM を入れる処理は無い</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="ハンマーが弦を打ち、弦の下の木の板（響板）が波打っている。横で Claude が黒板に式を書いて計算している">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="14" y="20" width="150" height="62" rx="8" fill="#22402F" stroke="#8A5A3C" stroke-width="5"/>
+                  <text x="89" y="60" text-anchor="middle" font-size="20" font-weight="700" fill="#F3EEE2" font-family="ui-monospace,Menlo,monospace">F = K·δ<tspan dy="-8" font-size="14">p</tspan></text>
+                  <use href="#robot" x="30" y="118" width="80" height="100"/>
+                  <path d="M100 176 L118 150" stroke="#8E6CD9" stroke-width="8" stroke-linecap="round"/>
+                  <text x="70" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Fable 5.2</text>
+                  <path d="M176 196 Q230 176 286 196 T392 194 L392 214 L176 214 Z" fill="#C89A6A"/>
+                  <path d="M176 196 Q230 176 286 196 T392 194" fill="none" stroke="#8A5A3C" stroke-width="3"/>
+                  <g stroke="#E6E9EF" stroke-width="2.5"><line x1="180" y1="150" x2="390" y2="150"/><line x1="180" y1="160" x2="390" y2="160"/></g>
+                  <path d="M196 150 Q300 132 388 150" fill="none" stroke="#FFB454" stroke-width="2.5"/>
+                  <rect x="236" y="98" width="8" height="34" fill="#8A5A3C" transform="rotate(-12 240 115)"/>
+                  <rect x="226" y="122" width="34" height="18" rx="9" fill="#F3EEE2" stroke="#9AA3B2" stroke-width="2"/>
+                  <text x="242" y="88" text-anchor="middle" font-size="15" font-weight="700" fill="#F3EEE2">ハンマー</text>
+                  <text x="350" y="138" text-anchor="middle" font-size="15" font-weight="700" fill="#FFB454">弦</text>
+                  <text x="284" y="242" text-anchor="middle" font-size="15" font-weight="700" fill="#C89A6A">響板（揺れ方 48 個）</text>
+                  <g fill="none" stroke="#36C2A8" stroke-width="2.5" stroke-linecap="round"><path d="M330 92 q8 -10 0 -20"/><path d="M344 98 q12 -16 0 -32"/><path d="M358 104 q16 -22 0 -44"/></g>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>Fable 5.2 は、ハンマー・弦・響板の動きを 1 サンプルずつ計算して音にする<small>フェルトのばね・弦を行き来する波・響板の 48 の揺れ方（作ったコードの説明）。音源ファイルは使わない</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="曲の地図。8 つの飛び石が 4 つずつ 2 組並び、7 つ目でカメがゆっくり歩き、最後にオルゴールから音符が消えていく">
+                  <rect width="400" height="260" fill="#141B2E"/>
+                  <text x="200" y="34" text-anchor="middle" font-size="17" font-weight="800" fill="#E6E9EF">ヘ長調 · ♩=72 · 8 小節</text>
+                  <path d="M0 200 Q100 170 200 196 T400 186 V260 H0 Z" fill="#1E2638"/>
+                  <g fill="#5A6378">
+                    <ellipse cx="34" cy="184" rx="16" ry="7"/><ellipse cx="74" cy="180" rx="16" ry="7"/><ellipse cx="114" cy="182" rx="16" ry="7"/><ellipse cx="154" cy="188" rx="16" ry="7"/>
+                    <ellipse cx="196" cy="194" rx="16" ry="7"/><ellipse cx="236" cy="194" rx="16" ry="7"/><ellipse cx="282" cy="190" rx="16" ry="7"/><ellipse cx="334" cy="186" rx="16" ry="7"/>
+                  </g>
+                  <g font-size="15" font-weight="800" fill="#E6E9EF" text-anchor="middle">
+                    <text x="34" y="215">1</text><text x="74" y="211">2</text><text x="114" y="213">3</text><text x="154" y="219">4</text>
+                    <text x="196" y="225">5</text><text x="236" y="225">6</text><text x="282" y="221">7</text><text x="334" y="217">8</text>
+                  </g>
+                  <path d="M20 152 H168" stroke="#4F8CFF" stroke-width="3"/><path d="M20 146 v12 M168 146 v12" stroke="#4F8CFF" stroke-width="3"/>
+                  <text x="94" y="142" text-anchor="middle" font-size="16" font-weight="800" fill="#4F8CFF">a</text>
+                  <path d="M182 152 H350" stroke="#36C2A8" stroke-width="3"/><path d="M182 146 v12 M350 146 v12" stroke="#36C2A8" stroke-width="3"/>
+                  <text x="266" y="142" text-anchor="middle" font-size="16" font-weight="800" fill="#36C2A8">a'</text>
+                  <g transform="translate(282 170)">
+                    <ellipse cx="0" cy="0" rx="15" ry="9" fill="#5DAA6E"/><circle cx="16" cy="-2" r="5" fill="#5DAA6E"/>
+                    <path d="M-8 8 v4 M8 8 v4" stroke="#5DAA6E" stroke-width="3"/>
+                  </g>
+                  <text x="282" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="#FFB454">ゆっくり</text>
+                  <rect x="356" y="160" width="34" height="24" rx="3" fill="#8A5A3C"/>
+                  <path d="M356 160 l8 -14 h26 l-8 14 z" fill="#B07A50"/>
+                  <g fill="#FFB454" fill-opacity=".8"><text x="360" y="128" font-size="18">♪</text><text x="376" y="104" font-size="15" fill-opacity=".5">♪</text><text x="352" y="82" font-size="13" fill-opacity=".3">♪</text></g>
+                  <text x="20" y="72" font-size="15" font-weight="700" fill="#9AA3B2">0 秒</text>
+                  <text x="388" y="250" text-anchor="end" font-size="15" font-weight="700" fill="#9AA3B2">29.8 秒で消える</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>曲も作った: 4 小節 + 4 小節。7 小節目から遅くなり、オルゴールの余韻で終わる<small>和音は F–Dm–B♭–C、F/A–B♭–Gm7·C7–F（Fable の説明。遅くなる所はコードで確かめた）</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 260" role="img" aria-label="同じ絵本動画に、声の波の下で小さな音符が流れている。祖父母がスマホを見て笑っている">
+                  <rect width="400" height="260" fill="#1C2333"/>
+                  <rect y="222" width="400" height="38" fill="#252E42"/>
+                  <rect x="40" y="14" width="144" height="232" rx="20" fill="#2A3346" stroke="#5E6778" stroke-width="3"/>
+                  <rect x="50" y="32" width="124" height="196" rx="10" fill="#F3EEE2"/>
+                  <circle cx="144" cy="58" r="14" fill="#FFB454"/>
+                  <path d="M50 150 Q82 128 112 146 T174 140 V228 H50 Z" fill="#9BD3A8"/>
+                  <rect x="72" y="112" width="8" height="36" fill="#8A5A3C"/>
+                  <circle cx="76" cy="104" r="18" fill="#5DAA6E"/>
+                  <circle cx="126" cy="140" r="11" fill="#F2C9A0"/>
+                  <path d="M115 138 a11 11 0 0 1 22 0 z" fill="#3A2E2A"/>
+                  <rect x="116" y="152" width="20" height="26" rx="8" fill="#FF6B6B"/>
+                  <rect x="58" y="186" width="108" height="34" rx="8" fill="#FFFFFF" fill-opacity=".85"/>
+                  <path d="M66 197 h6 l4 -7 4 14 4 -10 4 7 4 -5 4 3 h6 l4 -8 4 12 4 -9 4 5 h12" fill="none" stroke="#4F8CFF" stroke-width="2.5" stroke-linejoin="round"/>
+                  <g fill="#B48CFF" font-size="15"><text x="70" y="216">♪</text><text x="96" y="214">♪</text><text x="122" y="217">♪</text><text x="148" y="214">♪</text></g>
+                  <circle cx="262" cy="118" r="20" fill="#F2C9A0"/>
+                  <path d="M244 112 a20 20 0 0 1 36 -4" fill="none" stroke="#D9D3C7" stroke-width="7" stroke-linecap="round"/>
+                  <path d="M253 122 q4 -4 8 0 M266 122 q4 -4 8 0" fill="none" stroke="#3A2E2A" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M254 130 q8 7 16 0" fill="none" stroke="#3A2E2A" stroke-width="2.5" stroke-linecap="round"/>
+                  <rect x="240" y="140" width="44" height="62" rx="16" fill="#8E9BB0"/>
+                  <circle cx="332" cy="122" r="20" fill="#F2C9A0"/>
+                  <path d="M312 120 a20 20 0 0 1 40 0 v6 q-20 -14 -40 0z" fill="#D9D3C7"/>
+                  <path d="M323 126 q4 -4 8 0 M336 126 q4 -4 8 0" fill="none" stroke="#3A2E2A" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M324 134 q8 7 16 0" fill="none" stroke="#3A2E2A" stroke-width="2.5" stroke-linecap="round"/>
+                  <rect x="310" y="144" width="44" height="58" rx="16" fill="#C98FA6"/>
+                  <path d="M296 76 c-8 -10 -22 0 -12 12 l12 12 12 -12 c10 -12 -4 -22 -12 -12z" fill="#FF6B6B"/>
+                  <text x="296" y="248" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">じいじ・ばあば</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>私の案: 声の下に小さく流す。曲はコードから何度でも同じに作り直せる<small>まだ動画には入れていない。聞いて決めるのは本人</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>きしだ氏は Fable 5.2 に弦楽器・ピアノ・金管・木管・ギター・歌声の物理モデルを作らせ、作曲もさせた。「指示してないのにソナタ形式になって、転調とかもちゃんとしてました」「ピアノはかなり出来がいいです」</li>
+            <li>同じ頼み方の Opus 5.5 版は「まず物理音源のピアノがしょぼい」「曲も構成がやっぱ単純」（同じ記事）。記事のデモはブラウザで鳴る</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>試した: 同じ頼み方で、kid-voice-video 向けに 30 秒の BGM を作らせた</h3>
+          <div class="split top">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>make_bgm.py（Fable 5.2 が書いた 557 行の冒頭）</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">4</span><span class="tx">絵本風動画用 BGM「おやすみのえほん」</span><span></span></div>
+                <div class="ln"><span class="no">6</span><span class="tx">楽器1: フェルトピアノ</span><span></span></div>
+                <div class="ln ht"><span class="no">7</span><span class="tx">  ハンマー(質量 + 非線形フェルトばね F = K*δ^p)</span><span class="pill tool">打つ</span></div>
+                <div class="ln ht"><span class="no">8</span><span class="tx">  弦は進行波(ディジタル・ウェーブガイド)</span><span class="pill tool">鳴る</span></div>
+                <div class="ln ht"><span class="no">11</span><span class="tx">  → 響板(リブ付き直交異方性板のモード 48 個)</span><span class="pill tool">響く</span></div>
+                <div class="ln"><span class="no">12</span><span class="tx">楽器2: オルゴールの櫛歯</span><span></span></div>
+                <div class="ln"><span class="no">14</span><span class="tx">  (周波数比 1 : 6.27 : 17.55)</span><span></span></div>
+                <div class="ln"><span class="no">20</span><span class="tx">import math, sys, os, wave, random, time</span><span></span></div>
+                <div class="ln"><span class="no">51</span><span class="tx c"># 実測値ベースのパラメータ (Chaigne &amp; Askenfelt 1994 …)</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">私が wav を読み直して測った</div>
+              <div class="rl">
+                <div><span class="tool">長さ</span><span>44.1kHz・16bit・ステレオ</span><span class="pill good">30.000 秒</span></div>
+                <div><span class="tool">最大</span><span>音割れ（クリップ）</span><span class="pill good">−3.1 dBFS</span></div>
+                <div><span class="tool">高音</span><span>2kHz より上の量</span><span class="pill good">約 −30dB</span></div>
+                <div><span class="tool">再生成</span><span>python3 make_bgm.py</span><span class="pill good">4.0 秒</span></div>
+              </div>
+              <div class="f2">作り直した wav は、最初のものとバイト単位で同じだった</div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>頼んだこと: 音源ファイルなし・Python の標準ライブラリだけ・子どもの声の邪魔をしない・30 秒で自然に終わる・書き出したら自分で読み直して確かめる。<code>claude -p --model fable</code> で 6 手・約 7.5 分</li>
+            <li>Fable の返事:「私は音を耳で聴けないので、数値でしか確かめていません。動画に乗せる前に一度試聴してください」。私も聞けていない。全体の音量は −15.3 LUFS、高い音が少ないこもった音色にしてある</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>誰も聞いていない</b><span>Fable も私も音を聞けない。確かめたのは長さ・音量・高い音の量だけ</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 12l12 12M24 12L12 24" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>得意・不得意がある</b><span>記事: ピアノ・ギターは作りやすく、サックスは「きれいすぎ」、フルートは「機械音みたい」</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 26 q6 -18 12 -6 t12 -10" fill="none" stroke="#4F8CFF" stroke-width="3" stroke-linecap="round"/></svg><div><b>音の出だしは苦手</b><span>記事:「出だしはきれいな方程式でシミュレーションするのが特に難しい」。市販品は出だしに録音を使う</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 26 l4 -12 6 4 6 -10 4 18 z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/></svg><div><i>1</i>kid-voice-video で <code>claude --model fable</code> を開き、その回の雰囲気（散歩・寝る前など）を伝えて 1 曲作らせる</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M10 26 v-16 l16 -4 v16" fill="none" stroke="#B48CFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="26" r="4" fill="#B48CFF"/><circle cx="24" cy="22" r="4" fill="#B48CFF"/></svg><div><i>2</i>できた曲を、声の下に小さく重ねる処理を <code>tools/</code> に足す</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 14 h6 l7 -6 v20 l-7 -6 h-6 z" fill="#12302B" stroke="#36C2A8" stroke-width="2" stroke-linejoin="round"/><path d="M25 13 q4 5 0 10" fill="none" stroke="#36C2A8" stroke-width="2.5" stroke-linecap="round"/></svg><div><i>3</i>自分で聞いて、曲と音量を決める（Claude は聞けない）</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-20&amp;i=2&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>kid-voice-video に BGM を足す。WorkIQ で Orca に新しいセッション</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-20"><input type="hidden" name="i" value="2"><input type="hidden" name="m" value="dig">
+              <label for="q2">この記事を深掘りする</label>
+              <textarea id="q2" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://nowokay.hatenablog.com/entry/2026/11/13/101644">Fable 5.2は物理モデリング音源の実装も作曲もすごい（きしだ氏、2026-11-13）</a>・<a href="https://kishida.github.io/webdemos/instruments/trumpet-fable/index.html">金管のデモ（ブラウザで鳴る）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 3 ================= -->
+      <article class="item" id="i3">
+        <div class="tags"><span class="tag tonight">まだ試していない</span><span class="tag plain">入れる手間 App Store の更新 + 30 分ほど</span><span class="tag plain">対象: freelance-admin</span></div>
+        <h2>Claude Code が、Pages・Numbers・Keynote の書類を中から読んで直せる。Apple 公式の MCP</h2>
+        <p class="sub">Keynote・Pages・Numbers for Mac 16.0（11/18 米国時間）。手元の 3 つはまだ 14.4 で、App Store での更新が要るので試していない</p>
+
+        <section class="sec">
+          <div class="story three">
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="書類が鎖と錠前で閉じた束になっていて、Claude が外から首をかしげている">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="258" width="400" height="42" fill="#252E42"/>
+                  <rect x="206" y="62" width="150" height="190" rx="10" fill="#E8E1D1"/>
+                  <rect x="206" y="62" width="150" height="46" rx="10" fill="#FFB454"/>
+                  <rect x="206" y="92" width="150" height="16" fill="#FFB454"/>
+                  <text x="281" y="93" text-anchor="middle" font-size="18" font-weight="800" fill="#3A2A12">書類</text>
+                  <g fill="#B8B1A1"><rect x="222" y="124" width="104" height="6" rx="3"/><rect x="222" y="140" width="84" height="6" rx="3"/><rect x="222" y="206" width="96" height="6" rx="3"/><rect x="222" y="222" width="70" height="6" rx="3"/></g>
+                  <path d="M196 176 H366" stroke="#5E6778" stroke-width="9" stroke-dasharray="12 6"/>
+                  <rect x="264" y="164" width="34" height="30" rx="5" fill="#9AA3B2"/>
+                  <path d="M270 164 v-9 a11 11 0 0 1 22 0 v9" fill="none" stroke="#9AA3B2" stroke-width="5"/>
+                  <circle cx="281" cy="178" r="4" fill="#1C2333"/>
+                  <use href="#robot" x="44" y="150" width="80" height="100"/>
+                  <circle cx="150" cy="118" r="24" fill="#E6E9EF"/>
+                  <circle cx="132" cy="144" r="5" fill="#E6E9EF"/>
+                  <text x="150" y="129" text-anchor="middle" font-size="30" font-weight="800" fill="#231A3D">?</text>
+                  <text x="84" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude</text>
+                  <text x="281" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">.pages / .numbers / .key</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>いま: 書類の中身は独自の詰め方。外から読んで直すのは難しい<small>Keynote の書類は圧縮した独自形式の束で、開発者は解析して読むしかなかった（iThinkDifferent）</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="Mac で Pages の窓が開いていて、窓の横の小さな扉（MCP）から Claude が話しかけ、書類の 1 行が緑に光って書き直されている">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="258" width="400" height="42" fill="#252E42"/>
+                  <rect x="164" y="36" width="222" height="200" rx="10" fill="#E6E9EF"/>
+                  <rect x="164" y="36" width="222" height="26" rx="10" fill="#B4BBC7"/>
+                  <rect x="164" y="52" width="222" height="10" fill="#B4BBC7"/>
+                  <circle cx="180" cy="49" r="5" fill="#FF6B6B"/><circle cx="196" cy="49" r="5" fill="#FFB454"/><circle cx="212" cy="49" r="5" fill="#36C2A8"/>
+                  <text x="300" y="54" text-anchor="middle" font-size="15" font-weight="700" fill="#2A303A">Pages</text>
+                  <rect x="186" y="80" width="140" height="10" rx="4" fill="#2A303A"/>
+                  <g fill="#9AA3B2"><rect x="186" y="104" width="176" height="6" rx="3"/><rect x="186" y="118" width="160" height="6" rx="3"/><rect x="186" y="176" width="168" height="6" rx="3"/><rect x="186" y="190" width="120" height="6" rx="3"/><rect x="186" y="204" width="150" height="6" rx="3"/></g>
+                  <rect x="180" y="136" width="190" height="28" rx="4" fill="#36C2A8" fill-opacity=".35"/>
+                  <rect x="186" y="146" width="150" height="7" rx="3" fill="#1F7A69"/>
+                  <g transform="rotate(35 352 132)"><rect x="344" y="104" width="12" height="40" rx="2" fill="#FFB454"/><path d="M344 144 l6 12 6 -12z" fill="#F2C9A0"/></g>
+                  <rect x="146" y="122" width="22" height="56" rx="4" fill="#36C2A8"/>
+                  <circle cx="162" cy="152" r="3" fill="#0F1115"/>
+                  <text x="140" y="140" text-anchor="end" font-size="15" font-weight="800" fill="#36C2A8">MCP</text>
+                  <use href="#robot" x="30" y="140" width="80" height="100"/>
+                  <path d="M104 186 Q126 176 144 160" fill="none" stroke="#B48CFF" stroke-width="3" stroke-dasharray="5 5"/>
+                  <rect x="14" y="70" width="128" height="40" rx="12" fill="#E6E9EF"/>
+                  <path d="M60 109 L74 109 L64 124 Z" fill="#E6E9EF"/>
+                  <text x="78" y="96" text-anchor="middle" font-size="15" font-weight="800" fill="#231A3D">2 段落目を直す</text>
+                  <text x="70" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#C9B6FF">Claude Code</text>
+                  <text x="275" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">開いたままの Pages</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>16.0 から: アプリを開いておくと、横の窓口（MCP）から Claude が読んで・直して・操作する<small>Apple:「外の AI エージェントや道具が、内容を読み、編集し、自動の操作を実行できる」</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 300" role="img" aria-label="請求書の書類、数字の表、棒グラフのスライドが左から並び、Claude が矢印でつないで運んでいる">
+                  <rect width="400" height="300" fill="#1C2333"/>
+                  <rect y="258" width="400" height="42" fill="#252E42"/>
+                  <use href="#robot-happy" x="164" y="18" width="72" height="90"/>
+                  <rect x="18" y="128" width="104" height="120" rx="8" fill="#E8E1D1"/>
+                  <rect x="18" y="128" width="104" height="26" rx="8" fill="#FFB454"/>
+                  <rect x="18" y="144" width="104" height="10" fill="#FFB454"/>
+                  <text x="70" y="147" text-anchor="middle" font-size="15" font-weight="800" fill="#3A2A12">請求書</text>
+                  <g fill="#B8B1A1"><rect x="30" y="168" width="70" height="5" rx="2"/><rect x="30" y="182" width="56" height="5" rx="2"/><rect x="30" y="196" width="64" height="5" rx="2"/></g>
+                  <rect x="64" y="218" width="46" height="14" rx="3" fill="#FFB454" fill-opacity=".6"/>
+                  <rect x="148" y="128" width="104" height="120" rx="8" fill="#E8F5EF"/>
+                  <rect x="148" y="128" width="104" height="26" rx="8" fill="#36C2A8"/>
+                  <rect x="148" y="144" width="104" height="10" fill="#36C2A8"/>
+                  <text x="200" y="147" text-anchor="middle" font-size="15" font-weight="800" fill="#0F2A24">表</text>
+                  <g stroke="#9ACFC0" stroke-width="2"><path d="M158 170h84M158 188h84M158 206h84M158 224h84M186 160v76M214 160v76"/></g>
+                  <rect x="276" y="128" width="112" height="120" rx="8" fill="#E3ECFF"/>
+                  <rect x="276" y="128" width="112" height="26" rx="8" fill="#4F8CFF"/>
+                  <rect x="276" y="144" width="112" height="10" fill="#4F8CFF"/>
+                  <text x="332" y="147" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1A33">スライド</text>
+                  <g fill="#4F8CFF"><rect x="296" y="206" width="16" height="30" rx="2"/><rect x="320" y="190" width="16" height="46" rx="2"/><rect x="344" y="172" width="16" height="64" rx="2"/></g>
+                  <g fill="none" stroke="#B48CFF" stroke-width="3.5" stroke-linecap="round"><path d="M100 120 Q130 92 160 104"/><path d="M240 104 Q272 92 300 120"/></g>
+                  <path d="M156 98 l8 6 -10 3z M296 112 l6 9 -10 -1z" fill="#B48CFF"/>
+                  <text x="70" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Pages</text>
+                  <text x="200" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Numbers</text>
+                  <text x="332" y="286" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Keynote</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>使い道の例: 請求書 → 表 → スライドを、Claude が 1 本の流れでつなぐ<small>MacStories が挙げた例（筆者が組んだものではない）</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>Pages 16.0 の更新の説明（applech2 の写し）:「MCP を使用して、他社製の AI アシスタントが Pages 書類を編集できるようにします」。Numbers・Keynote も同じ 16.0 で対応</li>
+            <li>MacStories の John Voorhees 氏は Claude Code から Pages の編集を試し、「MCP からとても揃った機能が使える」と書いた。中身は「ローカルのサーバーと、3 つのアプリ共通の JavaScript の API」</li>
+            <li>Keynote には JSON の書類形式（.keyx）も加わった。Pages・Numbers には無い</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="5" y="8" width="26" height="20" rx="3" fill="#16233D" stroke="#4F8CFF" stroke-width="2"/><path d="M5 13h26" stroke="#4F8CFF" stroke-width="2"/></svg><div><b>アプリを開いたまま</b><span>操作するアプリは開いておく。窓が 2 つ以上なら、どの窓かを名指しする（MacStories）</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>契約が要るかは不明</b><span>Apple の文は、MCP を「契約者向けの新機能」の段落で書いていて、無料版で使えるかを読み切れない。Creator Studio は月 12.99 ドル（米国）</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#16233D" stroke="#4F8CFF" stroke-width="2.5"/><path d="M14 14a4 4 0 1 1 5 4v3M19 25.5v.5" stroke="#4F8CFF" stroke-width="2.5" stroke-linecap="round"/></svg><div><b>最初の設定が分かりにくい</b><span>MacStories も「少し分かりにくかった。Claude に手順を案内させた」。Mac は macOS 27 以上（手元は 27.2.1）</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 5v18M11 16l7 7 7-7" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 27h22" stroke="#36C2A8" stroke-width="3" stroke-linecap="round"/></svg><div><i>1</i>App Store で Pages・Numbers・Keynote を 16.0 に上げる（手元は 14.4）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="7" width="22" height="22" rx="4" fill="#12302B" stroke="#36C2A8" stroke-width="2"/><path d="M7 15h22M7 22h22M15 7v22" stroke="#36C2A8" stroke-width="2"/></svg><div><i>2</i>Numbers を開き、MCP をオンにする場所とつなぎ方を Claude と一緒に探す</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><g fill="#4F8CFF"><rect x="8" y="20" width="5" height="10" rx="1"/><rect x="16" y="14" width="5" height="16" rx="1"/><rect x="24" y="8" width="5" height="22" rx="1"/></g></svg><div><i>3</i>経費の CSV の写しを Numbers に入れさせ、月別の表とグラフを作らせる</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-20&amp;i=3&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>freelance-admin で、Orca に新しいセッション（更新は自分で押す）</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-20"><input type="hidden" name="i" value="3"><input type="hidden" name="m" value="dig">
+              <label for="q3">この記事を深掘りする</label>
+              <textarea id="q3" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://www.apple.com/newsroom/2026/10/apple-creator-studio-adds-powerful-new-ai-features-and-even-more-creative-tools/">Apple Newsroom（2026-10-27）</a>・<a href="https://applech2.com/archives/20261119-iwork-for-mac-support-ai-assistant.html">AAPL Ch.（11/19、16.0 の配信）</a>・<a href="https://www.macstories.net/reviews/a-closer-look-at-apples-upcoming-creator-studio-update/">MacStories（John Voorhees 氏）</a>・<a href="https://www.ithinkdiff.com/keynote-pages-numbers-mcp-support-keyx/">iThinkDifferent（10/27）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 見送り ================= -->
+      <article class="item" id="skip">
+        <div class="tags"><span class="tag plain">見送り</span></div>
+        <h2 class="skiph">調べて見送ったもの</h2>
+        <div class="skipl">
+          <div><b>Stitch Loop（Google Labs・11/18）</b><span>公開したあとも本番の数字やログを見張り、目標に届くまで改善の PR を出し続ける。順番待ちで、Google AI Ultra の加入者が先</span></div>
+          <div><b>ffmpeg-skill（v3.15.1・11/19）</b><span>Claude Code から FFmpeg の道具 42 個で、動画を切る・字幕を付ける・縦長にする（Star 約 8,300）。kid-voice-video はもう whisper の字幕と録音の切り出しを自前で持っていて重なる</span></div>
+          <div><b>rust-anything（v2.0.2・11/19）</b><span>元のアプリの振る舞いを記録し、それと突き合わせながら Rust に少しずつ書き直す（Star 約 4,900）。対象は TypeScript・Python・Go などで、本人の主力の Flutter（Dart）は入っていない</span></div>
+          <div><b>Edge0（v0.3.0・11/17）</b><span>145B のモデルを、重みを SSD から流し込んでノートで動かす（Star 約 1.2 万）。大きなモデルの取り寄せが要るので今夜は見送った。手元の LLM の話はこれまでの号にも多い</span></div>
+          <div><b>Claude Code 2.1.328（11/19）</b><span>auto mode が Bedrock などの Opus 4.6・Sonnet 4.6 にも広がった、mcp_tool の hook に <code>onFailure: "block"</code> が付いた、など。小さな追加と直し</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('data-jump')); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var src=b.parentNode.querySelector('[data-copy-src]'); var text=src.textContent.trim();
+      function done(){ b.textContent='コピーした'; setTimeout(function(){ b.textContent='コピー'; },1600); }
+      function fallback(){ var r=document.createRange(); r.selectNodeContents(src); var s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='選択した'; }
+      try{ navigator.clipboard.writeText(text).then(done,fallback); }catch(e){ fallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
