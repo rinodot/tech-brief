@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テックブリーフ · 2026年11月26日（木）</title>
+<style>
+/* layout: 左に号の目次、右に 1 件ずつ。主役は絵本のようなコマ（ロボットの Claude が登場する場面の絵）。文字はコマの下の 1 行だけ。コマは広い画面で横に並べ、狭い画面で縦に積む */
+:root{
+  --bg:#0F1115; --panel:#151922; --panel2:#1B202B; --line:#2A303A; --line2:#3A4250;
+  --text:#E6E9EF; --muted:#9AA3B2; --dim:#5E6778;
+  --good:#36C2A8; --flow:#4F8CFF; --ai:#B48CFF; --bad:#FF6B6B; --tool:#FFB454;
+  --good-bg:#12302B; --bad-bg:#3A1A1D; --tool-bg:#3A2A12; --ai-bg:#271F3A; --flow-bg:#16233D; --code-bg:#0B0D11;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,"Cascadia Code",monospace;
+  --wash:#151922; --hair:#2A303A; --soft:#9AA3B2; --grey:#5E6778;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0; color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.8;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg);}
+a{color:var(--flow)}
+code{font-family:var(--mono); font-size:.88em; background:var(--panel2); border:1px solid var(--line); padding:0 6px; border-radius:5px; color:var(--text); word-break:break-word;}
+:focus-visible{outline:2px solid var(--flow); outline-offset:2px; border-radius:6px;}
+
+.shell{display:grid; grid-template-columns:250px minmax(0,1fr);}
+.side{position:sticky; top:env(safe-area-inset-top,0px); align-self:start; height:100vh; overflow-y:auto; border-right:1px solid var(--line); background:var(--panel); padding-block:22px; padding-left:max(18px,env(safe-area-inset-left,0px)); padding-right:18px;}
+.side h1{font-size:16px; margin:0; letter-spacing:.02em;}
+.side .d{font-size:12px; color:var(--muted); margin:2px 0 18px;}
+.side .grp{font-size:11.5px; color:var(--dim); letter-spacing:.06em; margin:14px 0 6px;}
+.side a{display:grid; grid-template-columns:20px minmax(0,1fr); gap:6px; padding:7px 8px; border-radius:7px; color:var(--text); text-decoration:none; font-size:13px; line-height:1.55;}
+.side a:hover{background:var(--panel2);}
+.side a b{color:var(--flow); font-weight:700;}
+.side a.skip b{color:var(--dim);}
+.main{min-width:0; padding-block:28px 80px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.inner{max-width:900px; margin:0 auto; display:grid; gap:18px; min-width:0;}
+.lede{font-size:13px; color:var(--muted); border:1px dashed var(--line2); border-radius:10px; padding:10px 14px;}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line); padding-right:max(16px,env(safe-area-inset-right,0px));}
+}
+
+.item{display:grid; gap:14px; padding-top:26px; scroll-margin-top:16px; min-width:0;}
+.item + .item{border-top:1px solid var(--line); margin-top:22px;}
+.tags{display:flex; flex-wrap:wrap; gap:6px;}
+.tag{font-size:12px; font-weight:700; border-radius:999px; padding:1px 10px; border:1px solid;}
+.tag.tried{color:var(--good); border-color:var(--good); background:var(--good-bg);}
+.tag.tonight{color:var(--ai); border-color:var(--ai); background:var(--ai-bg);}
+.tag.plain{color:var(--muted); border-color:var(--line2);}
+.item h2{font-size:clamp(20px,2.6vw,26px); line-height:1.45; margin:0; text-wrap:balance;}
+.item .sub{color:var(--muted); font-size:14px; margin:-6px 0 0;}
+.sec{display:grid; gap:10px; margin-top:12px; min-width:0;}
+.sec h3{font-size:15.5px; margin:0; text-wrap:balance;}
+.notes{margin:0; padding-left:1.1em; font-size:13px; line-height:1.75; color:var(--muted); display:grid; gap:2px;}
+.notes b{color:var(--text); font-weight:600;}
+
+/* 絵本のコマ */
+.story{display:grid; gap:14px 12px; grid-template-columns:repeat(2,minmax(0,1fr));}
+.story.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:820px){ .story.three{grid-template-columns:1fr;} }
+@media (max-width:640px){ .story{grid-template-columns:1fr;} }
+.rowlab{grid-column:1/-1; font-size:13px; font-weight:800; letter-spacing:.06em; display:flex; align-items:center; gap:10px; margin-top:4px;}
+.rowlab::after{content:""; flex:1; height:1px; background:var(--line2);}
+.rowlab.now{color:var(--bad);} .rowlab.after{color:var(--good);}
+.pnl{display:grid; gap:8px; align-content:start; min-width:0;}
+.scene{border-radius:14px; overflow:hidden; line-height:0; border:1px solid var(--line);}
+.scene svg{display:block; width:100%; height:auto;}
+.cap{display:grid; grid-template-columns:24px minmax(0,1fr); gap:8px; align-items:start; font-size:14.5px; font-weight:700; line-height:1.55;}
+.cap .no{width:24px; height:24px; border-radius:50%; background:var(--text); color:var(--bg); display:grid; place-items:center; font-size:12.5px; font-weight:800;}
+.cap small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px;}
+
+/* ポスター（2 枚の絵を並べ、間に一言） */
+.vs{display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:center;}
+.vs .scene{background:var(--panel);}
+.vs .mid{display:grid; justify-items:center; gap:2px; font-weight:800; color:var(--good); font-size:20px; line-height:1.3; text-align:center;}
+.vs .mid i{display:block; width:46px; height:4px; border-radius:2px; background:var(--good); position:relative;}
+.vs .mid i::after{content:""; position:absolute; right:-2px; top:-6px; width:12px; height:12px; border-top:4px solid var(--good); border-right:4px solid var(--good); transform:rotate(45deg);}
+.vs .mid small{font-size:12px; color:var(--muted); font-weight:500;}
+.vs .mid.plain{color:var(--muted); font-size:26px;}
+@media (max-width:640px){ .vs{grid-template-columns:1fr;} .vs .mid i{transform:rotate(90deg); margin:10px 0;} }
+
+/* 画面の絵 */
+.split{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); gap:12px;}
+@media (max-width:720px){ .split{grid-template-columns:1fr;} }
+.win{min-width:0; background:var(--code-bg); border:1px solid var(--line2); border-radius:12px; overflow:hidden;}
+.wbar{display:flex; align-items:center; gap:10px; padding:6px 10px; background:var(--panel2); font-size:12px; color:var(--muted);}
+.wbar .dots{display:flex; gap:5px;}
+.wbar .dots i{width:9px; height:9px; border-radius:50%; display:block;}
+.wbar .dots i:nth-child(1){background:var(--bad);} .wbar .dots i:nth-child(2){background:var(--tool);} .wbar .dots i:nth-child(3){background:var(--good);}
+.code{padding:6px 0;}
+.ln{display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:8px; align-items:start; padding:2px 10px; font-family:var(--mono); font-size:12px; line-height:1.65;}
+.ln .no{color:var(--dim); text-align:right;}
+.ln .tx{white-space:pre-wrap; word-break:break-word;}
+.ln.hb{background:var(--bad-bg);} .ln.ht{background:var(--tool-bg);}
+.pill{font-family:var(--sans); font-size:11.5px; font-weight:700; border-radius:999px; padding:0 9px; color:var(--bg);}
+.pill.bad{background:var(--bad);} .pill.tool{background:var(--tool);}
+.ans{min-width:0; background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 14px; display:grid; gap:8px; align-content:start;}
+.ans .t{font-size:12.5px; font-weight:700; color:var(--muted); letter-spacing:.04em;}
+.ans .who{display:flex; align-items:center; gap:10px; font-size:14px;}
+.ans .big{font-size:22px; font-weight:800; color:var(--bad);}
+.ans .why{border-top:1px solid var(--line2); padding-top:8px; display:grid; gap:4px; font-size:13.5px;}
+.ans .why b{color:var(--tool);}
+.ans .why span.f{color:var(--bad); font-weight:700;}
+.mono{font-family:var(--mono); font-size:12px;}
+.ans .f2{font-size:11.5px; color:var(--muted);}
+
+/* 絵文字の代わりの小さな絵 */
+.ico{width:34px; height:34px; flex:0 0 34px; display:block;}
+.warns{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+@media (max-width:760px){ .warns{grid-template-columns:1fr;} }
+.warn{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.55; min-width:0;}
+.warn b{display:block;}
+.warn span{color:var(--muted); font-size:12.5px;}
+
+.steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;}
+.st{display:flex; gap:10px; align-items:flex-start; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:13.5px; line-height:1.6; min-width:0;}
+.st > div{min-width:0;}
+.st i{display:block; font-style:normal; font-weight:800; color:var(--flow); font-size:12px; letter-spacing:.06em;}
+@media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+.ask{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:center; background:var(--flow-bg); border:1px solid var(--flow); border-radius:12px; padding:10px 12px;}
+.ask .q{font-size:13.5px; line-height:1.65; min-width:0; word-break:break-word;}
+.ask .q small{display:block; color:var(--muted); font-size:11.5px; letter-spacing:.06em;}
+.ask button{font:inherit; font-size:12.5px; font-weight:700; color:var(--bg); background:var(--flow); border:none; border-radius:7px; padding:5px 14px; cursor:pointer; white-space:nowrap;}
+@media (max-width:520px){ .ask{grid-template-columns:1fr;} .ask button{justify-self:start;} }
+.src{font-size:12.5px; color:var(--muted); margin:0;}
+.src a{color:var(--muted);}
+
+.skipl{display:grid; gap:8px;}
+.skipl div{display:grid; grid-template-columns:minmax(0,190px) minmax(0,1fr); gap:12px; font-size:13.5px; border:1px solid var(--line); border-radius:10px; padding:9px 12px; background:var(--panel);}
+.skipl b{font-weight:600;}
+.skipl span{color:var(--muted);}
+@media (max-width:560px){ .skipl div{grid-template-columns:1fr; gap:2px;} }
+.bnav .wrap{max-width:1150px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+.go{display:grid; gap:10px;}
+.gobtn{display:grid; gap:2px; text-decoration:none; background:var(--good); color:var(--bg); border-radius:12px; padding:12px 14px; font-weight:800; font-size:15px;}
+.gobtn small{font-weight:600; font-size:12.5px; opacity:.85;}
+form.dig{display:grid; gap:8px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:12px;}
+form.dig label{font-size:12.5px; font-weight:800; letter-spacing:.04em; color:var(--muted);}
+form.dig textarea{width:100%; min-height:70px; border-radius:10px; border:1px solid var(--line2); background:var(--panel2); color:var(--text); font:inherit; font-size:14px; padding:8px 10px;}
+form.dig button{justify-self:end; font:inherit; font-weight:800; font-size:14px; border:none; border-radius:10px; padding:8px 16px; background:var(--flow); color:var(--bg); cursor:pointer;}
+form.dig small{color:var(--muted); font-size:12px;}
+/* 1 枚だけのポスター（中央・幅を抑える） */
+.poster{width:100%; max-width:460px; margin:0 auto;}
+.poster .scene{background:var(--panel);}
+/* 試した場面の前後（動画の静止画の模型） */
+.story .scene.light{background:#151922;}
+/* 試した結果の実物（前後の静止画） */
+.shotpair{display:grid; grid-template-columns:minmax(0,1fr); gap:12px; max-width:760px;}
+.shot{margin:0; display:grid; gap:6px; min-width:0;}
+.shot img{display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--line);}
+.shot figcaption{font-size:13px; color:var(--muted); line-height:1.6;}
+.shot figcaption b{color:var(--text);}
+@media (max-width:640px){ .vs .mid i{margin:24px 0 36px;} }
+@media (min-width:820px){ .shotpair{grid-template-columns:repeat(2,minmax(0,1fr)); max-width:none; align-items:start;} }
+@media (min-width:820px){ .shotpair.one{grid-template-columns:minmax(0,1fr); max-width:780px;} }
+@media (min-width:641px){ .vs .mid i{margin:8px 0;} }
+.shotpair.narrow{max-width:620px;}
+@media (min-width:820px){ .shotpair.narrow{max-width:620px;} }
+/*BNAVCSS*/
+  .bnav{background:var(--wash); border-bottom:1px solid var(--hair); font-size:12.5px;}
+  .bnav .wrap{display:flex; justify-content:space-between; padding-top:10px; padding-bottom:10px;}
+  .bnav a{color:var(--soft); text-decoration:none;}
+  .bnav a:hover{text-decoration:underline;}
+  .bnav .dis{color:var(--grey);}
+</style>
+</head>
+<body>
+<!--BNAV START--><nav class="bnav"><div class="wrap"><a href="2026-11-25.html">← 11/25（水）</a><a href="../index.html">一覧</a><span class="dis" id="bnext">最新号</span></div></nav><script>(function(){var s=document.getElementById("bnext");if(!s)return;var m=location.pathname.match(/(\d{4}-\d{2}-\d{2})\.html$/);if(!m)return;var d=m[1];fetch("../manifests/index.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(ix){var n=(ix.days||[]).filter(function(x){return x>d}).sort()[0];if(!n)return null;return fetch("../manifests/"+n+".json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()})}).then(function(e){if(!e)return;var p=e.date.split("-");var a=document.createElement("a");a.href=e.file;a.textContent=(+p[1])+"/"+(+p[2])+"（"+e.weekday+"）→";s.replaceWith(a)}).catch(function(){})})();</script><!--BNAV END-->
+
+<!-- 絵の部品（ロボットの Claude 3 つの顔・矢じり） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="robot" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#FFB454"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <circle cx="31" cy="36" r="4.2" fill="#F4F1FF"/>
+      <circle cx="49" cy="36" r="4.2" fill="#F4F1FF"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-sleepy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#5E6778"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 37h9M45 37h9" stroke="#F4F1FF" stroke-width="3" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#5E6778"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <symbol id="robot-happy" viewBox="0 0 80 100">
+      <line x1="40" y1="6" x2="40" y2="17" stroke="#B48CFF" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="40" cy="5" r="4.5" fill="#36C2A8"/>
+      <rect x="12" y="16" width="56" height="40" rx="13" fill="#B48CFF"/>
+      <rect x="19" y="23" width="42" height="26" rx="9" fill="#231A3D"/>
+      <path d="M26 39q5-8 10 0M44 39q5-8 10 0" stroke="#F4F1FF" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="9" y="61" width="9" height="22" rx="4.5" fill="#8E6CD9"/>
+      <rect x="62" y="44" width="9" height="22" rx="4.5" fill="#8E6CD9" transform="rotate(-30 66 55)"/>
+      <rect x="20" y="58" width="40" height="31" rx="9" fill="#8E6CD9"/>
+      <circle cx="40" cy="73" r="4.5" fill="#36C2A8"/>
+      <rect x="26" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+      <rect x="45" y="88" width="9" height="11" rx="3" fill="#7458C2"/>
+    </symbol>
+    <marker id="ahRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF6B6B"/></marker>
+    <marker id="ahGrey" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9AA3B2"/></marker>
+    <marker id="ahGood" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#36C2A8"/></marker>
+    <symbol id="mini" viewBox="0 0 80 100">
+      <rect x="14" y="10" width="52" height="44" rx="22" fill="#36C2A8"/>
+      <rect x="21" y="20" width="38" height="24" rx="12" fill="#0F2E2A"/>
+      <circle cx="32" cy="32" r="4" fill="#E9FFF9"/>
+      <circle cx="48" cy="32" r="4" fill="#E9FFF9"/>
+      <path d="M22 12 l-6 -9 M58 12 l6 -9" stroke="#36C2A8" stroke-width="4" stroke-linecap="round"/>
+      <rect x="22" y="58" width="36" height="30" rx="10" fill="#2A9C87"/>
+      <rect x="10" y="62" width="9" height="20" rx="4.5" fill="#2A9C87"/>
+      <rect x="61" y="62" width="9" height="20" rx="4.5" fill="#2A9C87"/>
+      <rect x="27" y="88" width="9" height="11" rx="3" fill="#1F7A69"/>
+      <rect x="44" y="88" width="9" height="11" rx="3" fill="#1F7A69"/>
+    </symbol>
+    <symbol id="mini-happy" viewBox="0 0 80 100">
+      <rect x="14" y="10" width="52" height="44" rx="22" fill="#36C2A8"/>
+      <rect x="21" y="20" width="38" height="24" rx="12" fill="#0F2E2A"/>
+      <path d="M27 34q5-7 10 0M43 34q5-7 10 0" stroke="#E9FFF9" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M22 12 l-6 -9 M58 12 l6 -9" stroke="#36C2A8" stroke-width="4" stroke-linecap="round"/>
+      <rect x="22" y="58" width="36" height="30" rx="10" fill="#2A9C87"/>
+      <rect x="10" y="62" width="9" height="20" rx="4.5" fill="#2A9C87"/>
+      <rect x="61" y="46" width="9" height="20" rx="4.5" fill="#2A9C87" transform="rotate(-30 65 56)"/>
+      <rect x="27" y="88" width="9" height="11" rx="3" fill="#1F7A69"/>
+      <rect x="44" y="88" width="9" height="11" rx="3" fill="#1F7A69"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="side">
+    <h1>テックブリーフ</h1>
+    <div class="d">2026-11-26（木） · 2 件</div>
+    <div class="grp">今日の 2 件</div>
+    <a href="#i1" data-jump="i1"><b>1</b><span>Claude に作らせた道具が、そのまま Mac のアプリになる</span></a>
+    <a href="#i2" data-jump="i2"><b>2</b><span>手元の LLM が、昼の直しを夜に覚える仕組み（日本語はまだ）</span></a>
+    <div class="grp">見送り</div>
+    <a href="#skip" data-jump="skip" class="skip"><b>–</b><span>調べて見送ったもの 3 件</span></a>
+  </aside>
+
+  <main class="main">
+    <div class="inner">
+      <div class="lede">今日は 2 件。1 件目（Install as app）は、押して入れる所が本人の手なので試していない。2 件目（songe）は手元の Ollama で試し、日本語の直しが覚えられない所まで見た。3 件目に足る話は無く、見送りに回した</div>
+
+      <!-- ================= 1 ================= -->
+      <article class="item" id="i1">
+        <div class="tags"><span class="tag plain">まだ試していない</span><span class="tag plain">手元の Claude が対応版かだけ確かめた</span><span class="tag plain">入れる手間 10 分ほど（押すのは本人）</span><span class="tag plain">対象: WorkIQ のタスク</span></div>
+        <h2>Claude に作らせた小さな道具が、そのまま Mac のアプリになる。メニューバーに住み、知らせを出し、手元のコマンドも動かせる</h2>
+        <p class="sub">Claude の「Install as app」（11/24・ベータ・全プラン）。Artifact が自分のアイコンと窓を持つ。包む・署名する・API キーを置く、は要らない</p>
+
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="大きな Claude の窓の中に、作った道具の紙が 1 枚。人が虫めがねで、会話の一覧から探している">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect y="246" width="400" height="34" fill="#252E42"/>
+                  <rect x="18" y="20" width="300" height="196" rx="12" fill="#232B3D" stroke="#3A4250" stroke-width="2"/>
+                  <rect x="18" y="20" width="300" height="24" rx="12" fill="#2A3346"/>
+                  <rect x="18" y="34" width="300" height="10" fill="#2A3346"/>
+                  <circle cx="34" cy="32" r="4" fill="#FF6B6B"/><circle cx="47" cy="32" r="4" fill="#FFB454"/><circle cx="60" cy="32" r="4" fill="#36C2A8"/>
+                  <text x="190" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Claude</text>
+                  <rect x="26" y="52" width="86" height="156" rx="6" fill="#1B202B"/>
+                  <g fill="#3A4250"><rect x="34" y="62" width="68" height="8" rx="3"/><rect x="34" y="78" width="58" height="8" rx="3"/><rect x="34" y="94" width="64" height="8" rx="3"/><rect x="34" y="110" width="50" height="8" rx="3"/><rect x="34" y="126" width="66" height="8" rx="3"/><rect x="34" y="142" width="56" height="8" rx="3"/><rect x="34" y="158" width="62" height="8" rx="3"/><rect x="34" y="174" width="48" height="8" rx="3"/><rect x="34" y="190" width="60" height="8" rx="3"/></g>
+                  <path d="M168 72 L284 66 L288 176 L172 182 Z" fill="#EDE6D6"/>
+                  <g fill="#4F8CFF"><rect x="186" y="140" width="14" height="28"/><rect x="206" y="124" width="14" height="44"/><rect x="226" y="132" width="14" height="36"/><rect x="246" y="108" width="14" height="60"/></g>
+                  <g fill="#B8B1A1"><rect x="184" y="84" width="70" height="6" rx="3"/><rect x="184" y="98" width="50" height="6" rx="3"/></g>
+                  <circle cx="352" cy="170" r="14" fill="#F2C9A0"/>
+                  <path d="M338 168 a14 14 0 0 1 28 0 z" fill="#3A2E2A"/>
+                  <path d="M330 246 c2-30 10-50 22-50 s20 20 22 50 z" fill="#4F8CFF"/>
+                  <circle cx="306" cy="150" r="18" fill="#FFFFFF" fill-opacity=".25" stroke="#FFB454" stroke-width="5"/>
+                  <line x1="318" y1="163" x2="334" y2="186" stroke="#FFB454" stroke-width="7" stroke-linecap="round"/>
+                  <rect x="232" y="222" width="150" height="40" rx="12" fill="#E6E9EF"/>
+                  <path d="M330 222 L344 222 L340 210 Z" fill="#E6E9EF"/>
+                  <text x="307" y="249" text-anchor="middle" font-size="18" font-weight="800" fill="#231A3D">どの会話だっけ</text>
+                  <text x="110" y="268" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">Claude の窓の中の 1 枚</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>作った道具は、Claude の窓の中の 1 枚の紙<small>使うたびに Claude を開き、会話を探して出す</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="自分の Mac アプリにしたいなら、箱詰め・判子・鍵の 3 つの山を越えないといけない。人が山の前で立ち止まっている">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect y="246" width="400" height="34" fill="#252E42"/>
+                  <path d="M120 246 L170 150 L220 246 Z" fill="#3A4250"/>
+                  <path d="M200 246 L262 120 L324 246 Z" fill="#4A5366"/>
+                  <path d="M290 246 L340 160 L392 246 Z" fill="#3A4250"/>
+                  <rect x="150" y="196" width="40" height="30" rx="3" fill="#8A5A3C"/>
+                  <path d="M150 204 h40 M170 196 v30" stroke="#6B4530" stroke-width="3"/>
+                  <text x="170" y="140" text-anchor="middle" font-size="16" font-weight="800" fill="#E6E9EF">包む</text>
+                  <circle cx="262" cy="188" r="18" fill="#FF6B6B"/>
+                  <rect x="254" y="150" width="16" height="22" rx="4" fill="#C9B6FF"/>
+                  <text x="262" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#E6E9EF">署名</text>
+                  <circle cx="332" cy="204" r="10" fill="none" stroke="#FFB454" stroke-width="4"/>
+                  <rect x="340" y="201" width="26" height="6" rx="3" fill="#FFB454"/>
+                  <rect x="358" y="206" width="4" height="8" rx="1" fill="#FFB454"/>
+                  <text x="340" y="150" text-anchor="middle" font-size="16" font-weight="800" fill="#E6E9EF">API キー</text>
+                  <circle cx="66" cy="170" r="14" fill="#F2C9A0"/>
+                  <path d="M52 168 a14 14 0 0 1 28 0 z" fill="#3A2E2A"/>
+                  <path d="M44 246 c2-30 10-50 22-50 s20 20 22 50 z" fill="#4F8CFF"/>
+                  <circle cx="94" cy="128" r="20" fill="#E6E9EF"/>
+                  <circle cx="80" cy="150" r="4" fill="#E6E9EF"/>
+                  <text x="94" y="138" text-anchor="middle" font-size="26" font-weight="800" fill="#231A3D">…</text>
+                  <text x="200" y="40" text-anchor="middle" font-size="18" font-weight="800" fill="#FF6B6B">自分のアプリにするなら</text>
+                  <text x="66" y="268" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>Mac のアプリにするには、山がいくつもあった<small>小さな窓 1 つでも、包んで・署名して・鍵を置く</small></span></div>
+            </div>
+
+            <div class="rowlab after">Install as app を押すと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="紙が Claude の窓から飛び出して、Dock に自分のアイコンとして並ぶ。Claude が喜んでいる">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect x="18" y="24" width="170" height="130" rx="12" fill="#232B3D" stroke="#3A4250" stroke-width="2"/>
+                  <circle cx="32" cy="36" r="3.5" fill="#FF6B6B"/><circle cx="43" cy="36" r="3.5" fill="#FFB454"/><circle cx="54" cy="36" r="3.5" fill="#36C2A8"/>
+                  <rect x="60" y="66" width="114" height="34" rx="17" fill="#36C2A8"/>
+                  <text x="117" y="89" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1115">Install as app</text>
+                  <path d="M122 118 Q200 60 262 170" fill="none" stroke="#4F8CFF" stroke-width="3" stroke-dasharray="6 7"/>
+                  <path d="M264 173 L253.6 167.9 L263.6 161.3 Z" fill="#4F8CFF"/>
+                  <rect x="64" y="208" width="300" height="52" rx="16" fill="#2A3346" fill-opacity=".9" stroke="#5E6778" stroke-width="2"/>
+                  <rect x="80" y="216" width="36" height="36" rx="9" fill="#5E6778"/>
+                  <rect x="126" y="216" width="36" height="36" rx="9" fill="#4A5366"/>
+                  <rect x="172" y="216" width="36" height="36" rx="9" fill="#5E6778"/>
+                  <rect x="276" y="160" width="68" height="68" rx="16" fill="#12302B" stroke="#36C2A8" stroke-width="4"/>
+                  <g fill="#36C2A8"><rect x="290" y="198" width="9" height="18"/><rect x="304" y="186" width="9" height="30"/><rect x="318" y="176" width="9" height="40"/></g>
+                  <path d="M352 158 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z" fill="#FFB454"/>
+                  <path d="M262 196 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#FFB454"/>
+                  <circle cx="310" cy="270" r="3" fill="#E6E9EF"/>
+                  <use href="#robot-happy" x="146" y="124" width="64" height="80"/>
+                  <text x="330" y="148" text-anchor="middle" font-size="15" font-weight="800" fill="#36C2A8">自分のアイコン</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>押すだけで、Dock に自分のアイコンが並ぶ<small>窓も自分のもの。共有した人も入れられる。中身を直すと、アプリも同じように変わる</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="画面のいちばん上のメニューバーに小さな印が住み、押すと今日のやることが下りてくる。右には知らせの札が届き、Claude が鍵を持って引き出しと黒い画面を開けている">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect width="400" height="34" fill="#0B0D11"/>
+                  <rect x="236" y="12" width="16" height="11" rx="2" fill="#9AA3B2"/>
+                  <path d="M266 24 a9 9 0 0 1 16 0" fill="none" stroke="#9AA3B2" stroke-width="2.5"/>
+                  <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">6:00</text>
+                  <rect x="140" y="5" width="60" height="24" rx="7" fill="#36C2A8"/>
+                  <text x="170" y="23" text-anchor="middle" font-size="16" font-weight="800" fill="#0F1115">5 件</text>
+                  <rect x="70" y="38" width="190" height="112" rx="10" fill="#E6E9EF"/>
+                  <circle cx="88" cy="58" r="5" fill="#36C2A8"/><circle cx="88" cy="80" r="5" fill="#FF6B6B"/>
+                  <rect x="100" y="54" width="130" height="8" rx="3" fill="#5E6778"/><rect x="100" y="76" width="104" height="8" rx="3" fill="#5E6778"/>
+                  <rect x="84" y="100" width="162" height="38" rx="9" fill="#4F8CFF"/>
+                  <text x="165" y="125" text-anchor="middle" font-size="16" font-weight="800" fill="#FFFFFF">Orca で始める</text>
+                  <rect x="272" y="44" width="120" height="72" rx="12" fill="#2A3346" stroke="#5E6778" stroke-width="2"/>
+                  <path d="M284 64 a8 8 0 0 1 16 0 v8 l3 4 h-22 l3 -4z" fill="#FFB454"/>
+                  <circle cx="292" cy="82" r="3" fill="#FFB454"/>
+                  <text x="346" y="72" text-anchor="middle" font-size="15" font-weight="800" fill="#E6E9EF">期限が今日</text>
+                  <text x="346" y="98" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">2 件</text>
+                  <rect x="22" y="172" width="92" height="74" rx="6" fill="#6B4F3A"/>
+                  <rect x="28" y="180" width="80" height="26" rx="3" fill="#8A5A3C"/>
+                  <rect x="28" y="214" width="80" height="26" rx="3" fill="#8A5A3C"/>
+                  <rect x="16" y="164" width="80" height="18" rx="3" fill="#EDE6D6" transform="rotate(-8 56 173)"/>
+                  <rect x="60" y="190" width="18" height="5" rx="2" fill="#EDE6D6"/>
+                  <rect x="278" y="160" width="110" height="86" rx="10" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                  <text x="290" y="190" font-size="16" font-weight="800" fill="#36C2A8" font-family="ui-monospace,Menlo,monospace">&gt;_ node</text>
+                  <rect x="290" y="204" width="80" height="6" rx="3" fill="#3A4250"/><rect x="290" y="218" width="60" height="6" rx="3" fill="#3A4250"/>
+                  <use href="#robot" x="146" y="158" width="72" height="90"/>
+                  <circle cx="238" cy="216" r="9" fill="none" stroke="#FFB454" stroke-width="4"/>
+                  <rect x="246" y="213" width="22" height="6" rx="3" fill="#FFB454"/>
+                  <text x="190" y="272" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">フルアクセスの鍵</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>メニューバーに住み、知らせを出す。鍵を渡せば、手元のファイルとコマンドにも手が届く<small>どこからでも効くショートカット、前面に浮かぶ小窓も作れる。許可は 1 つずつ聞かれる</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>4 の中身（5 件・Orca で始める）は、本人の WorkIQ で作るならの<b>私の案</b>。絵の機能（メニューバー・知らせ・ファイル・コマンド）は公式の説明にあるもの</li>
+            <li>Anthropic の人が作った例として、重ねて描ける画像編集・ファイル整理・Claude が横にいるターミナル・メニューバーの性能メーターなど 5 本が紹介されている（11/24 の記事）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>許可は 3 段。上の段ほど、できることが増える</h3>
+          <div class="poster">
+            <div class="scene">
+              <svg viewBox="0 0 480 360" role="img" aria-label="3 段の階段。1 段目はふつう（ブラウザと同じ）、2 段目はアプリの許可（知らせ・メニューバー・ショートカット・前面の小窓）、3 段目はフルアクセス（コマンドとファイル）。Claude が 3 段目に鍵を持って立っている">
+                <rect width="480" height="360" fill="#151922"/>
+                <rect x="12" y="262" width="152" height="86" fill="#2A3346"/>
+                <rect x="164" y="170" width="152" height="178" fill="#16233D"/>
+                <rect x="316" y="108" width="152" height="240" fill="#271F3A"/>
+                <circle cx="88" cy="232" r="17" fill="none" stroke="#9AA3B2" stroke-width="3"/>
+                <path d="M71 232 h34 M88 215 c-9 9-9 25 0 34 M88 215 c9 9 9 25 0 34" fill="none" stroke="#9AA3B2" stroke-width="2"/>
+                <text x="88" y="296" text-anchor="middle" font-size="20" font-weight="800" fill="#E6E9EF">ふつう</text>
+                <text x="88" y="322" text-anchor="middle" font-size="15" fill="#9AA3B2">ブラウザと同じ</text>
+                <path d="M228 134 a12 12 0 0 1 24 0 v12 l5 6 h-34 l5 -6z" fill="#4F8CFF"/>
+                <circle cx="240" cy="158" r="4" fill="#4F8CFF"/>
+                <text x="240" y="200" text-anchor="middle" font-size="20" font-weight="800" fill="#4F8CFF">アプリの許可</text>
+                <text x="240" y="230" text-anchor="middle" font-size="15" fill="#C9D4E6">知らせ</text>
+                <text x="240" y="254" text-anchor="middle" font-size="15" fill="#C9D4E6">メニューバー</text>
+                <text x="240" y="278" text-anchor="middle" font-size="15" fill="#C9D4E6">ショートカット</text>
+                <text x="240" y="302" text-anchor="middle" font-size="15" fill="#C9D4E6">前面の小窓</text>
+                <use href="#robot-happy" x="356" y="18" width="64" height="80"/>
+                <circle cx="432" cy="66" r="8" fill="none" stroke="#FFB454" stroke-width="3.5"/>
+                <rect x="439" y="63" width="18" height="5" rx="2" fill="#FFB454"/>
+                <text x="392" y="140" text-anchor="middle" font-size="20" font-weight="800" fill="#B48CFF">フルアクセス</text>
+                <text x="392" y="170" text-anchor="middle" font-size="15" fill="#D9CCFF">コマンドを動かす</text>
+                <text x="392" y="194" text-anchor="middle" font-size="15" fill="#D9CCFF">ファイルを読み書き</text>
+                <text x="392" y="262" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">自分が作った</text>
+                <text x="392" y="286" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">ものだけ</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>2 段目・3 段目は、アプリが使う前に 1 つずつ「許可する／許可しない」を聞く。許可はその版だけで、自分で直した版でも聞き直す（公式のヘルプ）</li>
+            <li>Pro・Max の人の場合、フルアクセスを許せるのは自分が作ったアプリだけ。ほかの人が手を入れたものには出ない</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>中に書くのは、使う許可の宣言と数行だけ（私の案の下書き）</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>Artifact の HTML（抜き出し）</span></div>
+              <div class="code">
+                <div class="ln ht"><span class="no">1</span><span class="tx">&lt;script type="application/json" id="claude-artifacts-manifest"&gt;</span><span class="pill tool">宣言</span></div>
+                <div class="ln ht"><span class="no">2</span><span class="tx">{"permissions": ["menu-bar", "notifications", "full-access"]}</span><span></span></div>
+                <div class="ln"><span class="no">3</span><span class="tx">&lt;/script&gt;</span><span></span></div>
+                <div class="ln"><span class="no">⋮</span><span class="tx"></span><span></span></div>
+                <div class="ln"><span class="no">9</span><span class="tx">const desktop = await claude.use("desktop");</span><span></span></div>
+                <div class="ln"><span class="no">10</span><span class="tx">const r = await desktop.childProcess.exec(</span><span></span></div>
+                <div class="ln"><span class="no">11</span><span class="tx">  "node tools/task-list.mjs --today --brief", {cwd: "~/Developer/workiq"});</span><span></span></div>
+                <div class="ln"><span class="no">12</span><span class="tx">await desktop.tray.set({title: "今日 5 件", menu: items(r.stdout)});</span><span></span></div>
+                <div class="ln"><span class="no">13</span><span class="tx">await desktop.notification.show({body: "期限が今日のタスクが 2 件"});</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">今夜、この Mac で確かめたこと</div>
+              <div class="who">
+                <svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="6" width="28" height="20" rx="3" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="12" y="28" width="12" height="3" rx="1" fill="#9AA3B2"/><path d="M12 16l4 4 8-8" fill="none" stroke="#36C2A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Claude Desktop は<br><b>7.37095.0</b>（要るのは 6.28899.0 以上）</span>
+              </div>
+              <div class="why">
+                <div><b>中身</b>　アプリの本体に、許可の宣言（claude-artifacts-manifest）を読む部分と「Claude Apps」のフォルダ名がある</div>
+                <div><b>入れた数</b>　~/Applications に Claude Apps のフォルダはまだ無い（0 本）</div>
+              </div>
+              <div class="f2">押して入れるところは、本人の手が要るので試していない</div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>左の書き方は、Claude Code 2.1.332 に同梱の型定義（desktop.d.ts）にある名前どおり。メニューバーの印・知らせ・コマンドの呼び方は合っているが、この下書きは動かしていない</li>
+            <li>11 行目の <code>task-list.mjs --today --brief</code> は、WorkIQ に今あるタスク一覧の出し方（本人のリポジトリ）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 18a12 12 0 1 0 4-9" fill="none" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/><path d="M4 5v7h7" fill="none" stroke="#FFB454" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>直すたびに許可を聞き直す</b><span>許可は版ごと。「許可しない」は次の版にも残る</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>Anthropic はアプリを審査しない</b><span>フルアクセスのアプリは、ファイルを消すことも聞かずにできる。消す・上書きするボタンは画面に出して確かめる作りに</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 12l12 12M24 12L12 24" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>オフラインでは開けない</b><span>ネットと Claude へのログインが要る。Claude の画面操作は、このアプリを見られるがクリックできない</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="6" y="6" width="24" height="18" rx="4" fill="#271F3A" stroke="#B48CFF" stroke-width="2"/><path d="M12 24l-2 7 8-7" fill="#271F3A" stroke="#B48CFF" stroke-width="2" stroke-linejoin="round"/><path d="M11 13h14M11 18h9" stroke="#B48CFF" stroke-width="2" stroke-linecap="round"/></svg><div><i>1</i>Claude Code に「メニューバーに今日の WorkIQ のタスクを出すアプリ」を Artifact で作らせる</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="5" y="20" width="26" height="11" rx="4" fill="#2A3346" stroke="#9AA3B2" stroke-width="2"/><rect x="12" y="4" width="12" height="12" rx="3" fill="#12302B" stroke="#36C2A8" stroke-width="2"/><path d="M18 16v5" stroke="#36C2A8" stroke-width="2.5" stroke-linecap="round"/></svg><div><i>2</i>Claude Desktop で開き、題名のメニューから <b>Install as app</b> → Install</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="12" cy="18" r="7" fill="none" stroke="#FFB454" stroke-width="3"/><rect x="18" y="16" width="14" height="5" rx="2" fill="#FFB454"/><rect x="27" y="20" width="4" height="6" rx="1" fill="#FFB454"/></svg><div><i>3</i>知らせとメニューバーを許す。タスクを読むコマンドのために、フルアクセスもこのアプリにだけ</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-26&amp;i=1&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>メニューバーに住む、WorkIQ の今日のタスクの小さなアプリを作る</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-26"><input type="hidden" name="i" value="1"><input type="hidden" name="m" value="dig">
+              <label for="q1">この記事を深掘りする</label>
+              <textarea id="q1" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://claude.com/resources/articles/install-as-app">Turn artifacts into Mac and Windows apps（Claude、2026-11-24）</a>・<a href="https://support.claude.com/en/articles/18516354">Install an artifact as an app（Claude ヘルプ）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 2 ================= -->
+      <article class="item" id="i2">
+        <div class="tags"><span class="tag tried">手元で試した</span><span class="tag plain">学習（Deep Dream）は試していない</span><span class="tag plain">入れる手間 10 分ほど（uv で 1 行）＋ モデルの置き場所</span><span class="tag plain">対象: 手元の LLM（Ollama）</span></div>
+        <h2>手元の LLM が、昼に直されたことを夜のあいだに覚える仕組み。試すと、日本語の直しはまだ覚えなかった</h2>
+        <p class="sub">songe（11/20 公開・Apache-2.0）。手元の Ollama で試すと、日本語の直しはそのままは覚えず、英語の一般論に丸まった。今の版は英語の言い回しと LM Studio が前提の作り（私の見立て）</p>
+        <section class="sec">
+          <div class="story">
+            <div class="rowlab now">いま</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="昼。人が手元の小さなモデルに「intl は使わないで。main の例は要らない」と直している。モデルはうなずく">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect y="246" width="400" height="34" fill="#252E42"/>
+                  <circle cx="356" cy="40" r="18" fill="#FFB454"/>
+                  <g stroke="#FFB454" stroke-width="3" stroke-linecap="round"><line x1="356" y1="12" x2="356" y2="6"/><line x1="328" y1="40" x2="322" y2="40"/><line x1="336" y1="20" x2="332" y2="16"/></g>
+                  <circle cx="300" cy="168" r="14" fill="#F2C9A0"/>
+                  <path d="M286 166 a14 14 0 0 1 28 0 z" fill="#3A2E2A"/>
+                  <path d="M278 246 c2-30 10-50 22-50 s20 20 22 50 z" fill="#4F8CFF"/>
+                  <rect x="150" y="62" width="236" height="76" rx="14" fill="#E6E9EF"/>
+                  <path d="M290 137 L306 137 L300 152 Z" fill="#E6E9EF"/>
+                  <text x="268" y="92" text-anchor="middle" font-size="17" font-weight="800" fill="#231A3D">intl は使わないで</text>
+                  <text x="268" y="120" text-anchor="middle" font-size="17" font-weight="800" fill="#231A3D">main の例は要らない</text>
+                  <use href="#mini" x="60" y="150" width="76" height="96"/>
+                  <text x="98" y="136" text-anchor="middle" font-size="18" font-weight="800" fill="#36C2A8">はい</text>
+                  <text x="98" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#7FE0CC">手元のモデル</text>
+                  <text x="300" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなた</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">1</span><span>昼、手元のモデルの答えを直す<small>その会話の中では、言ったとおりに直してくれる</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="次の日。新しい会話で、モデルはまた同じパッケージを持ってきて、人が頭を抱えている">
+                  <rect width="400" height="280" fill="#1C2333"/>
+                  <rect y="246" width="400" height="34" fill="#252E42"/>
+                  <rect x="22" y="18" width="96" height="40" rx="8" fill="#2A3346"/>
+                  <text x="70" y="45" text-anchor="middle" font-size="17" font-weight="800" fill="#9AA3B2">次の日</text>
+                  <use href="#mini" x="70" y="150" width="76" height="96"/>
+                  <rect x="140" y="170" width="64" height="44" rx="5" fill="#8A5A3C"/>
+                  <path d="M140 180 h64 M172 170 v44" stroke="#6B4530" stroke-width="3"/>
+                  <text x="172" y="160" text-anchor="middle" font-size="15" font-weight="800" fill="#FFB454">intl</text>
+                  <circle cx="186" cy="110" r="22" fill="#FF6B6B"/>
+                  <path d="M176 100l20 20M196 100l-20 20" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+                  <circle cx="310" cy="168" r="14" fill="#F2C9A0"/>
+                  <path d="M296 166 a14 14 0 0 1 28 0 z" fill="#3A2E2A"/>
+                  <path d="M288 246 c2-30 10-50 22-50 s20 20 22 50 z" fill="#4F8CFF"/>
+                  <path d="M292 160 q-8 -14 4 -22 M328 160 q8 -14 -4 -22" fill="none" stroke="#F2C9A0" stroke-width="7" stroke-linecap="round"/>
+                  <rect x="236" y="70" width="150" height="42" rx="12" fill="#E6E9EF"/>
+                  <path d="M300 111 L314 111 L310 124 Z" fill="#E6E9EF"/>
+                  <text x="311" y="98" text-anchor="middle" font-size="18" font-weight="800" fill="#231A3D">また言うの？</text>
+                  <text x="108" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#7FE0CC">手元のモデル</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">2</span><span>新しい会話では、また同じことをする<small>直したことは、その会話が終わると残らない</small></span></div>
+            </div>
+
+            <div class="rowlab after">songe を間に置くと</div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="夜。モデルが布団の中で、昼の直しを書いた帳面を読んでいる。窓に月">
+                  <rect width="400" height="280" fill="#141B2E"/>
+                  <g fill="#E6E9EF" fill-opacity=".7"><circle cx="40" cy="30" r="1.8"/><circle cx="150" cy="18" r="1.5"/><circle cx="250" cy="40" r="2"/><circle cx="110" cy="70" r="1.4"/><circle cx="210" cy="84" r="1.4"/></g>
+                  <rect x="290" y="20" width="90" height="80" rx="6" fill="#22314F" stroke="#5E6778" stroke-width="3"/>
+                  <circle cx="335" cy="58" r="20" fill="#F5E6A8"/><circle cx="344" cy="52" r="17" fill="#22314F"/>
+                  <rect y="246" width="400" height="34" fill="#1E2638"/>
+                  <rect x="40" y="196" width="320" height="18" rx="6" fill="#6B4F3A"/>
+                  <rect x="44" y="214" width="10" height="32" fill="#6B4F3A"/><rect x="346" y="214" width="10" height="32" fill="#6B4F3A"/>
+                  <rect x="40" y="150" width="22" height="64" rx="6" fill="#6B4F3A"/>
+                  <rect x="60" y="176" width="300" height="24" rx="10" fill="#4F8CFF"/>
+                  <use href="#mini" x="64" y="104" width="64" height="80"/>
+                  <path d="M150 120 L228 112 L228 176 L150 182 Z" fill="#EDE6D6"/>
+                  <path d="M228 112 L304 120 L304 182 L228 176 Z" fill="#F3EEE2"/>
+                  <line x1="228" y1="112" x2="228" y2="176" stroke="#B8B1A1" stroke-width="2"/>
+                  <text x="189" y="142" text-anchor="middle" font-size="16" font-weight="800" fill="#8A5A3C">昼の直し</text>
+                  <g fill="#B8B1A1"><rect x="160" y="150" width="58" height="5" rx="2"/><rect x="160" y="162" width="46" height="5" rx="2"/><rect x="238" y="132" width="56" height="5" rx="2"/><rect x="238" y="144" width="48" height="5" rx="2"/><rect x="238" y="156" width="54" height="5" rx="2"/></g>
+                  <g fill="#9AA3B2" font-weight="800"><text x="134" y="96" font-size="16">z</text><text x="146" y="78" font-size="21">z</text></g>
+                  <text x="200" y="272" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA3B2">あなたが離れているあいだ</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">3</span><span>手が空いた夜、昼の直しを帳面にまとめる（Dream）<small>songe は、あなたとモデルのあいだで会話を記録しておく</small></span></div>
+            </div>
+            <div class="pnl">
+              <div class="scene">
+                <svg viewBox="0 0 400 280" role="img" aria-label="朝。新しい会話の頭に、帳面の 1 枚がはさまっていて、モデルはパッケージを持たずに関数だけで答える">
+                  <rect width="400" height="280" fill="#22314F"/>
+                  <circle cx="60" cy="214" r="40" fill="#FFB454"/>
+                  <path d="M0 236 Q100 206 200 236 T400 232 V280 H0Z" fill="#1A263E"/>
+                  <rect x="150" y="26" width="230" height="160" rx="12" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                  <rect x="160" y="36" width="210" height="52" rx="6" fill="#EDE6D6"/>
+                  <text x="265" y="57" text-anchor="middle" font-size="15" font-weight="800" fill="#8A5A3C">前の会話からの教え</text>
+                  <text x="265" y="79" text-anchor="middle" font-size="15" font-weight="700" fill="#3A2A12">intl なし・関数だけ</text>
+                  <text x="168" y="116" font-size="15" fill="#E6E9EF" font-family="ui-monospace,Menlo,monospace">String hm(d) =&gt;</text>
+                  <text x="168" y="140" font-size="15" fill="#E6E9EF" font-family="ui-monospace,Menlo,monospace">  '${d.hour}:…';</text>
+                  <circle cx="352" cy="164" r="14" fill="#36C2A8"/>
+                  <path d="M345 164l5 5 9-10" fill="none" stroke="#0F1115" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <use href="#mini-happy" x="60" y="104" width="76" height="96"/>
+                  <text x="98" y="270" text-anchor="middle" font-size="15" font-weight="700" fill="#7FE0CC">手元のモデル</text>
+                </svg>
+              </div>
+              <div class="cap"><span class="no">4</span><span>次の会話から、教えが頭に付いて、言わなくても守る<small>深い Dream なら、モデルそのものに小さな追加の学習（LoRA）をする。前より良いときだけ切り替え、いつでも戻せる</small></span></div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>3・4 は songe の README の説明。今夜の試しでは、4 のとおりにはならなかった（下の 2 つ）</li>
+            <li>songe は、opencode・pi などとモデルのサーバーのあいだに立つ中継（127.0.0.1:7613）。会話は手元に記録するだけで、外には送らない（README。安全審査でも外への送信は見つからなかった）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>手元の Ollama（gemma4:e2b）で、日本語で教える前とあとを比べた</h3>
+          <div class="vs">
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="教える前。6 本の答えのうち、intl を使ったのが 4 本、main の例を付けたのが 6 本">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="40" text-anchor="middle" font-size="24" font-weight="800" fill="#9AA3B2">教える前</text>
+                <rect x="40" y="70" width="64" height="48" rx="6" fill="#8A5A3C"/>
+                <path d="M40 82 h64 M72 70 v48" stroke="#6B4530" stroke-width="3"/>
+                <text x="72" y="140" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">intl</text>
+                <text x="250" y="112" text-anchor="middle" font-size="56" font-weight="800" fill="#E6E9EF">4<tspan font-size="26" fill="#9AA3B2"> / 6</tspan></text>
+                <rect x="32" y="176" width="80" height="44" rx="8" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                <text x="72" y="204" text-anchor="middle" font-size="15" font-weight="800" fill="#36C2A8" font-family="ui-monospace,Menlo,monospace">main()</text>
+                <text x="72" y="244" text-anchor="middle" font-size="16" font-weight="800" fill="#9AA3B2">例</text>
+                <text x="250" y="218" text-anchor="middle" font-size="56" font-weight="800" fill="#E6E9EF">6<tspan font-size="26" fill="#9AA3B2"> / 6</tspan></text>
+                <text x="180" y="284" text-anchor="middle" font-size="15" fill="#9AA3B2">Dart の日付の頼み 3 つ × 2 回</text>
+              </svg>
+            </div>
+            <div class="mid plain"><span>ほぼ同じ</span><small>教えが会話に入らなかった</small></div>
+            <div class="scene">
+              <svg viewBox="0 0 360 300" role="img" aria-label="日本語で教えて Quick Dream をしたあと。6 本の答えのうち、intl を使ったのが 3 本、main の例を付けたのが 6 本">
+                <rect width="360" height="300" fill="#151922"/>
+                <text x="180" y="40" text-anchor="middle" font-size="24" font-weight="800" fill="#9AA3B2">教えたあと</text>
+                <rect x="40" y="70" width="64" height="48" rx="6" fill="#8A5A3C"/>
+                <path d="M40 82 h64 M72 70 v48" stroke="#6B4530" stroke-width="3"/>
+                <text x="72" y="140" text-anchor="middle" font-size="16" font-weight="800" fill="#FFB454">intl</text>
+                <text x="250" y="112" text-anchor="middle" font-size="56" font-weight="800" fill="#E6E9EF">3<tspan font-size="26" fill="#9AA3B2"> / 6</tspan></text>
+                <rect x="32" y="176" width="80" height="44" rx="8" fill="#0B0D11" stroke="#3A4250" stroke-width="2"/>
+                <text x="72" y="204" text-anchor="middle" font-size="15" font-weight="800" fill="#36C2A8" font-family="ui-monospace,Menlo,monospace">main()</text>
+                <text x="72" y="244" text-anchor="middle" font-size="16" font-weight="800" fill="#9AA3B2">例</text>
+                <text x="250" y="218" text-anchor="middle" font-size="56" font-weight="800" fill="#E6E9EF">6<tspan font-size="26" fill="#9AA3B2"> / 6</tspan></text>
+                <text x="180" y="284" text-anchor="middle" font-size="15" fill="#9AA3B2">同じ頼みを、新しい会話で</text>
+              </svg>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>教えた会話: 日付の関数を頼み →「intl パッケージは使わないで。… void main() の使い方の例は要らない。関数だけ書いて」→「これからも、パッケージは足さずに、main の例は付けずに書いてね」。そのあと Quick Dream を手で押した（会話 4 本を読んで約 20 秒）</li>
+            <li>gemma4:e2b は Ollama にあった小さなモデル。答え 1 本は 19〜31 秒。考える部分で字数を使うので、上限を 700 にすると答えが空や途中切れになった（4,000 で取り直した）</li>
+          </ul>
+        </section>
+
+        <section class="sec">
+          <h3>songe が書き取った教えの中身（帳面を読んだ）</h3>
+          <div class="split">
+            <div class="win">
+              <div class="wbar"><span class="dots"><i></i><i></i><i></i></span><span>songe の帳面（experience.sqlite3 の signals から抜き出し）</span></div>
+              <div class="code">
+                <div class="ln"><span class="no">ja</span><span class="tx">「これからも、パッケージは足さずに、main の例は付けずに書いてね。」→ 了承（教えなし）</span><span class="pill bad">gemma</span></div>
+                <div class="ln"><span class="no">en</span><span class="tx">"Never use the intl package; write date code with Dart built-ins only." → この作業だけ（task）</span><span class="pill bad">gemma</span></div>
+                <div class="ln"><span class="no">ja</span><span class="tx">「void main() の使い方の例は要らない。」→ 同じ種類の作業（kind）→ 深い Dream 待ち</span><span class="pill tool">qwen</span></div>
+                <div class="ln ht"><span class="no">ja</span><span class="tx">「intl パッケージは使わないで。」→ いつでも（always）→ 頭に付いた教え:</span><span class="pill tool">qwen</span></div>
+                <div class="ln ht"><span class="no"></span><span class="tx">  "Check constraints before submitting solutions."</span><span></span></div>
+              </div>
+            </div>
+            <div class="ans">
+              <div class="t">次の会話の頭に付いた教え</div>
+              <div class="who">
+                <svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M6 8 L18 6 L18 30 L6 32 Z" fill="#EDE6D6"/><path d="M18 6 L30 8 L30 32 L18 30 Z" fill="#F3EEE2"/><path d="M9 14h6M9 19h5M21 14h6" stroke="#B8B1A1" stroke-width="2"/></svg>
+                <span>gemma4:e2b は <b>0 件</b><br>qwen3:30b は <b>1 件</b>（具体が抜けた一般論）</span>
+              </div>
+              <div class="why">
+                <div><b>わけ 1</b>　言った決まりをすぐ付ける判定は、always・never・from now on などの<span class="f">英語の言い回し</span>だけを見る（reading/rules.py）</div>
+                <div><b>わけ 2</b>　ほかは、読む役（使っているモデル自身）が「いつでも効く」と読んだものだけ。教えは英語に書き直される</div>
+              </div>
+              <div class="f2">qwen3:30b はもともと intl 1/6・main 2/6 で、教えたあとの答えは比べていない</div>
+            </div>
+          </div>
+          <ul class="notes">
+            <li>深い Dream（モデルそのものの学習）は試していない。Ollama のモデルを名前でつなぐと「重みが読めない・中継だけ」になる。重みにつなぐと、学習用の部品（torch・llama.cpp）を取りに行く作りで、安全審査の外なので止めた</li>
+            <li>この形では、裏の見回りが数秒ごとに設定の確かめで失敗していた（ログに 175 回）。手で押す Quick Dream は動いた</li>
+            <li>試しは /tmp の一時フォルダの中だけ。HOME を差し替え、launchd に登録しない隠しオプション（--launchd-target）で init した。本人の opencode・pi の設定は変わっていない</li>
+          </ul>
+        </section>
+        <section class="sec">
+          <h3>気をつけること</h3>
+          <div class="warns">
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l15 27H3z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M18 13v9M18 26.5v.5" stroke="#FFB454" stroke-width="3" stroke-linecap="round"/></svg><div><b>作って 6 日のアルファ版</b><span>0.1.0a15・Star 834。最後まで確かめてあるのは LM Studio（Mac）と opencode・pi の組み合わせ。Ollama は「対応」の扱い</span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="13" fill="#16233D" stroke="#4F8CFF" stroke-width="2.5"/><path d="M18 10v8l6 4" stroke="#4F8CFF" stroke-width="3" stroke-linecap="round" fill="none"/></svg><div><b>init は常駐を入れる</b><span>ログイン時に起動するサービスと、opencode・pi の設定に 1 行（控えあり）。消すときは <code>songe uninstall</code></span></div></div>
+            <div class="warn"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="#3A1A1D" stroke="#FF6B6B" stroke-width="2.5"/><path d="M12 12l12 12M24 12L12 24" stroke="#FF6B6B" stroke-width="3" stroke-linecap="round"/></svg><div><b>Claude Code は間に置けない</b><span>songe が受けるのは OpenAI 形式の窓口（/v1/chat/completions など）だけ。間に置くのは opencode・pi などの道具</span></div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <h3>始めるなら</h3>
+          <div class="steps">
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l13 7v14l-13 7-13-7V11z" fill="#3A2A12" stroke="#FFB454" stroke-width="2" stroke-linejoin="round"/><path d="M5 11l13 7 13-7M18 18v14" fill="none" stroke="#FFB454" stroke-width="2"/></svg><div><i>1</i>試すなら最後まで確かめてある形で: LM Studio の MLX 版のモデルと opencode に、<code>uv tool install songe</code> → <code>songe init</code></div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><rect x="6" y="6" width="24" height="18" rx="4" fill="#12302B" stroke="#36C2A8" stroke-width="2"/><path d="M12 24l-2 7 8-7" fill="#12302B" stroke="#36C2A8" stroke-width="2" stroke-linejoin="round"/><path d="M11 13h14M11 18h9" stroke="#36C2A8" stroke-width="2" stroke-linecap="round"/></svg><div><i>2</i>決まりは英語の「Always … / Never …」の形でも言ってみる（この形の文を拾う作りがある。今夜の gemma4:e2b では、それでも入らなかった）</div></div>
+            <div class="st"><svg class="ico" viewBox="0 0 36 36" aria-hidden="true"><circle cx="12" cy="13" r="8" fill="#F5E6A8"/><circle cx="15" cy="10" r="7" fill="#151922"/><circle cx="25" cy="25" r="6" fill="#FFB454"/><path d="M25 15v2M25 33v2M15 25h2M33 25h2" stroke="#FFB454" stroke-width="2" stroke-linecap="round"/></svg><div><i>3</i>夜に <code>songe sleep</code>（深い Dream）。朝 <code>songe open</code> で、入った教えと切り替えのわけを見る</div></div>
+          </div>
+          <div class="go">
+            <a class="gobtn" href="https://board.rinodot.dev/brief?d=2026-11-26&amp;i=2&amp;m=adopt" target="_blank" rel="noopener">▶ これを始める<small>LM Studio と opencode で songe を一晩回し、深い Dream が効くかを見る</small></a>
+            <form class="dig" action="https://board.rinodot.dev/brief" method="get" target="_blank">
+              <input type="hidden" name="d" value="2026-11-26"><input type="hidden" name="i" value="2"><input type="hidden" name="m" value="dig">
+              <label for="q2">この記事を深掘りする</label>
+              <textarea id="q2" name="q" placeholder="聞きたいことを書く（空でもよい）"></textarea>
+              <small>送ると確認画面が開き、▶ を押すと Mac の Orca でセッションが始まる</small>
+              <button type="submit">送信</button>
+            </form>
+          </div>
+          <p class="src">出典: <a href="https://github.com/sous-labs/songe">sous-labs/songe（GitHub、2026-11-20 作成・0.1.0a15 は 11/22）</a>・<a href="https://news.ycombinator.com/item?id=50629231">Hacker News（228 点）</a></p>
+        </section>
+      </article>
+
+      <!-- ================= 見送り ================= -->
+      <article class="item" id="skip">
+        <div class="tags"><span class="tag plain">見送り</span></div>
+        <h2 class="skiph">調べて見送ったもの</h2>
+        <div class="skipl">
+          <div><b>Claude Code の <code>/ship</code>・<code>/steward</code>（v2.1.330 以上）</b><span>PR を出したあと、最長 7 日、CI の失敗・衝突・レビューの指摘を Claude が見張って直す組み込みの命令。本人の ship・codex-review と重なる。しかも公式のトラブル対応のページによると、同じ名前の自作のスキル（ship）は読み込まれなくなり、組み込みは確認なしで数秒後に commit・push・PR まで進む</span></div>
+          <div><b>Ternary Bonsai 2.5 27B（11/24・Hacker News 515 点）</b><span>27B のモデルを 5.9GB に縮めたもの。前の版（Bonsai 2 27B）と同じ大きさのまま、エージェントの作業を強くした版上げ（SWE-bench Verified 60.8→75.6、発表の表）。話の中心が性能の比べ</span></div>
+          <div><b>PenGPT（11/12・Hacker News 370 点）</b><span>手書きの字と線画を、ペンの一筆ずつ描く小さなモデル（字は 6MB、絵は 50MB、重みは公開）。数語の写真からその人の筆跡をまねる。11/17 号の「線画のアニメを動画に」と見た目が近い</span></div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('data-jump')); if(!t) return;
+      e.preventDefault();
+      t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
